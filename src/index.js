@@ -4,12 +4,12 @@ import { Canvas } from "@react-three/fiber";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Canvas position-x={[-4, 0, 0]}>
-    <mesh>
+  <Canvas>
+    <mesh position={[-4, 0, 0]} rotation-x={Math.PI * 0.5}>
       <torusKnotGeometry />
       <meshNormalMaterial />
     </mesh>
-    <mesh position={[4, 0, 0]}>
+    <mesh position={[4, 0, 0]} scale={1.5}>
       <torusKnotGeometry />
       <meshNormalMaterial />
     </mesh>
