@@ -3,8 +3,8 @@ import { useRef } from "react";
 
 const Scene = () => {
   const cubeRef = useRef();
-  useFrame(() => {
-    cubeRef.current.rotation.y += 0.01;
+  useFrame((state, deltaTime) => {
+    cubeRef.current.rotation.y += deltaTime * 10;
   });
   return (
     <group>
