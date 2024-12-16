@@ -1,0 +1,24 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+body {
+  overflow: hidden;
+  scrol: none; /* 'scrol' non è una proprietà valida, usa 'overflow' se desideri nascondere la scrollbar */
+}
+
+.box {
+  width: 100vw;
+  height: 100vh;
+  background-color: #282a36;
+}
+
+canvas {
+  display: block; /* Rimuove spazio extra intorno al canvas */
+  width: 100%;
+  height: 100%;
+}
