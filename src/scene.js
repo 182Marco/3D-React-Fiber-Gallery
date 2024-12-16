@@ -10,6 +10,7 @@ const Scene = () => {
   useFrame((state, deltaTime) => {
     cubeRef.current.rotation.y += deltaTime * 0.3;
     plane.current.rotation.y += deltaTime * 0.33;
+    state.camera.position.x = 4 * Math.cos(state.clock.elapsedTime);
   });
 
   return (
@@ -21,8 +22,8 @@ const Scene = () => {
           <meshBasicMaterial color="turquoise" wireframe />
         </mesh>
         <mesh position-x={2} ref={plane}>
-          <planeGeometry arg={[2, 10, 6]} side={T.DoubleSide} />
-          <meshBasicMaterial color="lightgreen" />
+          <boxGeometry args={[4, 2, 2]} />
+          <meshBasicMaterial color="pink" wireframe />
         </mesh>
       </group>
     </>
