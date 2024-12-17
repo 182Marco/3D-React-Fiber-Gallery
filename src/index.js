@@ -18,7 +18,9 @@ root.render(
       }}
       onCreated={createCanvasHandler}
     >
-      <group position={[0, 0, -3]}>
+      <group position={[0, -1, 2]}>
+        <axesHelper args={[3]} />
+        <gridHelper />
         <Scene />
       </group>
     </Canvas>
