@@ -14,7 +14,7 @@ body {
 .box {
   width: 100vw;
   height: 100vh;
-  background-color: rgb(31, 31, 31);
+  background: linear-gradient(45deg, #1e1e2f, #3a3a5f, #626292);
 }
 
 canvas {

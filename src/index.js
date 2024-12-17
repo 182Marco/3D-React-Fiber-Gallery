@@ -7,14 +7,15 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <div className="box">
     <Canvas
+      gl={{ alpha: true }}
       camera={{
         fov: 75,
         near: 0.1,
         far: 100,
-        position: [0, 0, -5],
+        position: [6, 0, -5],
       }}
     >
-      <group position={[0, 0, 5]}>
+      <group position={[0, 0, -3]}>
         <Scene />
       </group>
     </Canvas>
