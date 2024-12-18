@@ -2,6 +2,7 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as T from "three";
 import { OrbitControls } from "@react-three/drei";
+import { Particles } from "./particles";
 
 const Scene = () => {
   const cubeRef = useRef();
@@ -16,16 +17,7 @@ const Scene = () => {
   return (
     <>
       <OrbitControls />
-      <group>
-        <mesh position-x={-4} ref={cubeRef}>
-          {/*           <boxGeometry arg={[2, 2, 2]} />
-          <meshBasicMaterial color="turquoise" wireframe /> */}
-        </mesh>
-        <mesh position-x={4} ref={block}>
-          {/*         <boxGeometry args={[2, 1, 1]} />
-          <meshBasicMaterial color="pink" wireframe /> */}
-        </mesh>
-      </group>
+      <Particles />
     </>
   );
 };

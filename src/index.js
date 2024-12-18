@@ -3,14 +3,15 @@ import "./styles.css";
 import { Canvas } from "@react-three/fiber";
 import { Scene } from "./scene";
 import { Custom } from "./custom";
+import { Particles } from "./particles/particles";
 
 const createCanvasHandler = (state) => state.gl.setClearColor("red", 0.1);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <div className="box">
+    <Particles />
     <Canvas
-      // gl={{ alpha: true }}
       camera={{
         fov: 75,
         near: 0.1,
@@ -19,12 +20,9 @@ root.render(
       }}
       onCreated={createCanvasHandler}
     >
-      <Custom />
-      <group position={[0, -1, 2]}>
-        <axesHelper args={[3]} />
-        <gridHelper />
-        <Scene />
-      </group>
+      <axesHelper args={[3]} />
+      <gridHelper />
+      <Scene />
     </Canvas>
   </div>
 );
