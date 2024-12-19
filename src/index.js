@@ -2,7 +2,6 @@ import ReactDOM from "react-dom/client";
 import "./styles.css";
 import { Canvas } from "@react-three/fiber";
 import { Scene } from "./scene";
-import { Custom } from "./custom";
 
 const createCanvasHandler = (state) => state.gl.setClearColor("red", 0.1);
 
@@ -15,12 +14,11 @@ root.render(
         fov: 75,
         near: 0.1,
         far: 100,
-        position: [6, 0, -5],
+        position: [0, 2, 3],
       }}
       onCreated={createCanvasHandler}
     >
-      <Custom />
-      <group position={[0, -1, 2]}>
+      <group>
         <axesHelper args={[3]} />
         <gridHelper />
         <Scene />
