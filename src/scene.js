@@ -1,18 +1,14 @@
-import * as THREE from "three";
-import { useLoader } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "@react-three/drei";
-import { useRef } from "react";
+import { Model, Spinner } from "./componets";
+import { Suspense } from "react";
 
 const Scene = () => {
-  const cubeRef = useRef();
-
-  const model = useLoader(GLTFLoader, "./model/dog.glb");
-
   return (
     <>
       <ambientLight intensity={2} />
-      <primitive object={model.scene} />
+      <Suspense fallback={<Spinner speed={3} />}>
+        <Model />
+      </Suspense>
       <OrbitControls />
     </>
   );

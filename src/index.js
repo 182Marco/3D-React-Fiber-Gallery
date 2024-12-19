@@ -3,8 +3,6 @@ import "./styles.css";
 import { Canvas } from "@react-three/fiber";
 import { Scene } from "./scene";
 
-const createCanvasHandler = (state) => state.gl.setClearColor("red", 0.1);
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <div className="box">
@@ -16,11 +14,8 @@ root.render(
         far: 100,
         position: [0, 2, 3],
       }}
-      onCreated={createCanvasHandler}
     >
       <group>
-        <axesHelper args={[3]} />
-        <gridHelper />
         <Scene />
       </group>
     </Canvas>
