@@ -14,7 +14,7 @@ const Particles = () => {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.06}
+        size={0.15}
         alphaMap={u.texture}
         transparent
         depthTest={false}

@@ -14,8 +14,8 @@ const useParticles = () => {
   const particles = useRef();
 
   useFrame((_, deltaTime) => {
-    particles.current.rotation.y += deltaTime * 0.05;
-    particles.current.rotation.x += deltaTime * 0.05;
+    particles.current.rotation.y -= deltaTime * 0.03;
+    particles.current.rotation.x += deltaTime * 0.03;
   });
 
   return {

@@ -13,11 +13,7 @@ const Scene = () => {
     state.camera.position.x = 4 * Math.cos(state.clock.elapsedTime);
   }); */
 
-  return (
-    <>
-      <OrbitControls />
-    </>
-  );
+  return <></>;
 };
 
 export { Scene };

@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom/client";
 import "./styles.css";
 import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 import { Scene } from "./scene";
 import { Particles } from "./particles/particles";
 
@@ -11,15 +12,16 @@ root.render(
   <div className="box">
     <Canvas
       camera={{
-        fov: 75,
+        fov: 35,
         near: 0.1,
         far: 100,
         position: [6, 0, -5],
       }}
       onCreated={createCanvasHandler}
+      zoom={3}
     >
+      <OrbitControls enableZoom={false} />
       <Particles />
-      <Scene />
     </Canvas>
   </div>
 );
