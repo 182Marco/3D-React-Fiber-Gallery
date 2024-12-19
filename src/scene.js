@@ -2,7 +2,6 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as T from "three";
 import { OrbitControls } from "@react-three/drei";
-import { Particles } from "./particles";
 
 const Scene = () => {
   const cubeRef = useRef();
@@ -17,7 +16,6 @@ const Scene = () => {
   return (
     <>
       <OrbitControls />
-      <Particles />
     </>
   );
 };
