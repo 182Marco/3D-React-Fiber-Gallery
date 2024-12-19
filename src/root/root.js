@@ -17,7 +17,7 @@ const Root = () => {
           position: [0, 2, 3],
         }}
       >
-        <Scene IsShowDog={u.IsShowDog} />
+        <Scene IsShowDog={u.isShowDog} />
       </Canvas>
     </div>
   );
