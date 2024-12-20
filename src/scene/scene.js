@@ -8,8 +8,9 @@ const Scene = ({ IsShowDog }) => (
     {/*  <Suspense fallback={<Spinner speed={3} />}>
       <Model />
     </Suspense> */}
-    <Bike />
     {/* {IsShowDog ? <Model /> : <Spinner speed={10} />} */}
+    <directionalLight />
+    <Bike />
     <OrbitControls />
   </>
 );
