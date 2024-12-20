@@ -7,7 +7,7 @@ const Root = () => {
   return (
     <div className="box">
       <button className="show-dog-btn" onClick={u.toggleShowDog}>
-        See the dog
+        See the {u.isShowDog ? "loader" : "dog"}
       </button>
       <Canvas
         camera={{
