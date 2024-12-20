@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { OrbitControls } from "@react-three/drei";
-import { Model, Spinner } from "../componets";
+import { Model, Spinner, Bike } from "../componets";
 
 const Scene = ({ IsShowDog }) => (
   <>
@@ -8,7 +8,8 @@ const Scene = ({ IsShowDog }) => (
     {/*  <Suspense fallback={<Spinner speed={3} />}>
       <Model />
     </Suspense> */}
-    {IsShowDog ? <Model /> : <Spinner speed={10} />}
+    <Bike />
+    {/* {IsShowDog ? <Model /> : <Spinner speed={10} />} */}
     <OrbitControls />
   </>
 );
