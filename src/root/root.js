@@ -14,7 +14,7 @@ const Root = () => {
           fov: 75,
           near: 0.1,
           far: 100,
-          position: [0, 2, 3],
+          position: [0, 1, 3],
         }}
       >
         <Scene IsShowDog={u.isShowDog} />
