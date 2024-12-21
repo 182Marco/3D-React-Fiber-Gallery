@@ -10,15 +10,23 @@ import { useFrame } from "@react-three/fiber";
 const Bike = (props) => {
   const { nodes, materials } = useGLTF("./model/bike.gltf");
 
-  const firstMesh = useRef();
-  const secondMesh = useRef();
+  const backWheelTire = useRef();
+  const backWheelSpokes = useRef();
+  const frontWheelTire = useRef();
+  const forntWheelSpokes = useRef();
 
-  useFrame((state, delta) => {
-    if (firstMesh.current) {
-      firstMesh.current.rotation.y += delta; // Incrementa la rotazione
+  useFrame((_, delta) => {
+    if (backWheelTire.current) {
+      backWheelTire.current.rotation.y -= delta;
     }
-    if (secondMesh.current) {
-      secondMesh.current.rotation.z += delta; // Incrementa la rotazione
+    if (backWheelSpokes.current) {
+      backWheelSpokes.current.rotation.z -= delta;
+    }
+    if (frontWheelTire.current) {
+      frontWheelTire.current.rotation.y -= delta;
+    }
+    if (forntWheelSpokes.current) {
+      forntWheelSpokes.current.rotation.z -= delta;
     }
   });
 
@@ -41,7 +49,7 @@ const Bike = (props) => {
           scale={[0.792, 0.546, 0.792]}
         >
           <mesh
-            ref={firstMesh}
+            ref={backWheelTire}
             geometry={nodes.Torus003.geometry}
             material={materials.Pneu}
           />
@@ -55,25 +63,12 @@ const Bike = (props) => {
           />
         </group>
         <mesh
-          ref={secondMesh}
+          ref={backWheelSpokes}
           geometry={nodes.B_Raios.geometry}
           material={materials.Raio}
           position={[-1.053, -1.178, 0.005]}
         />
-        <group
-          position={[-0.428, -0.32, 0.011]}
-          rotation={[1.571, -1.414, 3.142]}
-          scale={[1, 3.023, 1]}
-        >
-          <mesh
-            geometry={nodes.Cylinder006.geometry}
-            material={materials.Roda}
-          />
-          <mesh
-            geometry={nodes.Cylinder006_1.geometry}
-            material={materials.Pneu}
-          />
-        </group>
+
         <group
           position={[1.73, -0.423, 0.134]}
           rotation={[Math.PI / 2, 0, 0]}
@@ -154,6 +149,7 @@ const Bike = (props) => {
           />
         </group>
         <group
+          ref={frontWheelTire}
           position={[1.905, -1.181, 0.005]}
           rotation={[Math.PI / 2, 0, 0]}
           scale={[0.792, 0.546, 0.792]}
@@ -169,6 +165,7 @@ const Bike = (props) => {
           />
         </group>
         <mesh
+          ref={forntWheelSpokes}
           geometry={nodes.F_Raios.geometry}
           material={materials.Raio}
           position={[1.899, -1.178, 0.005]}
