@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { Dog, Spinner } from "../componets";
+import { Perf } from "r3f-perf";
 
 const Scene = ({ IsShowDog }) => (
   <>
@@ -9,6 +10,7 @@ const Scene = ({ IsShowDog }) => (
       <Model />
     </Suspense> */}
     {IsShowDog ? <Dog /> : <Spinner speed={10} />}
+    <Perf />
     <OrbitControls />
   </>
 );
