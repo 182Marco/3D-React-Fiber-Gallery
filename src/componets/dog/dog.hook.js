@@ -6,11 +6,7 @@ const useDog = () => {
   const animations = useAnimations(model.animations, model.scene);
 
   useEffect(() => {
-    if (animations.actions && animations.actions.Idle) {
-      animations.actions.Hide.play();
-    } else {
-      console.error("Animazione 'Idle' non trovata o non disponibile");
-    }
+    animations?.actions?.Writing.play();
   }, [animations.actions]);
 
   return { model };
