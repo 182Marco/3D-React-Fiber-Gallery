@@ -5,7 +5,7 @@ const Select = () => {
 
   return (
     <section className="select">
-      {u?.list?.length && (
+      {!!u?.list?.length && (
         <select
           onChange={(e) => u.setCurrentAction(e.target.value)}
           className="custom-select"
