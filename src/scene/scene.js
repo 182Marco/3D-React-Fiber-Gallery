@@ -6,12 +6,12 @@ import { Perf } from "r3f-perf";
 const Scene = ({ IsShowDog }) => {
   return (
     <>
-      {/*  <Perf /> */}
+      <Perf />
       <ambientLight intensity={2} />
-      {/*  <Suspense fallback={<Spinner speed={3} />}>
-      <Model />
-    </Suspense> */}
-      {IsShowDog ? <Dog /> : <Spinner speed={10} />}
+      <Suspense fallback={<Spinner speed={3} />}>
+        <Dog />
+      </Suspense>
+      {/* IsShowDog ? <Dog /> : <Spinner speed={10} />*/}
       <OrbitControls />
     </>
   );

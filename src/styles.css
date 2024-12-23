@@ -49,8 +49,56 @@ button:active {
 
 .show-dog-btn {
   position: absolute;
-  top: 50px;
-  left: 30px;
+  right: 50px;
+  bottom: 30px;
   min-width: 150px;
   z-index: 2;
+}
+
+section.btns-box {
+  background: linear-gradient(45deg, #1a1a1a, #2c3e50, #34495e);
+  bottom: 0;
+  color: white;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: absolute;
+  z-index: 2;
+}
+
+.custom-select {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #2c3e50;
+  color: white;
+  border: 2px solid #34495e;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.custom-select:hover {
+  background: #34495e;
+  border-color: #1a1a1a;
+}
+
+.custom-select:focus {
+  background: #1a1a1a;
+  border-color: #2c3e50;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.custom-select option {
+  background: #34495e;
+  color: white;
+  font-weight: normal;
+}
+
+.custom-select option:hover {
+  background: #2c3e50;
 }
