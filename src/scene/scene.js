@@ -1,18 +1,19 @@
-import { Suspense } from "react";
+import { useState } from "react";
 import { OrbitControls } from "@react-three/drei";
-import { Dog, Spinner } from "../componets";
-import { Perf } from "r3f-perf";
 
-const Scene = ({ IsShowDog }) => {
+const Scene = () => {
+  const [isActive, setIsActive] = useState(false);
   return (
     <>
-      <Perf />
-      <ambientLight intensity={2} />
-      <Suspense fallback={<Spinner speed={3} />}>
-        <Dog />
-      </Suspense>
-      {/* IsShowDog ? <Dog /> : <Spinner speed={10} />*/}
       <OrbitControls />
+      <mesh position-x={-1} onClick={(e) => e.stopPropagation()}>
+        <boxGeometry />
+        <meshBasicMaterial color="white" />
+      </mesh>
+      <mesh position-x={1} onClick={() => setIsActive((pv) => !pv)}>
+        <boxGeometry />
+        <meshBasicMaterial color={isActive ? "red" : "green"} />
+      </mesh>
     </>
   );
 };
