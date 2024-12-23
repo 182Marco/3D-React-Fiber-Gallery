@@ -1,18 +1,26 @@
-import { useState } from "react";
-import { OrbitControls } from "@react-three/drei";
+import { useState, useRef } from "react";
+import { OrbitControls, useHelper } from "@react-three/drei";
+import * as THREE from "three";
 
 const Scene = () => {
-  const [isActive, setIsActive] = useState(false);
+  const lightRef = useRef();
+  useHelper(lightRef, THREE.DirectionalLightHelper, 1);
   return (
     <>
       <OrbitControls />
-      <mesh position-x={-1} onClick={(e) => e.stopPropagation()}>
+      <directionalLight
+        ref={lightRef}
+        position={[5, 1, -2]}
+        color="blue"
+        intensity={10}
+      />
+      <mesh>
         <boxGeometry />
-        <meshBasicMaterial color="white" />
+        <meshStandardMaterial color="white" />
       </mesh>
-      <mesh position-x={1} onClick={() => setIsActive((pv) => !pv)}>
-        <boxGeometry />
-        <meshBasicMaterial color={isActive ? "red" : "green"} />
+      <mesh position-y={-1} rotation-x={-Math.PI * 0.5}>
+        <boxGeometry args={[8, 8]} />
+        <meshStandardMaterial color="red" />
       </mesh>
     </>
   );

@@ -17,7 +17,7 @@ const Root = () => {
             fov: 75,
             near: 0.1,
             far: 100,
-            position: [0, 1, 3],
+            position: [0, 5, -10],
           }}
         >
           <Scene />
