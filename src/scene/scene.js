@@ -9,16 +9,17 @@ const Scene = () => {
     <>
       <OrbitControls />
       <directionalLight
+        castShadow
         ref={lightRef}
-        position={[5, 1, -2]}
+        position={[0, 2, 0]}
         color="blue"
         intensity={10}
       />
-      <mesh>
+      <mesh castShadow>
         <boxGeometry />
         <meshStandardMaterial color="white" />
       </mesh>
-      <mesh position-y={-1} rotation-x={-Math.PI * 0.5}>
+      <mesh receiveShadow position-y={-3} rotation-x={-Math.PI * 0.5}>
         <boxGeometry args={[8, 8]} />
         <meshStandardMaterial color="red" />
       </mesh>
