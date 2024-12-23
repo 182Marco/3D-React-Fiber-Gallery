@@ -6,7 +6,7 @@ import { Leva } from "leva";
 const Root = () => {
   const u = useRoot();
   return (
-    <div className="box">
+    <div className="box" style={{ position: "relative" }}>
       <button className="show-dog-btn" onClick={u.toggleShowDog}>
         See the {u.isShowDog ? "loader" : "dog"}
       </button>

@@ -5,6 +5,8 @@ import { useMyControls } from "./spinner.controls";
 const useSpinner = (speed = 1) => {
   const meshRef = useRef();
 
+  const { c } = useMyControls();
+
   useFrame((_, delta) => {
     if (meshRef.current) {
       meshRef.current.rotation.y += delta * speed;
@@ -12,7 +14,7 @@ const useSpinner = (speed = 1) => {
     }
   });
 
-  return { meshRef };
+  return { c, meshRef };
 };
 
 export { useSpinner };
