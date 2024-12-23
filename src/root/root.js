@@ -1,6 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { useRoot } from "./root.hook";
 import { Scene } from "../scene";
+import { Leva } from "leva";
 
 const Root = () => {
   const u = useRoot();
@@ -9,6 +10,7 @@ const Root = () => {
       <button className="show-dog-btn" onClick={u.toggleShowDog}>
         See the {u.isShowDog ? "loader" : "dog"}
       </button>
+      <Leva />
       <Canvas
         camera={{
           fov: 75,

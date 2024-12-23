@@ -3,16 +3,18 @@ import { OrbitControls } from "@react-three/drei";
 import { Dog, Spinner } from "../componets";
 import { Perf } from "r3f-perf";
 
-const Scene = ({ IsShowDog }) => (
-  <>
-    <ambientLight intensity={2} />
-    {/*  <Suspense fallback={<Spinner speed={3} />}>
+const Scene = ({ IsShowDog }) => {
+  return (
+    <>
+      {/*  <Perf /> */}
+      <ambientLight intensity={2} />
+      {/*  <Suspense fallback={<Spinner speed={3} />}>
       <Model />
     </Suspense> */}
-    {IsShowDog ? <Dog /> : <Spinner speed={10} />}
-    <Perf />
-    <OrbitControls />
-  </>
-);
+      {IsShowDog ? <Dog /> : <Spinner speed={10} />}
+      <OrbitControls />
+    </>
+  );
+};
 
 export { Scene };

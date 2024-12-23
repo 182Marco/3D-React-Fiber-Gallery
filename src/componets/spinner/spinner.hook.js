@@ -1,5 +1,6 @@
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
+import { useMyControls } from "./spinner.controls";
 
 const useSpinner = (speed = 1) => {
   const meshRef = useRef();
