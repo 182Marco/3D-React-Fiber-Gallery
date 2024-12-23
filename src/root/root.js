@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { Leva } from "leva";
-import { BtnsBox } from "../componets";
+import { Select } from "../componets";
 import { AppProvider } from "../context";
 import { useRoot } from "./root.hook";
 import { Scene } from "../scene";
@@ -10,11 +10,7 @@ const Root = () => {
   return (
     <AppProvider>
       <div className="box" style={{ position: "relative" }}>
-        <button className="show-dog-btn" onClick={u.toggleShowDog}>
-          See the {u.isShowDog ? "loader" : "dog"}
-        </button>
-        <BtnsBox />
-        {/*  */}
+        <Select />
         <Leva />
         <Canvas
           camera={{

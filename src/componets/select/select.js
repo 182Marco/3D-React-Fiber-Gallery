@@ -1,10 +1,10 @@
-import { useBtnsBox } from "./btnsBox.hook";
+import { useSelect } from "./select.hook";
 
-const BtnsBox = () => {
-  const u = useBtnsBox();
+const Select = () => {
+  const u = useSelect();
 
   return (
-    <section className="btns-box">
+    <section className="select">
       {u?.list?.length && (
         <select
           onChange={(e) => u.setCurrentAction(e.target.value)}
@@ -22,4 +22,4 @@ const BtnsBox = () => {
   );
 };
 
-export { BtnsBox };
+export { Select };

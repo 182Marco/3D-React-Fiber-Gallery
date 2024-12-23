@@ -1,6 +1,6 @@
 import { useAppContext } from "../../context/useAppContext";
 
-const useBtnsBox = () => {
+const useSelect = () => {
   const u = useAppContext();
 
   return {
@@ -14,4 +14,4 @@ const useBtnsBox = () => {
   };
 };
 
-export { useBtnsBox };
+export { useSelect };

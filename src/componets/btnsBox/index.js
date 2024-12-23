@@ -1,1 +1,0 @@
-export { BtnsBox } from "./btnsBox";
