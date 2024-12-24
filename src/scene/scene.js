@@ -1,10 +1,11 @@
 import { useRef } from "react";
 import {
+  Cloud,
   OrbitControls,
-  useHelper,
+  Sky,
   Sparkles,
   Stars,
-  Cloud,
+  useHelper,
 } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -18,7 +19,7 @@ const Scene = () => {
         castShadow
         ref={lightRef}
         position={[0, 2, 0]}
-        color="blue"
+        color="white"
         intensity={10}
       />
       {/*<mesh castShadow>
@@ -42,7 +43,14 @@ const Scene = () => {
         saturation={0}
         speed={1}
       />
-      <Cloud opacity={1} speed={0.2} depth={3} segments={60} />
+      <Cloud
+        opacity={1}
+        speed={0.2}
+        depth={3}
+        segments={60}
+        depthTest={false}
+      />
+      <Sky />
       <mesh receiveShadow position-y={-3} rotation-x={-Math.PI * 0.5}>
         <boxGeometry args={[8, 8]} />
         <meshStandardMaterial color="red" />
