@@ -6,6 +6,7 @@ import {
   Sparkles,
   Stars,
   useHelper,
+  Environment,
 } from "@react-three/drei";
 import * as THREE from "three";
 import { useControls } from "leva";
