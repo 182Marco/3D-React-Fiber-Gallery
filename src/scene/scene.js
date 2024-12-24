@@ -57,8 +57,23 @@ const Scene = () => {
         depth={3}
         segments={60}
         depthTest={false}
-      />*/}
-      <Sky sunPosition={sunPosition} />
+      />
+      <Sky sunPosition={sunPosition} /> */}
+      <Environment
+        background
+        files={[
+          "./envMap/px.png",
+          "./envMap/nx.png",
+          "./envMap/py.png",
+          "./envMap/ny.png",
+          "./envMap/pz.png",
+          "./envMap/nz.png",
+        ]}
+        path="/"
+        blur={0}
+        preset={null}
+        encoding={THREE.sRGBEncoding}
+      />
       <mesh receiveShadow position-y={-3} rotation-x={-Math.PI * 0.5}>
         <boxGeometry args={[8, 8]} />
         <meshStandardMaterial color="red" />
