@@ -8,10 +8,17 @@ import {
   useHelper,
 } from "@react-three/drei";
 import * as THREE from "three";
+import { useControls } from "leva";
 
 const Scene = () => {
   const lightRef = useRef();
   useHelper(lightRef, THREE.DirectionalLightHelper, 1);
+
+  const { sunPosition } = useControls("sky", {
+    sunPosition: {
+      value: [-7.359999999999987, 0.11000000000000063, 5.049999999999996],
+    },
+  });
   return (
     <>
       <OrbitControls />
@@ -33,7 +40,7 @@ const Scene = () => {
         color="#D3D3D3"
         scale={20}
         size={2}
-      /> */}
+      /> 
       <Stars
         radius={1}
         depth={50}
@@ -49,8 +56,8 @@ const Scene = () => {
         depth={3}
         segments={60}
         depthTest={false}
-      />
-      <Sky />
+      />*/}
+      <Sky sunPosition={sunPosition} />
       <mesh receiveShadow position-y={-3} rotation-x={-Math.PI * 0.5}>
         <boxGeometry args={[8, 8]} />
         <meshStandardMaterial color="red" />
