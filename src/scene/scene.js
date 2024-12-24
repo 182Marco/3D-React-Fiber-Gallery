@@ -42,7 +42,7 @@ const Scene = () => {
         saturation={0}
         speed={1}
       />
-      <Cloud opacity={1} />
+      <Cloud opacity={1} speed={0.2} depth={3} segments={60} />
       <mesh receiveShadow position-y={-3} rotation-x={-Math.PI * 0.5}>
         <boxGeometry args={[8, 8]} />
         <meshStandardMaterial color="red" />
