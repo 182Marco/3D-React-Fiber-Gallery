@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import { OrbitControls, useHelper } from "@react-three/drei";
+import { useRef } from "react";
+import { OrbitControls, useHelper, Sparkles } from "@react-three/drei";
 import * as THREE from "three";
 
 const Scene = () => {
@@ -15,10 +15,11 @@ const Scene = () => {
         color="blue"
         intensity={10}
       />
-      <mesh castShadow>
+      {/*<mesh castShadow>
         <boxGeometry />
         <meshStandardMaterial color="white" />
-      </mesh>
+      </mesh> */}
+      <Sparkles count={1000} speed={0.05} opacity={3} color="#D3D3D3" />
       <mesh receiveShadow position-y={-3} rotation-x={-Math.PI * 0.5}>
         <boxGeometry args={[8, 8]} />
         <meshStandardMaterial color="red" />
