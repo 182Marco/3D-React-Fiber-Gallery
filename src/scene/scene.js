@@ -15,11 +15,10 @@ const Scene = () => {
         color="blue"
         intensity={10}
       />
-      {/*<mesh castShadow>
+      <mesh castShadow>
         <boxGeometry />
         <meshStandardMaterial color="white" />
-      </mesh> */}
-      <Sparkles count={1000} speed={0.05} opacity={3} color="#D3D3D3" />
+      </mesh>
       <mesh receiveShadow position-y={-3} rotation-x={-Math.PI * 0.5}>
         <boxGeometry args={[8, 8]} />
         <meshStandardMaterial color="red" />
