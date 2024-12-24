@@ -25,6 +25,7 @@ const Scene = () => {
         opacity={3}
         color="#D3D3D3"
         scale={20}
+        size={2}
       />
       <mesh receiveShadow position-y={-3} rotation-x={-Math.PI * 0.5}>
         <boxGeometry args={[8, 8]} />
