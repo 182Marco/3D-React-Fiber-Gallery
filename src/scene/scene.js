@@ -7,6 +7,7 @@ import {
   Stars,
   useHelper,
   Environment,
+  Lightformer,
 } from "@react-three/drei";
 import * as THREE from "three";
 import { useControls } from "leva";
@@ -20,9 +21,22 @@ const Scene = () => {
       value: [-7.359999999999987, 0.11000000000000063, 5.049999999999996],
     },
   });
+
+  const { meshIntensity } = useControls("meshIntensity", {
+    meshIntensity: {
+      value: 1,
+      min: 0,
+      max: 1,
+    },
+  });
   return (
     <>
       <OrbitControls />
+      <mesh castShadow>
+        <boxGeometry />
+        <meshStandardMaterial color="white" envMapIntensity={meshIntensity} />
+      </mesh>
+      {/*
       <directionalLight
         castShadow
         ref={lightRef}
@@ -30,11 +44,7 @@ const Scene = () => {
         color="white"
         intensity={10}
       />
-      {/*<mesh castShadow>
-        <boxGeometry />
-        <meshStandardMaterial color="white" />
-      </mesh> */}
-      {/* <Sparkles
+      <Sparkles
         count={1000}
         speed={0.05}
         opacity={3}
@@ -66,7 +76,9 @@ const Scene = () => {
         blur={0}
         preset={null}
         encoding={THREE.sRGBEncoding}
-      />
+      >
+        {/*  <Lightformer position-z={-1} scale={5} color="orange" intensity={5} /> */}
+      </Environment>
       <mesh receiveShadow position-y={-3} rotation-x={-Math.PI * 0.5}>
         <boxGeometry args={[8, 8]} />
         <meshStandardMaterial color="red" />
