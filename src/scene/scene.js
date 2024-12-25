@@ -61,14 +61,7 @@ const Scene = () => {
       <Sky sunPosition={sunPosition} /> */}
       <Environment
         background
-        files={[
-          "./envMap/px.png",
-          "./envMap/nx.png",
-          "./envMap/py.png",
-          "./envMap/ny.png",
-          "./envMap/pz.png",
-          "./envMap/nz.png",
-        ]}
+        files="./envMap/1.hdr"
         path="/"
         blur={0}
         preset={null}
