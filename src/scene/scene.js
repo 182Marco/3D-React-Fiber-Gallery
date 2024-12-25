@@ -1,5 +1,11 @@
 import { useRef } from "react";
-import { useHelper, Environment, OrbitControls } from "@react-three/drei";
+import {
+  useHelper,
+  Environment,
+  OrbitControls,
+  PerspectiveCamera,
+  CubeCamera,
+} from "@react-three/drei";
 import * as THREE from "three";
 import { useControls } from "leva";
 
@@ -26,12 +32,24 @@ const Scene = () => {
   });
   return (
     <>
-      <OrbitControls />
       <Environment background files="./envMap/1.hdr" />
-      <mesh>
-        <sphereGeometry args={[1, 64, 64]} />
-        <meshStandardMaterial />
+      <mesh position={[0, 0, 5]}>
+        <boxGeometry />
+        <meshStandardMaterial color="violet" />
       </mesh>
+      <CubeCamera>
+        {(texture) => (
+          <mesh>
+            <sphereGeometry args={[1, 64, 64]} />
+            <meshStandardMaterial
+              envMap={texture}
+              roughness={0}
+              metalness={0.9}
+            />
+          </mesh>
+        )}
+      </CubeCamera>
+      <OrbitControls />
     </>
   );
 };
