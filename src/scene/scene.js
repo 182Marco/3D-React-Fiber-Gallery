@@ -6,13 +6,14 @@ import {
   PerspectiveCamera,
   CubeCamera,
 } from "@react-three/drei";
-import * as THREE from "three";
 import { useControls } from "leva";
+import { useFrame } from "@react-three/fiber";
 
 const Scene = () => {
-  const lightRef = useRef();
-  useHelper(lightRef, THREE.DirectionalLightHelper, 1);
-
+  const sphereRef = useRef();
+  useFrame((state, delta) => {
+    sphereRef.current.rotation.x += delta;
+  });
   const { height, radius, scale } = useControls("ground attribute", {
     height: {
       value: 6,
@@ -33,11 +34,11 @@ const Scene = () => {
   return (
     <>
       <Environment background files="./envMap/1.hdr" />
-      <mesh position={[0, 0, 5]}>
+      <mesh position={[0, 0, 5]} ref={sphereRef}>
         <boxGeometry />
         <meshStandardMaterial color="violet" />
       </mesh>
-      <CubeCamera>
+      <CubeCamera resolution={1024}>
         {(texture) => (
           <mesh>
             <sphereGeometry args={[1, 64, 64]} />
