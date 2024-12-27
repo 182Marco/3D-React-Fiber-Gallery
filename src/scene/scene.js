@@ -5,6 +5,7 @@ import {
   OrbitControls,
   PerspectiveCamera,
   CubeCamera,
+  Grid,
 } from "@react-three/drei";
 import { useControls } from "leva";
 import { useFrame } from "@react-three/fiber";
@@ -34,6 +35,15 @@ const Scene = () => {
   return (
     <>
       <Environment background files="./envMap/1.hdr" />
+      <Grid
+        args={[30, 30]}
+        cellSize={0.5}
+        cellColor="red"
+        sectionSize={5}
+        sectionThickness={4}
+        sectionColor="turquoise"
+        cellThickness={2}
+      />
       <mesh position={[0, 0, 5]} ref={sphereRef}>
         <boxGeometry />
         <meshStandardMaterial color="violet" />
