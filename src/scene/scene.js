@@ -6,8 +6,9 @@ import {
   PerspectiveCamera,
   CubeCamera,
   Grid,
+  CameraControls,
 } from "@react-three/drei";
-import { useControls } from "leva";
+import { useControls, buttonGroup, button } from "leva";
 import { useFrame } from "@react-three/fiber";
 
 const Scene = () => {
@@ -15,34 +16,24 @@ const Scene = () => {
   useFrame((state, delta) => {
     sphereRef.current.rotation.x += delta;
   });
-  const { height, radius, scale } = useControls("ground attribute", {
-    height: {
-      value: 6,
-      min: 0,
-      max: 20,
-    },
-    radius: {
-      value: 60,
-      min: 0,
-      max: 100,
-    },
-    scale: {
-      value: 70,
-      min: 0,
-      max: 100,
-    },
-  });
+
+  const cameraControls = useRef();
+  const camontrols = useControls("camera controls", {});
+
   return (
     <>
       <Environment background files="./envMap/1.hdr" />
+      <CameraControls ref={cameraControls} />
       <Grid
-        args={[30, 30]}
+        args={[100, 100]}
         cellSize={0.5}
         cellColor="red"
         sectionSize={5}
         sectionThickness={4}
         sectionColor="turquoise"
         cellThickness={2}
+        fadeDistance={20}
+        fadeStrength={2}
       />
       <mesh position={[0, 0, 5]} ref={sphereRef}>
         <boxGeometry />
@@ -60,7 +51,6 @@ const Scene = () => {
           </mesh>
         )}
       </CubeCamera>
-      <OrbitControls />
     </>
   );
 };
