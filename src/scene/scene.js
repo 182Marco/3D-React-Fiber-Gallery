@@ -22,7 +22,7 @@ const Scene = () => {
     horizontalRotation: buttonGroup({
       label: "horizontal R",
       opts: {
-        "45deg": () => cameraControls.current.rotate(45, 0, true),
+        "45deg": () => cameraControls.current.rotate(45 * 0.0174533, 0, true), // 0.017 to convert into radiants
       },
     }),
   });
