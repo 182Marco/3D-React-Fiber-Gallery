@@ -18,7 +18,14 @@ const Scene = () => {
   });
 
   const cameraControls = useRef();
-  const camontrols = useControls("camera controls", {});
+  const camontrols = useControls("camera controls", {
+    horizontalRotation: buttonGroup({
+      label: "horizontal R",
+      opts: {
+        "45deg": () => cameraControls.current.rotate(45, 0, true),
+      },
+    }),
+  });
 
   return (
     <>
