@@ -34,9 +34,19 @@ const Scene = () => {
     verticalRotation: buttonGroup({
       label: "vertical R",
       opts: {
-        // "45deg": () => cameraControls.current.rotate(45 * 0.0174533, 0, true), // 0.017 to convert into radiants
         "20deg": () => cameraControls.current.rotate(0, 20 * DEG2RAD, true), // 2nd way
         "-40deg": () => cameraControls.current.rotate(0, -40 * DEG2RAD, true),
+      },
+    }),
+    horizontalTruck: buttonGroup({
+      label: "horizontal T",
+      opts: {
+        "1, 0": () => cameraControls.current.truck(1, 0, true), // 2nd way
+        "0, 1": () => cameraControls.current.truck(0, 1, true),
+        "1, 1": () => cameraControls.current.truck(1, 1, true),
+        "-1, 0": () => cameraControls.current.truck(-1, 0, true),
+        "0, -1": () => cameraControls.current.truck(0, -1, true),
+        "-1, -1": () => cameraControls.current.truck(-1, -1, true),
       },
     }),
   });
@@ -44,7 +54,7 @@ const Scene = () => {
   return (
     <>
       <Environment background files="./envMap/1.hdr" />
-      <CameraControls ref={cameraControls} smoothTime={5} />
+      <CameraControls ref={cameraControls} smoothTime={1.125} />
       <Grid
         args={[100, 100]}
         cellSize={0.5}
