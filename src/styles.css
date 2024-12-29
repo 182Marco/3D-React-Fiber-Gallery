@@ -23,30 +23,6 @@ canvas {
   height: 100%;
 }
 
-button {
-  background: linear-gradient(45deg, #4e73df, #1abc9c);
-  color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background: linear-gradient(45deg, #1abc9c, #4e73df);
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.5);
-  transform: scale(1.05);
-}
-
-button:active {
-  transform: scale(0.98);
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
-}
-
 .show-dog-btn {
   position: absolute;
   right: 50px;

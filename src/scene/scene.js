@@ -10,6 +10,9 @@ import {
 } from "@react-three/drei";
 import { useControls, buttonGroup, button } from "leva";
 import { useFrame } from "@react-three/fiber";
+import { MathUtils } from "three";
+
+const { DEG2RAD } = MathUtils;
 
 const Scene = () => {
   const sphereRef = useRef();
@@ -22,7 +25,10 @@ const Scene = () => {
     horizontalRotation: buttonGroup({
       label: "horizontal R",
       opts: {
-        "45deg": () => cameraControls.current.rotate(45 * 0.0174533, 0, true), // 0.017 to convert into radiants
+        // "45deg": () => cameraControls.current.rotate(45 * 0.0174533, 0, true), // 0.017 to convert into radiants
+        "45deg": () => cameraControls.current.rotate(45 * DEG2RAD, 0, true), // 2nd way
+        "-90deg": () => cameraControls.current.rotate(-90 * DEG2RAD, 0, true),
+        "360deg": () => cameraControls.current.rotate(360 * DEG2RAD, 0, true),
       },
     }),
   });
