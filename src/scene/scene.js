@@ -36,7 +36,7 @@ const Scene = () => {
   return (
     <>
       <Environment background files="./envMap/1.hdr" />
-      <CameraControls ref={cameraControls} />
+      <CameraControls ref={cameraControls} smoothTime={5} />
       <Grid
         args={[100, 100]}
         cellSize={0.5}
