@@ -49,6 +49,13 @@ const Scene = () => {
         "-1, -1": () => cameraControls.current.truck(-1, -1, true),
       },
     }),
+    zoom: buttonGroup({
+      label: "zoom",
+      opts: {
+        0.025: () => cameraControls.current.zoom(0.25, true),
+        "-0.025": () => cameraControls.current.zoom(-0.25, true),
+      },
+    }),
   });
 
   return (
