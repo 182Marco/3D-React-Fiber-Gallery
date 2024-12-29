@@ -31,6 +31,14 @@ const Scene = () => {
         "360deg": () => cameraControls.current.rotate(360 * DEG2RAD, 0, true),
       },
     }),
+    verticalRotation: buttonGroup({
+      label: "vertical R",
+      opts: {
+        // "45deg": () => cameraControls.current.rotate(45 * 0.0174533, 0, true), // 0.017 to convert into radiants
+        "20deg": () => cameraControls.current.rotate(0, 20 * DEG2RAD, true), // 2nd way
+        "-40deg": () => cameraControls.current.rotate(0, -40 * DEG2RAD, true),
+      },
+    }),
   });
 
   return (
