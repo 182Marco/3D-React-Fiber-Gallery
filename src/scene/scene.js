@@ -56,6 +56,9 @@ const Scene = () => {
         "-0.025": () => cameraControls.current.zoom(-0.25, true),
       },
     }),
+    lookAtBox: button(() => {
+      cameraControls.current.setLookAt(0, 1, 3, 0, 0, 0, true);
+    }),
   });
 
   return (
