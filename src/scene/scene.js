@@ -4,21 +4,13 @@ import { useFrame } from "@react-three/fiber";
 import { CameraControl, OrbitControl, PresentationControl } from "../componets";
 
 const Scene = () => {
-  const sphereRef = useRef();
-  useFrame((state, delta) => {
-    sphereRef.current.rotation.x += delta;
-  });
-
   return (
     <>
-      <Environment background files="./envMap/1.hdr" />
-      {/* <CameraControl /> */}
-      {/* <OrbitControl /> */}
       <PresentationControl />
-      <mesh position={[0, 0, 5]} ref={sphereRef}>
-        <boxGeometry />
-        <meshStandardMaterial color="violet" />
-      </mesh>
+      {/*  <Environment background files="./envMap/1.hdr" />
+      <CameraControl /> 
+       <OrbitControl /> 
+    
       <CubeCamera resolution={1024}>
         {(texture) => (
           <mesh>
@@ -30,7 +22,7 @@ const Scene = () => {
             />
           </mesh>
         )}
-      </CubeCamera>
+      </CubeCamera> */}
     </>
   );
 };
