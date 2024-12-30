@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Environment, CubeCamera } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { CameraControl } from "../componets";
+import { CameraControl, OrbitControl } from "../componets";
 
 const Scene = () => {
   const sphereRef = useRef();
@@ -12,7 +12,8 @@ const Scene = () => {
   return (
     <>
       <Environment background files="./envMap/1.hdr" />
-      <CameraControl />
+      {/* <CameraControl /> */}
+      <OrbitControl />
       <mesh position={[0, 0, 5]} ref={sphereRef}>
         <boxGeometry />
         <meshStandardMaterial color="violet" />
