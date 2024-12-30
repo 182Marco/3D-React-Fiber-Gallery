@@ -1,11 +1,20 @@
 import { PresentationControls } from "@react-three/drei";
+import { usePresentaionControlos } from "./presentationControl.hook";
 
 const PresentationControl = () => {
+  const { colors } = usePresentaionControlos();
+
   return (
-    <PresentationControls global>
+    <PresentationControls
+      global
+      polar={[-Math.PI / 3, Math.PI / 3]}
+      azimuth={[-Math.PI / 3, Math.PI / 3]}
+    >
       <mesh>
         <boxGeometry args={[4, 4, 4]} />
-        <meshBasicMaterial color="lightgreen" wireframe />
+        {colors.map((c, i) => (
+          <meshBasicMaterial key={i} attach={`material-${i}`} color={c} />
+        ))}
       </mesh>
     </PresentationControls>
   );
