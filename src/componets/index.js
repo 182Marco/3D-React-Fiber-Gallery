@@ -4,3 +4,4 @@ export { Dog } from "./dog";
 export { OrbitControl } from "./orbitControl";
 export { Select } from "./select";
 export { Spinner } from "./spinner";
+export { PresentationControl } from "./presentationControl";
