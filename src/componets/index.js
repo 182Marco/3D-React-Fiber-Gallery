@@ -1,7 +1,9 @@
 export { CameraControl } from "./cameraControls";
-export { Custom } from "./custom";
+export { CustomModel } from "./customModel";
 export { Dog } from "./dog";
+export { Images } from "./images";
 export { OrbitControl } from "./orbitControl";
+export { ScrollControl } from "./scrollControl";
 export { Select } from "./select";
 export { Spinner } from "./spinner";
 export { PresentationControl } from "./presentationControl";

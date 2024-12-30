@@ -1,15 +1,13 @@
-import { useRef } from "react";
-import { Environment, CubeCamera } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { CameraControl, OrbitControl, PresentationControl } from "../componets";
+import * as C from "../componets";
 
 const Scene = () => {
   return (
     <>
-      <PresentationControl />
-      {/*  <Environment background files="./envMap/1.hdr" />
-      <CameraControl /> 
-       <OrbitControl /> 
+      <C.ScrollControl />
+      {/*  <C.PresentationControl />
+     <Environment background files="./envMap/1.hdr" />
+      <C.CameraControl /> 
+       <C.OrbitControl /> 
     
       <CubeCamera resolution={1024}>
         {(texture) => (
