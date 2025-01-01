@@ -9,7 +9,7 @@ const ScrollControl = () => {
     <>
       <ambientLight intensity={3} />
       <directionalLight />
-      <ScrollControls pages={3} damping={1.2}>
+      <ScrollControls pages={3} damping={0.4}>
         <Scroll>
           <Images />
           <primitive object={u.model.scene} position={[1.5, -1, 0]} />
