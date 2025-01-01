@@ -7,3 +7,4 @@ export { ScrollControl } from "./scrollControl";
 export { Select } from "./select";
 export { Spinner } from "./spinner";
 export { PresentationControl } from "./presentationControl";
+export { transformControl } from "./transformControl";
