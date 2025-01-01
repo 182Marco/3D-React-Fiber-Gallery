@@ -6,5 +6,6 @@ export { OrbitControl } from "./orbitControl";
 export { ScrollControl } from "./scrollControl";
 export { Select } from "./select";
 export { Spinner } from "./spinner";
+export { PivotControl } from "./pivotControl";
 export { PresentationControl } from "./presentationControl";
 export { transformControl } from "./transformControl";

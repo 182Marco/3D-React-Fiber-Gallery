@@ -3,7 +3,8 @@ import * as C from "../componets";
 const Scene = () => {
   return (
     <>
-      <C.transformControl />
+      <C.PivotControl />
+      {/* <C.TransformControl /> */}
       {/* <C.ScrollControl /> */}
       {/*  <C.PresentationControl />
      <Environment background files="./envMap/1.hdr" />
