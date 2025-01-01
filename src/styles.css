@@ -82,6 +82,7 @@ section.select {
 
 h1 {
   position: absolute;
+  font-size: 17vw;
 }
 
 h1.to {
@@ -91,11 +92,11 @@ h1.to {
 
 h1.be {
   top: 120vh;
-  left: 60vw;
+  left: 79vw;
 }
 
 h1.home {
-  top: 195.5vh;
+  top: 176vh;
   left: 0.5vw;
-  font-size: 40vw;
+  font-size: 33vw;
 }

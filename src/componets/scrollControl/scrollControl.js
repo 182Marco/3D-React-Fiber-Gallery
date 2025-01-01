@@ -12,7 +12,7 @@ const ScrollControl = () => {
       <ScrollControls pages={3} damping={0.4}>
         <Scroll>
           <Images />
-          <primitive object={u.model.scene} position={[1.5, -1, 0]} />
+          <primitive object={u.model.scene} position={[2.3, -1.2, 0]} />
         </Scroll>
         <Scroll html>
           <h1 className="to">to</h1>
