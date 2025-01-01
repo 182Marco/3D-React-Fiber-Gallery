@@ -15,6 +15,8 @@ const useImages = () => {
     images.forEach((e, i) =>
       i > 0 && i < 4 ? (e.material.zoom = 1 + scroll.range(0.33, 0.66)) : null
     );
+    images[4].material.grayscale = 1 - scroll.range(0.66, 0.33);
+    images[5].material.zoom = 2 - scroll.range(0.66, 0.33);
   });
 
   return { height, imagesRef, width };

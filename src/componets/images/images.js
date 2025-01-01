@@ -30,7 +30,7 @@ const Images = () => {
         position={[0, -u.height * 1.5, 2.5]}
         scale={[1.5, 3, 1]}
         url="./images/5.jpg"
-        greyscale={1}
+        grayscale={1}
       />
       <Image
         position={[0, -u.height * 2 - u.height / 4, 0]}
