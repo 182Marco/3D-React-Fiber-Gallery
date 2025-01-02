@@ -1,9 +1,14 @@
 import * as C from "../componets";
+import { Text, OrbitControls } from "@react-three/drei";
 
 const Scene = () => {
   return (
     <>
-      <C.PivotControl />
+      <OrbitControls />
+      <Text fontSize={0.6} color="red" font="./fonts/Quicksand-Medium.ttf">
+        This is the text
+      </Text>
+      {/* <C.PivotControl /> */}
       {/* <C.TransformControl /> */}
       {/* <C.ScrollControl /> */}
       {/*  <C.PresentationControl />
