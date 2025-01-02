@@ -1,11 +1,11 @@
 import * as C from "../componets";
-import { Text, OrbitControls, Text3D } from "@react-three/drei";
+import * as D from "@react-three/drei";
 
 const Scene = () => {
   return (
     <>
-      <OrbitControls />
-      <Text
+      <D.OrbitControls />
+      <D.Text
         fontSize={0.4}
         color="red"
         font="./fonts/Quicksand-Medium.ttf"
@@ -15,13 +15,16 @@ const Scene = () => {
         textAlign="center"
       >
         This is the text
-      </Text>
-      <Text3D
-        position={[0, -1.5, 0]}
-        font="./fonts/Quicksand Medium_Regular.json"
-      >
-        Here a 3d text
-      </Text3D>
+      </D.Text>
+      <D.Center>
+        <D.Text3D
+          position={[0, -1.5, 0]}
+          font="./fonts/Quicksand Medium_Regular.json"
+        >
+          Here a 3d text
+          <meshNormalMaterial />
+        </D.Text3D>
+      </D.Center>
       {/* <C.PivotControl /> */}
       {/* <C.TransformControl /> */}
       {/* <C.ScrollControl /> */}
