@@ -100,3 +100,8 @@ h1.home {
   left: 0.5vw;
   font-size: 33vw;
 }
+
+.text-in-canvas > div {
+  font-size: 30px;
+  color: green;
+}

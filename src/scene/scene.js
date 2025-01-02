@@ -1,10 +1,29 @@
 import * as C from "../componets";
 import * as D from "@react-three/drei";
+import { useRef } from "react";
 
 const Scene = () => {
+  const orangeMesh = useRef();
   return (
     <>
-      <D.OrbitControls />
+      <D.OrbitControls position={[0, 1, 0]} />
+      <mesh position={[1, 0, 0]} ref={orangeMesh}>
+        <boxGeometry />
+        <meshBasicMaterial color="orange" />
+        <D.Html
+          position={[0, 0.5, 0.5]}
+          wrapperClass="text-in-canvas"
+          distanceFactor={5} // to add prospective to text when zoom in and out
+          // occlude={[orangeMesh]} ---> not working --> don't know why
+        >
+          R3F
+        </D.Html>
+      </mesh>
+      <mesh position={[-1, 0, 0]}>
+        <boxGeometry />
+        <meshBasicMaterial color="violet" />
+      </mesh>
+      {/* 
       <D.Text
         fontSize={0.6}
         color="turquoise"
@@ -31,7 +50,7 @@ const Scene = () => {
             <meshNormalMaterial />
           </D.Text3D>
         </D.Float>
-      </D.Center>
+      </D.Center> */}
       {/* <C.PivotControl /> */}
       {/* <C.TransformControl /> */}
       {/* <C.ScrollControl /> */}
