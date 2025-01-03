@@ -7,8 +7,10 @@ const Scene = () => {
 
   return (
     <>
-      {play && <D.PositionalAudio url="./sound/sound.mp3" autoplay loop />}
-      <D.OrbitControls position={[0, 1, 0]} />
+      {play && (
+        <D.PositionalAudio url="./sound/sound.mp3" autoplay loop distance={5} />
+      )}
+      <D.OrbitControls position={[0, 1, 10]} />
       <mesh onClick={() => setPlay(pv => !pv)}>
         <boxGeometry />
         <meshBasicMaterial color="orange" />
