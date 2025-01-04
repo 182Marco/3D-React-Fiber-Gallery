@@ -6,21 +6,22 @@ const Scene = () => {
     <>
       <ambientLight />
       <D.OrbitControls position={[0, 3, 3]} />
-      <D.Environment background files="./envMap/envMap.hdr" />
+      {/* <D.Environment background files="./envMap/envMap.hdr" /> */}
       <mesh>
-        <boxGeometry />
-        <meshBasicMaterial color="red" />
+        <boxGeometry args={[1, 1, 1, 32, 32, 32]} />
+        <D.MeshWobbleMaterial color="red" factor={3} speed={0.3} wireframe />
+        {/*gelatinus material*/}
       </mesh>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position-y={-1}>
+      {/* <mesh rotation={[-Math.PI / 2, 0, 0]} position-y={-1}>
         <boxGeometry args={[6, 6, 1]} />
         <D.MeshReflectorMaterial
           resolution={512}
           color="grey"
           blur={[1000, 100]}
           mixBlur={1}
-          mirror={0.8} // reflect evironment map
+          mirror={1} // reflect evironment map
         />
-      </mesh>
+      </mesh> */}
     </>
   );
 };
