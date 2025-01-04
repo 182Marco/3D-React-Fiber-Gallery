@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as C from "../componets";
 import * as D from "@react-three/drei";
@@ -6,6 +6,7 @@ import * as THREE from "three";
 
 const Scene = () => {
   const cubeRef = useRef();
+  const layerRef = useRef();
   const [hover, setHover] = useState(false);
   D.useCursor(hover);
 
@@ -17,6 +18,15 @@ const Scene = () => {
         0.001
       ))
   );
+
+  useFrame(() => {
+    layerRef.current.material.distort = THREE.MathUtils.lerp(
+      layerRef.current.material.distort,
+      hover ? 0.3 : 0,
+      0.02
+    );
+  }, [hover]);
+
   return (
     <>
       <ambientLight intensity={1} />
@@ -24,14 +34,15 @@ const Scene = () => {
       <mesh
         rotation={[0, 0, Math.PI]}
         position={[0, 0, 0]}
+        ref={layerRef}
         onPointerEnter={() => setHover(true)}
         onPointerLeave={() => setHover(false)}
       >
         <planeGeometry args={[5, 5, 32, 32]} />
         <D.MeshDistortMaterial
           color="white"
-          distort={hover ? 0.3 : 0}
-          speed={3}
+          // distort={hover ? 0.3 : 0}
+          speed={10}
           wireframe
         >
           <D.GradientTexture
