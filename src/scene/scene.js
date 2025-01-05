@@ -9,8 +9,15 @@ const Scene = () => {
     <>
       <ambientLight />
       <D.OrbitControls />
-      <mesh>
-        <planeGeometry args={[2, 3]} />
+      <D.Text
+        fonts="./fonts/Roboto-Bold.ttf"
+        position={[0, 1.6, 0.1]}
+        fontSize={0.6}
+      >
+        Eggs
+        <meshBasicMaterial toneMapped={false} />
+      </D.Text>
+      <D.RoundedBox args={[3, 4, 0.1]} radius={0.1}>
         <D.MeshPortalMaterial>
           <primitive object={model.scene} scale={0.6} position={[0, 0.6, 0]} />
           <mesh>
@@ -18,7 +25,7 @@ const Scene = () => {
             <meshBasicMaterial map={texture} side={THREE.BackSide} />
           </mesh>
         </D.MeshPortalMaterial>
-      </mesh>
+      </D.RoundedBox>
     </>
   );
 };
