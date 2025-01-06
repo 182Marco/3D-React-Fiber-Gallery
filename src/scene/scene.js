@@ -12,8 +12,14 @@ const Scene = () => {
 
   const [active, setActive] = R.useState(false);
 
-  T.useFrame(() => {
-    M.easing.damp(portalMaterialRef.current, "blend", active ? 1 : 0);
+  T.useFrame((_, delta) => {
+    M.easing.damp(
+      portalMaterialRef.current,
+      "blend",
+      active ? 1 : 0,
+      0.2,
+      delta
+    );
   });
 
   return (
