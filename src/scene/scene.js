@@ -7,7 +7,7 @@ const Scene = () => {
   const model = D.useGLTF("./model/1.glb");
   const texture = D.useTexture("./texture/1.png");
 
-  const [blend, setBlend] = useState(0);
+  const [active, setActive] = useState(false);
 
   return (
     <>
@@ -24,9 +24,9 @@ const Scene = () => {
       <D.RoundedBox
         args={[3, 4, 0.1]}
         radius={0.1}
-        onDoubleClick={() => setBlend(pv => (pv ? 0 : 1))}
+        onDoubleClick={() => setActive(pv => !pv)}
       >
-        <D.MeshPortalMaterial blend={blend}>
+        <D.MeshPortalMaterial blend={active ? 1 : 0}>
           <primitive object={model.scene} scale={0.6} position={[0, 0.6, 0]} />
           <mesh>
             <sphereGeometry args={[5, 64, 64]} />
