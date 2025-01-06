@@ -9,8 +9,13 @@ const Scene = () => {
   const model = D.useGLTF("./model/1.glb");
   const texture = D.useTexture("./texture/1.png");
   const portalMaterialRef = R.useRef();
+  const CameraControlRef = R.useRef();
 
   const [active, setActive] = R.useState(false);
+
+  R.useEffect(() => {
+    // CameraControlRef.current.setLookAt([0, 0, active ? 3 : 5, 0, 0, 0, true]); // These lines break the functionality, it's unclear why.
+  }, [active]);
 
   T.useFrame((_, delta) => {
     M.easing.damp(
@@ -25,7 +30,7 @@ const Scene = () => {
   return (
     <>
       <ambientLight />
-      <D.OrbitControls />
+      <D.CameraControls ref={CameraControlRef} />
       <D.Text
         fonts="./fonts/Roboto-Bold.ttf"
         position={[0, 1.6, 0.1]}
