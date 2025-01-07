@@ -4,8 +4,8 @@ import * as S from "@react-spring/three";
 const SpringBasicAnimation = () => {
   const [click, setClick] = R.useState(false);
   const spring = S.useSpring({
-    from: { scale: 1 },
-    scale: 2,
+    from: { scale: click ? 2 : 1 },
+    scale: click ? 1 : 2,
   });
 
   return (
