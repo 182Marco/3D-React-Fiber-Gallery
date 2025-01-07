@@ -1,15 +1,10 @@
-import * as R from "react";
 import * as S from "@react-spring/three";
+import { useSpringBasicAnimation } from "./springBasicAnimation.hook";
 
 const SpringBasicAnimation = () => {
-  const [click, setClick] = R.useState(false);
-  const spring = S.useSpring({
-    from: { scale: click ? 2 : 1 },
-    scale: click ? 1 : 2,
-  });
-
+  const u = useSpringBasicAnimation();
   return (
-    <S.a.mesh onClick={() => setClick(pv => !pv)} scale={spring.scale}>
+    <S.a.mesh onClick={() => u.setClick(pv => !pv)} scale={u.spring.scale}>
       <boxGeometry />
       <meshBasicMaterial color={"orange"} />
     </S.a.mesh>
