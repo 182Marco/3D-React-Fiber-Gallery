@@ -5,14 +5,14 @@ const SpringBasicAnimation = () => {
   const [click, setClick] = R.useState(false);
   const spring = S.useSpring({
     from: { scale: 1 },
-    to: { scale: 2 },
+    scale: 2,
   });
 
   return (
-    <S.animated.mesh onClick={() => setClick(pv => !pv)} scale={spring.scale}>
+    <S.a.mesh onClick={() => setClick(pv => !pv)} scale={spring.scale}>
       <boxGeometry />
       <meshBasicMaterial color={"orange"} />
-    </S.animated.mesh>
+    </S.a.mesh>
   );
 };
 
