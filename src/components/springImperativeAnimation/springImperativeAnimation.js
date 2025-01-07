@@ -4,11 +4,7 @@ import { useSpringImperativeAnimation } from "./springImperativeAnimation.hook";
 const SpringImperativeAnimation = () => {
   const u = useSpringImperativeAnimation();
   return (
-    <S.a.mesh
-      onClick={() => u.api.start({ to: { x: u.spring.x.get() ? 0 : 1 } })}
-      scale={3}
-      position-x={u.spring.x}
-    >
+    <S.a.mesh onClick={u.handleClick} scale={3} position-x={u.spring.x}>
       <boxGeometry />
       <S.a.meshBasicMaterial color="orange" />
     </S.a.mesh>

@@ -2,11 +2,13 @@ import * as R from "react";
 import * as S from "@react-spring/three";
 
 const useSpringImperativeAnimation = () => {
-  // const [click, setClick] = R.useState(false);
   const [spring, api] = S.useSpring(() => ({
     from: { x: 0 },
   }));
-  return { api, spring };
+
+  const handleClick = () => api.start({ to: { x: spring.x.get() ? 0 : 1 } });
+
+  return { api, handleClick, spring };
 };
 
 export { useSpringImperativeAnimation };
