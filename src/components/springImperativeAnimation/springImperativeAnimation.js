@@ -5,7 +5,7 @@ const SpringImperativeAnimation = () => {
   const u = useSpringImperativeAnimation();
   return (
     <S.a.mesh
-      onClick={() => u.api.start({ to: { x: 1 } })}
+      onClick={() => u.api.start({ to: { x: u.spring.x.get() ? 0 : 1 } })}
       scale={3}
       position-x={u.spring.x}
     >
