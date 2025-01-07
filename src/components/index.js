@@ -7,6 +7,7 @@ export { ScrollControl } from "./scrollControl";
 export { Select } from "./select";
 export { Spinner } from "./spinner";
 export { SpringBasicAnimation } from "./springBasicAnimation";
+export { SpringImperativeAnimation } from "./springImperativeAnimation";
 export { PivotControl } from "./pivotControl";
 export { Portal } from "./portal";
 export { PresentationControl } from "./presentationControl";
