@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { Leva } from "leva";
-import { Select } from "../componets";
+import { Select } from "../components";
 import { AppProvider } from "../context";
 import { useRoot } from "./root.hook";
 import { Scene } from "../scene";

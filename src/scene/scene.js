@@ -1,7 +1,8 @@
-import * as C from "../componets";
+import * as C from "../components";
 
 const Scene = () => {
-  return <C.Portal />;
+  console.log(`marcom ---> C: `, C);
+  return <C.SpringBasicAnimation />;
 };
 
 export { Scene };

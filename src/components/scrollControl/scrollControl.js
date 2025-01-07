@@ -1,6 +1,6 @@
 import { ScrollControls, Scroll } from "@react-three/drei";
 import { useScrollControl } from "./scrollControl.hook";
-import { Images } from "../../componets";
+import { Images } from "../../components";
 
 const ScrollControl = () => {
   const u = useScrollControl();

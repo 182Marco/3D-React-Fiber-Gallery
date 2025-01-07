@@ -6,6 +6,7 @@ export { OrbitControl } from "./orbitControl";
 export { ScrollControl } from "./scrollControl";
 export { Select } from "./select";
 export { Spinner } from "./spinner";
+export { SpringBasicAnimation } from "./springBasicAnimation";
 export { PivotControl } from "./pivotControl";
 export { Portal } from "./portal";
 export { PresentationControl } from "./presentationControl";
