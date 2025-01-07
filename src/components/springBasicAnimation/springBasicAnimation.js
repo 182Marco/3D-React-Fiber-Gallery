@@ -6,7 +6,7 @@ const SpringBasicAnimation = () => {
   return (
     <S.a.mesh onClick={() => u.setClick(pv => !pv)} scale={u.spring.scale}>
       <boxGeometry />
-      <meshBasicMaterial color={"orange"} />
+      <S.a.meshBasicMaterial color={u.spring.color} />
     </S.a.mesh>
   );
 };
