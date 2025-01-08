@@ -31,7 +31,11 @@ const Scene = () => {
     // reverse: clicked,
     //reset: clicked,
     pause: clicked,
-    config: { duration: 4000 },
+    config: {
+      mass: 20,
+      tension: 700,
+      // duration: 4000
+    },
     onStart: () => console.log("start"),
     onPause: () => console.log("pause"),
     onResume: () => console.log("resume"),
