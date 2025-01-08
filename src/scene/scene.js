@@ -2,6 +2,7 @@ import { a, useSpring } from "@react-spring/three";
 import * as C from "../components";
 
 const Scene = () => {
+  let n = 0;
   const { color, x, y } = useSpring({
     from: { color: "pink", y: -2, x: -2 },
     to: [
@@ -22,6 +23,7 @@ const Scene = () => {
         y: -2,
       },
     ],
+    loop: () => n++ < 2, // assign fn to assign to loop dynamically, based on other values if needed.
   });
 
   return (
