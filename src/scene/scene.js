@@ -7,11 +7,19 @@ const Scene = () => {
     to: [
       {
         color: "yellow",
-        x: 0,
+        x: 2,
       },
       {
         color: "green",
         y: 2,
+      },
+      {
+        color: "red",
+        x: -2,
+      },
+      {
+        color: "blue",
+        y: -2,
       },
     ],
   });
