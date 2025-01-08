@@ -1,7 +1,12 @@
 import * as C from "../components";
 
 const Scene = () => {
-  return <C.Dog />;
+  return (
+    <mesh>
+      <boxGeometry />
+      <meshBasicMaterial color="orange" />
+    </mesh>
+  );
 };
 
 export { Scene };
