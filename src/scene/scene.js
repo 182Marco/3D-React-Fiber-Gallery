@@ -27,11 +27,15 @@ const Scene = () => {
     // },
     // ],
     // loop: () => n++ < 2, // assign fn to assign to loop dynamically, based on other values if needed.
-    delay: 3000,
+    delay: 2000,
     // reverse: clicked,
-    // pause: clicked,
-    reset: clicked,
-    config: { duration: 7000 },
+    //reset: clicked,
+    pause: clicked,
+    config: { duration: 4000 },
+    onStart: () => console.log("start"),
+    onPause: () => console.log("pause"),
+    onResume: () => console.log("resume"),
+    onRest: () => console.log("rest"),
   });
 
   return (
