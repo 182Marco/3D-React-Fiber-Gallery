@@ -5,25 +5,28 @@ const Scene = () => {
   let n = 0;
   const { color, x, y } = useSpring({
     from: { color: "pink", y: -2, x: -2 },
-    to: [
+    to:
+      //  [
       {
         color: "yellow",
         x: 2,
       },
-      {
-        color: "green",
-        y: 2,
-      },
-      {
-        color: "red",
-        x: -2,
-      },
-      {
-        color: "violet",
-        y: -2,
-      },
-    ],
-    loop: () => n++ < 2, // assign fn to assign to loop dynamically, based on other values if needed.
+    // {
+    //   color: "green",
+    //   y: 2,
+    // },
+    // {
+    //   color: "red",
+    //   x: -2,
+    // },
+    // {
+    //   color: "violet",
+    //   y: -2,
+    // },
+    // ],
+    // loop: () => n++ < 2, // assign fn to assign to loop dynamically, based on other values if needed.
+    delay: 3000,
+    reverse: true,
   });
 
   return (
