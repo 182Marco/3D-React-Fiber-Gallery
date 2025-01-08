@@ -28,7 +28,10 @@ const Scene = () => {
     // ],
     // loop: () => n++ < 2, // assign fn to assign to loop dynamically, based on other values if needed.
     delay: 3000,
-    reverse: clicked,
+    // reverse: clicked,
+    // pause: clicked,
+    reset: clicked,
+    config: { duration: 7000 },
   });
 
   return (
