@@ -3,11 +3,17 @@ import * as C from "../components";
 
 const Scene = () => {
   const { color, x, y } = useSpring({
-    from: { color: "hotpink", y: -2, x: -2 },
-    to: {
-      color: "yellow",
-      x: 0,
-    },
+    from: { color: "pink", y: -2, x: -2 },
+    to: [
+      {
+        color: "yellow",
+        x: 0,
+      },
+      {
+        color: "green",
+        y: 2,
+      },
+    ],
   });
 
   return (
