@@ -18,7 +18,7 @@ const Scene = () => {
         x: -2,
       },
       {
-        color: "blue",
+        color: "violet",
         y: -2,
       },
     ],
@@ -28,7 +28,7 @@ const Scene = () => {
     <>
       <a.mesh position-x={x} position-y={y}>
         <boxGeometry />
-        <meshBasicMaterial color={color} />
+        <a.meshBasicMaterial color={color} />
       </a.mesh>
     </>
   );
