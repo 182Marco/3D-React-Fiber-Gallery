@@ -14,6 +14,8 @@ const useConfigInSpring = () => {
     config: {
       mass: 20,
       tension: 700,
+      clamp: false, // Clamp defaults to false, limiting the
+      // animation  to 'TO' when true, but reducing realism
     },
     onStart: () => console.log("start"),
     onPause: () => console.log("pause"),
