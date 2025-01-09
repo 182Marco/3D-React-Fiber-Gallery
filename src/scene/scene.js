@@ -1,7 +1,7 @@
 import * as C from "../components";
 
 const Scene = () => {
-  return <C.ConfigInUseSpring />;
+  return <C.HookUseSpringProps />;
 };
 
 export { Scene };

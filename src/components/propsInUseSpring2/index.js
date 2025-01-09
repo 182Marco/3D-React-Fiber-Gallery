@@ -1,1 +1,0 @@
-export { PropsInUseSpring } from "./propsInUseSpring";

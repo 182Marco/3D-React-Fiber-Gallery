@@ -1,6 +1,8 @@
 export { CameraControl } from "./cameraControls";
+export { ConfigInUseSpring } from "./configInUseSpring";
 export { CustomModel } from "./customModel";
 export { Dog } from "./dog";
+export { HookUseSpringProps } from "./hookUseSpringProps";
 export { Images } from "./images";
 export { OrbitControl } from "./orbitControl";
 export { ScrollControl } from "./scrollControl";
@@ -11,5 +13,4 @@ export { SpringImperativeAnimation } from "./springImperativeAnimation";
 export { PivotControl } from "./pivotControl";
 export { Portal } from "./portal";
 export { PresentationControl } from "./presentationControl";
-export { ConfigInUseSpring } from "./configInUseSpring";
 export { transformControl } from "./transformControl";
