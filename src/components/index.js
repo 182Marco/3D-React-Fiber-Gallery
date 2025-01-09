@@ -11,4 +11,5 @@ export { SpringImperativeAnimation } from "./springImperativeAnimation";
 export { PivotControl } from "./pivotControl";
 export { Portal } from "./portal";
 export { PresentationControl } from "./presentationControl";
+export { ConfigInUseSpring } from "./configInUseSpring";
 export { transformControl } from "./transformControl";
