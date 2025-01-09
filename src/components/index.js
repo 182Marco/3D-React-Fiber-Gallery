@@ -10,6 +10,7 @@ export { Select } from "./select";
 export { Spinner } from "./spinner";
 export { SpringBasicAnimation } from "./springBasicAnimation";
 export { SpringImperativeAnimation } from "./springImperativeAnimation";
+export { SpringRefHook } from "./springImperativeAnimation copy";
 export { PivotControl } from "./pivotControl";
 export { Portal } from "./portal";
 export { PresentationControl } from "./presentationControl";
