@@ -1,4 +1,3 @@
-import * as R from "react";
 import * as S from "@react-spring/three";
 
 const useSpringImperativeAnimation = () => {
@@ -8,7 +7,7 @@ const useSpringImperativeAnimation = () => {
 
   const handleClick = () => api.start({ to: { x: spring.x.get() ? 0 : 1 } });
 
-  return { api, handleClick, spring };
+  return { handleClick, spring };
 };
 
 export { useSpringImperativeAnimation };
