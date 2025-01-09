@@ -14,6 +14,7 @@ const useConfigInSpring = () => {
     config: {
       mass: 20,
       tension: 700,
+      friction: 26, // friction is the amount of "bouncing" in the animation, default is 26
       clamp: false, // Clamp defaults to false, limiting the
       // animation  to 'TO' when true, but reducing realism
     },
