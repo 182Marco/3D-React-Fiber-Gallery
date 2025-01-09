@@ -1,5 +1,5 @@
 export { CameraControl } from "./cameraControls";
-export { ConfigInUseSpring } from "./configInUseSpring";
+export { ConfigInSpring } from "./configInSpring";
 export { CustomModel } from "./customModel";
 export { Dog } from "./dog";
 export { HookUseSpringProps } from "./hookUseSpringProps";

@@ -1,7 +1,7 @@
-import { a, useSpring } from "@react-spring/three";
+import { useSpring } from "@react-spring/three";
 import { useState } from "react";
 
-const ConfigInUseSpring = () => {
+const useConfigInSpring = () => {
   const [clicked, setClick] = useState(false);
   const { color, x, y } = useSpring({
     from: { color: "pink", y: -2, x: -2 },
@@ -20,13 +20,7 @@ const ConfigInUseSpring = () => {
     onResume: () => console.log("resume"),
     onRest: () => console.log("rest"),
   });
-
-  return (
-    <a.mesh position-x={x} position-y={y} onClick={() => setClick(pv => !pv)}>
-      <boxGeometry />
-      <a.meshBasicMaterial color={color} />
-    </a.mesh>
-  );
+  return { color, x, y, setClick };
 };
 
-export { ConfigInUseSpring };
+export { useConfigInSpring };
