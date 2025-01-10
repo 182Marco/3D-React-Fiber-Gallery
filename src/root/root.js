@@ -9,7 +9,7 @@ const Root = () => {
   const u = useRoot();
   return (
     <AppProvider>
-      <div className="box" style={{ position: "relative" }}>
+      <div className="box">
         <Select />
         <Leva />
         <Canvas
