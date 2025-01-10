@@ -4,34 +4,21 @@ import { a, useSprings } from "@react-spring/three";
 
 const items = [
   {
-    position: [-1.5, 0, 0],
-    key: 1,
+    from: { position: [-3.5, 0, 0] },
+    to: { position: [-1.5, 0, 0] },
   },
   {
-    position: [0, 0, 0],
-    key: 2,
+    from: { position: [0, -3.5, 0] },
+    to: { position: [0, 0, 0] },
   },
   {
-    position: [1.5, 0, 0],
-    key: 3,
+    from: { position: [0, 0, 3.5] },
+    to: { position: [1.5, 0, 0] },
   },
 ];
 
 const Scene = () => {
-  const springs = useSprings(items.length, [
-    {
-      from: { position: [-3.5, 0, 0] },
-      to: { position: [-1.5, 0, 0] },
-    },
-    {
-      from: { position: [0, -3.5, 0] },
-      to: { position: [0, 0, 0] },
-    },
-    {
-      from: { position: [0, 0, 3.5] },
-      to: { position: [1.5, 0, 0] },
-    },
-  ]);
+  const springs = useSprings(items.length, items);
 
   return (
     <>
