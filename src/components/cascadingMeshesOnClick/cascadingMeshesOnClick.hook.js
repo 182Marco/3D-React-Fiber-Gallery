@@ -20,7 +20,12 @@ const useCascadingMeshesOnClick = () => {
     from: { scale: 0.3 },
   }));
 
-  const handleMiss = () => api.start({ to: { scale: 0.6 } });
+  let active = true;
+
+  const handleMiss = () => {
+    api.start({ to: { scale: active ? 0.6 : 0 } });
+    active = !active;
+  };
 
   return { handleMiss, trail };
 };
