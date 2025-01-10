@@ -15,13 +15,14 @@ const items = [
   },
 ];
 
-const useCascadingMeshes = () => {
+const useCascadingMeshesOnClick = () => {
   const [trail, api] = useTrail(items.length, () => ({
-    from: { scale: 0 },
-    to: { scale: 0.6 },
+    from: { scale: 0.3 },
   }));
 
-  return { api, trail };
+  const handleMiss = () => api.start({ to: { scale: 0.6 } });
+
+  return { handleMiss, trail };
 };
 
-export { useCascadingMeshes };
+export { useCascadingMeshesOnClick };

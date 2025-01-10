@@ -1,5 +1,6 @@
 export { AnimateMultiplesMesh } from "./animateMultiplesMesh";
-export { CascadingMeshes } from "./cascadingMeshes";
+export { CascadingMeshes } from "./cascadingMeshes_";
+export { CascadingMeshesOnClick } from "./cascadingMeshesOnClick";
 export { ConfigInSpring } from "./configInSpring";
 export { CustomModel } from "./customModel";
 export { Dog } from "./dog";
