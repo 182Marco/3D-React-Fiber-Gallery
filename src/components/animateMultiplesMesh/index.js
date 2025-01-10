@@ -1,0 +1,1 @@
+export { AnimateMultiplesMesh } from "./animateMultiplesMesh";

@@ -1,4 +1,4 @@
-export { CameraControl } from "./cameraControls";
+export { AnimateMultiplesMesh } from "./animateMultiplesMesh";
 export { ConfigInSpring } from "./configInSpring";
 export { CustomModel } from "./customModel";
 export { Dog } from "./dog";
