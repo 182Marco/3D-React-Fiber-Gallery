@@ -1,13 +1,24 @@
+import { useRef } from "react";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { useBike } from "./bike.hook";
+import { useFrame } from "@react-three/fiber";
 
 const Bike = props => {
   const u = useBike();
+
+  const backTireRef = useRef();
+  const backRadiusRef = useRef();
+
+  useFrame((_, deltaT) => {
+    backTireRef.current.rotation.y -= deltaT;
+    backRadiusRef.current.rotation.z -= deltaT;
+  });
 
   return (
     <>
       <OrbitControls />
       <ambientLight intensity={3} />
+      <directionalLight />
       <group {...props} dispose={null}>
         <mesh geometry={u.nodes.Bike.geometry} material={u.materials.Quadro}>
           <group position={[-1.053, -1.178, 0.005]}>
@@ -28,6 +39,7 @@ const Bike = props => {
             <mesh
               geometry={u.nodes.Torus003.geometry}
               material={u.materials.Pneu}
+              ref={backTireRef}
             />
             <mesh
               geometry={u.nodes.Torus003_1.geometry}
@@ -42,6 +54,7 @@ const Bike = props => {
             geometry={u.nodes.B_Raios.geometry}
             material={u.materials.Raio}
             position={[-1.053, -1.178, 0.005]}
+            ref={backRadiusRef}
           />
           <group
             position={[-0.428, -0.32, 0.011]}
