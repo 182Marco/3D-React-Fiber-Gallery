@@ -1,21 +1,8 @@
-import { useRef } from "react";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { useBike } from "./bike.hook";
-import { useFrame } from "@react-three/fiber";
 
 const Bike = props => {
   const u = useBike();
-  const backTireRef = useRef();
-  const backRadiusRef = useRef();
-  const frontTireRef = useRef();
-  const frontRadiusRef = useRef();
-
-  useFrame((_, deltaT) => {
-    backTireRef.current.rotation.y -= deltaT * 2;
-    backRadiusRef.current.rotation.z -= deltaT * 2;
-    frontTireRef.current.rotation.y -= deltaT * 2;
-    frontRadiusRef.current.rotation.z -= deltaT * 2;
-  });
 
   return (
     <>
@@ -42,7 +29,7 @@ const Bike = props => {
             <mesh
               geometry={u.nodes.Torus003.geometry}
               material={u.materials.Pneu}
-              ref={backTireRef}
+              ref={u.backTireRef}
             />
             <mesh
               geometry={u.nodes.Torus003_1.geometry}
@@ -57,7 +44,7 @@ const Bike = props => {
             geometry={u.nodes.B_Raios.geometry}
             material={u.materials.Raio}
             position={[-1.053, -1.178, 0.005]}
-            ref={backRadiusRef}
+            ref={u.backRadiusRef}
           />
           <group
             position={[-0.428, -0.32, 0.011]}
@@ -160,7 +147,7 @@ const Bike = props => {
             <mesh
               geometry={u.nodes.Torus002.geometry}
               material={u.materials.Pneu}
-              ref={frontTireRef}
+              ref={u.frontTireRef}
             />
             <mesh
               geometry={u.nodes.Torus002_1.geometry}
@@ -175,7 +162,7 @@ const Bike = props => {
             geometry={u.nodes.F_Raios.geometry}
             material={u.materials.Raio}
             position={[1.899, -1.178, 0.005]}
-            ref={frontRadiusRef}
+            ref={u.frontRadiusRef}
           />
           <mesh
             geometry={u.nodes.NurbsCurve.geometry}
