@@ -5,13 +5,16 @@ import { useFrame } from "@react-three/fiber";
 
 const Bike = props => {
   const u = useBike();
-
   const backTireRef = useRef();
   const backRadiusRef = useRef();
+  const frontTireRef = useRef();
+  const frontRadiusRef = useRef();
 
   useFrame((_, deltaT) => {
-    backTireRef.current.rotation.y -= deltaT;
-    backRadiusRef.current.rotation.z -= deltaT;
+    backTireRef.current.rotation.y -= deltaT * 2;
+    backRadiusRef.current.rotation.z -= deltaT * 2;
+    frontTireRef.current.rotation.y -= deltaT * 2;
+    frontRadiusRef.current.rotation.z -= deltaT * 2;
   });
 
   return (
@@ -19,7 +22,7 @@ const Bike = props => {
       <OrbitControls />
       <ambientLight intensity={3} />
       <directionalLight />
-      <group {...props} dispose={null}>
+      <group scale={1.5} {...props} dispose={null}>
         <mesh geometry={u.nodes.Bike.geometry} material={u.materials.Quadro}>
           <group position={[-1.053, -1.178, 0.005]}>
             <mesh
@@ -157,6 +160,7 @@ const Bike = props => {
             <mesh
               geometry={u.nodes.Torus002.geometry}
               material={u.materials.Pneu}
+              ref={frontTireRef}
             />
             <mesh
               geometry={u.nodes.Torus002_1.geometry}
@@ -171,6 +175,7 @@ const Bike = props => {
             geometry={u.nodes.F_Raios.geometry}
             material={u.materials.Raio}
             position={[1.899, -1.178, 0.005]}
+            ref={frontRadiusRef}
           />
           <mesh
             geometry={u.nodes.NurbsCurve.geometry}
