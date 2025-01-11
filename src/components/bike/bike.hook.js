@@ -1,6 +1,8 @@
+import { OrbitControls, useGLTF } from "@react-three/drei";
+
 const useBike = () => {
-  const a = true;
-  return { a };
+  const { nodes, materials } = useGLTF("/model/bike.gltf");
+  return { nodes, materials };
 };
 
 export { useBike };
