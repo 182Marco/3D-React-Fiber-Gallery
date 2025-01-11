@@ -1,4 +1,5 @@
 export { AnimateMultiplesMesh } from "./animateMultiplesMesh";
+export { Bike } from "./bike";
 export { CascadingMeshes } from "./cascadingMeshes_";
 export { CascadingMeshesOnClick } from "./cascadingMeshesOnClick";
 export { ConfigInSpring } from "./configInSpring";

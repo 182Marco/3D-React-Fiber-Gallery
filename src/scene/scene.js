@@ -1,7 +1,7 @@
 import * as C from "../components";
 
 const Scene = () => {
-  return <C.CascadingMeshesOnClick />;
+  return <C.Bike />;
 };
 
 export { Scene };
