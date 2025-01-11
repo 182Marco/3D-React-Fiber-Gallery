@@ -7,6 +7,7 @@ const Bike = props => {
   return (
     <>
       <OrbitControls />
+      <ambientLight intensity={3} />
       <group {...props} dispose={null}>
         <mesh geometry={u.nodes.Bike.geometry} material={u.materials.Quadro}>
           <group position={[-1.053, -1.178, 0.005]}>
