@@ -16,19 +16,19 @@ const FallingMesh = () => {
       >
         <Debug />
         <RigidBody>
-          <mesh rotation={[2, 3, 4]} position={[0, 1.5, 0]} castShadow>
+          <mesh rotation={[2, 3, 4]} position={[0, 3, 0]} castShadow>
             <boxGeometry />
             <meshStandardMaterial color="#CC2941" />
           </mesh>
         </RigidBody>
-        <RigidBody colliders="hull">
-          <mesh position={[-1.5, 1.5, 0]} castShadow>
+        <RigidBody colliders="trimesh">
+          <mesh position={[-1.5, 3, 0]} castShadow>
             <torusKnotGeometry args={[0.5, 0.15, 100, 100]} />
             <meshStandardMaterial color="orange" />
           </mesh>
         </RigidBody>
         <RigidBody colliders="ball">
-          <mesh position={[0, 1.5, -1.5]} castShadow>
+          <mesh position={[0, 3, -1.5]} castShadow>
             <sphereGeometry args={[0.75, 64, 64]} />
             <meshStandardMaterial color="#23b278" />
           </mesh>
