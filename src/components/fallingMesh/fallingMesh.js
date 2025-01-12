@@ -17,10 +17,12 @@ const FallingMesh = props => {
             <meshStandardMaterial color="#CC2941" />
           </mesh>
         </RigidBody>
-        <mesh position-y={-1} rotation-x={-Math.PI * 0.5} receiveShadow>
-          <boxGeometry args={[8, 8, 0.35]} />
-          <meshStandardMaterial color="#C7CAC7" />
-        </mesh>
+        <RigidBody type="fixed">
+          <mesh position-y={-1} rotation-x={-Math.PI * 0.5} receiveShadow>
+            <boxGeometry args={[8, 8, 0.35]} />
+            <meshStandardMaterial color="#C7CAC7" />
+          </mesh>
+        </RigidBody>
       </Physics>
     </>
   );
