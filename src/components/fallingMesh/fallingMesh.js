@@ -1,8 +1,8 @@
 import { OrbitControls } from "@react-three/drei";
-import { Physics, RigidBody } from "@react-three/rapier";
+import { Physics, RigidBody, Debug } from "@react-three/rapier";
 import { useFallingMesh } from "./fallingMesh.hook";
 
-const FallingMesh = props => {
+const FallingMesh = () => {
   const u = useFallingMesh();
 
   return (
@@ -14,10 +14,17 @@ const FallingMesh = props => {
       //    gravity={[0, -9.81, 0]} default earth value
       // Hypothetically, gravity can also move meshes along other axes
       >
+        <Debug />
         <RigidBody>
           <mesh rotation={[2, 3, 4]} position={[0, 1.5, 0]} castShadow>
             <boxGeometry />
             <meshStandardMaterial color="#CC2941" />
+          </mesh>
+        </RigidBody>
+        <RigidBody>
+          <mesh position={[-1.5, 1.5, 0]} castShadow>
+            <torusKnotGeometry args={[0.5, 0.15, 100, 100]} />
+            <meshStandardMaterial color="orange" />
           </mesh>
         </RigidBody>
         <RigidBody type="fixed">
