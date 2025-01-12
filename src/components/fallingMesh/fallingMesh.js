@@ -1,5 +1,5 @@
 import { OrbitControls } from "@react-three/drei";
-import { Physics, RigidBody, Debug } from "@react-three/rapier";
+import * as R from "@react-three/rapier";
 import { useFallingMesh } from "./fallingMesh.hook";
 
 const FallingMesh = () => {
@@ -10,18 +10,23 @@ const FallingMesh = () => {
       <OrbitControls />
       <ambientLight intensity={0.5} />
       <directionalLight position={[2, 2, 3]} castShadow />
-      <Physics
+      <R.Physics
       //    gravity={[0, -9.81, 0]} default earth value
       // Hypothetically, gravity can also move meshes along other axes
       >
-        <Debug />
-        <RigidBody>
+        <R.Debug />
+        <R.RigidBody>
+          <R.CuboidCollider
+            args={[0.5, 0.5, 0.5]}
+            position={[0, 3, 0]}
+            rotation={[2, 3, 4]}
+          />
           <mesh rotation={[2, 3, 4]} position={[0, 3, 0]} castShadow>
             <boxGeometry />
             <meshStandardMaterial color="#CC2941" />
           </mesh>
-        </RigidBody>
-        <RigidBody
+        </R.RigidBody>
+        <R.RigidBody
           // colliders="hull"
           // timesh will reduce performance, use it as little as possible
           colliders="trimesh"
@@ -30,20 +35,20 @@ const FallingMesh = () => {
             <torusKnotGeometry args={[0.5, 0.15, 100, 100]} />
             <meshStandardMaterial color="orange" />
           </mesh>
-        </RigidBody>
-        <RigidBody colliders="ball">
+        </R.RigidBody>
+        <R.RigidBody colliders="ball">
           <mesh position={[0, 3, -1.5]} castShadow>
             <sphereGeometry args={[0.75, 64, 64]} />
             <meshStandardMaterial color="#23b278" />
           </mesh>
-        </RigidBody>
-        <RigidBody type="fixed">
+        </R.RigidBody>
+        <R.RigidBody type="fixed">
           <mesh position-y={-1} rotation-x={-Math.PI * 0.5} receiveShadow>
             <boxGeometry args={[8, 8, 0.35]} />
             <meshStandardMaterial color="#C7CAC7" />
           </mesh>
-        </RigidBody>
-      </Physics>
+        </R.RigidBody>
+      </R.Physics>
     </>
   );
 };
