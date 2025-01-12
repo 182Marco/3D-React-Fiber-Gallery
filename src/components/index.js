@@ -5,6 +5,7 @@ export { CascadingMeshesOnClick } from "./cascadingMeshesOnClick";
 export { ConfigInSpring } from "./configInSpring";
 export { CustomModel } from "./customModel";
 export { Dog } from "./dog";
+export { FallingMesh } from "./fallingMesh";
 export { HookUseSpringProps } from "./hookUseSpringProps";
 export { Images } from "./images";
 export { OrbitControl } from "./orbitControl";
