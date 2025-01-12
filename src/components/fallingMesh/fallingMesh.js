@@ -23,6 +23,7 @@ const FallingMesh = () => {
         </RigidBody>
         <RigidBody
           // colliders="hull"
+          // timesh will reduce performance, use it as little as possible
           colliders="trimesh"
         >
           <mesh position={[-1.5, 3, 0]} castShadow>
