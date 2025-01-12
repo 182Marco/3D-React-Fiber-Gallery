@@ -21,10 +21,16 @@ const FallingMesh = () => {
             <meshStandardMaterial color="#CC2941" />
           </mesh>
         </RigidBody>
-        <RigidBody>
+        <RigidBody colliders="hull">
           <mesh position={[-1.5, 1.5, 0]} castShadow>
             <torusKnotGeometry args={[0.5, 0.15, 100, 100]} />
             <meshStandardMaterial color="orange" />
+          </mesh>
+        </RigidBody>
+        <RigidBody colliders="ball">
+          <mesh position={[0, 1.5, -1.5]} castShadow>
+            <sphereGeometry args={[0.75, 64, 64]} />
+            <meshStandardMaterial color="#23b278" />
           </mesh>
         </RigidBody>
         <RigidBody type="fixed">
