@@ -10,7 +10,9 @@ const FallingMesh = props => {
       <OrbitControls />
       <ambientLight intensity={0.5} />
       <directionalLight position={[2, 2, 3]} castShadow />
-      <Physics>
+      <Physics
+      //    gravity={[0, -9.81, 0]} default earth value
+      >
         <RigidBody>
           <mesh position={[0, 1.5, 0]} castShadow>
             <boxGeometry />
