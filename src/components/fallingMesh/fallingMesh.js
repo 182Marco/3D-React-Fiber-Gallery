@@ -12,9 +12,10 @@ const FallingMesh = props => {
       <directionalLight position={[2, 2, 3]} castShadow />
       <Physics
       //    gravity={[0, -9.81, 0]} default earth value
+      // Hypothetically, gravity can also move meshes along other axes
       >
         <RigidBody>
-          <mesh position={[0, 1.5, 0]} castShadow>
+          <mesh rotation={[2, 3, 4]} position={[0, 1.5, 0]} castShadow>
             <boxGeometry />
             <meshStandardMaterial color="#CC2941" />
           </mesh>
