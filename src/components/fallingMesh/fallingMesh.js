@@ -15,13 +15,9 @@ const FallingMesh = () => {
       // Hypothetically, gravity can also move meshes along other axes
       >
         <R.Debug />
-        <R.RigidBody>
-          <R.CuboidCollider
-            args={[0.5, 0.5, 0.5]}
-            position={[0, 3, 0]}
-            rotation={[2, 3, 4]}
-          />
-          <mesh rotation={[2, 3, 4]} position={[0, 3, 0]} castShadow>
+        <R.RigidBody position={[0, 3, 0]} rotation={[2, 3, 4]}>
+          <R.CuboidCollider args={[0.5, 0.5, 0.5]} />
+          <mesh castShadow>
             <boxGeometry />
             <meshStandardMaterial color="#CC2941" />
           </mesh>
