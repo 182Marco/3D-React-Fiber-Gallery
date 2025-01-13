@@ -1,0 +1,1 @@
+export { MethodsOfTheRigidBody } from "./methodsOfTheRigidBody";
