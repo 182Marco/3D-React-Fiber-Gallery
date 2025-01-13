@@ -17,6 +17,8 @@ const MethodsOfTheRigidBody = () => {
           position={[0, 3, 0]}
           rotation={[2, 3, 4]}
           ref={u.firstMesh}
+          onCollisionEnter={() => console.log(`collision enter`)}
+          onCollisionExit={() => console.log(`collision exit`)}
         >
           <mesh castShadow onClick={u.fistMeshClickHandler}>
             <boxGeometry />
@@ -27,8 +29,9 @@ const MethodsOfTheRigidBody = () => {
           colliders="cuboid"
           position={[-2, 3.5, 2]}
           rotation={[1, 4, 1]}
+          ref={u.secondMesh}
         >
-          <mesh castShadow>
+          <mesh castShadow onClick={u.secondMeshClickHandler}>
             <boxGeometry />
             <meshStandardMaterial color="#CC2941" />
           </mesh>
