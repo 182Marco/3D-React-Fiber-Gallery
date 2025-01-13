@@ -16,8 +16,9 @@ const MethodsOfTheRigidBody = () => {
           colliders="cuboid"
           position={[0, 3, 0]}
           rotation={[2, 3, 4]}
+          ref={u.firstMesh}
         >
-          <mesh castShadow>
+          <mesh castShadow onClick={u.fistMeshClickHandler}>
             <boxGeometry />
             <meshStandardMaterial color="#CC2941" />
           </mesh>
