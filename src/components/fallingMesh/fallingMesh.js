@@ -15,8 +15,21 @@ const FallingMesh = () => {
       // Hypothetically, gravity can also move meshes along other axes
       >
         <R.Debug />
-        <R.RigidBody position={[0, 3, 0]} rotation={[2, 3, 4]}>
-          <R.CuboidCollider args={[0.5, 0.5, 0.5]} />
+        <R.RigidBody
+          colliders={false}
+          position={[0, 3, 0]}
+          rotation={[2, 3, 4]}
+        >
+          {/* You've got the collider="cuboid" in the rigid body --> 
+          use the following tag only to add more colliders to the same
+           mesh or to have a collider with different dimensions from the mesh */}
+          <R.CuboidCollider args={[0.7, 0.7, 0.7]} />
+          {/*You can also have 2 colliders each mesh
+          they can affect also other meshes */}
+          <R.CuboidCollider
+            args={[0.25, 0.25, 0.25]}
+            position={[-2, -2, -2.5]}
+          />
           <mesh castShadow>
             <boxGeometry />
             <meshStandardMaterial color="#CC2941" />
