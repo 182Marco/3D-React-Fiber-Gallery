@@ -56,7 +56,7 @@ const MethodsOfTheRigidBody = () => {
         <R.RigidBody
           type="fixed"
           restitution={1}
-          friction={0} // 0 + 0 = 0 so infinite rotation
+          friction={0} // 0 + 0 = 0 so infinite rotation or impulse
         >
           <mesh position-y={-1} rotation-x={-Math.PI * 0.5} receiveShadow>
             <boxGeometry args={[8, 8, 0.35]} />
