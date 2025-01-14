@@ -22,7 +22,7 @@ const MethodsOfTheRigidBody = () => {
           onSleep={() => console.log(`sleeping`)}
           onWake={() => console.log(`wake`)}
           gravityScale={0.2} // can also move up with minus value
-          restitution={2} // Adds floor restitution (0), gives 2 / 2 = 1-> returns to the fall height.
+          // restitution={2} // Adds floor restitution (0), gives 2 / 2 = 1-> returns to the fall height.
         >
           <mesh castShadow onClick={u.fistMeshClickHandler}>
             <boxGeometry />
@@ -45,13 +45,18 @@ const MethodsOfTheRigidBody = () => {
           position={[-2, 3.5, 2]}
           rotation={[1, 4, 1]}
           ref={u.secondMesh}
+          restitution={-1}
         >
           <mesh castShadow onClick={u.secondMeshClickHandler}>
             <boxGeometry />
             <meshStandardMaterial color="#CC2941" />
           </mesh>
         </R.RigidBody>
-        <R.RigidBody type="fixed" restitution={1}>
+        <R.RigidBody
+          type="fixed"
+          restitution={1}
+          friction={0} // Less friction with the floor means it will take longer to stop rotating
+        >
           <mesh position-y={-1} rotation-x={-Math.PI * 0.5} receiveShadow>
             <boxGeometry args={[8, 8, 0.35]} />
             <meshStandardMaterial color="#C7CAC7" />

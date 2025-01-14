@@ -16,7 +16,7 @@ const useMethodsOfTheRigidBody = () => {
   };
 
   const secondMeshClickHandler = () => {
-    secondMesh.current.applyImpulse({ x: 8, y: 0, z: 0 });
+    secondMesh.current.applyTorqueImpulse({ x: 0, y: 4, z: 0 });
   };
 
   return {
