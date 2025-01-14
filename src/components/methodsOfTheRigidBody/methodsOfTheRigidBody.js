@@ -46,6 +46,7 @@ const MethodsOfTheRigidBody = () => {
           rotation={[1, 4, 1]}
           ref={u.secondMesh}
           restitution={-1}
+          friction={0} // Less friction with the floor means it will take longer to stop rotating
         >
           <mesh castShadow onClick={u.secondMeshClickHandler}>
             <boxGeometry />
@@ -55,7 +56,7 @@ const MethodsOfTheRigidBody = () => {
         <R.RigidBody
           type="fixed"
           restitution={1}
-          friction={0} // Less friction with the floor means it will take longer to stop rotating
+          friction={0} // 0 + 0 = 0 so infinite rotation
         >
           <mesh position-y={-1} rotation-x={-Math.PI * 0.5} receiveShadow>
             <boxGeometry args={[8, 8, 0.35]} />
