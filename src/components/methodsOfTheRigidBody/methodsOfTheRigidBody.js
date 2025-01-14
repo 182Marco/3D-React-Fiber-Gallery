@@ -19,6 +19,7 @@ const MethodsOfTheRigidBody = () => {
           ref={u.firstMesh}
           onCollisionEnter={() => console.log(`collision enter`)}
           onCollisionExit={() => console.log(`collision exit`)}
+          onSleep={() => console.log(`sleeping`)}
         >
           <mesh castShadow onClick={u.fistMeshClickHandler}>
             <boxGeometry />
