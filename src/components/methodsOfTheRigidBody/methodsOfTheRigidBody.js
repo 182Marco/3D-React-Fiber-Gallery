@@ -21,6 +21,7 @@ const MethodsOfTheRigidBody = () => {
           onCollisionExit={() => console.log(`collision exit`)}
           onSleep={() => console.log(`sleeping`)}
           onWake={() => console.log(`wake`)}
+          gravityScale={0.2}
         >
           <mesh castShadow onClick={u.fistMeshClickHandler}>
             <boxGeometry />
