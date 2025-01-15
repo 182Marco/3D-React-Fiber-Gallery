@@ -5,11 +5,11 @@ const useMassInRapier = () => {
   const secondMesh = useRef();
 
   const fistMeshClickHandler = () => {
-    firstMesh.current.applyImpulse({ x: -100, y: 0, z: 0 });
+    firstMesh.current.applyImpulse({ x: -10, y: 0, z: 0 });
   };
 
   const secondMeshClickHandler = () => {
-    secondMesh.current.applyImpulse({ x: 100, y: 0, z: 0 });
+    secondMesh.current.applyImpulse({ x: 10, y: 0, z: 0 });
   };
 
   return {

@@ -12,25 +12,21 @@ const MassInRapier = () => {
       <directionalLight position={[2, 2, 3]} castShadow />
       <R.Physics>
         <R.Debug />
-        <R.RigidBody
-          colliders="cuboid"
-          position={[1.5, 3, 0]}
-          ref={u.firstMesh}
-          scale={4}
-        >
+        <R.RigidBody colliders="cuboid" position={[1, 3, 0]} ref={u.firstMesh}>
           <mesh castShadow onClick={u.fistMeshClickHandler}>
             <boxGeometry />
-            <meshStandardMaterial color="#CC2941" />
+            <meshStandardMaterial color="#CC2941" mass={20} />
           </mesh>
         </R.RigidBody>
         <R.RigidBody
           colliders="cuboid"
-          position={[-1.5, 3, 0]}
+          position={[-1, 3, 0]}
           ref={u.secondMesh}
+          scale={2}
         >
           <mesh castShadow onClick={u.secondMeshClickHandler}>
             <boxGeometry />
-            <meshStandardMaterial color="#CC2941" />
+            <meshStandardMaterial color="blue" mass={200} />
           </mesh>
         </R.RigidBody>
         <R.RigidBody type="fixed">
