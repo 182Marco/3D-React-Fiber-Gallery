@@ -16,7 +16,11 @@ const Game = () => {
           </mesh>
         </R.RigidBody>
 
-        <R.RigidBody position-y={-0.65}>
+        <R.RigidBody
+          position-y={-0.65}
+          type="kinematicPosition"
+          ref={u.spinnerRef}
+        >
           <mesh receiveShadow>
             <boxGeometry args={[1, 0.35, 15]} />
             <meshStandardMaterial color="orange" />
