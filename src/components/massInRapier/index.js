@@ -1,0 +1,1 @@
+export { MassInRapier } from "./massInRapier";

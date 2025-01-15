@@ -8,6 +8,7 @@ export { Dog } from "./dog";
 export { FallingMesh } from "./fallingMesh";
 export { HookUseSpringProps } from "./hookUseSpringProps";
 export { Images } from "./images";
+export { MassInRapier } from "./massInRapier";
 export { MethodsOfTheRigidBody } from "./methodsOfTheRigidBody";
 export { OrbitControl } from "./orbitControl";
 export { ScrollControl } from "./scrollControl";
