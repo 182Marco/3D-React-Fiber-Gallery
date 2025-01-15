@@ -1,11 +1,12 @@
 import * as R from "@react-three/rapier";
+import * as D from "@react-three/drei";
 import { useGame } from "./game.hook";
 
 const Game = () => {
   const u = useGame();
 
   return (
-    <>
+    <D.KeyboardControls map={[{ name: "moveUp", keys: ["ArrowUp", "w"] }]}>
       <R.Physics>
         <ambientLight />
         <R.Debug />
@@ -39,7 +40,7 @@ const Game = () => {
           </mesh>
         </R.RigidBody>
       </R.Physics>
-    </>
+    </D.KeyboardControls>
   );
 };
 
