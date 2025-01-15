@@ -15,7 +15,7 @@ const Root = () => {
         <Canvas
           shadows
           camera={{
-            position: [0, 2, -7],
+            position: [0, 4, -15],
             fov: 75,
           }}
         >

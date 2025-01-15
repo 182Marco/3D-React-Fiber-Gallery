@@ -6,6 +6,7 @@ export { ConfigInSpring } from "./configInSpring";
 export { CustomModel } from "./customModel";
 export { Dog } from "./dog";
 export { FallingMesh } from "./fallingMesh";
+export { Game } from "./game";
 export { HookUseSpringProps } from "./hookUseSpringProps";
 export { Images } from "./images";
 export { MassInRapier } from "./massInRapier";
