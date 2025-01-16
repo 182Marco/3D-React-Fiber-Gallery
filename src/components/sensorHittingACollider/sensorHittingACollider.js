@@ -20,8 +20,8 @@ const SensorHittingACollider = () => {
           <R.CuboidCollider
             args={[1, 1, 1]}
             sensor
-            onIntersectionEnter={() => console.log("in")}
-            onIntersectionExit={() => console.log("out")}
+            onIntersectionEnter={() => h.setGoal(true)}
+            onIntersectionExit={() => h.setGoal(false)}
           />
         </R.RigidBody>
         <R.RigidBody type="fixed" restitution={0.4}>
@@ -31,10 +31,12 @@ const SensorHittingACollider = () => {
           </mesh>
         </R.RigidBody>
       </R.Physics>
-      <D.Text3D font="./fonts/2.json" position={[-1.75, 3, -5]}>
-        Goal
-        <meshNormalMaterial />
-      </D.Text3D>
+      {h.goal && (
+        <D.Text3D font="./fonts/2.json" position={[-1.75, 3, -5]}>
+          Goal
+          <meshNormalMaterial />
+        </D.Text3D>
+      )}
     </>
   );
 };
