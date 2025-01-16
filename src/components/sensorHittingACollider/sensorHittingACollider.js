@@ -17,7 +17,12 @@ const SensorHittingACollider = () => {
           </mesh>
         </R.RigidBody>
         <R.RigidBody type="fixed" position={[0, 0.175, -5]}>
-          <R.CuboidCollider args={[1, 1, 1]} />
+          <R.CuboidCollider
+            args={[1, 1, 1]}
+            sensor
+            onIntersectionEnter={() => console.log("in")}
+            onIntersectionExit={() => console.log("out")}
+          />
         </R.RigidBody>
         <R.RigidBody type="fixed" restitution={0.4}>
           <mesh position-y={-1} rotation-x={-Math.PI * 0.5} receiveShadow>
