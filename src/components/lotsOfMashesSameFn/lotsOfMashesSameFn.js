@@ -1,9 +1,9 @@
 import * as R from "@react-three/rapier";
 import * as D from "@react-three/drei";
-import { useGame } from "./game.hook";
+import { useLotsOfMashesSameFn } from "./lotsOfMashesSameFn.hook";
 
-const Game = () => {
-  const u = useGame();
+const LotsOfMashesSameFn = () => {
+  const u = useLotsOfMashesSameFn();
 
   return (
     <D.KeyboardControls
@@ -52,4 +52,4 @@ const Game = () => {
   );
 };
 
-export { Game };
+export { LotsOfMashesSameFn };

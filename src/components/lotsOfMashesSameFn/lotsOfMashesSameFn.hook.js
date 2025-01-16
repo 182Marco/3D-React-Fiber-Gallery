@@ -1,8 +1,7 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import * as D from "@react-three/drei";
 
-const useGame = () => {
+const useLotsOfMashesSameFn = () => {
   const cubeRef = useRef();
   const spinnerRef = useRef();
 
@@ -22,4 +21,4 @@ const useGame = () => {
   };
 };
 
-export { useGame };
+export { useLotsOfMashesSameFn };
