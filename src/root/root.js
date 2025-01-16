@@ -3,7 +3,7 @@ import { Leva } from "leva";
 import { Select } from "../components";
 import { AppProvider } from "../context";
 import { useRoot } from "./root.hook";
-import { Scene } from "../scene";
+import * as C from "../components";
 
 const Root = () => {
   const u = useRoot();
@@ -15,11 +15,11 @@ const Root = () => {
         <Canvas
           shadows
           camera={{
-            position: [0, 20, -50],
+            position: [0, 4, 15],
             fov: 75,
           }}
         >
-          <Scene />
+          <C.SensorHittingACollider />
         </Canvas>
       </div>
     </AppProvider>

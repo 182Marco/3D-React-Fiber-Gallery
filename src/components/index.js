@@ -13,6 +13,7 @@ export { Images } from "./images";
 export { MassInRapier } from "./massInRapier";
 export { MethodsOfTheRigidBody } from "./methodsOfTheRigidBody";
 export { OrbitControl } from "./orbitControl";
+export { SensorHittingACollider } from "./sensorHittingACollider";
 export { ScrollControl } from "./scrollControl";
 export { Select } from "./select";
 export { Spinner } from "./spinner";
