@@ -1,19 +1,20 @@
-import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import * as R from "react";
+import * as U from "../../utils";
 
 const useLotsOfMashesSameFn = () => {
-  const cubeRef = useRef();
-  const spinnerRef = useRef();
+  const count = 100;
 
-  const cubeClickHandler = () => {
-    cubeRef.current.applyImpulse({ x: -25, y: 0, z: 0 });
-  };
+  const positions = R.useMemo(
+    () =>
+      U.createSeqArray(count).map(() => [
+        (Math.random() - 0.5) * 5,
+        Math.random() * 20,
+        (Math.random() - 0.5) * 5,
+      ]),
+    [],
+  );
 
-  return {
-    cubeRef,
-    cubeClickHandler,
-    spinnerRef,
-  };
+  return { positions };
 };
 
 export { useLotsOfMashesSameFn };

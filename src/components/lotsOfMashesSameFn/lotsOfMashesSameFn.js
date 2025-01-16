@@ -4,24 +4,30 @@ import { useLotsOfMashesSameFn } from "./lotsOfMashesSameFn.hook";
 import * as THREE from "three";
 
 const LotsOfMashesSameFn = () => {
-  const u = useLotsOfMashesSameFn();
+  const h = useLotsOfMashesSameFn();
 
   return (
     <R.Physics>
       <ambientLight />
+      <D.OrbitControls />
       <R.Debug />
-      <R.RigidBody ref={u.cubeRef} position={[2.5, 2.5, 0]}>
+      {/* <R.RigidBody ref={u.cubeRef} position={[2.5, 2.5, 0]}>
         <mesh
           castShadow
           onClick={u.cubeClickHandler}
-          geometry={new THREE.BoxGeometry(2, 2, 2)}
+          geometry={new THREE.BoxGeometry(4, 4, 4)}
         >
           <meshStandardMaterial color="#CC3941" />
         </mesh>
-      </R.RigidBody>
-      {/* <instancedMesh args={[, , ,]}></instancedMesh>
+      </R.RigidBody> */}
+      <R.InstancedRigidBodies {...h}>
+        <instancedMesh args={[null, null, h.positions.length]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="#39FF14" />
+        </instancedMesh>
+      </R.InstancedRigidBodies>
 
-      <R.RigidBody */}
+      <R.RigidBody
         type="fixed"
         position-y={-1}
         rotation-x={-Math.PI * 0.5}
