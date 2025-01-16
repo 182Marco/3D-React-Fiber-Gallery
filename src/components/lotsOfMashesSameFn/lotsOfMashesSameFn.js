@@ -21,7 +21,7 @@ const LotsOfMashesSameFn = () => {
         </mesh>
       </R.RigidBody> */}
       <R.InstancedRigidBodies {...h}>
-        <instancedMesh args={[null, null, h.positions.length]}>
+        <instancedMesh args={[null, null, h.positions.length]} castShadow>
           <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial color="#39FF14" />
         </instancedMesh>
@@ -34,7 +34,7 @@ const LotsOfMashesSameFn = () => {
         restitution={0.5}
       >
         <mesh receiveShadow>
-          <boxGeometry args={[15, 15, 0.35]} />
+          <boxGeometry args={[40, 40, 0.35]} />
           <meshStandardMaterial color="#C7CAC7" />
         </mesh>
       </R.RigidBody>
