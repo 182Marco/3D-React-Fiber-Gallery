@@ -9,11 +9,6 @@ const useLotsOfMashesSameFn = () => {
     cubeRef.current.applyImpulse({ x: -25, y: 0, z: 0 });
   };
 
-  useFrame(state => {
-    const elapsedTime = state.clock.getElapsedTime();
-    console.log(`elapsedTime: `, elapsedTime);
-  });
-
   return {
     cubeRef,
     cubeClickHandler,
