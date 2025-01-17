@@ -19,7 +19,7 @@ const Root = () => {
             fov: 75,
           }}
         >
-          <C.TryEffects />
+          <C.Dog />
         </Canvas>
       </div>
     </AppProvider>

@@ -1,1 +1,0 @@
-export { Effects } from "./effect";
