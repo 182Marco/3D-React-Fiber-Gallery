@@ -1,5 +1,5 @@
-import * as R from "@react-three/rapier";
 import * as D from "@react-three/drei";
+import * as C from "../../components";
 import { useExperience } from "./experience.hook";
 
 const Experience = () => {
@@ -7,10 +7,9 @@ const Experience = () => {
 
   return (
     <>
-      <mesh>
-        <boxGeometry />
-        <meshBasicMaterial />
-      </mesh>
+      <ambientLight intensity={1} />
+      <D.OrbitControls />
+      <C.Office />
     </>
   );
 };

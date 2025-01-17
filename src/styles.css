@@ -16,6 +16,7 @@ body {
   height: 100vh;
   background: white;
   background: linear-gradient(45deg, #1a1a1a, #2c3e50, #34495e);
+  background: linear-gradient(0, #d9afd9 0%, #97d9e1 100%);
   position: relative;
 }
 

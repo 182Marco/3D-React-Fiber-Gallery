@@ -13,6 +13,7 @@ export { HookUseSpringProps } from "./hookUseSpringProps";
 export { Images } from "./images";
 export { MassInRapier } from "./massInRapier";
 export { MethodsOfTheRigidBody } from "./methodsOfTheRigidBody";
+export { Office } from "./office";
 export { OrbitControl } from "./orbitControl";
 export { SensorHittingACollider } from "./sensorHittingACollider";
 export { ScrollControl } from "./scrollControl";
