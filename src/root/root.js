@@ -19,7 +19,7 @@ const Root = () => {
             fov: 75,
           }}
         >
-          <C.SensorHittingACollider />
+          <C.Tryeffects />
         </Canvas>
       </div>
     </AppProvider>
