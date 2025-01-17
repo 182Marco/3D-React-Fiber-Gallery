@@ -26,4 +26,4 @@ export { PivotControl } from "./pivotControl";
 export { Portal } from "./portal";
 export { PresentationControl } from "./presentationControl";
 export { transformControl } from "./transformControl";
-export { Tryeffects } from "./tryeffects";
+export { TryEffects } from "./tryEffects_";

@@ -15,11 +15,11 @@ const Root = () => {
         <Canvas
           shadows
           camera={{
-            position: [0, 4, 15],
+            position: [0, 2, 3],
             fov: 75,
           }}
         >
-          <C.Tryeffects />
+          <C.TryEffects />
         </Canvas>
       </div>
     </AppProvider>
