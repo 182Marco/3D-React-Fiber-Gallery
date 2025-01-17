@@ -5,6 +5,7 @@ export { CascadingMeshesOnClick } from "./cascadingMeshesOnClick";
 export { ConfigInSpring } from "./configInSpring";
 export { CustomModel } from "./customModel";
 export { Dog } from "./dog";
+export { Experience } from "./experience";
 export { FallingMesh } from "./fallingMesh";
 export { LotsOfMashesSameFn } from "./lotsOfMashesSameFn";
 export { Game } from "./game";
