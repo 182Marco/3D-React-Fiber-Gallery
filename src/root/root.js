@@ -12,13 +12,7 @@ const Root = () => {
       <div className="box">
         <Select />
         <Leva />
-        <Canvas
-          shadows
-          camera={{
-            position: [0, 4, -3],
-            fov: 75,
-          }}
-        >
+        <Canvas>
           <C.Experience />
         </Canvas>
       </div>
