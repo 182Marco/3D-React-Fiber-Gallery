@@ -1,6 +1,6 @@
 import * as R from "react";
-import gsap from "gsap";
 import * as D from "@react-three/drei";
+import gsap from "gsap";
 import { useFrame } from "@react-three/fiber";
 
 const FL_HEIGHT = 2.3;
@@ -43,6 +43,14 @@ const useOffice = () => {
         y: 2,
       },
       0,
+    );
+    tl.current.from(
+      atticRef.current.position,
+      {
+        duration: 0.5,
+        z: -2,
+      },
+      1.5,
     );
   }, []);
 
