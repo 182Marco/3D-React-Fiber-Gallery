@@ -1,9 +1,8 @@
-import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
-import * as D from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 
 const useOffice = () => {
-  return {};
+  const { nodes, materials } = useGLTF("./model/WawaOffice.glb");
+  return { nodes, materials };
 };
 
 export { useOffice };

@@ -12,6 +12,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "gltfjsx": "^6.5.3",
+    "gsap": "^3.12.7",
     "leva": "^0.9.35",
     "maath": "^0.10.8",
     "r3f-perf": "^6.6.3",
