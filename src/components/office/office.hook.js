@@ -1,10 +1,8 @@
 import * as R from "react";
+import * as RF from "@react-three/fiber";
 import * as D from "@react-three/drei";
+import * as U from "./utils";
 import gsap from "gsap";
-import { useFrame } from "@react-three/fiber";
-
-const FL_HEIGHT = 2.3;
-const FL_NUMBER = 3;
 
 const useOffice = () => {
   const allOfficeRef = R.useRef();
@@ -14,7 +12,7 @@ const useOffice = () => {
   const { nodes, materials } = D.useGLTF("./model/WawaOffice.glb");
   const scroll = D.useScroll();
 
-  useFrame(() => {
+  RF.useFrame(() => {
     tl.current.seek(scroll?.offset * tl.current.duration());
   });
 
@@ -24,7 +22,7 @@ const useOffice = () => {
       allOfficeRef.current.position,
       {
         duration: 2,
-        y: -FL_HEIGHT * (FL_NUMBER - 1),
+        y: -U.FL_HEIGHT * (U.FL_NUMBER - 1),
       },
       0,
     );
