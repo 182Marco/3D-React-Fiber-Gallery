@@ -3,13 +3,13 @@ import * as C from "../../components";
 import { useExperience } from "./experience.hook";
 
 const Experience = () => {
-  const u = useExperience();
+  const h = useExperience();
 
   return (
     <>
       <ambientLight intensity={1} />
       <D.OrbitControls enableZoom={false} />
-      <D.ScrollControls pages={3} dumping={0.25}>
+      <D.ScrollControls pages={3} damping={0.25}>
         <C.Office />
       </D.ScrollControls>
     </>
