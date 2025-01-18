@@ -5,21 +5,23 @@ const Office = props => {
   const h = useOffice();
 
   return (
-    <group {...props} dispose={null} ref={h.groupRef}>
+    <group {...props} dispose={null} ref={h.allOfficeRef}>
       <mesh
         geometry={h.nodes["01_office"].geometry}
         material={h.materials["01"]}
       />
-      <mesh
-        geometry={h.nodes["02_library"].geometry}
-        material={h.materials["02"]}
-        position={[0, 2.114, -2.23]}
-      />
-      <mesh
-        geometry={h.nodes["03_attic"].geometry}
-        material={h.materials["03"]}
-        position={[-1.97, 4.227, -2.199]}
-      />
+      <group position={[0, 2.114, -2.23]}>
+        <mesh
+          geometry={h.nodes["02_library"].geometry}
+          material={h.materials["02"]}
+        />
+      </group>
+      <group position={[-1.97, 4.227, -2.199]}>
+        <mesh
+          geometry={h.nodes["03_attic"].geometry}
+          material={h.materials["03"]}
+        />
+      </group>
     </group>
   );
 };

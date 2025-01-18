@@ -7,7 +7,7 @@ const FL_HEIGHT = 2.3;
 const FL_NUMBER = 3;
 
 const useOffice = () => {
-  const groupRef = R.useRef();
+  const allOfficeRef = R.useRef();
   const tl = R.useRef();
   const { nodes, materials } = D.useGLTF("./model/WawaOffice.glb");
   const scroll = D.useScroll();
@@ -19,7 +19,7 @@ const useOffice = () => {
   R.useLayoutEffect(() => {
     tl.current = gsap.timeline();
     tl.current.to(
-      groupRef.current.position,
+      allOfficeRef.current.position,
       {
         duration: 2,
         y: -FL_HEIGHT * (FL_NUMBER - 1),
@@ -28,7 +28,7 @@ const useOffice = () => {
     );
   }, []);
 
-  return { groupRef, nodes, materials };
+  return { allOfficeRef, nodes, materials };
 };
 
 export { useOffice };
