@@ -48,7 +48,15 @@ const useOffice = () => {
         duration: 0.5,
         z: -2,
       },
-      1.5,
+      0.5,
+    );
+    tl.current.from(
+      libraryRef.current.rotation,
+      {
+        duration: 0.5,
+        y: -Math.PI / 2,
+      },
+      0,
     );
   }, []);
 
