@@ -28,6 +28,22 @@ const useOffice = () => {
       },
       0,
     );
+    tl.current.from(
+      libraryRef.current.position,
+      {
+        duration: 0.5,
+        x: -2,
+      },
+      0.5,
+    );
+    tl.current.from(
+      atticRef.current.position,
+      {
+        duration: 1.5,
+        y: 2,
+      },
+      0,
+    );
   }, []);
 
   return { allOfficeRef, atticRef, libraryRef, nodes, materials };
