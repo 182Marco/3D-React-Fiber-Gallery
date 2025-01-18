@@ -6,7 +6,7 @@ import { useRoot } from "./root.hook";
 import * as C from "../components";
 
 const Root = () => {
-  const u = useRoot();
+  const h = useRoot();
   return (
     <AppProvider>
       <div className="box">

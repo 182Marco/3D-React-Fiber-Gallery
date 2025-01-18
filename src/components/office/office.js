@@ -5,7 +5,7 @@ const Office = props => {
   const h = useOffice();
 
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} ref={h.groupRef}>
       <mesh
         geometry={h.nodes["01_office"].geometry}
         material={h.materials["01"]}

@@ -9,8 +9,9 @@ const Experience = () => {
     <>
       <ambientLight intensity={1} />
       <D.OrbitControls enableZoom={false} />
-      <D.ScrollControls pages={3} dumping={0.25} />
-      <C.Office />
+      <D.ScrollControls pages={3} dumping={0.25}>
+        <C.Office />
+      </D.ScrollControls>
     </>
   );
 };
