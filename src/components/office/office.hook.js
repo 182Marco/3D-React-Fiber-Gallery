@@ -27,6 +27,26 @@ const useOffice = () => {
       0,
     );
     tl.current.from(
+      allOfficeRef.current.rotation,
+      {
+        duration: 1,
+        x: 0,
+        y: Math.PI / 6,
+        z: 0,
+      },
+      0,
+    );
+    tl.current.from(
+      allOfficeRef.current.rotation,
+      {
+        duration: 1,
+        x: 0,
+        y: -Math.PI / 6,
+        z: 0,
+      },
+      1,
+    );
+    tl.current.from(
       libraryRef.current.position,
       {
         duration: 0.5,
@@ -57,6 +77,14 @@ const useOffice = () => {
         y: -Math.PI / 2,
       },
       0,
+    );
+    tl.current.from(
+      atticRef.current.rotation,
+      {
+        duration: 0.5,
+        y: -Math.PI / 2,
+      },
+      1,
     );
   }, []);
 
