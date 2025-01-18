@@ -9,6 +9,8 @@ const FL_NUMBER = 3;
 const useOffice = () => {
   const allOfficeRef = R.useRef();
   const tl = R.useRef();
+  const libraryRef = R.useRef();
+  const atticRef = R.useRef();
   const { nodes, materials } = D.useGLTF("./model/WawaOffice.glb");
   const scroll = D.useScroll();
 
@@ -28,7 +30,7 @@ const useOffice = () => {
     );
   }, []);
 
-  return { allOfficeRef, nodes, materials };
+  return { allOfficeRef, atticRef, libraryRef, nodes, materials };
 };
 
 export { useOffice };
