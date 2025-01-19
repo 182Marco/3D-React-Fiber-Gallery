@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import "colors";
 
+/* Global reset for margin, padding, and outline */
 *,
 *::before,
 *::after {
@@ -8,22 +10,34 @@
   outline: none;
 }
 
+/* Body settings - hide scroll */
 body {
   overflow: hidden;
-  scrol: none; /* 'scrol' non è una proprietà valida, usa 'overflow' se desideri nascondere la scrollbar */
+  scroll: none; /* 'scroll' is not a valid property, use 'overflow' to hide the scrollbar */
 }
 
+/* Box container with background gradient */
 .box {
   width: 100vw;
   height: 100vh;
-  background: white;
-  background: linear-gradient(45deg, #1a1a1a, #2c3e50, #34495e);
-  background: linear-gradient(0, #d9afd9 0%, #97d9e1 100%);
+  background: $text-light;
+  background: linear-gradient(
+    45deg,
+    $primary,
+    $secondary,
+    $accent
+  ); /* Fallback gradient */
+  background: linear-gradient(
+    0,
+    $background-light 0%,
+    $background-dark 100%
+  ); /* Main gradient */
   position: relative;
 }
 
+/* Canvas settings - full width and height */
 canvas {
-  display: block; /* Rimuove spazio extra intorno al canvas */
+  display: block; /* Removes extra space around the canvas */
   width: 100%;
   height: 100%;
 }
@@ -37,9 +51,9 @@ canvas {
 }
 
 section.select {
-  background: linear-gradient(45deg, #1a1a1a, #2c3e50, #34495e);
+  background: linear-gradient(45deg, $primary, $secondary, $accent);
   bottom: 0;
-  color: white;
+  color: $text-light;
   left: 0;
   display: flex;
   justify-content: center;
@@ -53,9 +67,9 @@ section.select {
   padding: 12px 20px;
   font-size: 16px;
   font-weight: bold;
-  background: #2c3e50;
-  color: white;
-  border: 2px solid #34495e;
+  background: $secondary;
+  color: $text-light;
+  border: 2px solid $accent;
   border-radius: 8px;
   outline: none;
   cursor: pointer;
@@ -64,24 +78,24 @@ section.select {
 }
 
 .custom-select:hover {
-  background: #34495e;
-  border-color: #1a1a1a;
+  background: $accent;
+  border-color: $primary;
 }
 
 .custom-select:focus {
-  background: #1a1a1a;
-  border-color: #2c3e50;
+  background: $primary;
+  border-color: $secondary;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .custom-select option {
-  background: #34495e;
-  color: white;
+  background: $accent;
+  color: $text-light;
   font-weight: normal;
 }
 
 .custom-select option:hover {
-  background: #2c3e50;
+  background: $secondary;
 }
 
 h1 {
@@ -107,5 +121,5 @@ h1.home {
 
 .text-in-canvas > div {
   font-size: 30px;
-  color: green;
+  color: $highlight;
 }
