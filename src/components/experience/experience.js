@@ -1,5 +1,6 @@
 import * as D from "@react-three/drei";
 import * as C from "../../components";
+import J from "./textsToPass.json";
 import { useExperience } from "./experience.hook";
 
 const Experience = () => {
@@ -10,7 +11,7 @@ const Experience = () => {
       <ambientLight intensity={1} />
       <D.OrbitControls enableZoom={false} />
       <D.ScrollControls pages={3} damping={0.25}>
-        <C.OverlayText />
+        <C.OverlayText txt={J.txt} />
         <C.Office />
       </D.ScrollControls>
     </>
