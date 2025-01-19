@@ -14,6 +14,7 @@ export { Images } from "./images";
 export { MassInRapier } from "./massInRapier";
 export { MethodsOfTheRigidBody } from "./methodsOfTheRigidBody";
 export { Office } from "./office";
+export { OverlayText } from "./overlayText";
 export { OrbitControl } from "./orbitControl";
 export { SensorHittingACollider } from "./sensorHittingACollider";
 export { ScrollControl } from "./scrollControl";

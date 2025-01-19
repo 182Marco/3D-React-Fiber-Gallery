@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
 *,
 *::before,
 *::after {
@@ -106,4 +108,37 @@ h1.home {
 .text-in-canvas > div {
   font-size: 30px;
   color: green;
+}
+
+main.text-box {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  width: 33vw;
+}
+
+main.text-box > section {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main.text-box > section > div {
+  width: 100%;
+  max-width: 384px;
+}
+
+main.text-box > section > div > div {
+  padding: 7px 10px;
+  border-radius: 8px;
+  background-color: #eee;
+  color: #222;
+  font-family: "Quicksand", sans-serif;
+}
+
+main.text-box h1 {
+  font-size: 14px;
 }

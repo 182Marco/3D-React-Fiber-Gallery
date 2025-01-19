@@ -12,7 +12,6 @@ const useExperience = () => {
 
   useFrame(state => {
     const elapsedTime = state.clock.getElapsedTime();
-    console.log(`elapsedTime: `, elapsedTime);
   });
 
   return {
