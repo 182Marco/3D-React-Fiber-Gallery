@@ -1,5 +1,6 @@
 import * as D from "@react-three/drei";
 import * as U from "../../utils";
+import "./styles.scss";
 
 const OverlayText = props =>
   !!props.txt && (
