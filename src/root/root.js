@@ -13,7 +13,7 @@ const Root = () => {
         <Select />
         <Leva />
         <Canvas camera={{ fav: 64, position: [2.3, 1.5, 2.3] }}>
-          <C.Experience />
+          <C.Home3d />
         </Canvas>
       </div>
     </AppProvider>
