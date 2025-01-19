@@ -116,18 +116,30 @@ main.text-box {
   flex-direction: column;
   justify-content: center;
   padding: 40px;
-  width: 33vw;
+  width: 20vw;
 }
 
 main.text-box > section {
   border-radius: 8px;
+  font-size: 13px;
   padding: 20px 25px;
-  background-color: #eee;
-  color: #222;
+  background-color: #ffffff99;
+  color: #444;
   font-family: "Quicksand", sans-serif;
 }
 
 main.text-box h1 {
-  font-size: 14px;
+  font-size: 15px;
   position: static;
+}
+main.text-box p {
+  margin: 15px 0;
+  list-style-position: inside;
+}
+main.text-box ul {
+  list-style-type: none;
+}
+
+main.text-box li {
+  margin: 5px 0;
 }
