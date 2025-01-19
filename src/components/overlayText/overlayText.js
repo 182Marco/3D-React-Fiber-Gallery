@@ -3,11 +3,13 @@ import * as U from "../../utils";
 import "./styles.scss";
 
 const OverlayText = props =>
-  !!props.txt && (
+  !!props?.txt?.length && (
     <D.Scroll html>
-      <main className="text-box">
-        <section dangerouslySetInnerHTML={{ __html: U.purify(props.txt) }} />
-      </main>
+      {props.txt.map((e, i) => (
+        <section className="text-box" key={i}>
+          <div dangerouslySetInnerHTML={{ __html: U.purify(e) }} />
+        </section>
+      ))}
     </D.Scroll>
   );
 

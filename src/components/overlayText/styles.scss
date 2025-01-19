@@ -2,7 +2,7 @@ $font-family: "Quicksand", sans-serif;
 $text-color: #444;
 $background-color: #ffffff99;
 
-main.text-box {
+section.text-box {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@ main.text-box {
   padding: 40px;
   width: 20vw;
 
-  > section {
+  > div {
     border-radius: 8px;
     font-size: 13px;
     padding: 20px 25px;
