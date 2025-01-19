@@ -2,38 +2,49 @@ $font-family: "Quicksand", sans-serif;
 $text-color: #444;
 $background-color: #ffffff99;
 
-section.text-box {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 0 0 40px;
-  width: 20vw;
+.w100-scroll {
+  width: 100%;
+  pointer-events: none;
 
-  > div {
-    border-radius: 8px;
-    font-size: 13px;
-    padding: 20px 25px;
-    background-color: $background-color;
-    color: $text-color;
-    font-family: $font-family;
+  section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 0 0 40px;
+    width: 20vw;
+    pointer-events: auto;
 
-    h1 {
-      font-size: 15px;
-      position: static;
+    &.right {
+      padding: 0;
+      margin-left: calc(100% - 20vw - 40px);
     }
 
-    p {
-      margin: 15px 0;
-      list-style-position: inside;
-    }
+    > div {
+      border-radius: 8px;
+      font-size: 13px;
+      padding: 20px 25px;
+      background-color: $background-color;
+      color: $text-color;
+      font-family: $font-family;
 
-    ul {
-      list-style-type: none;
-    }
+      h1 {
+        font-size: 15px;
+        position: static;
+      }
 
-    li {
-      margin: 5px 0;
+      p {
+        margin: 15px 0;
+        list-style-position: inside;
+      }
+
+      ul {
+        list-style-type: none;
+      }
+
+      li {
+        margin: 5px 0;
+      }
     }
   }
 }

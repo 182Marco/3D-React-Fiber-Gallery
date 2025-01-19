@@ -4,9 +4,9 @@ import "./styles.scss";
 
 const OverlayText = props =>
   !!props?.txt?.length && (
-    <D.Scroll html>
+    <D.Scroll className="w100-scroll" html>
       {props.txt.map((e, i) => (
-        <section className="text-box" key={i}>
+        <section className={(i + 1) % 2 ? "right" : ""} key={i}>
           <div dangerouslySetInnerHTML={{ __html: U.purify(e) }} />
         </section>
       ))}
