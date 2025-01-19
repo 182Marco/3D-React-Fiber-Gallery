@@ -120,20 +120,8 @@ main.text-box {
 }
 
 main.text-box > section {
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-main.text-box > section > div {
-  width: 100%;
-  max-width: 384px;
-}
-
-main.text-box > section > div > div {
-  padding: 7px 10px;
   border-radius: 8px;
+  padding: 20px 25px;
   background-color: #eee;
   color: #222;
   font-family: "Quicksand", sans-serif;
@@ -141,4 +129,5 @@ main.text-box > section > div > div {
 
 main.text-box h1 {
   font-size: 14px;
+  position: static;
 }
