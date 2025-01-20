@@ -23,6 +23,7 @@ export { Spinner } from "./spinner";
 export { SpringBasicAnimation } from "./springBasicAnimation";
 export { SpringImperativeAnimation } from "./springImperativeAnimation";
 export { SpringRefHook_ } from "./springRefHook";
+export { PlayWithFritionToRoll } from "./playWithFritionToRoll";
 export { PhysicsScene } from "./physicsScene";
 export { PivotControl } from "./pivotControl";
 export { Portal } from "./portal";
