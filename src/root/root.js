@@ -12,8 +12,8 @@ const Root = () => {
       <div className="box">
         <Select />
         <Leva />
-        <Canvas camera={{ fav: 64, position: [2.3, 1.5, 2.3] }}>
-          <C.Home3d />
+        <Canvas camera={{ position: [10, 10, 10], fov: 30 }}>
+          <C.Game />
         </Canvas>
       </div>
     </AppProvider>
