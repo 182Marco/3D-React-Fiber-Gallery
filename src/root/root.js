@@ -13,6 +13,7 @@ const Root = () => {
         <Select />
         <Leva />
         <Canvas camera={{ position: [10, 10, 10], fov: 30 }}>
+          {/*   <Canvas camera={{ fav: 64, position: [2.3, 1.5, 2.3] }}> */}
           <C.Game />
         </Canvas>
       </div>

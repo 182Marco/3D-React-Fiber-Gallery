@@ -11,6 +11,12 @@ const Game = () => {
       <R.Physics debug>
         <ambientLight intensity={0.5} />
         <directionalLight position={[-10, 10, 0]} intensity={0.4} />
+        <D.OrbitControls />
+        <R.RigidBody position={[0, 5, 0]}>
+          <D.Sphere>
+            <meshStandardMaterial color="hotpink" />
+          </D.Sphere>
+        </R.RigidBody>
         <R.RigidBody position={[3, 5, 0]}>
           <D.Box>
             <meshStandardMaterial color="royalblue" />
