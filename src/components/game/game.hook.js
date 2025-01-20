@@ -1,23 +1,16 @@
-import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
-import * as D from "@react-three/drei";
+import * as R from "react";
 
 const useGame = () => {
-  const cubeRef = useRef();
-  const spinnerRef = useRef();
+  const [hover, setHover] = R.useState(false);
+  const meshRef = R.useRef();
 
-  const cubeClickHandler = () => {
-    cubeRef.current.applyImpulse({ x: -25, y: 0, z: 0 });
-  };
-
-  useFrame(state => {
-    const elapsedTime = state.clock.getElapsedTime();
-  });
+  const jump = () => meshRef.current.applyImpulse({ x: 0, y: 5, z: 0 });
 
   return {
-    cubeRef,
-    cubeClickHandler,
-    spinnerRef,
+    hover,
+    setHover,
+    meshRef,
+    jump,
   };
 };
 
