@@ -9,7 +9,11 @@ const OverlayText = props => {
     !!props?.txt?.length && (
       <D.Scroll className="w100-scroll" html>
         {props.txt.map((e, i) => (
-          <section className={i % 2 ? "" : "right"} key={i}>
+          <section
+            className={i % 2 ? "" : "right"}
+            key={i}
+            style={{ opacity: h.opacity[i] }}
+          >
             <div dangerouslySetInnerHTML={{ __html: U.purify(e) }} />
           </section>
         ))}
