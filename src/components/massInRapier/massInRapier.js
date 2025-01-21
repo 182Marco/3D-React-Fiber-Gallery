@@ -11,7 +11,7 @@ const MassInRapier = () => {
       <ambientLight intensity={0.5} />
       <directionalLight position={[2, 2, 3]} castShadow />
       <R.Physics>
-        <R.Debug />
+        {/* <R.Debug /> */}
         <R.RigidBody colliders="cuboid" position={[1, 3, 0]} ref={u.firstMesh}>
           <mesh castShadow onClick={u.fistMeshClickHandler}>
             <boxGeometry />

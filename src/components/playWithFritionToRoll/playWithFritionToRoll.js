@@ -33,7 +33,7 @@ const PlayWithFritionToRoll = () => {
           <D.Box position={[0, 0, 0]} args={[10, 1, 10]} />
           <meshStandardMaterial color="springgreen" />
         </R.RigidBody>
-        <R.Debug />
+        {/* <R.Debug /> */}
       </Suspense>
     </R.Physics>
   );

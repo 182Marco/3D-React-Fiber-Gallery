@@ -14,7 +14,7 @@ const FallingMesh = () => {
       //    gravity={[0, -9.81, 0]} default earth value
       // Hypothetically, gravity can also move meshes along other axes
       >
-        <R.Debug />
+        {/* <R.Debug /> */}
         <R.RigidBody
           colliders={false}
           position={[0, 3, 0]}

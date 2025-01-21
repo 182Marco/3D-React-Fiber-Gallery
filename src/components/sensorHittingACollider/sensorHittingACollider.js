@@ -9,7 +9,7 @@ const SensorHittingACollider = () => {
       <ambientLight />
       <D.OrbitControls />
       <R.Physics>
-        <R.Debug />
+        {/* <R.Debug /> */}
         <R.RigidBody ref={h.sphereRef} position={[0, 2.5, 5]} colliders="hull">
           <mesh castShadow onClick={h.sphereHandler}>
             <sphereGeometry args={[0.5, 16, 16]} />

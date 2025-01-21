@@ -10,7 +10,7 @@ const LotsOfMashesSameFn = () => {
     <R.Physics>
       <ambientLight />
       <D.OrbitControls />
-      <R.Debug />
+      {/* <R.Debug /> */}
       {/* <R.RigidBody ref={u.cubeRef} position={[2.5, 2.5, 0]}>
         <mesh
           castShadow

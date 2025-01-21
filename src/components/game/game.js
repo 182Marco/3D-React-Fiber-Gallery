@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import * as R from "@react-three/rapier";
+import { Physics, RigidBody } from "@react-three/rapier";
 import * as D from "@react-three/drei";
 import { useGame } from "./game.hook";
 
@@ -7,35 +7,46 @@ const Game = () => {
   const h = useGame();
 
   return (
-    <R.Physics debug gravity={[0, -9.8, 0]}>
+    <Physics gravity={[0, -9.8, 0]}>
       {/* without <Suspense> you can't see colliders  */}
       <Suspense>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[-10, 10, 0]} intensity={0.4} />
+        <ambientLight intensity={0.3} />
+        <directionalLight position={[-10, 3, 0]} intensity={1} castShadow />
         <D.OrbitControls />
-        <R.RigidBody
+        <RigidBody
           position={[-2.5, 1, 0]}
           colliders="cuboid"
           onPointerEnter={() => h.setHover(true)}
           onPointerLeave={() => h.setHover(false)}
-          ref={h.meshRef}
+          ref={h.cube}
+          castShadow
         >
-          {/*    <R.BallCollider args={[1]} position={[0, 1, 0]} />
+          {/*    <BallCollider args={[1]} position={[0, 1, 0]} />
            <D.Sphere position-y={1}>
             <meshStandardMaterial />
           </D.Sphere> 
-          <R.CuboidCollider args={[0.5, 0.5, 0.5]} /> */}
-          <D.Box onClick={h.jump}>
+          <CuboidCollider args={[0.5, 0.5, 0.5]} /> */}
+          <D.Box onClick={h.jump} castShadow>
             <meshStandardMaterial color={h.hover ? "hotpink" : "royalblue"} />
           </D.Box>
-        </R.RigidBody>
-        <R.RigidBody type="fixed">
+        </RigidBody>
+        <RigidBody
+          type="kinematicPosition"
+          position={[0, 0.75, 0]}
+          ref={h.kicker}
+        >
+          <group position={[2.5, 0, 0]}>
+            <D.Box args={[5, 0.5, 0.5]} receiveShadow>
+              <meshStandardMaterial color="peachPuff" />
+            </D.Box>
+          </group>
+        </RigidBody>
+        <RigidBody type="fixed">
           <D.Box position={[0, 0, 0]} args={[10, 1, 10]} />
-          <meshStandardMaterial color="springgreen" />
-        </R.RigidBody>
-        <R.Debug />
+          <meshStandardMaterial />
+        </RigidBody>
       </Suspense>
-    </R.Physics>
+    </Physics>
   );
 };
 
