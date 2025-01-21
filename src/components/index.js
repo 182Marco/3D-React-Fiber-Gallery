@@ -7,6 +7,7 @@ export { CustomModel } from "./customModel";
 export { Dog } from "./dog";
 export { FallingMesh } from "./fallingMesh";
 export { Home3d } from "./home3d";
+export { Heart } from "./heart";
 export { LotsOfMashesSameFn } from "./lotsOfMashesSameFn";
 export { Game } from "./game";
 export { HookUseSpringProps } from "./hookUseSpringProps";
