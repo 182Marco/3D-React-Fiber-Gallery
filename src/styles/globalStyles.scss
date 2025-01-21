@@ -21,8 +21,8 @@ body {
   width: 100vw;
   height: 100vh;
   background: $text-light;
-  background: linear-gradient(0, $background-light 0%, $background-dark 100%);
   background: linear-gradient(45deg, $primary, $secondary, $accent);
+  background: linear-gradient(0, $background-light 0%, $background-dark 100%);
   position: relative;
 }
 
