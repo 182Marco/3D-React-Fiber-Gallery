@@ -34,6 +34,10 @@ const useHeart = () => {
         e.directionVector(
           meshWorldPosition.clone().sub(allHeartWorldPosition).normalize(),
         );
+
+        e.targetPosition = e.originalPosition
+          .clone()
+          .add(e.directionVector.clone().multiplyScalar(3));
       });
     }
   }, []); // This effect runs only once after the component is mounted
