@@ -32,9 +32,10 @@ const useHeart = () => {
         e.getWorldPosition(meshWorldPosition);
 
         // Calculate the direction vector from the heart object to this mesh and normalize it
-        e.directionVector(
-          meshWorldPosition.clone().sub(allHeartWorldPosition).normalize(),
-        );
+        e.directionVector = meshWorldPosition
+          .clone()
+          .sub(allHeartWorldPosition)
+          .normalize();
 
         e.targetPosition = e.originalPosition
           .clone()
@@ -46,18 +47,18 @@ const useHeart = () => {
   const scrollData = D.useScroll();
 
   F.useFrame(() => {
-    allHeart.current.children.forEach(e => {
-      e.position = THREE.MathUtils.lerp(
+    allHeart.current?.children.forEach(e => {
+      e.position.x = THREE.MathUtils.lerp(
         e.originalPosition.x,
         e.targetPosition.x,
         scrollData.offset, // 0 at the beginnig and 1 after scroll
       );
-      e.position = THREE.MathUtils.lerp(
+      e.position.y = THREE.MathUtils.lerp(
         e.originalPosition.y,
         e.targetPosition.y,
         scrollData.offset,
       );
-      e.position = THREE.MathUtils.lerp(
+      e.position.z = THREE.MathUtils.lerp(
         e.originalPosition.z,
         e.targetPosition.z,
         scrollData.offset,
