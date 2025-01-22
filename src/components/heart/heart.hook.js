@@ -47,23 +47,25 @@ const useHeart = () => {
   const scrollData = D.useScroll();
 
   F.useFrame(() => {
-    allHeart.current?.children.forEach(e => {
-      e.position.x = THREE.MathUtils.lerp(
-        e.originalPosition.x,
-        e.targetPosition.x,
-        scrollData.offset, // 0 at the beginnig and 1 after scroll
-      );
-      e.position.y = THREE.MathUtils.lerp(
-        e.originalPosition.y,
-        e.targetPosition.y,
-        scrollData.offset,
-      );
-      e.position.z = THREE.MathUtils.lerp(
-        e.originalPosition.z,
-        e.targetPosition.z,
-        scrollData.offset,
-      );
-    });
+    if (scrollData?.offset !== undefined) {
+      allHeart.current?.children.forEach(e => {
+        e.position.x = THREE.MathUtils.lerp(
+          e.originalPosition.x,
+          e.targetPosition.x,
+          scrollData.offset, // 0 all'inizio e 1 dopo lo scroll
+        );
+        e.position.y = THREE.MathUtils.lerp(
+          e.originalPosition.y,
+          e.targetPosition.y,
+          scrollData.offset,
+        );
+        e.position.z = THREE.MathUtils.lerp(
+          e.originalPosition.z,
+          e.targetPosition.z,
+          scrollData.offset,
+        );
+      });
+    }
   }, []);
 
   // Return the ref and other model data (nodes and materials)
