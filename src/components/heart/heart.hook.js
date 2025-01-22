@@ -52,6 +52,16 @@ const useHeart = () => {
         e.targetPosition.x,
         scrollData.offset, // 0 at the beginnig and 1 after scroll
       );
+      e.position = THREE.MathUtils.lerp(
+        e.originalPosition.y,
+        e.targetPosition.y,
+        scrollData.offset,
+      );
+      e.position = THREE.MathUtils.lerp(
+        e.originalPosition.z,
+        e.targetPosition.z,
+        scrollData.offset,
+      );
     });
   }, []);
 
