@@ -42,7 +42,7 @@ const useHeart = () => {
           .add(e.directionVector.clone().multiplyScalar(3));
       });
     }
-  }, []); // This effect runs only once after the component is mounted
+  }, []);
 
   const scrollData = D.useScroll();
 
