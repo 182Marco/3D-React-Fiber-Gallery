@@ -66,7 +66,7 @@ const useHeart = () => {
         );
       });
     }
-  }, []);
+  });
 
   // Return the ref and other model data (nodes and materials)
   return { allHeart, nodes, materials };
