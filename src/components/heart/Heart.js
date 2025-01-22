@@ -5,11 +5,11 @@ const Heart = props => {
   const h = useHeart();
   return (
     <>
-      <D.ScrollControls pages={4} ref={h.allHeart}>
+      <D.ScrollControls pages={4}>
         <D.Environment preset="sunset" background blur={0.4} />
         <D.OrbitControls enableZoom={false} />
         <D.Float floatIntensity={2} speed={3}>
-          <group scale={0.25} {...props} dispose={null}>
+          <group scale={0.25} {...props} dispose={null} ref={h.allHeart}>
             <mesh
               name="Heart_Full_cell"
               geometry={h.nodes.Heart_Full_cell.geometry}
