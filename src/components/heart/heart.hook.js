@@ -1,5 +1,6 @@
 import * as R from "react";
 import * as D from "@react-three/drei";
+import * as F from "@react-three/fiber";
 import * as THREE from "three";
 
 const useHeart = () => {
@@ -41,6 +42,18 @@ const useHeart = () => {
       });
     }
   }, []); // This effect runs only once after the component is mounted
+
+  const scrollData = D.useScroll();
+
+  F.useFrame(() => {
+    allHeart.current.children.forEach(e => {
+      e.position = THREE.MathUtils.lerp(
+        e.originalPosition.x,
+        e.targetPosition.x,
+        scrollData.offset, // 0 at the beginnig and 1 after scroll
+      );
+    });
+  }, []);
 
   // Return the ref and other model data (nodes and materials)
   return { allHeart, nodes, materials };
