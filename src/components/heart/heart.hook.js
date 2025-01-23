@@ -47,8 +47,10 @@ const useHeart = () => {
   const scrollData = D.useScroll();
 
   F.useFrame(() => {
+    console.log(`marcom ---> scrollData?.offset: `, scrollData?.offset);
     if (scrollData?.offset !== undefined) {
       allHeart.current?.children.forEach(e => {
+        console.log(`marcom ---> e.position: `, e.position);
         e.position.x = THREE.MathUtils.lerp(
           e.originalPosition.x,
           e.targetPosition.x,
