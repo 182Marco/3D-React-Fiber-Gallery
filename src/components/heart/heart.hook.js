@@ -39,21 +39,23 @@ const useHeart = () => {
   F.useFrame(() => {
     originHeart.current.visible = scrollData.offset < 0.001;
     allHeart.current?.children.forEach(e => {
-      e.position.x = THREE.MathUtils.lerp(
-        e.originalPosition.x,
-        e.targetPosition.x,
-        scrollData.offset, // starts at 0 and get's to 1 after scrolling
-      );
-      e.position.y = THREE.MathUtils.lerp(
-        e.originalPosition.y,
-        e.targetPosition.y,
-        scrollData.offset,
-      );
-      e.position.z = THREE.MathUtils.lerp(
-        e.originalPosition.z,
-        e.targetPosition.z,
-        scrollData.offset,
-      );
+      if (e.position) {
+        e.position.x = THREE.MathUtils.lerp(
+          e.originalPosition.x,
+          e.targetPosition.x,
+          scrollData.offset, // starts at 0 and get's to 1 after scrolling
+        );
+        e.position.y = THREE.MathUtils.lerp(
+          e.originalPosition.y,
+          e.targetPosition.y,
+          scrollData.offset,
+        );
+        e.position.z = THREE.MathUtils.lerp(
+          e.originalPosition.z,
+          e.targetPosition.z,
+          scrollData.offset,
+        );
+      }
     });
   });
 
