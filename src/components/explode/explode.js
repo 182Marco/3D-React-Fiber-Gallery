@@ -1,5 +1,5 @@
 import * as D from "@react-three/drei";
-import * as C from "../../components";
+import * as C from "./components";
 import { useExplode } from "./explode.hook";
 
 const Explode = () => {
@@ -9,7 +9,7 @@ const Explode = () => {
       <D.Environment preset="sunset" background blur={0.4} />
       <D.OrbitControls enableZoom={false} />
       <D.Float floatIntensity={2} speed={3}>
-        <C.Heart />
+        <C.Heart visible={h.item === "heart"} />
       </D.Float>
     </>
   );

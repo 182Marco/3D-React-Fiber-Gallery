@@ -1,5 +1,11 @@
+import * as L from "leva";
+
 const useExplode = () => {
-  return {};
+  const { item } = L.useControls({
+    item: { value: "heart", options: ["heart", "banana"] },
+  });
+
+  return { item };
 };
 
 export { useExplode };
