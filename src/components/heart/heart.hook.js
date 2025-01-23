@@ -6,6 +6,7 @@ import * as THREE from "three";
 const useHeart = () => {
   const { nodes, materials } = D.useGLTF("/model/heart.glb");
   const allHeart = R.useRef();
+  const originHeart = R.useRef();
 
   R.useEffect(() => {
     // Create a new Vector3 to hold the world position of the entire heart object
@@ -55,7 +56,7 @@ const useHeart = () => {
     });
   });
 
-  return { allHeart, nodes, materials };
+  return { allHeart, nodes, materials, originHeart };
 };
 
 export { useHeart };
