@@ -37,6 +37,7 @@ const useHeart = () => {
   const scrollData = D.useScroll();
 
   F.useFrame(() => {
+    originHeart.current.visible = scrollData.offset < 0.001;
     allHeart.current?.children.forEach(e => {
       e.position.x = THREE.MathUtils.lerp(
         e.originalPosition.x,
