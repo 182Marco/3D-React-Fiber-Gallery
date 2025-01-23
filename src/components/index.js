@@ -5,6 +5,7 @@ export { CascadingMeshesOnClick } from "./cascadingMeshesOnClick";
 export { ConfigInSpring } from "./configInSpring";
 export { CustomModel } from "./customModel";
 export { Dog } from "./dog";
+export { Explode } from "./explode";
 export { FallingMesh } from "./fallingMesh";
 export { Home3d } from "./home3d";
 export { Heart } from "./heart";

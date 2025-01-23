@@ -16,7 +16,7 @@ const Root = () => {
         <Canvas camera={{ position: [0, 0, 5], fov: 30 }}>
           {/*   <Canvas camera={{ fav: 64, position: [2.3, 1.5, 2.3] }}> */}
           <D.ScrollControls pages={4}>
-            <C.Heart />
+            <C.Explode />
           </D.ScrollControls>
         </Canvas>
       </div>
