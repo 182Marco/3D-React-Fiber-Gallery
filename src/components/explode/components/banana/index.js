@@ -1,2 +1,1 @@
-export { Heart } from "./heart";
 export { Banana } from "./banana";

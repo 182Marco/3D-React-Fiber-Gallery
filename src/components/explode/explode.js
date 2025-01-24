@@ -4,12 +4,14 @@ import { useExplode } from "./explode.hook";
 
 const Explode = () => {
   const h = useExplode();
+  console.log(`marcom ---> h: `, h);
   return (
     <>
       <D.Environment preset="sunset" background blur={0.4} />
       <D.OrbitControls enableZoom={false} />
       <D.Float floatIntensity={2} speed={3}>
-        <C.Heart visible={h.item === "heart"} />
+        <C.Heart visible={h.item === h.heart} />
+        <C.Banana visible={h.item === h.banana} />
       </D.Float>
     </>
   );
