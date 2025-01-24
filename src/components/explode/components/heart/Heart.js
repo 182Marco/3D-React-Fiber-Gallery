@@ -362,7 +362,6 @@ const Heart = props => {
         />
         <mesh
           name="origin"
-          ref={h.originHeart}
           geometry={h.nodes.origin.geometry}
           material={h.materials.Red}
           rotation={[-Math.PI / 2, 0, 0]}

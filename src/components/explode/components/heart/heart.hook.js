@@ -5,11 +5,10 @@ import { useExplodeAnimation } from "../../animation.hook";
 const useHeart = () => {
   const { nodes, materials } = D.useGLTF("/model/heart.glb");
   const group = R.useRef();
-  const originHeart = R.useRef();
 
   useExplodeAnimation(group, { distance: 3 });
 
-  return { group, nodes, materials, originHeart };
+  return { group, nodes, materials };
 };
 
 export { useHeart };

@@ -40,7 +40,21 @@ const useExplodeAnimation = (group, options = {}) => {
   const scrollData = D.useScroll();
 
   F.useFrame(() => {
-    group.current.children.forEach(e => {});
+    group.current.children.forEach(e => {
+      if (scrollData.offset < 0.0001) {
+        if (e.name === "origin") {
+          e.visible = true;
+        } else {
+          e.visible = false;
+        }
+      } else {
+        if (e.name === "origin") {
+          e.visible = false;
+        } else {
+          e.visible = true;
+        }
+      }
+    });
 
     group.current?.children.forEach(e => {
       if (e.position) {
