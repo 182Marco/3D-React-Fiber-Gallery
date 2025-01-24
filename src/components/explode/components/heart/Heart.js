@@ -5,7 +5,7 @@ const Heart = props => {
   const h = useHeart();
   return (
     <>
-      <group scale={0.25} {...props} dispose={null} ref={h.allHeart}>
+      <group scale={0.25} {...props} dispose={null} ref={h.group}>
         <mesh
           name="Heart_Full_cell"
           geometry={h.nodes.Heart_Full_cell.geometry}
