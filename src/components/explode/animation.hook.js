@@ -1,4 +1,3 @@
-import * as L from "leva";
 import * as R from "react";
 import * as D from "@react-three/drei";
 import * as F from "@react-three/fiber";
