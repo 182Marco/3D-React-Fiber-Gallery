@@ -41,19 +41,8 @@ const useExplodeAnimation = (group, options = {}) => {
 
   F.useFrame(() => {
     group.current.children.forEach(e => {
-      if (scrollData.offset < 0.0001) {
-        if (e.name === "origin") {
-          e.visible = true;
-        } else {
-          e.visible = false;
-        }
-      } else {
-        if (e.name === "origin") {
-          e.visible = false;
-        } else {
-          e.visible = true;
-        }
-      }
+      e.visible =
+        scrollData.offset < 0.0001 ? e.name === "origin" : e.name !== "origin";
     });
 
     group.current?.children.forEach(e => {
