@@ -4,7 +4,6 @@ import { useExplode } from "./explode.hook";
 
 const Explode = () => {
   const h = useExplode();
-  console.log(`marcom ---> h: `, h);
   return (
     <>
       <D.Environment preset="sunset" background blur={0.4} />
