@@ -1,11 +1,7 @@
-import { useState } from "react";
+import * as U from "./utils";
 
 const useRoot = () => {
-  const [isShowDog, setShowDog] = useState(false);
-
-  const toggleShowDog = () => setShowDog((pv) => !pv);
-
-  return { isShowDog, toggleShowDog };
+  return {};
 };
 
 export { useRoot };
