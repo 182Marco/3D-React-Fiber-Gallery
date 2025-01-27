@@ -7,7 +7,7 @@ const Dog = () => {
     <>
       <D.OrbitControls />
       <ambientLight />
-      <primitive scale={2.5} position-y={-1.5} object={u.model.scene} />
+      <primitive scale={2.2} position-y={-1.5} object={u.model.scene} />
     </>
   );
 };
