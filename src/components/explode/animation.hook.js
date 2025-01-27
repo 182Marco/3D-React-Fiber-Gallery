@@ -9,37 +9,35 @@ const {
 } = THREE;
 
 const useExplodeAnimation = (group, options = {}) => {
-  const { distance = 3, enableRotation = true } = options;
+  const { distance = 3 } = options;
 
   R.useEffect(() => {
-    // Create a new Vector3 to hold the world position of the entire heart object
     const groupWorldPosition = new Vector3();
 
-    // Get the world position of the whole heart and store it in groupWorldPosition
+    // Calcola la posizione del gruppo nel mondo
     group.current.getWorldPosition(groupWorldPosition);
 
     group.current.children?.forEach(e => {
-      // Store the original position of the mesh (in case we need it later)
-      e.originalPosition = e.position.clone();
-
+      e.originalPosition = e.position?.clone() || new Vector3();
       const meshWorldPosition = new Vector3();
       e.getWorldPosition(meshWorldPosition);
 
-      // Calculate the direction vector from the heart object to this mesh and normalize it
       e.directionVector = meshWorldPosition
         .clone()
         .sub(groupWorldPosition)
         .normalize();
     });
-  }, []);
+  }, [group]);
 
   R.useEffect(() => {
     group.current.children?.forEach(e => {
-      e.targetPosition = e.originalPosition
-        .clone()
-        .add(e.directionVector.clone().multiplyScalar(options.distance));
+      e.targetPosition =
+        e.originalPosition
+          ?.clone()
+          .add(e.directionVector?.clone().multiplyScalar(distance)) ||
+        new Vector3();
     });
-  }, [options.distance]);
+  }, [group, distance]);
 
   const scrollData = D.useScroll();
 
@@ -47,19 +45,28 @@ const useExplodeAnimation = (group, options = {}) => {
     group.current.children.forEach(e => {
       e.visible =
         scrollData.offset < 0.0001 ? e.name === "origin" : e.name !== "origin";
-    });
 
-    group.current?.children.forEach(e => {
-      const getLerpArgs = axe => [
-        e.originalPosition[axe],
-        e.targetPosition[axe],
-        scrollData.offset, // starts at 0 and get's to 1 after scrolling
-      ];
-
-      if (e.position) {
-        e.position.x = lerp(...getLerpArgs("x"));
-        e.position.y = lerp(...getLerpArgs("y"));
-        e.position.z = lerp(...getLerpArgs("z"));
+      if (
+        e.position &&
+        e.originalPosition &&
+        e.targetPosition &&
+        e.targetPosition.x
+      ) {
+        e.position.x = lerp(
+          e.originalPosition.x,
+          e.targetPosition.x,
+          scrollData.offset,
+        );
+        e.position.y = lerp(
+          e.originalPosition.y,
+          e.targetPosition.y,
+          scrollData.offset,
+        );
+        e.position.z = lerp(
+          e.originalPosition.z,
+          e.targetPosition.z,
+          scrollData.offset,
+        );
       }
     });
   });
