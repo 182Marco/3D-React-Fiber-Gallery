@@ -15,7 +15,7 @@ const GetComponents = projName => {
     case U.projects.Dog:
       return <C.Dog />;
     default:
-      console.log("Error: comp not found.", projName);
+      console.log("Error: comp not found", projName);
       return null;
   }
 };
