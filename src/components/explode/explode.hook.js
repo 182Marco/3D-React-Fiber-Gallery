@@ -1,17 +1,17 @@
 import * as L from "leva";
 
 const useExplode = () => {
+  const bird = "bird";
   const banana = "banana";
   const heart = "heart";
-  const options = [heart, banana];
+  const componets = { bird, banana, heart };
+  const options = Object.keys(componets);
 
-  const controlObj = {
-    item: { value: heart, options },
-  };
+  const { item } = L.useControls({ item: { value: heart, options } });
 
-  const { item } = L.useControls(controlObj);
+  const isSelected = name => item === componets[name];
 
-  return { banana, heart, item };
+  return { banana, bird, heart, isSelected };
 };
 
 export { useExplode };
