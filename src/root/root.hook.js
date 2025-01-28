@@ -1,4 +1,6 @@
 import * as L from "leva";
+import * as R from "react";
+import * as F from "@react-three/fiber";
 import * as U from "./utils";
 
 const useRoot = () => {
@@ -8,7 +10,13 @@ const useRoot = () => {
     project: { value: U.projects.Home3d, options },
   });
 
-  return { project };
+  const [currentProject, setCurrentProject] = R.useState(project);
+
+  R.useEffect(() => {
+    setCurrentProject(project);
+  }, [project]);
+
+  return { currentProject, project };
 };
 
 export { useRoot };
