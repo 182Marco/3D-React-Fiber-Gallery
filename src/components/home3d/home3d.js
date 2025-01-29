@@ -8,7 +8,7 @@ const Home3d = () => (
     <D.OrbitControls enableZoom={false} />
     <D.ScrollControls pages={3} damping={0.25}>
       <C.OverlayText txt={J.txt} />
-      <C.Office />
+      <C.Office scale={1.3} />
     </D.ScrollControls>
   </>
 );
