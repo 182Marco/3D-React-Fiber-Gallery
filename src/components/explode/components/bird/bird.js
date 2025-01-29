@@ -4,7 +4,7 @@ import { useBird } from "./bird.hook";
 const Bird = props => {
   const h = useBird();
   return (
-    <group {...props} dispose={null} ref={h.group} scale={0.7}>
+    <group {...props} dispose={null} ref={h.group}>
       <mesh
         name="origin"
         geometry={h.nodes.origin.geometry}
