@@ -6,7 +6,7 @@ const useBanana = () => {
   const { nodes, materials } = D.useGLTF("/model/banana.glb");
   const group = R.useRef();
 
-  useExplodeAnimation(group, { distance: 2.2 });
+  useExplodeAnimation(group, { distance: 5 });
 
   return { group, nodes, materials };
 };
