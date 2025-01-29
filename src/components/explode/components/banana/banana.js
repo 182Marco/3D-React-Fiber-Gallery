@@ -5,7 +5,7 @@ import { useBanana } from "./banana.hook";
 const Banana = props => {
   const h = useBanana();
   return (
-    <group {...props} dispose={null} scale={0.13} ref={h.group}>
+    <group {...props} dispose={null} ref={h.group}>
       <group name="origin" position={[0.023, 0.008, 0.017]} ref={h.group}>
         <mesh
           name="pasted__pCube11_group_1"
