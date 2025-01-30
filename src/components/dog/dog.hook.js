@@ -1,4 +1,4 @@
-// import { useEffect } from "react";
+import * as R from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { useAppContext } from "../../context/useAppContext";
 import * as L from "leva";
@@ -7,13 +7,17 @@ const useDog = () => {
   const u = useAppContext();
   const model = useGLTF("./model/dog.glb");
   const animations = useAnimations(model.animations, model.scene);
-  const animationsList = Object.keys(animations?.actions);
+  const [animationsList, setAnimationsList] = R.useState([]);
+
+  R.useEffect(() => {
+    if (animations) {
+      setAnimationsList(Object.keys(animations));
+    }
+  }, [animations]);
 
   const { action } = L.useControls({
-    actions: { value: "Select Animation", options: animationsList },
+    actions: { value: animationsList[0], options: animationsList },
   });
-
-  console.log(`marcom ---> animationsList: `, animationsList);
 
   console.log(`marcom ---> action: `, action);
 
