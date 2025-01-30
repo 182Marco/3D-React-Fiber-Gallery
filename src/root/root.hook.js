@@ -1,6 +1,5 @@
 import * as L from "leva";
 import * as R from "react";
-import * as F from "@react-three/fiber";
 import * as U from "./utils";
 
 const useRoot = () => {
