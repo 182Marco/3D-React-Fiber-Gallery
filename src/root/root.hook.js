@@ -9,6 +9,7 @@ const useRoot = () => {
   const { project } = L.useControls({
     project: { value: U.projects.Home3d, options },
   });
+  console.log(`marcom ---> project: `, project);
 
   const [currentProject, setCurrentProject] = R.useState(project);
 

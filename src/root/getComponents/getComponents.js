@@ -1,6 +1,7 @@
 import * as C from "../../components";
 import * as D from "@react-three/drei";
 import * as U from "../utils";
+import * as R from "react";
 
 const GetComponents = projName => {
   switch (projName) {
@@ -13,7 +14,11 @@ const GetComponents = projName => {
         </D.ScrollControls>
       );
     case U.projects.Dog:
-      return <C.Dog />;
+      return (
+        <R.Suspense>
+          <C.Dog />
+        </R.Suspense>
+      );
     default:
       console.log("Error: comp not found", projName);
       return null;
