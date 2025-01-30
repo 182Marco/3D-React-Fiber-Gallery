@@ -10,8 +10,12 @@ const useDog = () => {
   const animationsList = Object.keys(animations?.actions);
 
   const { action } = L.useControls({
-    actions: { value: "Select Animation", animationsList },
+    actions: { value: "Select Animation", options: animationsList },
   });
+
+  console.log(`marcom ---> animationsList: `, animationsList);
+
+  console.log(`marcom ---> action: `, action);
 
   // useEffect(() => {
   //   u.setBtns(animationsList);
