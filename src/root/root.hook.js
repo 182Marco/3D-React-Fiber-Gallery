@@ -6,7 +6,7 @@ const useRoot = () => {
   const options = Object.keys(U.projects);
 
   const { project } = L.useControls({
-    project: { value: U.projects.Home3d, options },
+    project: { value: U.projects.Dog, options },
   });
 
   const [currentProject, setCurrentProject] = R.useState(project);

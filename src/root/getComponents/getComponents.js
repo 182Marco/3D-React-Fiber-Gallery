@@ -15,7 +15,7 @@ const GetComponents = projName => {
       );
     case U.projects.Dog:
       return (
-        <R.Suspense fallback={C.Spinner}>
+        <R.Suspense fallback={<C.Spinner />}>
           <C.Dog />
         </R.Suspense>
       );
