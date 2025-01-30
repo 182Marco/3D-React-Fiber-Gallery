@@ -7,19 +7,13 @@ const useDog = () => {
   const u = useAppContext();
   const model = useGLTF("./model/dog.glb");
   const animations = useAnimations(model.animations, model.scene);
-  const [animationsList, setAnimationsList] = R.useState([]);
+  const animationsList = Object.keys(animations.actions);
 
-  R.useEffect(() => {
-    if (animations) {
-      setAnimationsList(Object.keys(animations));
-    }
-  }, [animations]);
-
-  const { action } = L.useControls({
-    actions: { value: animationsList[0], options: animationsList },
+  const { animation } = L.useControls({
+    animation: { value: animationsList[0], options: animationsList },
   });
 
-  console.log(`marcom ---> action: `, action);
+  console.log(`marcom ---> animation: `, animation);
 
   // useEffect(() => {
   //   u.setBtns(animationsList);
