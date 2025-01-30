@@ -13,7 +13,6 @@ const Root = () => {
     <AppProvider>
       <div className="bg">
         <L.Leva />
-        {h.currentProject === U.projects.Dog && <C.Select />}
         <F.Canvas>{GetComponents(h.currentProject)}</F.Canvas>
       </div>
     </AppProvider>
