@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { useAppContext } from "../../context/useAppContext";
+import * as L from "leva";
 
 const useDog = () => {
   const u = useAppContext();
@@ -8,25 +9,29 @@ const useDog = () => {
   const animations = useAnimations(model.animations, model.scene);
   const animationsList = Object.keys(animations?.actions);
 
-  useEffect(() => {
-    u.setBtns(animationsList);
-  }, [animationsList, u.setBtns]);
+  const { action } = L.useControls({
+    actions: { value: "Select Animation", animationsList },
+  });
 
-  const playAnimation = () =>
-    animations?.actions?.[u.state.currentAction]?.play();
+  // useEffect(() => {
+  //   u.setBtns(animationsList);
+  // }, [animationsList, u.setBtns]);
 
-  const isWorking = (animation) => animations.actions[animation].isRunning();
-  const isStateMangerAnimation = (animation) =>
-    u?.state?.currentAction === animations.actions[animation]._clip.name;
+  // const playAnimation = () =>
+  //   animations?.actions?.[u.state.currentAction]?.play();
 
-  useEffect(() => {
-    Object.keys(animations.actions).forEach((k) => {
-      if (isWorking(k) && !isStateMangerAnimation(k))
-        animations.actions[k].stop();
-    });
+  // const isWorking = (animation) => animations.actions[animation].isRunning();
+  // const isStateMangerAnimation = (animation) =>
+  //   u?.state?.currentAction === animations.actions[animation]._clip.name;
 
-    playAnimation();
-  }, [u?.state?.currentAction]);
+  // useEffect(() => {
+  //   Object.keys(animations.actions).forEach((k) => {
+  //     if (isWorking(k) && !isStateMangerAnimation(k))
+  //       animations.actions[k].stop();
+  //   });
+
+  //   playAnimation();
+  // }, [u?.state?.currentAction]);
 
   return { animationsList, model };
 };
