@@ -1,41 +1,30 @@
 import * as R from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
-import { useAppContext } from "../../context/useAppContext";
 import * as L from "leva";
+import { useGLTF, useAnimations } from "@react-three/drei";
 
 const useDog = () => {
-  const u = useAppContext();
   const model = useGLTF("./model/dog.glb");
   const animations = useAnimations(model.animations, model.scene);
-  const animationsList = Object.keys(animations.actions);
+  const animationsObj = animations.actions;
+  const animationsAr = Object.keys(animationsObj);
 
   const { animation } = L.useControls({
-    animation: { value: animationsList[0], options: animationsList },
+    animation: { value: animationsAr[0], options: animationsAr },
   });
 
-  console.log(`marcom ---> animation: `, animation);
+  const stopActiveAnimation = () =>
+    Object.values(animationsObj).forEach(a =>
+      a.isRunning() ? a.stop() : null,
+    );
 
-  // useEffect(() => {
-  //   u.setBtns(animationsList);
-  // }, [animationsList, u.setBtns]);
+  R.useEffect(() => {
+    if (animation) {
+      stopActiveAnimation();
+      animationsObj[animation]?.play();
+    }
+  }, [animation, animationsObj]);
 
-  // const playAnimation = () =>
-  //   animations?.actions?.[u.state.currentAction]?.play();
-
-  // const isWorking = (animation) => animations.actions[animation].isRunning();
-  // const isStateMangerAnimation = (animation) =>
-  //   u?.state?.currentAction === animations.actions[animation]._clip.name;
-
-  // useEffect(() => {
-  //   Object.keys(animations.actions).forEach((k) => {
-  //     if (isWorking(k) && !isStateMangerAnimation(k))
-  //       animations.actions[k].stop();
-  //   });
-
-  //   playAnimation();
-  // }, [u?.state?.currentAction]);
-
-  return { animationsList, model };
+  return { animationsAr, model };
 };
 
 export { useDog };
