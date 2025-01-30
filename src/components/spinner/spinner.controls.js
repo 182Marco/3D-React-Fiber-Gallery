@@ -9,7 +9,7 @@ const useMyControls = () => ({
       step: 0.01,
     },
     color: {
-      value: "#ff6347",
+      value: "#00F9FF",
       label: "Color",
     },
     wireframe: false,

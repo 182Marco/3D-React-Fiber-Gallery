@@ -5,6 +5,7 @@ const Spinner = ({ speed }) => {
 
   return (
     <>
+      <ambientLight />
       <mesh
         ref={u.meshRef}
         position={[u.c.position.x, u.c.position.y, u.c.position.z]}
