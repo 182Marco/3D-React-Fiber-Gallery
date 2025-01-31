@@ -28,5 +28,6 @@ export { PlayWithFritionToRoll } from "./playWithFritionToRoll";
 export { PhysicsScene } from "./physicsScene";
 export { PivotControl } from "./pivotControl";
 export { Portal } from "./portal";
+export { PortalPass } from "./portalPass";
 export { PresentationControl } from "./presentationControl";
 export { transformControl } from "./transformControl";
