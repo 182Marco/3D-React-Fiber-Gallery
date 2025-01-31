@@ -19,6 +19,8 @@ const GetComponents = projName => {
           <C.Dog />
         </R.Suspense>
       );
+    case U.projects.PortalPass:
+      return <C.PortalPass />;
     default:
       console.log("Error: comp not found", projName);
       return null;
