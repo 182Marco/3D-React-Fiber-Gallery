@@ -5,7 +5,7 @@ import * as T from "@react-three/fiber";
 
 const usePortal = () => {
   const model = D.useGLTF("./model/1.glb");
-  const texture = D.useTexture("./texture/1.png");
+  const texture = D.useTexture("./textures/1.png");
   const portalMaterialRef = R.useRef();
   const CameraControlRef = R.useRef();
 
@@ -21,7 +21,7 @@ const usePortal = () => {
       "blend",
       active ? 1 : 0,
       0.2,
-      delta
+      delta,
     );
   });
   return { CameraControlRef, model, portalMaterialRef, setActive, texture };
