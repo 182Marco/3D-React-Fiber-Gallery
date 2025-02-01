@@ -10,7 +10,7 @@ const PortalPass = () => {
       <ambientLight intensity={0.5} />
       <D.Environment preset="sunset" />
       <mesh>
-        <sphereGeometry args={[5, 32, 32]} />
+        <sphereGeometry args={[10, 64, 64]} />
         <meshStandardMaterial map={h.map} side={THREE.BackSide} />
       </mesh>
     </>
