@@ -20,7 +20,11 @@ const GetComponents = projName => {
         </R.Suspense>
       );
     case U.projects.PortalPass:
-      return <C.PortalPass />;
+      return (
+        <R.Suspense fallback={<C.Spinner speed={10} />}>
+          <C.PortalPass />
+        </R.Suspense>
+      );
     default:
       console.log("Error: comp not found", projName);
       return null;
