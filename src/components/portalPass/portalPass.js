@@ -7,7 +7,7 @@ const PortalPass = () => {
   return (
     <>
       <D.OrbitControls makeDefault />
-      <C.MonsterStage>
+      <C.MonsterStage texture={h.texture}>
         <C.Fish scale={0.6} position-y={-1} />
       </C.MonsterStage>
     </>
