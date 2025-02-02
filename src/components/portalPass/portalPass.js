@@ -8,8 +8,7 @@ const PortalPass = () => {
   return (
     <>
       <D.OrbitControls makeDefault />
-      <mesh>
-        <planeGeometry args={[2, 3]} />
+      <D.RoundedBox args={[2, 3, 0.1]}>
         <D.MeshPortalMaterial>
           <D.Environment preset="sunset" />
           <ambientLight intensity={1} />
@@ -19,7 +18,7 @@ const PortalPass = () => {
             <meshStandardMaterial map={h.map} side={THREE.BackSide} />
           </mesh>
         </D.MeshPortalMaterial>
-      </mesh>
+      </D.RoundedBox>
     </>
   );
 };
