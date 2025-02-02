@@ -9,7 +9,7 @@ const PortalPass = () => {
     <>
       <D.OrbitControls makeDefault />
       <D.RoundedBox args={[2, 3, 0.1]}>
-        <D.MeshPortalMaterial>
+        <D.MeshPortalMaterial side={THREE.DoubleSide}>
           <D.Environment preset="sunset" />
           <ambientLight intensity={1} />
           <C.Fish scale={0.55} position-y={-0.7} />
