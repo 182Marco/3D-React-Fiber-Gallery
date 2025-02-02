@@ -10,6 +10,11 @@ const useFish = () => {
   const { nodes, materials } = F.useGraph(clone);
   const { actions } = D.useAnimations(animations, group);
 
+  R.useEffect(() => {
+    actions["Idle"].reset().fadeIn(0.5).play();
+    return () => actions["Idle"].fadeOut(0.5);
+  }, []);
+
   return { group, nodes, materials };
 };
 
