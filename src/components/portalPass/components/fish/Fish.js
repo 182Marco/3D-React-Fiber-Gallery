@@ -52,6 +52,6 @@ const Fish = props => {
   );
 };
 
-useGLTF.preload("/fish.gltf");
+useGLTF.preload("./model/fish.gltf");
 
 export { Fish };
