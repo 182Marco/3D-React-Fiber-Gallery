@@ -5,7 +5,7 @@ import { SkeletonUtils } from "three-stdlib";
 
 const useFish = () => {
   const group = R.useRef();
-  const { scene, animations } = D.useGLTF("/fish.gltf");
+  const { scene, animations } = D.useGLTF("./model/fish.gltf");
   const clone = R.useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes, materials } = F.useGraph(clone);
   const { actions } = D.useAnimations(animations, group);
