@@ -8,12 +8,17 @@ const PortalPass = () => {
   return (
     <>
       <D.OrbitControls makeDefault />
-      <ambientLight intensity={0.5} />
-      <D.Environment preset="sunset" />
-      <C.Fish />
       <mesh>
-        <sphereGeometry args={[10, 64, 64]} />
-        <meshStandardMaterial map={h.map} side={THREE.BackSide} />
+        <planeGeometry args={[2, 3]} />
+        <D.MeshPortalMaterial>
+          <D.Environment preset="sunset" />
+          <ambientLight intensity={1} />
+          <C.Fish scale={0.55} position-y={-0.7} />
+          <mesh>
+            <sphereGeometry args={[10, 64, 64]} />
+            <meshStandardMaterial map={h.map} side={THREE.BackSide} />
+          </mesh>
+        </D.MeshPortalMaterial>
       </mesh>
     </>
   );
