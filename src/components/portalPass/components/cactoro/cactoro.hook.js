@@ -5,7 +5,7 @@ import { SkeletonUtils } from "three-stdlib";
 
 const useCactoro = () => {
   const group = R.useRef();
-  const { scene, animations } = D.useGLTF("./model/cactoro.js");
+  const { scene, animations } = D.useGLTF("./model/cactoro.gltf");
   const clone = R.useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes, materials } = F.useGraph(clone);
   const { actions } = D.useAnimations(animations, group);
