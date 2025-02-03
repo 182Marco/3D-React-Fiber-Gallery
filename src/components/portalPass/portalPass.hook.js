@@ -1,5 +1,10 @@
+import * as R from "react";
+
 const usePortalPass = () => {
-  return {};
+  const [active, setActive] = R.useState();
+  const cameraRef = R.useRef();
+
+  return { active, cameraRef, setActive };
 };
 
 export { usePortalPass };
