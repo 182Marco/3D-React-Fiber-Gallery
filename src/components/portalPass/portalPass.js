@@ -1,15 +1,32 @@
+import * as C from "./components";
 import * as D from "@react-three/drei";
 import { usePortalPass } from "./portalPass.hook";
-import * as C from "./components";
 
 const PortalPass = () => {
   const h = usePortalPass();
+
   return (
     <>
       <D.OrbitControls makeDefault />
-      <C.MonsterStage texture={h.texture}>
-        <C.Fish scale={0.6} position-y={-1} />
-      </C.MonsterStage>
+      <group scale={1.2}>
+        <C.MonsterStage texture="textures/waterEnviron.jpg">
+          <C.Fish scale={0.6} position-y={-1} />
+        </C.MonsterStage>
+        <C.MonsterStage
+          texture="textures/cactusForest.jpg"
+          position-x={-2.5}
+          rotation-y={Math.PI / 8}
+        >
+          <C.Cactoro scale={0.6} position-y={-1} />
+        </C.MonsterStage>
+        <C.MonsterStage
+          texture="textures/LavaWorld.jpg"
+          position-x={2.5}
+          rotation-y={-Math.PI / 8}
+        >
+          <C.Dragon scale={0.6} position-y={-1} />
+        </C.MonsterStage>
+      </group>
     </>
   );
 };
