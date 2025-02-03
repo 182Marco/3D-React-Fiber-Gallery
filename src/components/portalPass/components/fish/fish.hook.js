@@ -12,7 +12,7 @@ const useFish = () => {
 
   R.useEffect(() => {
     actions["Idle"].reset().fadeIn(0.5).play();
-    return () => actions["Idle"].fadeOut(0.5);
+    return () => actions["Idle"];
   }, []);
 
   return { group, nodes, materials };
