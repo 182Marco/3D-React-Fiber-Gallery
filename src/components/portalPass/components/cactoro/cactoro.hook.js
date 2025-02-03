@@ -10,6 +10,11 @@ const useCactoro = () => {
   const { nodes, materials } = F.useGraph(clone);
   const { actions } = D.useAnimations(animations, group);
 
+  R.useEffect(() => {
+    actions["Idle"].reset().fadeIn(0.5).play();
+    return () => actions["Idle"];
+  }, []);
+
   return { group, nodes, materials };
 };
 
