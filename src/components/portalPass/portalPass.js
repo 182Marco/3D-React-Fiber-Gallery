@@ -7,7 +7,7 @@ const PortalPass = () => {
 
   return (
     <>
-      <D.OrbitControls makeDefault />
+      <D.CameraControls ref={h.cameraRef} />
       <group scale={1.2}>
         <C.MonsterStage
           texture="textures/LavaWorld.jpg"
@@ -15,6 +15,8 @@ const PortalPass = () => {
           rotation-y={Math.PI / 8}
           name="Dragon"
           color="#df8252"
+          active={h.active}
+          setActive={h.setActive}
         >
           <C.Dragon scale={0.46} position-y={-0.8} />
         </C.MonsterStage>
@@ -22,6 +24,8 @@ const PortalPass = () => {
           texture="textures/waterEnviron.jpg"
           name="Fish King"
           color="#50b8cd"
+          active={h.active}
+          setActive={h.setActive}
         >
           <C.Fish scale={0.6} position-y={-1} />
         </C.MonsterStage>
@@ -31,6 +35,8 @@ const PortalPass = () => {
           rotation-y={-Math.PI / 8}
           name="Cactoro"
           color="#80aa3f"
+          active={h.active}
+          setActive={h.setActive}
         >
           <C.Cactoro scale={0.4} position-y={-0.7} />
         </C.MonsterStage>
