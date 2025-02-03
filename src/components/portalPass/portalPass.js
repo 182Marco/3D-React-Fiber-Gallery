@@ -7,8 +7,8 @@ const PortalPass = () => {
 
   return (
     <>
-      <D.CameraControls ref={h.camera} />
-      <group scale={1.2}>
+      <D.CameraControls ref={h.cameraRef} />
+      <group scale={2.4}>
         <C.MonsterStage
           texture="textures/LavaWorld.jpg"
           position-x={-2.5}
