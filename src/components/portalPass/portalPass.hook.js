@@ -26,6 +26,7 @@ const usePortalPass = () => {
       );
     } else {
       cameraRef.current?.setLookAt(0, 0, 4, 0, 0, 0, true);
+      cameraRef.current.maxDistance = 6;
     }
   }, [active]);
 
