@@ -1,3 +1,4 @@
+import * as D from "@react-three/drei";
 import * as F from "@react-three/fiber";
 import * as R from "react";
 import * as THREE from "three";
@@ -7,6 +8,8 @@ const usePortalPass = () => {
   const [hover, setIsHover] = R.useState(null);
   const cameraRef = R.useRef();
   const scene = F.useThree(state => state.scene);
+
+  D.useCursor(hover);
 
   R.useEffect(() => {
     if (active) {
