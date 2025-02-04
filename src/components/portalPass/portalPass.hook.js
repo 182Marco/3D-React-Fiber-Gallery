@@ -4,6 +4,7 @@ import * as THREE from "three";
 
 const usePortalPass = () => {
   const [active, setActive] = R.useState(null);
+  const [hover, setIsHover] = R.useState(null);
   const cameraRef = R.useRef();
   const scene = F.useThree(state => state.scene);
 
@@ -21,11 +22,11 @@ const usePortalPass = () => {
         true,
       );
     } else {
-      cameraRef.current?.setLookAt(0, 0, 10, 0, 0, 0, true);
+      cameraRef.current?.setLookAt(0, 0, 4, 0, 0, 0, true);
     }
   }, [active]);
 
-  return { active, cameraRef, setActive };
+  return { active, cameraRef, setActive, hover, setIsHover };
 };
 
 export { usePortalPass };
