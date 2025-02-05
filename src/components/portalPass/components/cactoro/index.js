@@ -1,1 +1,1 @@
-export { Fish } from "./cactoro";
+export { Cactoro } from "./cactoro";
