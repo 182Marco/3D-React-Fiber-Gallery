@@ -16,21 +16,37 @@ body {
   scroll: none; /* 'scroll' is not a valid property, use 'overflow' to hide the scrollbar */
 }
 
-/* Box container with background gradient */
-.bg {
-  width: 100vw;
-  height: 100vh;
-  background: $text-light;
-  background: linear-gradient(45deg, $primary, $secondary, $accent);
-  background: linear-gradient(0, $background-light 0%, $background-dark 100%);
-  position: relative;
-}
-
 /* Canvas settings - full width and height */
 canvas {
   display: block; /* Removes extra space around the canvas */
   width: 100%;
   height: 100%;
+}
+
+/* Box container with background gradient */
+.bg {
+  width: 100vw;
+  height: 100vh;
+  background: $text-light;
+  position: relative;
+}
+
+.light-bg {
+  background: linear-gradient(0, $background-light 0%, $background-dark 100%);
+}
+
+.dark-bg {
+  background: linear-gradient(
+      45deg,
+      lighten($primary, 10%),
+      $secondary,
+      darken($accent, 10%)
+    ),
+    radial-gradient(circle, $gradient-highlight 10%, transparent 70%);
+
+  box-shadow:
+    inset 0 0 15px $shadow-dark,
+    0 5px 15px $shadow-light;
 }
 
 .show-dog-btn {
