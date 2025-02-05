@@ -1,8 +1,8 @@
 import { useFish } from "./fish.hook";
 import { useGLTF } from "@react-three/drei";
 
-const Fish = props => {
-  const h = useFish();
+const Fish = ({ hover, ...props }) => {
+  const h = useFish(hover);
   return (
     <group ref={h.group} {...props} dispose={null}>
       <group name="Scene">
