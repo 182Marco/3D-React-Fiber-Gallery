@@ -9,7 +9,7 @@ const Bike = props => {
       <OrbitControls />
       <ambientLight intensity={3} />
       <directionalLight />
-      <group scale={1.5} {...props} dispose={null}>
+      <group scale={1.4} {...props} dispose={null} position={[-0.5, 1, 0]}>
         <mesh geometry={u.nodes.Bike.geometry} material={u.materials.Quadro}>
           <group position={[-1.053, -1.178, 0.005]}>
             <mesh
