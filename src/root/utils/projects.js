@@ -1,7 +1,8 @@
 const projects = {
-  Home3d: "Home3d",
-  Explode: "Explode",
+  Bike: "Bike",
   Dog: "Dog",
+  Explode: "Explode",
+  Home3d: "Home3d",
   PortalPass: "PortalPass",
 };
 
