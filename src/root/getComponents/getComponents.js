@@ -26,7 +26,13 @@ const GetComponents = projName => {
         </R.Suspense>
       );
     case U.projects.Bike:
-      return <C.Bike />;
+      return (
+        <R.Suspense fallback={<C.Spinner speed={10} />}>
+          <C.Bike />
+        </R.Suspense>
+      );
+    case U.projects.Dissolve:
+      return <C.Dissolve />;
     default:
       console.log("Error: comp not found", projName);
       return null;
