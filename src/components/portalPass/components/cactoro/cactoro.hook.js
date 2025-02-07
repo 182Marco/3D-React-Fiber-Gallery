@@ -1,7 +1,9 @@
 import * as R from "react";
 import * as F from "@react-three/fiber";
 import * as D from "@react-three/drei";
+import * as V from "../../environmentVars";
 import { SkeletonUtils } from "three-stdlib";
+import { animationNames } from "./animationNames";
 
 const useCactoro = hover => {
   const group = R.useRef();
@@ -11,13 +13,16 @@ const useCactoro = hover => {
   const { actions } = D.useAnimations(animations, group);
 
   R.useEffect(() => {
-    const action = actions["Yes"];
+    const animationName =
+      hover === V.names.catoro ? animationNames.Dance : animationNames.Idle;
+    const action = actions[animationName];
     if (action) {
       action.reset().fadeIn(0.5).play();
-      action.timeScale = 0.05;
     }
-    return () => actions["Idle"];
-  }, []);
+    return () => {
+      actions[animationName]?.stop();
+    };
+  }, [hover, actions]);
 
   return { group, nodes, materials };
 };
