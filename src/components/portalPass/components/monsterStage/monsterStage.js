@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import * as R from "react";
 import * as D from "@react-three/drei";
 import { useMonsterStage } from "./monsterStage.hook";
 
@@ -29,8 +28,6 @@ const MonsterStage = ({
       </D.Text>
       <D.RoundedBox
         args={[2, 3, 0.1]}
-        onClick={e => e.stopPropagation()}
-        onDoubleClick={() => setActive(active === name ? null : name)}
         onPointerEnter={() => setIsHover(name)}
         onPointerLeave={() => setIsHover(null)}
         name={name}
@@ -39,7 +36,7 @@ const MonsterStage = ({
           <D.Environment preset="sunset" />
           <ambientLight intensity={1} />
           {children}
-          <mesh>
+          <mesh onDoubleClick={() => setActive(active === name ? null : name)}>
             <sphereGeometry args={[10, 64, 64]} />
             <meshStandardMaterial map={h.loadedTexture} side={THREE.BackSide} />
           </mesh>
