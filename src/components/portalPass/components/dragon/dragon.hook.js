@@ -1,7 +1,9 @@
 import * as R from "react";
 import * as F from "@react-three/fiber";
 import * as D from "@react-three/drei";
+import * as V from "../../environmentVars";
 import { SkeletonUtils } from "three-stdlib";
+import { animationNames } from "./animationNames";
 
 const useDragon = hover => {
   const group = R.useRef();
@@ -11,9 +13,13 @@ const useDragon = hover => {
   const { actions } = D.useAnimations(animations, group);
 
   R.useEffect(() => {
-    actions["Flying_Idle"].reset().fadeIn(0.5).play();
-    return () => actions["Idle"];
-  }, []);
+    const animation =
+      hover === V.names.dragon
+        ? animationNames.Headbutt
+        : animationNames.Flying_Idle;
+    actions[animation].reset().fadeIn(0.5).play();
+    return () => actions[animation]?.stop();
+  }, [hover, actions]);
 
   return { group, nodes, materials };
 };
