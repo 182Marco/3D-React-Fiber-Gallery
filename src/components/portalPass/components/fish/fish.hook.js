@@ -13,12 +13,14 @@ const useFish = hover => {
   const { actions } = D.useAnimations(animations, group);
 
   R.useEffect(() => {
-    const actionName =
+    const animation =
       hover === V.names.fish ? animationNames.Wave : animationNames.Idle;
-    actions[actionName].stop();
-    actions[actionName].reset().fadeIn(0.5).play();
-    return () => actions[actionName].stop();
-  }, [hover]);
+    const action = actions[animation];
+    if (action) {
+      action.reset().fadeIn(0.5).play();
+    }
+    return () => actions[animation]?.stop();
+  }, [hover, actions]);
 
   return { group, nodes, materials };
 };
