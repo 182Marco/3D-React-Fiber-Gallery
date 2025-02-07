@@ -1,8 +1,8 @@
 import { useDragon } from "./dragon.hook";
 import { useGLTF } from "@react-three/drei";
 
-const Dragon = props => {
-  const h = useDragon();
+const Dragon = ({ hover, ...props }) => {
+  const h = useDragon(hover);
   return (
     <group ref={h.group} {...props} dispose={null}>
       <group name="Scene">
@@ -48,4 +48,4 @@ const Dragon = props => {
 
 export { Dragon };
 
-useGLTF.preload("./model/dragon.js");
+useGLTF.preload("./model/dragon.gltf");
