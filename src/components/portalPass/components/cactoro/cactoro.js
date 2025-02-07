@@ -1,8 +1,8 @@
 import { useCactoro } from "./cactoro.hook";
 import { useGLTF } from "@react-three/drei";
 
-const Cactoro = props => {
-  const h = useCactoro();
+const Cactoro = ({ hover, ...props }) => {
+  const h = useCactoro(hover);
   return (
     <group ref={h.group} {...props} dispose={null}>
       <group name="Scene">
