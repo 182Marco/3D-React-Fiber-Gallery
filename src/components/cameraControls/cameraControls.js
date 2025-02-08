@@ -5,7 +5,7 @@ const CameraControl = () => {
   const u = useCameraControls();
   return (
     <>
-      <CameraControls ref={u.cameraControlsRef} smoothTime={1.125} />
+      <CameraControls ref={u.cameraControlsRef} smoothTime={1.125} shadows />
       <Grid
         args={[100, 100]}
         cellSize={0.5}
