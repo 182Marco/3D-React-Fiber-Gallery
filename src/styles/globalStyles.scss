@@ -49,6 +49,12 @@ canvas {
     0 5px 15px $shadow-light;
 }
 
+.grey-bg {
+  background: linear-gradient(135deg, #3a3a3a, #707070, #e0e0e0, #ffffff);
+  background-size: 400% 400%;
+  animation: gradientMove 5s infinite linear;
+}
+
 .show-dog-btn {
   position: absolute;
   right: 50px;
