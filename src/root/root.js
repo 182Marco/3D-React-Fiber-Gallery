@@ -6,12 +6,11 @@ import { GetComponents } from "./getComponents";
 
 const Root = () => {
   const h = useRoot();
-
   return (
     <AppProvider>
-      <div className="bg">
+      <div className={h.getBgClass(h.currentProject)}>
         <L.Leva />
-        <F.Canvas>{GetComponents(h.currentProject)}</F.Canvas>
+        <F.Canvas shadows>{GetComponents(h.currentProject)}</F.Canvas>
       </div>
     </AppProvider>
   );
