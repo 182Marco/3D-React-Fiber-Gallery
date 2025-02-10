@@ -31,8 +31,8 @@ const GetComponents = projName => {
           <C.Bike />
         </R.Suspense>
       );
-    case U.projects.Dissolve:
-      return <C.Dissolve />;
+    case U.projects.Woman:
+      return <C.Woman />;
     default:
       console.log("Error: comp not found", projName);
       return null;
