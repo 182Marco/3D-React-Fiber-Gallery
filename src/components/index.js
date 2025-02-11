@@ -32,3 +32,4 @@ export { PortalPass } from "./portalPass";
 export { PresentationControl } from "./presentationControl";
 export { transformControl } from "./transformControl";
 export { Woman } from "./woman";
+export { YoungKorrigan } from "./youngKorrigon";
