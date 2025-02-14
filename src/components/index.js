@@ -1,8 +1,8 @@
 export { AnimateMultiplesMesh } from "./animateMultiplesMesh";
-export { Ankou } from "./ankou";
 export { Bike } from "./bike";
 export { CascadingMeshes } from "./cascadingMeshes_";
 export { CascadingMeshesOnClick } from "./cascadingMeshesOnClick";
+export { CartFollowingMidget } from "./cartFollowingMidget";
 export { ConfigInSpring } from "./configInSpring";
 export { CustomModel } from "./customModel";
 export { Dog } from "./dog";
@@ -33,4 +33,3 @@ export { PortalPass } from "./portalPass";
 export { PresentationControl } from "./presentationControl";
 export { transformControl } from "./transformControl";
 export { Woman } from "./woman";
-export { YoungKorrigan } from "./youngKorrigon";
