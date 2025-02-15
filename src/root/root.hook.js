@@ -6,7 +6,7 @@ const useRoot = () => {
   const options = Object.keys(U.projects);
 
   const { project } = L.useControls({
-    project: { value: U.projects.Woman, options },
+    project: { value: U.projects.CartFollowingMidget, options },
   });
 
   const [currentProject, setCurrentProject] = R.useState(project);
@@ -17,6 +17,8 @@ const useRoot = () => {
 
   const getBgClass = project => {
     switch (project) {
+      case U.projects.CartFollowingMidget:
+        return "bg green-bg";
       case U.projects.PortalPass:
         return "bg dark-bg";
       case U.projects.Woman:
