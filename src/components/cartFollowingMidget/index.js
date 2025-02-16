@@ -1,0 +1,1 @@
+export { CartFollowingMidget } from "./cartFollowingMidget";
