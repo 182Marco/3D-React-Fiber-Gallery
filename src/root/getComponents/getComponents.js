@@ -3,6 +3,12 @@ import * as D from "@react-three/drei";
 import * as U from "../utils";
 import * as R from "react";
 
+const withSuspense = Component => (
+  <R.Suspense fallback={<C.Spinner speed={10} />}>
+    <Component />
+  </R.Suspense>
+);
+
 const GetComponents = projName => {
   switch (projName) {
     case U.projects.Home3d:
@@ -14,25 +20,15 @@ const GetComponents = projName => {
         </D.ScrollControls>
       );
     case U.projects.Dog:
-      return (
-        <R.Suspense fallback={<C.Spinner speed={10} />}>
-          <C.Dog />
-        </R.Suspense>
-      );
+      return withSuspense(C.Dog);
     case U.projects.PortalPass:
-      return (
-        <R.Suspense fallback={<C.Spinner speed={10} />}>
-          <C.PortalPass />
-        </R.Suspense>
-      );
+      return withSuspense(C.PortalPass);
     case U.projects.Bike:
-      return (
-        <R.Suspense fallback={<C.Spinner speed={10} />}>
-          <C.Bike />
-        </R.Suspense>
-      );
+      return withSuspense(C.Bike);
     case U.projects.Woman:
       return <C.Woman />;
+    case U.projects.CartFollowingMidget:
+      return withSuspense(C.CartFollowingMidget);
     default:
       console.log("Error: comp not found", projName);
       return null;
