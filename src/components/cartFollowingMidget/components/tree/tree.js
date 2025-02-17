@@ -1,4 +1,4 @@
-import * as D from "@rea ct-three/drei";
+import * as D from "@react-three/drei";
 import { useTree } from "./tree.hook";
 
 const Tree = props => {
@@ -15,4 +15,4 @@ const Tree = props => {
 
 export { Tree };
 
-D.useGLTF.preload("./models/tree-spruce/model.gltf");
+D.useGLTF.preload("./model/tree.gltf");
