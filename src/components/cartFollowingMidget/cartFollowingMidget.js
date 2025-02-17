@@ -21,6 +21,7 @@ const CartFollowingMidget = () => {
           position={[3.5, -1, -1]}
           rotation={[0, (-Math.PI * 4) / 10, 0]}
         />
+        <C.Tree scale={0.1} />
       </group>
     </>
   );
