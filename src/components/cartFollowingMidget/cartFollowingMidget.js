@@ -10,7 +10,7 @@ const CartFollowingMidget = () => {
       <ambientLight />
       <group rotation={[0, Math.PI / 12, 0]} position={[0, -0.7, 0]}>
         <C.LampPost />
-        <C.Rock />
+        <C.Rock scale={0.2} />
         <C.Ankou
           scale={3}
           rotation={[0, (-Math.PI * 4) / 10, 0]}
