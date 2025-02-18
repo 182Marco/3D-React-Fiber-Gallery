@@ -1,6 +1,7 @@
 import * as C from "./components";
 import * as D from "@react-three/drei";
 import { useCartFollowingMidget } from "./cartFollowingMidget.hook";
+import { AxesHelper } from "three"; // Importato da 'three'
 
 const CartFollowingMidget = () => {
   const h = useCartFollowingMidget();
@@ -27,7 +28,10 @@ const CartFollowingMidget = () => {
           position={[0.9, 0, 0]}
           scale={4}
         />
+        <C.LampPost position={[30, -6, -30]} scale={3.7} />
         <D.ContactShadows scale={[16, 16]} opacity={0.42} />
+        <primitive object={new AxesHelper(5)} />{" "}
+        {/* Usa <primitive> per aggiungere AxesHelper */}
       </group>
     </>
   );
