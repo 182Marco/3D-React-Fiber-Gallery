@@ -31,7 +31,6 @@ const CartFollowingMidget = () => {
         <C.LampPost position={[30, -6, -30]} scale={3.7} />
         <D.ContactShadows scale={[16, 16]} opacity={0.42} />
         <primitive object={new AxesHelper(5)} />{" "}
-        {/* Usa <primitive> per aggiungere AxesHelper */}
       </group>
     </>
   );
