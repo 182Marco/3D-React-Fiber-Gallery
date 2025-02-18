@@ -16,16 +16,16 @@ const CartFollowingMidget = () => {
       />
       <ambientLight intensity={0.2} />
       <D.Environment preset="sunset" intensity={0.7} blur={0.8} />
-      <group position={[0, -1, 0]}>
+      <group position={[0, -0.6, 0]}>
         <C.Ankou
           rotation-y={-Math.PI / 2}
-          position={[0.9, 0, 0]}
-          scale={[0.5, 0.5, 0.5]}
+          position={[-2, -0.02, 0]}
+          scale={1.3}
         />
         <C.YoungKorrigan
           rotation-y={-Math.PI / 2}
-          position={[-1, -0.02, 0]}
-          scale={[1.5, 1.5, 1.5]}
+          position={[0.9, 0, 0]}
+          scale={4}
         />
         <D.ContactShadows scale={[16, 16]} opacity={0.42} />
       </group>
