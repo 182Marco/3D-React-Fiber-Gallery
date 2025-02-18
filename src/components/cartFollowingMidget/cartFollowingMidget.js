@@ -1,7 +1,7 @@
 import * as C from "./components";
 import * as D from "@react-three/drei";
 import { useCartFollowingMidget } from "./cartFollowingMidget.hook";
-import { AxesHelper } from "three"; // Importato da 'three'
+import { AxesHelper } from "three";
 
 const CartFollowingMidget = () => {
   const h = useCartFollowingMidget();
