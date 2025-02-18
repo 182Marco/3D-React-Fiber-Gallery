@@ -6,22 +6,28 @@ const CartFollowingMidget = () => {
   const h = useCartFollowingMidget();
   return (
     <>
-      <D.OrbitControls />
-      <ambientLight />
-      <group rotation={[0, Math.PI / 12, 0]} position={[0, -0.7, 0]}>
-        <C.LampPost />
-        <C.Rock scale={0.2} />
+      <D.OrbitControls
+        minAzimuthAngle={-Math.PI / 4}
+        maxAzimuthAngle={Math.PI / 4}
+        minPolarAngle={0}
+        maxPolarAngle={Math.PI / 2}
+        minDistance={2}
+        maxDistance={15}
+      />
+      <ambientLight intensity={0.2} />
+      <D.Environment preset="sunset" intensity={0.7} blur={0.8} />
+      <group position={[0, -1, 0]}>
         <C.Ankou
-          scale={3}
-          rotation={[0, (-Math.PI * 4) / 10, 0]}
-          position={[-1, -1.7, -1]}
+          rotation-y={-Math.PI / 2}
+          position={[0.9, 0, 0]}
+          scale={[0.5, 0.5, 0.5]}
         />
         <C.YoungKorrigan
-          scale={1.3}
-          position={[3.5, -1, -1]}
-          rotation={[0, (-Math.PI * 4) / 10, 0]}
+          rotation-y={-Math.PI / 2}
+          position={[-1, -0.02, 0]}
+          scale={[1.5, 1.5, 1.5]}
         />
-        <C.Tree scale={0.1} />
+        <D.ContactShadows scale={[16, 16]} opacity={0.42} />
       </group>
     </>
   );
