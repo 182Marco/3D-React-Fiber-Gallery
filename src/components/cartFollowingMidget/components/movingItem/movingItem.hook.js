@@ -1,6 +1,6 @@
 import * as F from "@react-three/fiber";
 import * as R from "react";
-import { vars } from "./fixedVars";
+import { vars } from "../../fixedVars";
 
 const useMovingItem = () => {
   const groupRef = R.useRef();
