@@ -32,7 +32,7 @@ const CartFollowingMidget = () => {
           <C.LampPost position={[3, -6, -30]} scale={3.7} />
         </C.MovingItem>
         <D.ContactShadows scale={[16, 16]} opacity={0.42} />
-        <primitive object={new AxesHelper(5)} />{" "}
+        <primitive object={new AxesHelper(5)} />
       </group>
     </>
   );
