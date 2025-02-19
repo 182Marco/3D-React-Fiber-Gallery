@@ -1,4 +1,3 @@
-import * as F from "@react-three/fiber";
 import { useMovingItem } from "./movingItem.hook";
 
 const MovingItem = props => {
