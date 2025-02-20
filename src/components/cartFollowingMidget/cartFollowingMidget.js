@@ -2,9 +2,17 @@ import * as C from "./components";
 import * as D from "@react-three/drei";
 import { useCartFollowingMidget } from "./cartFollowingMidget.hook";
 import { AxesHelper } from "three";
+import { vars } from "./fixedVars";
 
 const CartFollowingMidget = () => {
   const h = useCartFollowingMidget();
+
+  const getPosition = i =>
+    vars.lampPost_N === 1
+      ? 0
+      : -vars.lampPost_max_offset_X +
+        (2 * vars.lampPost_max_offset_X * i) / (vars.lampPost_N - 1);
+
   return (
     <>
       <D.OrbitControls
@@ -20,17 +28,28 @@ const CartFollowingMidget = () => {
       <group position={[0, -0.6, 0]}>
         <C.Ankou
           rotation-y={-Math.PI / 2}
-          position={[-2, -0.02, 0]}
+          position={[-1.5, -0.02, 0]}
           scale={1.3}
         />
         <C.YoungKorrigan
           rotation-y={-Math.PI / 2}
-          position={[0.9, 0, 0]}
+          position={[1.5, 0, 0]}
           scale={4}
         />
-        <C.MovingItem>
-          <C.LampPost position={[3, -6, -30]} scale={3.7} />
-        </C.MovingItem>
+        {[...Array(vars.lampPost_N)].map((e, i) => (
+          <C.MovingItem>
+            <C.LampPost
+              /*               position={[
+                (i / vars.lampPost_N) * (3 + vars.lampPost_max_offset_X) * 2,
+                -6,
+                -30,
+              ]} */
+              position={[getPosition(i), 0, -2]}
+              scale={0.73}
+            />
+          </C.MovingItem>
+        ))}
+        {/*        <C.LampPost position={[6.43, 0, -2]} scale={0.73} /> */}
         <D.ContactShadows scale={[16, 16]} opacity={0.42} />
         <primitive object={new AxesHelper(5)} />
       </group>
