@@ -8,7 +8,7 @@ const useUpdateCamera = () => {
     const originalPosition = camera.position.clone();
     const originalFov = camera.fov;
 
-    camera.position.set(-5, 1, 6);
+    camera.position.set(0, 2, 10);
     camera.fov = 25;
     camera.updateProjectionMatrix();
 
