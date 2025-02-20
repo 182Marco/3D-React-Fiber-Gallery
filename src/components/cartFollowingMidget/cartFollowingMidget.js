@@ -30,8 +30,8 @@ const CartFollowingMidget = () => {
           position={[1.5, 0, 0]}
           scale={4}
         />
-        {[...Array(vars.lampPost_N)].map((e, i) => (
-          <C.MovingItem>
+        {[...Array(vars.lampN)].map((_, i) => (
+          <C.MovingItem key={i}>
             <C.LampPost position={[h.getPosition(i), 0, -2]} scale={0.73} />
           </C.MovingItem>
         ))}
