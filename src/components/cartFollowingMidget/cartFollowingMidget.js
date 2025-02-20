@@ -7,12 +7,6 @@ import { vars } from "./fixedVars";
 const CartFollowingMidget = () => {
   const h = useCartFollowingMidget();
 
-  const getPosition = i =>
-    vars.lampPost_N === 1
-      ? 0
-      : -vars.lampPost_max_offset_X +
-        (2 * vars.lampPost_max_offset_X * i) / (vars.lampPost_N - 1);
-
   return (
     <>
       <D.OrbitControls
@@ -38,18 +32,9 @@ const CartFollowingMidget = () => {
         />
         {[...Array(vars.lampPost_N)].map((e, i) => (
           <C.MovingItem>
-            <C.LampPost
-              /*               position={[
-                (i / vars.lampPost_N) * (3 + vars.lampPost_max_offset_X) * 2,
-                -6,
-                -30,
-              ]} */
-              position={[getPosition(i), 0, -2]}
-              scale={0.73}
-            />
+            <C.LampPost position={[h.getPosition(i), 0, -2]} scale={0.73} />
           </C.MovingItem>
         ))}
-        {/*        <C.LampPost position={[6.43, 0, -2]} scale={0.73} /> */}
         <D.ContactShadows scale={[16, 16]} opacity={0.42} />
         <primitive object={new AxesHelper(5)} />
       </group>
