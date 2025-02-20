@@ -1,6 +1,6 @@
 const vars = {
-  lampPost_max_offset_X: 6.43,
-  lampPost_N: 6,
+  lampMaxX: 6.43,
+  lampN: 15,
 };
 
 export { vars };
