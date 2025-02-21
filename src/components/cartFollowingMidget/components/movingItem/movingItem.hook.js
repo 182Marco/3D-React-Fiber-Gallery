@@ -6,9 +6,9 @@ const useMovingItem = () => {
   const groupRef = R.useRef();
 
   F.useFrame((_, d) => {
-    groupRef.current.position.x += d / 2;
-    if (groupRef.current.position.x >= vars.lampPost_max_offset_X) {
-      groupRef.current.position.x = -vars.lampPost_max_offset_X;
+    groupRef.current.position.x += d * 5;
+    if (groupRef.current.position.x >= vars.lampMaxX) {
+      groupRef.current.position.x = -vars.lampMaxX;
     }
   });
 
