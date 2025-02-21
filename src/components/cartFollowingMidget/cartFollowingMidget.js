@@ -9,14 +9,7 @@ const CartFollowingMidget = () => {
 
   return (
     <>
-      <D.OrbitControls
-        minAzimuthAngle={-Math.PI / 4}
-        maxAzimuthAngle={Math.PI / 4}
-        minPolarAngle={0}
-        maxPolarAngle={Math.PI / 2}
-        minDistance={2}
-        maxDistance={15}
-      />
+      <C.CartSceneOrbitControls />
       <ambientLight intensity={0.2} />
       <D.Environment preset="sunset" intensity={0.7} blur={0.8} />
       <group position={[0, -0.6, 0]}>
