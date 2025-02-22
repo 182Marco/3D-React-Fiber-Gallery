@@ -33,6 +33,11 @@ const CartFollowingMidget = () => {
             <C.Rock position={[h.getPosition(i), 0, -2]} scale={0.1} />
           </C.MovingItem>
         ))}
+        {[...Array(vars.treeN)].map((_, i) => (
+          <C.MovingItem xSpread={vars.treeMaxX} key={i}>
+            <C.Tree position={[h.getPosition(i), 0, -2]} scale={0.1} />
+          </C.MovingItem>
+        ))}
         <D.ContactShadows scale={[16, 16]} opacity={0.42} />
         <primitive object={new AxesHelper(5)} />
       </group>
