@@ -7,6 +7,8 @@ const vars = {
   lampN: 18,
   rocksMaxX: 40,
   rocksN: 10,
+  treeMaxX: 27,
+  treeN: 22,
 };
 
 export { vars };
