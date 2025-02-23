@@ -1,5 +1,4 @@
 import { useUpdateCamera } from "./cartFollowingMidget.updateCamera";
-import { vars } from "./fixedVars";
 
 const useCartFollowingMidget = () => {
   useUpdateCamera();
