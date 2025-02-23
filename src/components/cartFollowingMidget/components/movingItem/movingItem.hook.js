@@ -1,12 +1,11 @@
 import * as F from "@react-three/fiber";
 import * as R from "react";
-import { vars } from "../../fixedVars";
 
-const useMovingItem = xSpread => {
+const useMovingItem = (xSpread, speed) => {
   const groupRef = R.useRef();
 
   F.useFrame((_, d) => {
-    groupRef.current.position.x += d / 2;
+    groupRef.current.position.x += d * speed;
     if (groupRef.current.position.x >= xSpread) {
       groupRef.current.position.x = -xSpread;
     }
