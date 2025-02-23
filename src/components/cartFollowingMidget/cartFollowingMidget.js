@@ -24,18 +24,27 @@ const CartFollowingMidget = () => {
           scale={4}
         />
         {[...Array(vars.lampN)].map((_, i) => (
-          <C.MovingItem xSpread={vars.lampMaxX} key={i}>
-            <C.LampPost position={[h.getPosition(i), 0, -2]} scale={0.73} />
+          <C.MovingItem xSpread={vars.treeMaxX} key={i}>
+            <C.LampPost
+              position={[h.getPosition(i, vars.lampMaxX, vars.lampN), 0, -2]}
+              scale={0.73}
+            />
           </C.MovingItem>
         ))}
         {[...Array(vars.rocksN)].map((_, i) => (
-          <C.MovingItem xSpread={vars.rocksMaxX} key={i}>
-            <C.Rock position={[h.getPosition(i), 0, -2]} scale={0.1} />
+          <C.MovingItem xSpread={vars.treeMaxX} key={i}>
+            <C.Rock
+              position={[h.getPosition(i, vars.rocksMaxX, vars.rocksN), 0, -2]}
+              scale={0.1}
+            />
           </C.MovingItem>
         ))}
         {[...Array(vars.treeN)].map((_, i) => (
           <C.MovingItem xSpread={vars.treeMaxX} key={i}>
-            <C.Tree position={[h.getPosition(i), 0, -2]} scale={0.1} />
+            <C.Tree
+              position={[h.getPosition(i, vars.treeMaxX, vars.treeN), 0, -2]}
+              scale={0.1}
+            />
           </C.MovingItem>
         ))}
         <D.ContactShadows scale={[16, 16]} opacity={0.42} />
