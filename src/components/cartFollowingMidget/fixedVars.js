@@ -1,11 +1,14 @@
 const vars = {
-  //lampMaxX: 6.43,
   lampMaxX: 30,
   lampN: 12,
-  rocksMaxX: 40,
-  rocksN: 4,
-  treeMaxX: 27,
-  treeN: 7,
+  rocksMaxX: 20,
+  rocksN: 7,
+  nearTreeMaxX: 27,
+  nearTreeN: 7,
+  farTreeMaxX: 40,
+  farTreeN: 18,
+  distantTreeMaxX: 48,
+  distantTreeN: 21,
 };
 
 export { vars };
