@@ -23,55 +23,79 @@ const CartFollowingMidget = () => {
           position={[1.5, 0, 0]}
           scale={4}
         />
-        {[...Array(vars.lampN)].map((_, i) => (
-          <C.MovingItem xSpread={vars.lampMaxX} key={i}>
-            <C.LampPost
-              position={[h.getPosition(i, vars.lampMaxX, vars.lampN), 0, -2]}
-              scale={0.7}
+        {[...Array(vars.rocksN)].map((_, i) => (
+          <C.MovingItem
+            xSpread={vars.rocksMaxX}
+            speed={vars.rocksSpeed}
+            key={i}
+          >
+            <C.Rock
+              position={[
+                h.getPosition(i, vars.rocksMaxX, vars.rocksN),
+                0,
+                vars.rockZposition,
+              ]}
+              scale={vars.rockScale}
             />
           </C.MovingItem>
         ))}
-        {[...Array(vars.rocksN)].map((_, i) => (
-          <C.MovingItem xSpread={vars.rocksMaxX} key={i}>
-            <C.Rock
-              position={[h.getPosition(i, vars.rocksMaxX, vars.rocksN), 0, 2.5]}
-              scale={0.06}
+        {[...Array(vars.lampN)].map((_, i) => (
+          <C.MovingItem xSpread={vars.lampMaxX} speed={vars.lampSpeed} key={i}>
+            <C.LampPost
+              position={[
+                h.getPosition(i, vars.lampMaxX, vars.lampN),
+                0,
+                vars.lampZpoistion,
+              ]}
+              scale={vars.lampScale}
             />
           </C.MovingItem>
         ))}
         {[...Array(vars.nearTreeN)].map((_, i) => (
-          <C.MovingItem xSpread={vars.nearTreeMaxX} key={i}>
+          <C.MovingItem
+            xSpread={vars.nearTreeMaxX}
+            speed={vars.nearTreeSpeed}
+            key={i}
+          >
             <C.Tree
               position={[
                 h.getPosition(i, vars.nearTreeMaxX, vars.nearTreeN),
                 0,
-                -4,
+                vars.nearTreeZposition,
               ]}
-              scale={0.1}
+              scale={vars.nearTreeScale}
             />
           </C.MovingItem>
         ))}
         {[...Array(vars.farTreeN)].map((_, i) => (
-          <C.MovingItem xSpread={vars.farTreeMaxX} key={i}>
+          <C.MovingItem
+            xSpread={vars.farTreeMaxX}
+            speed={vars.farTreeSpeed}
+            key={i}
+          >
             <C.Tree
               position={[
                 h.getPosition(i, vars.farTreeMaxX, vars.farTreeN),
                 0,
-                -12,
+                vars.farTreeZposition,
               ]}
-              scale={0.16}
+              scale={vars.farTreeScale}
             />
           </C.MovingItem>
         ))}
         {[...Array(vars.distantTreeN)].map((_, i) => (
-          <C.MovingItem xSpread={vars.distantTreeMaxX} key={i}>
+          <C.MovingItem
+            xSpread={vars.distantTreeMaxX}
+            speed={vars.distantTreeSpeed}
+            key={i}
+          >
             <C.Tree
               position={[
                 h.getPosition(i, vars.distantTreeMaxX, vars.distantTreeN) - 1,
                 0,
-                -17,
+                vars.distantTreeZposition,
               ]}
-              scale={0.2}
+              scale={vars.distantTreeScale}
             />
           </C.MovingItem>
         ))}
