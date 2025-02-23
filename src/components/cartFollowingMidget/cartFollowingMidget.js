@@ -23,22 +23,55 @@ const CartFollowingMidget = () => {
           position={[1.5, 0, 0]}
           scale={4}
         />
-        {[...Array(vars.rocksN)].map((_, i) => (
+        {[...Array(vars.nearRockN)].map((_, i) => (
           <C.MovingItem
-            xSpread={vars.rocksMaxX}
-            speed={vars.rocksSpeed}
+            xSpread={vars.nearRockMaxX}
+            speed={vars.nearRockSpeed}
             key={i}
           >
             <C.Rock
               position={[
-                h.getPosition(i, vars.rocksMaxX, vars.rocksN),
+                h.getPosition(i, vars.nearRockMaxX, vars.nearRockN),
                 0,
-                vars.rockZposition,
+                vars.nearRockZposition,
               ]}
-              scale={vars.rockScale}
+              scale={vars.nearRockScale}
             />
           </C.MovingItem>
         ))}
+        {[...Array(vars.farRockN)].map((_, i) => (
+          <C.MovingItem
+            xSpread={vars.farRockMaxX}
+            speed={vars.farRockSpeed}
+            key={i}
+          >
+            <C.Rock
+              position={[
+                h.getPosition(i, vars.farRockMaxX, vars.farRockN),
+                0,
+                vars.farRockZposition,
+              ]}
+              scale={vars.farRockScale}
+            />
+          </C.MovingItem>
+        ))}
+        {[...Array(vars.distantRockN)].map((_, i) => (
+          <C.MovingItem
+            xSpread={vars.distantRockMaxX}
+            speed={vars.distantRockSpeed}
+            key={i}
+          >
+            <C.Rock
+              position={[
+                h.getPosition(i, vars.distantRockMaxX, vars.distantRockN),
+                0,
+                vars.distantRockZposition,
+              ]}
+              scale={vars.distantRockScale}
+            />
+          </C.MovingItem>
+        ))}
+
         {[...Array(vars.lampN)].map((_, i) => (
           <C.MovingItem xSpread={vars.lampMaxX} speed={vars.lampSpeed} key={i}>
             <C.LampPost
