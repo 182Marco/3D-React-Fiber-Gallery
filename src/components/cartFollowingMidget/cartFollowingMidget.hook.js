@@ -4,8 +4,8 @@ import { vars } from "./fixedVars";
 const useCartFollowingMidget = () => {
   useUpdateCamera();
 
-  const getPosition = i =>
-    -vars.lampMaxX + (2 * vars.lampMaxX * i) / (vars.lampN - 1);
+  const getPosition = (i, maxX, number) =>
+    -maxX + (2 * maxX * i) / (number - 1);
 
   return { getPosition };
 };
