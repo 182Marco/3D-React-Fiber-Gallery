@@ -5,7 +5,12 @@ const Office = props => {
   const h = useOffice();
 
   return (
-    <group {...props} dispose={null} ref={h.allOfficeRef}>
+    <group
+      {...props}
+      rotation={[0, -Math.PI / 4, 0]}
+      dispose={null}
+      ref={h.allOfficeRef}
+    >
       <mesh
         geometry={h.nodes["01_office"].geometry}
         material={h.materials["01"]}
