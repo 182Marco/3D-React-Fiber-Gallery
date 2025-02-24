@@ -7,7 +7,7 @@ const Home3d = () => {
   const h = useHome3d();
   return (
     <>
-      <ambientLight intensity={1} />
+      <ambientLight intensity={3} />
       <D.CameraControls enabled={false} ref={h.cameraRef} />
       <D.ScrollControls pages={3} damping={0.25}>
         <C.OverlayText txt={J.txt} />
