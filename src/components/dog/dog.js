@@ -6,7 +6,7 @@ const Dog = () => {
   return (
     <>
       <D.OrbitControls />
-      <ambientLight />
+      <ambientLight intensity={3} />
       <primitive scale={2.2} position-y={-1.5} object={u.model.scene} />
     </>
   );
