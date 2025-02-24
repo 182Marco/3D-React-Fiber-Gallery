@@ -12,6 +12,7 @@ const CartFollowingMidget = () => {
       <C.CartSceneOrbitControls />
       <ambientLight intensity={0.2} />
       <D.Environment preset="sunset" intensity={0.7} blur={0.8} />
+      <fog attach="fog" args={["#CCCCCC10", 5, 50]} />
       <group position={[0, -0.6, 0]}>
         <C.Ankou
           rotation-y={-Math.PI / 2}
