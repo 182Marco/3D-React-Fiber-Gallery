@@ -1,5 +1,6 @@
 import * as C from "./components";
 import * as D from "@react-three/drei";
+import * as P from "@react-three/postprocessing";
 import { useCartFollowingMidget } from "./cartFollowingMidget.hook";
 import { AxesHelper } from "three";
 import { vars } from "./fixedVars";
@@ -12,6 +13,14 @@ const CartFollowingMidget = () => {
       <C.CartSceneOrbitControls />
       <ambientLight intensity={0.2} />
       <D.Environment preset="sunset" intensity={0.7} blur={0.8} />
+      <P.EffectComposer>
+        <P.Bloom
+          mipmapBlur
+          luminanceThreshold={1}
+          intensity={1.42}
+          radius={0.72}
+        />
+      </P.EffectComposer>
       <fog attach="fog" args={["#CCCCCC10", 5, 50]} />
       <group position={[0, -0.6, 0]}>
         <C.Ankou
