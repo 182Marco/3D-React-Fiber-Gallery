@@ -7,6 +7,7 @@ const Woman = props => {
     <>
       <D.OrbitControls />
       <directionalLight
+        intensity={4}
         position={[-5, 5, 5]}
         castShadow
         shadow-mapSize-width={1024}
@@ -101,7 +102,7 @@ const Woman = props => {
         position={[0, -1, 0]}
         receiveShadow
       >
-        <planeBufferGeometry args={[10, 10, 1, 1]} />
+        <planeGeometry args={[10, 10, 1, 1]} />
         <shadowMaterial trasparent opacity={0.2} />
       </mesh>
     </>
