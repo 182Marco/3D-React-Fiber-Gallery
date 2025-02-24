@@ -16,7 +16,7 @@ const CartFollowingMidget = () => {
         <C.Ankou
           rotation-y={-Math.PI / 2}
           position={[-1.5, -0.02, 0]}
-          scale={1.3}
+          scale={1.8}
         />
         <C.YoungKorrigan
           rotation-y={-Math.PI / 2}
