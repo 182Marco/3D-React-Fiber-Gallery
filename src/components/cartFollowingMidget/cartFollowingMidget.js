@@ -2,7 +2,6 @@ import * as C from "./components";
 import * as D from "@react-three/drei";
 import * as P from "@react-three/postprocessing";
 import { useCartFollowingMidget } from "./cartFollowingMidget.hook";
-import { AxesHelper } from "three";
 import { vars } from "./fixedVars";
 
 const CartFollowingMidget = () => {
@@ -11,8 +10,7 @@ const CartFollowingMidget = () => {
   return (
     <>
       <C.CartSceneOrbitControls />
-      <ambientLight intensity={0.2} />
-      <D.Environment preset="sunset" intensity={0.7} blur={0.8} />
+      <D.Environment preset="sunset" intensity={0.7} blur={0} />
       <P.EffectComposer>
         <P.Bloom
           mipmapBlur
@@ -21,7 +19,6 @@ const CartFollowingMidget = () => {
           radius={0.72}
         />
       </P.EffectComposer>
-      <fog attach="fog" args={["#CCCCCC10", 5, 50]} />
       <group position={[0, -0.6, 0]}>
         <C.Ankou
           rotation-y={-Math.PI / 2}
@@ -142,8 +139,7 @@ const CartFollowingMidget = () => {
             />
           </C.MovingItem>
         ))}
-        <D.ContactShadows scale={[16, 16]} opacity={0.42} />
-        <primitive object={new AxesHelper(5)} />
+        <D.ContactShadows scale={[120, 35]} opacity={0.6} />
       </group>
     </>
   );
