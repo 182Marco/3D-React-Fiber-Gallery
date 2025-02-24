@@ -6,7 +6,7 @@ const CartSceneOrbitControls = () => (
     maxAzimuthAngle={Math.PI / 4}
     minPolarAngle={0}
     maxPolarAngle={Math.PI / 2}
-    minDistance={2}
+    minDistance={4}
     maxDistance={15}
   />
 );
