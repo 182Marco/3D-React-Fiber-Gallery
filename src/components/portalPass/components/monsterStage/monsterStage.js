@@ -34,7 +34,7 @@ const MonsterStage = ({
       >
         <D.MeshPortalMaterial side={THREE.DoubleSide} ref={h.portalMaterialRef}>
           <D.Environment preset="sunset" />
-          <ambientLight intensity={1} />
+          <ambientLight intensity={4} />
           {children}
           <mesh onDoubleClick={() => setActive(active === name ? null : name)}>
             <sphereGeometry args={[10, 64, 64]} />
