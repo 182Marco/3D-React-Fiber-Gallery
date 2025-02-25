@@ -3,18 +3,19 @@ import * as F from "@react-three/fiber";
 import * as D from "@react-three/drei";
 import * as V from "../../environmentVars";
 import { SkeletonUtils } from "three-stdlib";
-import { animationNames } from "./animationNames";
 
 const useFish = hover => {
   const group = R.useRef();
   const { scene, animations } = D.useGLTF("./model/fish.gltf");
   const clone = R.useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes, materials } = F.useGraph(clone);
-  const { actions } = D.useAnimations(animations, group);
+  const { actions, names } = D.useAnimations(animations, group);
 
   R.useEffect(() => {
     const animation =
-      hover === V.names.fish ? animationNames.Wave : animationNames.Idle;
+      hover === V.names.fish
+        ? names[names.indexOf("Wave")]
+        : names[names.indexOf("Idle")];
     const action = actions[animation];
     if (action) {
       action.reset().fadeIn(0.5).play();
