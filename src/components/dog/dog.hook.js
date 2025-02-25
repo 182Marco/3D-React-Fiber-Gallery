@@ -5,26 +5,23 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 const useDog = () => {
   const model = useGLTF("./model/dog.glb");
   const animations = useAnimations(model.animations, model.scene);
-  const animationsObj = animations.actions;
-  const animationsAr = Object.keys(animationsObj);
+  const { actions, names } = animations;
 
   const { animation } = L.useControls({
-    animation: { value: animationsAr[0], options: animationsAr },
+    animation: { value: names[0], options: names },
   });
 
   const stopActiveAnimation = () =>
-    Object.values(animationsObj).forEach(a =>
-      a.isRunning() ? a.stop() : null,
-    );
+    Object.values(actions).forEach(a => (a.isRunning() ? a.stop() : null));
 
   R.useEffect(() => {
     if (animation) {
       stopActiveAnimation();
-      animationsObj[animation]?.play();
+      actions[animation]?.play();
     }
-  }, [animation, animationsObj]);
+  }, [animation, actions]);
 
-  return { animationsAr, model };
+  return { model };
 };
 
 export { useDog };
