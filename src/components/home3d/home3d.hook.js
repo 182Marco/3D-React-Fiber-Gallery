@@ -7,6 +7,23 @@ const useHome3d = () => {
   const cameraRef = R.useRef();
   const scene = F.useThree(state => state.scene);
 
+  const { camera } = F.useThree();
+
+  R.useEffect(() => {
+    const originalPosition = camera.position.clone();
+    const originalFov = camera.fov;
+
+    camera.position.set(0, 5, 20);
+    camera.fov = 25;
+    camera.updateProjectionMatrix();
+
+    return () => {
+      camera.position.copy(originalPosition);
+      camera.fov = originalFov;
+      camera.updateProjectionMatrix();
+    };
+  }, [camera]);
+
   R.useEffect(() => {
     if (!cameraRef.current) return;
 
@@ -23,6 +40,7 @@ const useHome3d = () => {
       true,
     );
   }, [scene, name]);
+
   return {
     name,
   };
