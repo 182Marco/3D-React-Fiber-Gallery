@@ -15,7 +15,7 @@ const useOverlayText = () => {
     setOp3(1 - scroll.range(2 / 3, 1 / 3));
   });
 
-  return { opacity: [op1, op2, op3] };
+  return { opacity: [op1, op2, 1 - op3] };
 };
 
 export { useOverlayText };
