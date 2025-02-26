@@ -1,7 +1,7 @@
 const vars = {
   rocks: {
     xMax: 13,
-    quantity: 9,
+    quantity: 220,
     speed: 0.75,
     rangePosition: [-4.5, 4],
     scaleRange: [0.06, 0.016],
@@ -12,7 +12,7 @@ const vars = {
     speed: 0.75,
     scale: 0.7,
     zPosition: -2,
-    zPositionRange: [-2.2, -1.8],
+    zPositionRange: [-2.4, -1.6],
   },
   trees: {
     xMax: 27,
@@ -21,7 +21,7 @@ const vars = {
     scaleRange: [0.09, 0.14],
     rangePosition: [-13, -4],
   },
-  subjectZPositionRange: [-0.9, 0.9],
+  subjectZPositionRange: [-1, 1],
 };
 
 export { vars };
