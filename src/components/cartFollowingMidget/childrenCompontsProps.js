@@ -21,7 +21,7 @@ const getZPosition = name => {
   }
 };
 
-const getProps = name => i => ({
+const getSingleMeshProps = name => i => ({
   position: [
     getPosition(i, vars[name].xMax, vars[name].quantity),
     0,
@@ -32,25 +32,11 @@ const getProps = name => i => ({
     : U.getRandomWithin(...vars[name].scaleRange),
 });
 
-const lampsProps = {
-  getMeshComponentProps: getProps("lamps"),
-  count: vars.lamps.quantity,
-  xSpread: vars.lamps.xMax,
-  speed: vars.lamps.speed,
-};
+const getProps = name => ({
+  getMeshComponentProps: getSingleMeshProps(name),
+  count: vars[name].quantity,
+  xSpread: vars[name].xMax,
+  speed: vars[name].speed,
+});
 
-const treeProps = {
-  getMeshComponentProps: getProps("trees"),
-  count: vars.trees.quantity,
-  xSpread: vars.trees.xMax,
-  speed: vars.trees.speed,
-};
-
-const rockProps = {
-  getMeshComponentProps: getProps("rocks"),
-  count: vars.rocks.quantity,
-  xSpread: vars.rocks.xMax,
-  speed: vars.rocks.speed,
-};
-
-export { lampsProps, treeProps, rockProps };
+export { getProps };
