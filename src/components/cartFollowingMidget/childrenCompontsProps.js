@@ -1,53 +1,57 @@
 import * as U from "../../utils";
 import { vars } from "./fixedVars";
 
-const getPosition = (i, maxX, number) => -maxX + (2 * maxX * i) / (number - 1);
+const getPosition = (i, xMax, number) => -xMax + (2 * xMax * i) / (number - 1);
 
 const getRocks = i => ({
   position: [
-    getPosition(i, vars.rockMaxX, vars.rockN),
+    getPosition(i, vars.rocks.xMax, vars.rocks.quantity),
     0,
     U.getRandomIntExceptRange({
-      range: vars.rockRangePosition,
-      excludeRanges: [vars.subjectZPositionRange, vars.lampZPositionRange],
+      range: vars.rocks.rangePosition,
+      excludeRanges: [vars.subjectZPositionRange, vars.lamps.zPositionRange],
     }),
   ],
-  scale: U.getRandomWithin(0.06, 0.016),
+  scale: U.getRandomWithin(...vars.rocks.scaleRange),
 });
 
 const getTrees = i => ({
   position: [
-    getPosition(i, vars.treeMaxX, vars.treeN),
+    getPosition(i, vars.trees.xMax, vars.trees.quantity),
     0,
-    U.getRandomWithin(...vars.treesRangePosition),
+    U.getRandomWithin(...vars.trees.rangePosition),
   ],
-  scale: U.getRandomWithin(...vars.treeScaleRange),
+  scale: U.getRandomWithin(...vars.trees.scaleRange),
 });
 
 const getLamps = i => ({
-  position: [getPosition(i, vars.lampMaxX, vars.lampN), 0, vars.lampZpoistion],
-  scale: vars.lampScale,
+  position: [
+    getPosition(i, vars.lamps.xMax, vars.lamps.quantity),
+    0,
+    vars.lamps.zPosition,
+  ],
+  scale: vars.lamps.scale,
 });
 
 const lampsProps = {
   getMeshComponentProps: getLamps,
-  count: vars.lampN,
-  xSpread: vars.lampMaxX,
-  speed: vars.lampSpeed,
+  count: vars.lamps.quantity,
+  xSpread: vars.lamps.xMax,
+  speed: vars.lamps.speed,
 };
 
 const treeProps = {
   getMeshComponentProps: getTrees,
-  count: vars.treeN,
-  xSpread: vars.treeMaxX,
-  speed: vars.treeSpeed,
+  count: vars.trees.quantity,
+  xSpread: vars.trees.xMax,
+  speed: vars.trees.speed,
 };
 
 const rockProps = {
   getMeshComponentProps: getRocks,
-  count: vars.rockN,
-  xSpread: vars.rockMaxX,
-  speed: vars.rockSpeed,
+  count: vars.rocks.quantity,
+  xSpread: vars.rocks.xMax,
+  speed: vars.rocks.speed,
 };
 
 export { lampsProps, treeProps, rockProps };
