@@ -1,7 +1,6 @@
 import * as C from "./components";
 import * as D from "@react-three/drei";
 import * as P from "@react-three/postprocessing";
-import { getProps } from "./childrenCompontsProps";
 import { useUpdateCamera } from "./cartFollowingMidget.updateCamera";
 
 const CartFollowingMidget = () => {
@@ -30,9 +29,9 @@ const CartFollowingMidget = () => {
           position={[1.5, 0, 0]}
           scale={4}
         />
-        <C.RenderMovingItems Component={C.Rock} {...getProps("rocks")} />
-        <C.RenderMovingItems Component={C.LampPost} {...getProps("lamps")} />
-        <C.RenderMovingItems Component={C.Tree} {...getProps("trees")} />
+        <C.RenderMovingItems name="rocks" />
+        <C.RenderMovingItems name="lamps" />
+        <C.RenderMovingItems name="trees" />
         <D.ContactShadows scale={[120, 120]} opacity={0.6} />
       </group>
     </>
