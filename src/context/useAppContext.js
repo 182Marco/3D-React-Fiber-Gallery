@@ -1,14 +1,16 @@
-import React, { createContext, useContext } from "react";
+import * as R from "react";
 import { useContextLogic } from "./useContextLogic.hook";
 
-const AppContext = createContext();
+const AppContext = R.createContext();
 
-const useAppContext = () => useContext(AppContext);
+const useAppContext = () => R.useContext(AppContext);
 
 const AppProvider = ({ children }) => {
-  const u = useContextLogic();
+  const contextValue = useContextLogic();
 
-  return <AppContext.Provider value={u}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
+  );
 };
 
 export { AppProvider, useAppContext };
