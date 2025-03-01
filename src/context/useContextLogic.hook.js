@@ -1,26 +1,11 @@
 import { useState } from "react";
 
 const useContextLogic = () => {
-  const [state, setState] = useState({
-    btns: [],
-    currentAction: "",
-  });
+  const [startedExperience, setStart] = useState(false);
 
-  const setBtns = (btns) => {
-    setState((pv) => ({
-      ...pv,
-      btns: [...btns],
-    }));
-  };
+  const startExperience = () => setStart(true);
 
-  const setCurrentAction = (action) => {
-    setState((pv) => ({
-      ...pv,
-      currentAction: action,
-    }));
-  };
-
-  return { setBtns, setCurrentAction, state };
+  return { startedExperience, startExperience };
 };
 
 export { useContextLogic };
