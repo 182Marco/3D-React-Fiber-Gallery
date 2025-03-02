@@ -19,6 +19,10 @@ const useDog = () => {
       stopActiveAnimation();
       actions[animation]?.play();
     }
+
+    return () => {
+      stopActiveAnimation();
+    };
   }, [animation, actions]);
 
   return { model };
