@@ -10,6 +10,7 @@ const Office = props => {
       rotation={[0, -Math.PI / 4, 0]}
       dispose={null}
       ref={h.allOfficeRef}
+      position={[0, 4, 0]}
     >
       <mesh
         geometry={h.nodes["01_office"].geometry}
