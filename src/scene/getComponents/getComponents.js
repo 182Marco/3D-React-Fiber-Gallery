@@ -1,42 +1,29 @@
 import * as C from "../../components";
-import * as D from "@react-three/drei";
 import * as U from "../utils";
-import * as R from "react";
-
-const withSuspense = Component => (
-  <R.Suspense>
-    <Component />
-  </R.Suspense>
-);
-
-const withFallBackSuspense = Component => (
-  <R.Suspense fallback={<C.Spinner speed={10} />}>
-    <Component />
-  </R.Suspense>
-);
+import {
+  WithFallBackSuspense,
+  WithSuspense,
+  WithScrollControls,
+} from "./wrappers";
 
 const GetComponents = projName => {
   switch (projName) {
     case U.projects.Home3d:
       return <C.Home3d />;
     case U.projects.Explode:
-      return (
-        <D.ScrollControls pages={4}>
-          <C.Explode />
-        </D.ScrollControls>
-      );
+      return WithScrollControls(C.Explode);
     case U.projects.Dog:
-      return withFallBackSuspense(C.Dog);
+      return WithFallBackSuspense(C.Dog);
     case U.projects.PortalPass:
-      return withFallBackSuspense(C.PortalPass);
+      return WithFallBackSuspense(C.PortalPass);
     case U.projects.Bike:
-      return withFallBackSuspense(C.Bike);
+      return WithFallBackSuspense(C.Bike);
     case U.projects.slideShow:
-      return withFallBackSuspense(C.SlideShow);
+      return WithFallBackSuspense(C.SlideShow);
     case U.projects.Woman:
-      return <C.Woman />;
+      return WithSuspense(C.Woman);
     case U.projects.CartFollowingMidget:
-      return withSuspense(C.CartFollowingMidget);
+      return WithSuspense(C.CartFollowingMidget);
     default:
       console.log("Error: comp not found", projName);
       return null;
