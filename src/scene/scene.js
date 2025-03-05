@@ -11,6 +11,7 @@ const Scene = () => {
       {h.startedExperience && (
         <div className={h.getBgClass(h.currentProject)}>
           {h.startedExperience && <L.Leva />}
+          {h.isSlideShow && <C.OverlaySlideShow />}
           <F.Canvas shadows>{GetComponents(h.currentProject)}</F.Canvas>
         </div>
       )}
