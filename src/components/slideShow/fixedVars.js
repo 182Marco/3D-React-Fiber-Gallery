@@ -1,6 +1,5 @@
 const scenes = [
   {
-    key: 6349132764832,
     path: "model/cybertruck_scene.glb",
     mainColor: "#f9c0ff",
     name: "Cybertruck",
@@ -10,7 +9,6 @@ const scenes = [
     range: 660,
   },
   {
-    key: 4539132765831,
     path: "model/model3_scene.glb",
     mainColor: "#c0ffe1",
     name: "Model 3",
@@ -19,7 +17,6 @@ const scenes = [
     range: 576,
   },
   {
-    key: 8734032286104,
     path: "model/semi_scene.glb",
     mainColor: "#ffdec0",
     name: "Semi",
