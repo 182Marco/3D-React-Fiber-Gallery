@@ -1,5 +1,4 @@
 import { useOverlaySlideShow } from "./overlaySlideShow.hook";
-import * as fixedVars from "../../fixedVars";
 import "./styles.scss";
 
 const OverlaySlideShow = () => {
@@ -21,16 +20,13 @@ const OverlaySlideShow = () => {
         <section>
           <svg
             onClick={() =>
-              h.setSlide(prev =>
-                prev > 0 ? prev - 1 : fixedVars.scenes?.length - 1,
-              )
+              h.setSlide(prev => (prev > 0 ? prev - 1 : h.numberOfScenes - 1))
             }
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="arrow"
           >
             <path
               strokeLinecap="round"
@@ -45,11 +41,8 @@ const OverlaySlideShow = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="arrow"
             onClick={() =>
-              h.setSlide(prev =>
-                prev < fixedVars.scenes?.length - 1 ? prev + 1 : 0,
-              )
+              h.setSlide(prev => (prev < h.numberOfScenes - 1 ? prev + 1 : 0))
             }
           >
             <path
@@ -60,8 +53,8 @@ const OverlaySlideShow = () => {
           </svg>
         </section>
         <main>
-          <h1>{fixedVars.scenes?.[h.displaySlide].name}</h1>
-          <em>{fixedVars.scenes?.[h.displaySlide].description}</em>
+          <h1>{h.currentSlide.name}</h1>
+          <em>{h.currentSlide.description}</em>
           <section>
             <div>
               <div>
@@ -71,7 +64,6 @@ const OverlaySlideShow = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-5 h-5"
                 >
                   <path
                     strokeLinecap="round"
@@ -79,9 +71,7 @@ const OverlaySlideShow = () => {
                     d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
                   />
                 </svg>
-                <p>
-                  ${fixedVars.scenes?.[h.displaySlide].price.toLocaleString()}
-                </p>
+                <p>${h.currentSlide.price.toLocaleString()}</p>
               </div>
               <p>After Federal Tax Credit</p>
             </div>
@@ -93,7 +83,6 @@ const OverlaySlideShow = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -101,9 +90,9 @@ const OverlaySlideShow = () => {
                     d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M4.5 10.5H18V15H4.5v-4.5zM3.75 18h15A2.25 2.25 0 0021 15.75v-6a2.25 2.25 0 00-2.25-2.25h-15A2.25 2.25 0 001.5 9.75v6A2.25 2.25 0 003.75 18z"
                   />
                 </svg>
-                <p>{fixedVars.scenes?.[h.displaySlide].range}km</p>
+                <p>{h.currentSlide.range}km</p>
               </div>
-              <p className="text-sm opacity-80">With one single charge</p>
+              <p>With one single charge</p>
             </div>
           </section>
         </main>
