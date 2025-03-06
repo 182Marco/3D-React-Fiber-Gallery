@@ -1,14 +1,18 @@
-import * as C from "..";
 import { useOverlaySlideShow } from "./overlaySlideShow.hook";
 import "./styles.scss";
 
 const OverlaySlideShow = () => {
   const h = useOverlaySlideShow();
+
+  console.log(
+    `marcom ---> h.scenes?.[h.displaySlide].name: `,
+    h.scenes?.[h.displaySlide].name,
+  );
   return (
     <>
-      <div className={`overlay-container ${h.visible ? "visible" : "hidden"}`}>
+      <div className={`overlay-slideShow ${h.visible ? "" : "hidden"}`}>
         <svg
-          className="overlay-logo"
+          className="logo"
           viewBox="0 0 342 35"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -17,12 +21,17 @@ const OverlaySlideShow = () => {
             fill="currentColor"
           ></path>
         </svg>
-        <div className="overlay-controls">
+        <section>
           <svg
-            className="overlay-button left"
             onClick={() =>
-              h.setSlide(prev => (prev > 0 ? prev - 1 : C.Slide.length - 1))
+              h.setSlide(prev => (prev > 0 ? prev - 1 : h.scenes?.length - 1))
             }
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="arrow"
           >
             <path
               strokeLinecap="round"
@@ -30,10 +39,16 @@ const OverlaySlideShow = () => {
               d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
             />
           </svg>
+
           <svg
-            className="overlay-button right"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="arrow"
             onClick={() =>
-              h.setSlide(prev => (prev < C.Slide.length - 1 ? prev + 1 : 0))
+              h.setSlide(prev => (prev < h.scenes?.length - 1 ? prev + 1 : 0))
             }
           >
             <path
@@ -42,27 +57,53 @@ const OverlaySlideShow = () => {
               d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
             />
           </svg>
-        </div>
-        <div className="overlay-content">
-          <h1 className="overlay-title">{C.Slide[h.displaySlide]?.name}</h1>
-          <p className="overlay-description">
-            {C.Slide[h.displaySlide]?.description}
-          </p>
-          <div className="overlay-stats">
-            <div className="overlay-stat">
-              <p className="overlay-price">
-                ${C.Slide[h.displaySlide]?.price.toLocaleString()}
-              </p>
-              <p className="overlay-subtext">After Federal Tax Credit</p>
+        </section>
+        <main>
+          <h1>{h.scenes?.[h.displaySlide].name}</h1>
+          <em>{h.scenes?.[h.displaySlide].description}</em>
+          <section>
+            <div>
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
+                  />
+                </svg>
+                <p>${h.scenes?.[h.displaySlide].price.toLocaleString()}</p>
+              </div>
+              <p>After Federal Tax Credit</p>
             </div>
-            <div className="overlay-stat">
-              <p className="overlay-range">
-                {C.Slide[h.displaySlide]?.range}km
-              </p>
-              <p className="overlay-subtext">With one single charge</p>
+            <div>
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M4.5 10.5H18V15H4.5v-4.5zM3.75 18h15A2.25 2.25 0 0021 15.75v-6a2.25 2.25 0 00-2.25-2.25h-15A2.25 2.25 0 001.5 9.75v6A2.25 2.25 0 003.75 18z"
+                  />
+                </svg>
+                <p>{h.scenes?.[h.displaySlide].range}km</p>
+              </div>
+              <p className="text-sm opacity-80">With one single charge</p>
             </div>
-          </div>
-        </div>
+          </section>
+        </main>
       </div>
     </>
   );
