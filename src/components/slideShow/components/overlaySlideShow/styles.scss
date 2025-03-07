@@ -1,4 +1,5 @@
 .overlay-slideShow {
+  font-family: sans-serif;
   position: fixed;
   z-index: 10;
   top: 0;
@@ -12,13 +13,13 @@
   text-align: center;
   color: black;
   transition: opacity 1s;
-  border: 5px solid red;
+  border: 3px solid red;
 
   &.hidden {
     opacity: 0;
   }
 
-  .logo {
+  & > svg {
     width: 10rem;
     margin-left: auto;
     margin-right: auto;
@@ -51,10 +52,8 @@
   }
 
   main {
+    height: 33%;
     background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent);
-    padding-top: 5rem;
-    padding-bottom: 2.5rem;
-    padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -65,7 +64,8 @@
       font-weight: 800;
     }
 
-    em {
+    h1 + p {
+      display: block;
       font-size: 1rem;
       line-height: 1.5;
       font-family: sans-serif;
@@ -78,6 +78,11 @@
       align-items: center;
       gap: 3rem;
       margin-top: 2.5rem;
+
+      p {
+        font-size: 0.875rem;
+        opacity: 0.8;
+      }
 
       & > div {
         display: flex;
