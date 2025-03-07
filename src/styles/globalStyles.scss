@@ -1,6 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import "colors";
 
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Global reset for margin, padding, and outline */
 *,
 *::before,
@@ -57,6 +62,10 @@ canvas {
   background: linear-gradient(135deg, #3a3a3a, #707070, #e0e0e0, #ffffff);
   background-size: 400% 400%;
   animation: gradientMove 5s infinite linear;
+}
+
+.slideShow {
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent);
 }
 
 .show-dog-btn {
