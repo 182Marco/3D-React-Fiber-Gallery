@@ -38,12 +38,22 @@ const useScene = () => {
         return "bg dark-bg";
       case U.projects.Woman:
         return "bg grey-bg";
+      case U.projects.slideShow:
+        return "bg";
       default:
         return "bg light-bg";
     }
   };
 
-  return { currentProject, getBgClass, startedExperience, startExperience };
+  const isSlideShow = currentProject === U.projects.slideShow;
+
+  return {
+    currentProject,
+    getBgClass,
+    isSlideShow,
+    startedExperience,
+    startExperience,
+  };
 };
 
 export { useScene };
