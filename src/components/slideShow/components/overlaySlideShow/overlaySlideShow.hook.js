@@ -1,5 +1,6 @@
 import { atom, useAtom } from "jotai";
 import * as R from "react";
+import * as fixedVars from "../../fixedVars";
 
 const slideAtom = atom(0);
 
@@ -21,7 +22,11 @@ const useOverlaySlideShow = () => {
       setVisible(true);
     }, 2600);
   }, [slide]);
-  return { displaySlide, setSlide, visible };
+
+  const currentSlide = fixedVars.scenes?.[displaySlide];
+  const numberOfScenes = fixedVars.scenes?.length;
+
+  return { displaySlide, currentSlide, numberOfScenes, setSlide, visible };
 };
 
 export { useOverlaySlideShow, slideAtom };
