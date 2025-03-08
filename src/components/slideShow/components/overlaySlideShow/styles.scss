@@ -1,5 +1,4 @@
 .overlay-slideShow {
-  font-family: sans-serif;
   position: fixed;
   z-index: 10;
   top: 0;
@@ -13,17 +12,40 @@
   text-align: center;
   color: black;
   transition: opacity 1s;
-  border: 3px solid red;
 
   &.hidden {
     opacity: 0;
   }
 
   & > svg {
-    width: 10rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2rem;
+    &:first-of-type {
+      width: 160px;
+      margin: 32px auto 0;
+    }
+
+    &:nth-of-type(2),
+    &:nth-of-type(3) {
+      width: 2.5rem;
+      height: 2.5rem;
+      pointer-events: auto;
+      cursor: pointer;
+      transition-property: opacity;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+
+    &:nth-of-type(2) {
+      left: 16px;
+    }
+
+    &:nth-of-type(3) {
+      right: 16px;
+    }
   }
 
   section {
