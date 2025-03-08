@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { DEG2RAD } from "three/src/math/MathUtils";
 import { useScene } from "./slide.hook";
 
-const Scene = ({ mainColor, path, ...props }) => {
+const Slide = ({ mainColor, path, ...props }) => {
   const h = useScene(path);
   return (
     <>
@@ -87,8 +87,8 @@ const Scene = ({ mainColor, path, ...props }) => {
   );
 };
 
-D.useGLTF.preload("/models/cybertruck_scene.glb");
-D.useGLTF.preload("/models/model3_scene.glb");
-D.useGLTF.preload("/models/semi_scene.glb");
+D.useGLTF.preload("/model/cybertruck_scene.glb");
+D.useGLTF.preload("/model/model3_scene.glb");
+D.useGLTF.preload("/model/semi_scene.glb");
 
-export { Scene };
+export { Slide };
