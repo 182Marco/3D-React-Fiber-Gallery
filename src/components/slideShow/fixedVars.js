@@ -1,12 +1,11 @@
 const scenes = [
   {
-    path: "model/cybertruck_scene.glb",
-    mainColor: "#f6dafa",
-    name: "Cybertruck",
-    description:
-      "Better utility than a truck with more performance than a sports car",
-    price: 72000,
-    range: 660,
+    path: "model/model3_scene.glb",
+    mainColor: "#c0ffe1",
+    name: "Model 3",
+    description: "The car of the future",
+    price: 29740,
+    range: 576,
   },
   {
     path: "model/model3_scene.glb",
