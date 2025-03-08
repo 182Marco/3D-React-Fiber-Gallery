@@ -54,7 +54,7 @@ const OverlaySlideShow = () => {
         </section>
         <main>
           <h1>{h.currentSlide.name}</h1>
-          <em>{h.currentSlide.description}</em>
+          <p>{h.currentSlide.description}</p>
           <section>
             <div>
               <div>
