@@ -13,46 +13,43 @@ const OverlaySlideShow = () => {
             fill="currentColor"
           ></path>
         </svg>
-        <section>
-          <svg
-            onClick={() =>
-              h.setSlide(prev => (prev > 0 ? prev - 1 : h.numberOfScenes - 1))
-            }
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
-            />
-          </svg>
-
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            onClick={() =>
-              h.setSlide(prev => (prev < h.numberOfScenes - 1 ? prev + 1 : 0))
-            }
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-            />
-          </svg>
-        </section>
+        <svg
+          onClick={() =>
+            h.setSlide(prev => (prev > 0 ? prev - 1 : h.numberOfScenes - 1))
+          }
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+          />
+        </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          onClick={() =>
+            h.setSlide(prev => (prev < h.numberOfScenes - 1 ? prev + 1 : 0))
+          }
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+          />
+        </svg>
         <main>
           <h1>{h.currentSlide.name}</h1>
-          <p>{h.currentSlide.description}</p>
-          <section>
-            <div>
+          <h2>{h.currentSlide.description}</h2>
+          <footer>
+            <aside>
               <div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -69,9 +66,11 @@ const OverlaySlideShow = () => {
                 </svg>
                 <p>${h.currentSlide.price.toLocaleString()}</p>
               </div>
+
               <p>After Federal Tax Credit</p>
-            </div>
-            <div>
+            </aside>
+
+            <aside>
               <div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -88,9 +87,10 @@ const OverlaySlideShow = () => {
                 </svg>
                 <p>{h.currentSlide.range}km</p>
               </div>
+
               <p>With one single charge</p>
-            </div>
-          </section>
+            </aside>
+          </footer>
         </main>
       </div>
     </>
