@@ -1,7 +1,7 @@
 const scenes = [
   {
     path: "model/cybertruck_scene.glb",
-    mainColor: "#f9c0ff",
+    mainColor: "#f6dafa",
     name: "Cybertruck",
     description:
       "Better utility than a truck with more performance than a sports car",
