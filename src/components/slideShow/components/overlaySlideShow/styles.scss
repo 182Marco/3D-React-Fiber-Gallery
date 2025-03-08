@@ -37,18 +37,6 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-
-    svg {
-      width: 2.5rem;
-      height: 2.5rem;
-      pointer-events: auto;
-      cursor: pointer;
-      transition-property: opacity;
-
-      &:hover {
-        opacity: 0.6;
-      }
-    }
   }
 
   main {
