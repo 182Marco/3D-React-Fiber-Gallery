@@ -60,49 +60,56 @@
     text-align: center;
 
     h1 {
-      font-size: 3rem;
+      font-size: 48px;
+      line-height: 48px;
+      position: static;
       font-weight: 800;
+      padding: 0;
     }
 
-    h1 + p {
+    h1 + h2 {
       display: block;
-      font-size: 1rem;
+      font-size: 13px;
       line-height: 1.5;
-      font-family: sans-serif;
       font-style: italic;
-      opacity: 0.6;
+      margin: 7px 0 30px;
     }
 
-    section {
+    footer {
       display: flex;
       align-items: center;
-      gap: 3rem;
-      margin-top: 2.5rem;
 
-      p {
-        font-size: 0.875rem;
-        opacity: 0.8;
-      }
-
-      & > div {
+      aside {
         display: flex;
         flex-direction: column;
         align-items: center;
+
         & > div {
           display: flex;
-          gap: 0.5rem;
           align-items: center;
+
+          svg {
+            width: 16px;
+            height: 16px;
+          }
+
+          p {
+            margin-left: 7px;
+            font-weight: 700;
+            font-size: 22px;
+          }
+        }
+        p {
+          font-weight: 400;
+          font-size: 12px;
+        }
+        &:first-of-type {
+          margin-right: 20px;
+        }
+        &:last-of-type {
+          margin-left: 20px;
         }
       }
-    }
-    p {
-      font-weight: 600;
-      font-size: 1.875rem;
-    }
-
-    svg {
-      width: 1.5rem;
-      height: 1.5rem;
     }
   }
 }
