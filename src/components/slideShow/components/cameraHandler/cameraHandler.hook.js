@@ -36,7 +36,7 @@ const useCameraHandler = slideDistance => {
     await cameraControls.current.setLookAt(
       slide * (viewport.width + slideDistance),
       0,
-      5,
+      3,
       slide * (viewport.width + slideDistance),
       0,
       0,
