@@ -1,4 +1,4 @@
-import * as C from "../../components";
+import * as C from "..";
 import * as U from "./utils";
 import { vars } from "./fixedVars";
 
