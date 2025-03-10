@@ -74,7 +74,7 @@ To run the project locally, follow these steps:
    ```bash
    npm i
 
-3. **RUn local Server**  
+3. **Run local Server**  
    type:
    ```bash
    npm run start
