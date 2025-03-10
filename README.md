@@ -68,3 +68,13 @@ To run the project locally, follow these steps:
    Open your terminal and type:
    ```bash
    git clone https://github.com/182Marco/3D-React-Fiber-Gallery.git
+
+2. **Install dependencies**  
+   type:
+   ```bash
+   npm i
+
+3. **RUn local Server**  
+   type:
+   ```bash
+   npm run start
