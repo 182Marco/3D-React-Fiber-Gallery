@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mediapipe/tasks-vision": "^0.10.22-rc.20250304",
     "@react-spring/three": "9.7",
     "@react-three/drei": "^9.56.25",
     "@react-three/fiber": "^8.11.2",
@@ -30,14 +31,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "vite build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "dev": "vite",
-    "preview": "vite preview",
-    "pre-deploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build --verbose",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
     "extends": [
@@ -60,6 +59,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "gh-pages": "^6.3.0",
+    "react-app-rewired": "^2.2.1",
     "vite": "^6.2.1"
   }
 }
