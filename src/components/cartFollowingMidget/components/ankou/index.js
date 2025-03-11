@@ -1,1 +1,0 @@
-export { Ankou } from "./ankou";

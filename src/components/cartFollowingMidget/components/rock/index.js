@@ -1,1 +1,0 @@
-export { Rock } from "./rock";

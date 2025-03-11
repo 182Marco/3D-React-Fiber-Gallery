@@ -1,1 +1,0 @@
-export { Dog } from "./dog";

@@ -1,1 +1,0 @@
-export { CustomModel } from "./customModel";

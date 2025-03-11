@@ -1,1 +1,0 @@
-export { LampPost } from "./lampPost";

@@ -1,1 +1,0 @@
-export { ConfigInSpring } from "./configInSpring";

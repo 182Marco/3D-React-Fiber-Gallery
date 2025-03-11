@@ -1,1 +1,0 @@
-export { FallingMesh } from "./fallingMesh";

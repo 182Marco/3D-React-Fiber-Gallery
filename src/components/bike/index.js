@@ -1,1 +1,0 @@
-export { Bike } from "./bike";

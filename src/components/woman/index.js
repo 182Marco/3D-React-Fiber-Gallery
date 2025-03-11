@@ -1,1 +1,0 @@
-export { Woman } from "./woman";
