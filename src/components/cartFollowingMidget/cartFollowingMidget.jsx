@@ -1,6 +1,5 @@
 import * as C from "./components";
 import * as D from "@react-three/drei";
-import * as P from "@react-three/postprocessing";
 import { useUpdateCamera } from "./cartFollowingMidget.updateCamera";
 
 const CartFollowingMidget = () => {
@@ -10,14 +9,6 @@ const CartFollowingMidget = () => {
     <>
       <C.CartSceneOrbitControls />
       <D.Environment preset="sunset" intensity={0.7} blur={0} />
-      <P.EffectComposer>
-        <P.Bloom
-          mipmapBlur
-          luminanceThreshold={1}
-          intensity={1.42}
-          radius={0.72}
-        />
-      </P.EffectComposer>
       <group position={[0, -0.7, 0]} rotation={[0, Math.PI / 4, 0]}>
         <C.Ankou
           rotation-y={-Math.PI / 2}
