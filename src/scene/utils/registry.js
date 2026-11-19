@@ -3,6 +3,7 @@
 //   exportName  nome dell'export nominato da usare come componente
 //   wrapper     "suspense" | "fallback" | "scroll" (vedi getComponents.jsx)
 //   bg          classi CSS dello sfondo (default: "bg light-bg")
+//   lab         true = esperimento mostrato con badge "Lab" in galleria
 //   title/description/accent/icon  testo, colore ed emoji della card in galleria
 //   fitWidth    false se la scena gestisce da sé la larghezza (default: true →
 //               ResponsiveCamera riduce lo zoom su schermi stretti)
@@ -89,6 +90,16 @@ const registry = {
     exportName: "Woman",
     wrapper: "suspense",
     bg: "bg grey-bg",
+  },
+  Portal: {
+    lab: true,
+    icon: "🥚",
+    title: "Portal",
+    description: "Double-click the card to step inside another world.",
+    accent: "#e8a33d",
+    load: () => import("../../components/portal"),
+    exportName: "Portal",
+    wrapper: "suspense",
   },
 };
 

@@ -88,6 +88,7 @@ const Gallery = props => {
                     />
                     <span className="tags">
                       <em>{pad(i)}</em>
+                      {item.lab && <u className="lab">Lab</u>}
                       {item.name === current && <u>Now viewing</u>}
                     </span>
                     <b aria-hidden>{item.icon}</b>

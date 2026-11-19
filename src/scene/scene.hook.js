@@ -30,13 +30,14 @@ const useScene = () => {
   }, []);
 
   const galleryItems = Object.entries(U.registry).map(
-    ([name, { title, description, accent, icon }]) => ({
+    ([name, { title, description, accent, icon, lab }]) => ({
       name,
       icon,
       thumb: `./thumbs/${name}.jpg`,
       title,
       description,
       accent,
+      lab: Boolean(lab),
     })
   );
 
