@@ -3,13 +3,14 @@
 //   exportName  nome dell'export nominato da usare come componente
 //   wrapper     "suspense" | "fallback" | "scroll" (vedi getComponents.jsx)
 //   bg          classi CSS dello sfondo (default: "bg light-bg")
-//   title/description/accent  testo e colore della card in galleria
+//   title/description/accent/icon  testo, colore ed emoji della card in galleria
 //   fitWidth    false se la scena gestisce da sé la larghezza (default: true →
 //               ResponsiveCamera riduce lo zoom su schermi stretti)
 //   camera      opzioni camera (default: {})
 //   background  colore di sfondo del Canvas (opzionale)
 const registry = {
   Bike: {
+    icon: "🚲",
     title: "Bicycle",
     description: "A 3D bicycle with continuously turning wheels.",
     accent: "#97d9e1",
@@ -18,6 +19,7 @@ const registry = {
     wrapper: "fallback",
   },
   CartFollowingMidget: {
+    icon: "🎠",
     title: "The Carriage of Destiny",
     description: "An endless landscape of objects looping past a cart.",
     accent: "#16a04b",
@@ -27,6 +29,7 @@ const registry = {
     bg: "bg green-bg",
   },
   Dog: {
+    icon: "🐕",
     title: "Dog",
     description: "An animated dog: pick an animation from the panel.",
     accent: "#c9a27a",
@@ -36,6 +39,7 @@ const registry = {
     camera: { fov: 33, near: 0.1, far: 500, position: [-7, 0, 10] },
   },
   Explode: {
+    icon: "💥",
     title: "Explode",
     description: "Scroll to blow a model apart and put it back together.",
     accent: "#e8a33d",
@@ -45,6 +49,7 @@ const registry = {
     camera: { position: [0, 0, 5], fov: 30 },
   },
   Home3d: {
+    icon: "🏠",
     title: "Home 3D",
     description: "A three-storey apartment revealed as you scroll.",
     accent: "#d9afd9",
@@ -54,6 +59,7 @@ const registry = {
     camera: { position: [2.3, 1.5, 2.3], fov: 64 },
   },
   PortalPass: {
+    icon: "🌀",
     title: "Portal Pass",
     description: "Three cards that open portals into other 3D worlds.",
     accent: "#34495e",
@@ -64,6 +70,7 @@ const registry = {
     bg: "bg dark-bg",
   },
   slideShow: {
+    icon: "🎞️",
     title: "Slideshow",
     description: "A 3D slider where each slide is a window into a new world.",
     accent: "#8f9aa8",
@@ -75,6 +82,7 @@ const registry = {
     background: "#ececec",
   },
   Woman: {
+    icon: "💃",
     title: "Woman",
     description: "An animated character: pick an animation from the panel.",
     accent: "#707070",

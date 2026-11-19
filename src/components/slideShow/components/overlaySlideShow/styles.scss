@@ -126,3 +126,13 @@
     }
   }
 }
+
+// Telefono: il logo in alto al centro finiva sotto il pulsante della galleria
+// (in alto a sinistra) e la barra dei comandi sotto di esso. Più piccolo e
+// più in basso, fuori dalla loro zona.
+@media (max-width: 700px) {
+  .overlay-slideShow > svg:first-of-type {
+    width: 100px;
+    margin-top: 80px;
+  }
+}

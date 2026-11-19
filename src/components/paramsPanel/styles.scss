@@ -146,5 +146,10 @@
     right: auto;
     left: 16px;
     max-height: calc(100vh - 100px);
+
+    // chiuso: solo la barra del titolo, per lasciare libero il resto
+    &.collapsed {
+      width: fit-content;
+    }
   }
 }

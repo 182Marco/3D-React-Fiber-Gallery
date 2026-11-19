@@ -30,8 +30,9 @@ const useScene = () => {
   }, []);
 
   const galleryItems = Object.entries(U.registry).map(
-    ([name, { title, description, accent }]) => ({
+    ([name, { title, description, accent, icon }]) => ({
       name,
+      icon,
       title,
       description,
       accent,

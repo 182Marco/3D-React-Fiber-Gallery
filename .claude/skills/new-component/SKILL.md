@@ -136,7 +136,7 @@ const Nome = () => {
 
 1. Aggiungi `export { Nome } from "./nome";` in `src/components/index.js` (o nel barrel `components/index.js` del padre).
 2. **Solo se è una scena selezionabile:**
-   - UNA sola voce in `src/scene/utils/registry.js`: `load: () => import("../../components/nome")`, `exportName`, `title`, `description`, `accent` (card in galleria), `wrapper` (`"suspense"` carica asset, `"fallback"` con spinner, `"scroll"` se usa `useScroll`), e se servono `bg` (classi sfondo), `camera`, `background` (colore Canvas). `projects`, camera, sfondo e `getComponents.jsx` si aggiornano da soli.
+   - UNA sola voce in `src/scene/utils/registry.js`: `load: () => import("../../components/nome")`, `exportName`, `title`, `description`, `accent`, `icon` emoji (card in galleria), `wrapper` (`"suspense"` carica asset, `"fallback"` con spinner, `"scroll"` se usa `useScroll`), e se servono `bg` (classi sfondo), `camera`, `background` (colore Canvas). `projects`, camera, sfondo e `getComponents.jsx` si aggiornano da soli.
 3. Asset in `public/model/` (riferiti come `./model/x.glb`), audio in `public/audios/`, texture in `public/textures/`.
 
 ## 7. Checklist prima di finire
