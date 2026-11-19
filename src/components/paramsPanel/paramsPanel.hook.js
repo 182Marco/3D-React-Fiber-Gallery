@@ -4,7 +4,10 @@ import { paramsAtom } from "./params.hook";
 
 const usePanel = () => {
   const [params, setParams] = useAtom(paramsAtom);
-  const [collapsed, setCollapsed] = R.useState(false);
+  // Su telefono parte chiuso, per non coprire la scena.
+  const [collapsed, setCollapsed] = R.useState(
+    () => window.matchMedia("(max-width: 700px)").matches
+  );
 
   const entries = Object.entries(params).map(([key, def]) => ({
     key,

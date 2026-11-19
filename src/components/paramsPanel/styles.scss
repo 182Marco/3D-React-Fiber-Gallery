@@ -138,4 +138,13 @@
     padding: 0;
     background: none;
   }
+
+  // Telefono: sotto il pulsante della galleria (in alto a sinistra) invece
+  // che nell'angolo opposto, dove le due box si sovrapponevano.
+  @media (max-width: 700px) {
+    top: 84px;
+    right: auto;
+    left: 16px;
+    max-height: calc(100vh - 100px);
+  }
 }

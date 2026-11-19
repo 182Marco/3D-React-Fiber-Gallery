@@ -66,3 +66,24 @@ $background-color: #ffffff99;
     }
   }
 }
+
+// Telefono: le card scorrono sopra il modello 3D; con lo sfondo al 60% il
+// modello si vedeva attraverso il testo. Sfondo quasi opaco e testo scuro.
+@media (max-width: 700px) {
+  .w100-scroll section > div {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    color: #222;
+    font-size: 12px;
+    padding: 14px 16px;
+
+    h1 {
+      color: #111;
+    }
+
+    p {
+      margin: 8px 0;
+    }
+  }
+}
