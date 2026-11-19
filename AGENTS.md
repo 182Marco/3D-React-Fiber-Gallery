@@ -18,9 +18,8 @@ Galleria di esperimenti 3D con React Three Fiber (CRA + `react-app-rewired`, Jav
 ## Architettura
 - `src/index.js` → `src/root.jsx` (`AppProvider` + `Scene`).
 - `src/scene/scene.jsx` mostra `LoadScreen` finché `startedExperience` è false, poi un `<Canvas shadows>` con il progetto scelto dal controllo Leva `project`.
-- `src/scene/utils/projects.js` elenca i progetti selezionabili (Bike, CartFollowingMidget, Dog, Explode, Home3d, PortalPass, slideShow, Woman).
-- `src/scene/getComponents/getComponents.jsx` mappa progetto → componente, avvolto con uno dei wrapper in `getComponents/wrappers` (`WithSuspense`, `WithFallBackSuspense`, `WithScrollControls`).
-- Camera per progetto: `src/scene/utils/getCamera.js`; classe di sfondo per progetto: `getBgClass` in `scene.hook.js`.
+- `src/scene/utils/registry.js` è l'unico punto in cui si definisce un progetto selezionabile (Bike, CartFollowingMidget, Dog, Explode, Home3d, PortalPass, slideShow, Woman): import dinamico, wrapper, sfondo, camera. `projects.js` ne deriva i nomi.
+- `src/scene/getComponents/getComponents.jsx` crea un componente `React.lazy` per voce del registry e lo avvolge col wrapper indicato (`suspense` → `WithSuspense`, `fallback` → `WithFallBackSuspense`, `scroll` → `WithScrollControls`, in `getComponents/wrappers`). Camera e sfondo si leggono dal registry (`getCamera.js`, `getBgClass` in `scene.hook.js`).
 - `src/components/*` contiene tutti i componenti 3D; molti sono esperimenti non collegati al selettore (physics, spring, ecc.). Barrel in `src/components/index.js`.
 - Asset statici (modelli `.glb/.gltf`, HDR, font, texture, audio) in `public/`; vanno caricati con path relativo a `public`.
 
@@ -32,10 +31,8 @@ Galleria di esperimenti 3D con React Three Fiber (CRA + `react-app-rewired`, Jav
 
 ## Aggiungere un nuovo progetto
 1. Creare `src/components/<nome>/` con `.jsx`, `.hook.js`, `index.js`.
-2. Esportarlo da `src/components/index.js`.
-3. Aggiungerlo a `projects` in `src/scene/utils/projects.js`.
-4. Aggiungere il `case` in `getComponents.jsx` con il wrapper adatto.
-5. Se serve, camera in `getCamera.js` e sfondo in `getBgClass`.
+2. Esportarlo da `src/components/index.js` (e fare `export` nominato anche in `<nome>/index.js`: il registry importa la cartella).
+3. Aggiungere UNA voce in `registry` (`src/scene/utils/registry.js`): `load`, `exportName`, `wrapper`, e se servono `bg`, `camera`, `background`.
 
 ## Attenzioni
 - Prestazioni: gli effetti glow/postprocessing sono stati rimossi di recente perché rallentavano tutto (vedi git log); evitare di reintrodurli senza misurare.

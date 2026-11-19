@@ -51,7 +51,7 @@ Un componente con hook ha sempre `.hook.js`, anche se piccolo. Se l'unica logica
 - **Export nominati in fondo al file**: `export { Nome };` — mai `export default`.
 - Dati derivati con `map`/`filter`/`Object.keys`/`Object.values`/`forEach`, non cicli `for`. Liste: `[...Array(n)].map((_, i) => ...)`; per sequenze usare `createSeqArray` da `src/utils`.
 - Funzioni piccole, pure e componibili; predicati come `isSelected = name => item === map[name]`.
-- Selezione per `switch` con `return` per caso (vedi `getComponents.jsx`, `getBgClass`) invece di catene if/else; per più condizioni `switch (true)`.
+- Selezione per `switch` con `return` per caso (vedi `getComponents.jsx`) invece di catene if/else; per più condizioni `switch (true)`.
 - Higher-order helper per i wrapper (`WithSuspense = Component => <Suspense><Component /></Suspense>`).
 - Optional chaining `?.` e default nei destructuring (`const { distance = 3 } = options`) invece di controlli manuali.
 - Non mutare stato React; la mutazione diretta è ammessa solo su oggetti three.js dentro `useFrame` (`ref.current.rotation.y -= delta * 2`), sempre scalata per `delta`.
@@ -136,9 +136,7 @@ const Nome = () => {
 
 1. Aggiungi `export { Nome } from "./nome";` in `src/components/index.js` (o nel barrel `components/index.js` del padre).
 2. **Solo se è una scena selezionabile:**
-   - voce in `src/scene/utils/projects.js` (`Nome: "Nome"`),
-   - `case U.projects.Nome:` in `src/scene/getComponents/getComponents.jsx` con il wrapper giusto: `WithSuspense` (carica asset), `WithFallBackSuspense` (con fallback), `WithScrollControls` (usa `useScroll`); `<C.Nome />` diretto se non carica nulla,
-   - camera in `src/scene/utils/getCamera.js` e/o sfondo in `getBgClass` (`scene.hook.js`) se servono valori diversi dal default.
+   - UNA sola voce in `src/scene/utils/registry.js`: `load: () => import("../../components/nome")`, `exportName`, `wrapper` (`"suspense"` carica asset, `"fallback"` con spinner, `"scroll"` se usa `useScroll`), e se servono `bg` (classi sfondo), `camera`, `background` (colore Canvas). `projects`, camera, sfondo e `getComponents.jsx` si aggiornano da soli.
 3. Asset in `public/model/` (riferiti come `./model/x.glb`), audio in `public/audios/`, texture in `public/textures/`.
 
 ## 7. Checklist prima di finire
