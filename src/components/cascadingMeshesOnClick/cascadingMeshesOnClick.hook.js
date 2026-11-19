@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useTrail } from "@react-spring/three";
 
 const items = [
@@ -20,11 +21,11 @@ const useCascadingMeshesOnClick = () => {
     from: { scale: 0.3 },
   }));
 
-  let active = true;
+  const active = useRef(true);
 
   const handleMiss = () => {
-    api.start({ to: { scale: active ? 0.6 : 0 } });
-    active = !active;
+    api.start({ to: { scale: active.current ? 0.6 : 0 } });
+    active.current = !active.current;
   };
 
   return { handleMiss, trail };

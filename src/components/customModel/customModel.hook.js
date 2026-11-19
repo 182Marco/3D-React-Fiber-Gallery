@@ -2,9 +2,9 @@ import { useLoader } from "@react-three/fiber";
 import * as THREE from "three";
 
 const useCustomModel = () => ({
-  texture: useLoader(THREE.TextureLoader, "./images/1.png"),
+  texture: useLoader(THREE.TextureLoader, "./images/1.jpg"),
   positionArray: new Float32Array([0, 0, 0, 0, 1, 0, 1, 0, 0]),
-  uvCoordinates: new Float32Array([0, 0, 0, 1, 0]),
+  uvCoordinates: new Float32Array([0, 0, 0, 1, 1, 0]),
 });
 
 export { useCustomModel };

@@ -9,8 +9,7 @@ const getOptions = comp => {
     case comp === U.projects.Dog:
       return { fov: 33, near: 0.1, far: 500, position: [-7, 0, 10] };
     default:
-      console.log("Errore: componente non valido.");
-      return null;
+      return {}; // nessuna impostazione: valgono i default del chiamante
   }
 };
 

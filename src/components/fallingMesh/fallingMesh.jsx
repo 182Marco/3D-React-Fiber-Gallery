@@ -3,7 +3,7 @@ import * as R from "@react-three/rapier";
 import { useFallingMesh } from "./fallingMesh.hook";
 
 const FallingMesh = () => {
-  const u = useFallingMesh();
+  useFallingMesh();
 
   return (
     <>

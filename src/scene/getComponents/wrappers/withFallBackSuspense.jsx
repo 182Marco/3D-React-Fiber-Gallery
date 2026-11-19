@@ -1,10 +1,9 @@
 import { Suspense } from "react";
-import { Spinner } from "../../../components";
-import { projects } from "../../utils";
+import { Spinner, SlideShow } from "../../../components";
 
 const WithFallBackSuspense = Component => (
   <Suspense fallback={<Spinner speed={10} />}>
-    {Component?.name === projects.slideShow && (
+    {Component === SlideShow && (
       <color attach="background" args={["#ececec"]} />
     )}
     <Component />

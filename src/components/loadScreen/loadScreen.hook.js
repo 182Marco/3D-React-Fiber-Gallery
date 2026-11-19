@@ -1,20 +1,16 @@
 import * as R from "react";
 import { useProgress } from "@react-three/drei";
 import { useAppContext } from "../../context";
-import { wait } from "../../utils";
 
 const useLoadScreen = () => {
   const { startedExperience } = useAppContext();
   const { progress } = useProgress();
   const [removeElement, setRemoveElement] = R.useState(false);
 
-  const handleRemoveElement = async () => {
-    await wait(3500);
-    setRemoveElement(true);
-  };
-
   R.useEffect(() => {
-    if (startedExperience) handleRemoveElement();
+    if (!startedExperience) return;
+    const id = setTimeout(() => setRemoveElement(true), 3500);
+    return () => clearTimeout(id);
   }, [startedExperience]);
 
   return { progress, removeElement, startedExperience };

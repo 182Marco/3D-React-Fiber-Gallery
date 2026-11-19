@@ -10,17 +10,17 @@ const useOverlaySlideShow = () => {
   const [visible, setVisible] = R.useState(false);
 
   R.useEffect(() => {
-    setTimeout(() => {
-      setVisible(true);
-    }, 1000);
+    const id = setTimeout(() => setVisible(true), 1000);
+    return () => clearTimeout(id);
   }, []);
 
   R.useEffect(() => {
     setVisible(false);
-    setTimeout(() => {
+    const id = setTimeout(() => {
       setDisplaySlide(slide);
       setVisible(true);
     }, 2600);
+    return () => clearTimeout(id);
   }, [slide]);
 
   const currentSlide = fixedVars.scenes?.[displaySlide];

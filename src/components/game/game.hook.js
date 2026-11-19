@@ -1,7 +1,4 @@
-import * as F from "@react-three/fiber";
-import { quat } from "@react-three/rapier";
 import * as R from "react";
-import * as THREE from "three";
 
 const useGame = () => {
   const [hover, setHover] = R.useState(false);

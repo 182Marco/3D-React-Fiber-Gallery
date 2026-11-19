@@ -1,9 +1,9 @@
-import { a, useSpring } from "@react-spring/three";
-import { useState } from "react";
+import { useSpring } from "@react-spring/three";
+import { useRef, useState } from "react";
 
 const useHookUseSpringProps = () => {
   const [clicked, setClick] = useState(false);
-  let n = 0;
+  const loops = useRef(0);
   const { color, x, y } = useSpring({
     from: { color: "pink", y: -2, x: -2 },
     to: [
@@ -24,7 +24,7 @@ const useHookUseSpringProps = () => {
         y: -2,
       },
     ],
-    loop: () => n++ < 2, // assign fn to assign to loop dynamically, based on other values if needed.
+    loop: () => loops.current++ < 2, // assign fn to assign to loop dynamically, based on other values if needed.
     delay: 2000,
     // reverse: clicked,
     //reset: clicked,

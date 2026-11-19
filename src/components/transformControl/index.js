@@ -1,1 +1,1 @@
-export { transformControl } from "./transformControl";
+export { TransformControl } from "./transformControl";

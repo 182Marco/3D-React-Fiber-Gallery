@@ -1,7 +1,6 @@
 import * as R from "@react-three/rapier";
 import * as D from "@react-three/drei";
 import { useLotsOfMashesSameFn } from "./lotsOfMashesSameFn.hook";
-import * as THREE from "three";
 
 const LotsOfMashesSameFn = () => {
   const h = useLotsOfMashesSameFn();

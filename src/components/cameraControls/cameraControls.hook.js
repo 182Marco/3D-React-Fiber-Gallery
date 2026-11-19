@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { useControls, buttonGroup, button } from "leva";
 import { MathUtils } from "three";
-import { CameraControls } from "@react-three/drei";
 
 const useCameraControls = () => {
   const { DEG2RAD } = MathUtils;

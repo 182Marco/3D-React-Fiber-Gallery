@@ -8,7 +8,7 @@ const Home3d = () => {
   return (
     <>
       <ambientLight intensity={3} />
-      <D.CameraControls enabled={false} ref={h.cameraRef} />
+      <D.CameraControls enabled={false} />
       <D.ScrollControls pages={3} damping={0.25}>
         <C.OverlayText txt={J.txt} />
         <C.Office scale={1.3} name={h.name} />

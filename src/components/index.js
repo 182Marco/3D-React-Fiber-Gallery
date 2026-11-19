@@ -1,5 +1,6 @@
 export { AnimateMultiplesMesh } from "./animateMultiplesMesh";
 export { Bike } from "./bike";
+export { CameraControl } from "./cameraControls";
 export { CascadingMeshes } from "./cascadingMeshes_";
 export { CascadingMeshesOnClick } from "./cascadingMeshesOnClick";
 export { CartFollowingMidget } from "./cartFollowingMidget";
@@ -32,5 +33,5 @@ export { PivotControl } from "./pivotControl";
 export { Portal } from "./portal";
 export { PortalPass } from "./portalPass";
 export { PresentationControl } from "./presentationControl";
-export { transformControl } from "./transformControl";
+export { TransformControl } from "./transformControl";
 export { Woman } from "./woman";

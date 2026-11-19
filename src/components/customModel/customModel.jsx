@@ -1,8 +1,8 @@
-import { useLoader } from "@react-three/fiber";
 import * as THREE from "three";
+import { useCustomModel } from "./customModel.hook";
 
 const CustomModel = () => {
-  const u = useLoader();
+  const u = useCustomModel();
   return (
     <mesh>
       <bufferGeometry>

@@ -1,6 +1,6 @@
 import { TransformControls, OrbitControls } from "@react-three/drei";
 
-const transformControl = () => (
+const TransformControl = () => (
   <>
     <OrbitControls makeDefault />
     <TransformControls
@@ -15,4 +15,4 @@ const transformControl = () => (
   </>
 );
 
-export { transformControl };
+export { TransformControl };
