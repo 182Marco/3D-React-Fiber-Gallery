@@ -1,15 +1,12 @@
 import * as R from "react";
 import * as U from "./utils";
-import { useAppContext } from "../context";
 
 const MIN_DPR = 1;
 const MAX_DPR = 1.5;
 
 const useScene = () => {
-  const { skipIntro, startedExperience, startExperience } = useAppContext();
-
   const [currentProject, setCurrentProject] = R.useState(
-    () => U.getProjectFromHash() ?? U.defaultProject
+    () => U.getProjectFromHash() ?? U.defaultProject,
   );
 
   // Progetto → hash. Si usa location.hash e non history.pushState perché
@@ -38,7 +35,7 @@ const useScene = () => {
       description,
       accent,
       lab: Boolean(lab),
-    })
+    }),
   );
 
   const getBgClass = project => U.registry[project]?.bg ?? "bg light-bg";
@@ -60,12 +57,9 @@ const useScene = () => {
     camera: U.getCamera(currentProject).camera,
     galleryItems,
     selectProject: setCurrentProject,
-    skipIntro,
     onPerformanceChange,
     getBgClass,
     isSlideShow,
-    startedExperience,
-    startExperience,
   };
 };
 

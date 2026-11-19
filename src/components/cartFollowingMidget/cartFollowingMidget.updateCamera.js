@@ -1,15 +1,10 @@
 import * as R from "react";
 import * as T from "@react-three/fiber";
-import { useAppContext } from "../../context";
 
 const useUpdateCamera = () => {
   const { camera } = T.useThree();
 
-  const { startedExperience } = useAppContext();
-
   R.useEffect(() => {
-    if (!startedExperience) return;
-
     // creato qui (non a livello di modulo) così il file audio viene
     // scaricato solo quando questa scena viene davvero usata
     const audio = new Audio("./audios/Song Of Unity.mp3");
@@ -19,7 +14,7 @@ const useUpdateCamera = () => {
       audio.pause();
       audio.currentTime = 0;
     };
-  }, [startedExperience]);
+  }, []);
 
   R.useEffect(() => {
     const originalPosition = camera.position.clone();

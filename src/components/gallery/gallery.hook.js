@@ -1,4 +1,5 @@
 import * as R from "react";
+import { getProjectFromHash } from "../../scene/utils";
 
 const HINT_KEY = "gallery-hint-seen";
 const HINT_MS = 7000;
@@ -20,7 +21,8 @@ const writeSeen = () => {
 };
 
 const useGallery = ({ items, current, onSelect }) => {
-  const [open, setOpen] = R.useState(false);
+  // All'avvio la galleria è già aperta, salvo link diretto a una scena.
+  const [open, setOpen] = R.useState(() => !getProjectFromHash());
   // Card sotto il cursore: tinge lo sfondo della galleria col suo colore.
   const [hovered, setHovered] = R.useState(null);
   // Suggerimento "ci sono N scene" sul pulsante: solo finché non lo si è

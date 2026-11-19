@@ -1,1 +1,0 @@
-export { LoadScreen } from "./loadScreen";

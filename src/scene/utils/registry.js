@@ -54,6 +54,7 @@ const registry = {
     title: "Home 3D",
     description: "A three-storey apartment revealed as you scroll.",
     accent: "#d9afd9",
+    tips: [["Scroll", "glide through the three floors"]],
     load: () => import("../../components/home3d"),
     exportName: "Home3d",
     wrapper: "suspense",
@@ -117,8 +118,7 @@ const registry = {
   },
 };
 
-// Progetto mostrato all'avvio. Il suo modulo viene importato subito: i
-// useGLTF.preload a livello di modulo alimentano useProgress (LoadScreen).
+// Progetto mostrato all'avvio (dietro la modale della galleria).
 const defaultProject = "CartFollowingMidget";
 
 export { registry, defaultProject };

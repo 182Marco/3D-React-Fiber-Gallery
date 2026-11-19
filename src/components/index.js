@@ -10,7 +10,6 @@ export { Dog } from "./dog";
 export { Explode } from "./explode";
 export { FallingMesh } from "./fallingMesh";
 export { Home3d } from "./home3d";
-export { LoadScreen } from "./loadScreen";
 export { LotsOfMashesSameFn } from "./lotsOfMashesSameFn";
 export { Game } from "./game";
 export { HookUseSpringProps } from "./hookUseSpringProps";
