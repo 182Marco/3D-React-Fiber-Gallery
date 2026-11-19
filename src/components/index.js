@@ -29,6 +29,7 @@ export { SpringRefHook_ } from "./springRefHook";
 export { PlayWithFritionToRoll } from "./playWithFritionToRoll";
 export { PhysicsScene } from "./physicsScene";
 export { PivotControl } from "./pivotControl";
+export { PhotoWorld } from "./photoWorld";
 export { Portal } from "./portal";
 export { PortalPass } from "./portalPass";
 export { PresentationControl } from "./presentationControl";

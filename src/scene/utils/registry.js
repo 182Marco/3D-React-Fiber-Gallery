@@ -8,8 +8,8 @@
 //   fitWidth    false se la scena gestisce da sé la larghezza (default: true →
 //               ResponsiveCamera riduce lo zoom su schermi stretti)
 //   camera      { position, fov, near, far } passati al Canvas (default di R3F:
-//               position [0,0,5], fov 75). Le scene esistenti sono tarate
-//               sul default
+//               position [0,0,5], fov 75). Solo PhotoWorld lo usa: le scene
+//               esistenti sono tarate sul default
 //   background  colore di sfondo del Canvas (opzionale)
 const registry = {
   Bike: {
@@ -100,6 +100,20 @@ const registry = {
     load: () => import("../../components/portal"),
     exportName: "Portal",
     wrapper: "suspense",
+  },
+  PhotoWorld: {
+    lab: true,
+    icon: "🌍",
+    title: "Photo Worlds",
+    description:
+      "Stand inside a real 360° photo: drag to look around, click the objects to knock them like billiard balls.",
+    accent: "#4a90c2",
+    load: () => import("../../components/photoWorld"),
+    exportName: "PhotoWorld",
+    wrapper: "suspense",
+    bg: "bg dark-bg",
+    // guarda il fiume, il ponte, le colonne e gli edifici (HDR Plaza, ~ +X)
+    camera: { position: [-6.4, 1.3, -1.3], fov: 58 },
   },
 };
 

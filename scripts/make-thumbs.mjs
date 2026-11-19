@@ -15,7 +15,7 @@
 import { chromium } from "playwright-core";
 import fs from "fs";
 
-const ALL = ["Bike", "CartFollowingMidget", "Dog", "Explode", "Home3d", "PortalPass", "slideShow", "Woman", "Portal"];
+const ALL = ["Bike", "CartFollowingMidget", "Dog", "Explode", "Home3d", "PortalPass", "slideShow", "Woman", "Portal", "PhotoWorld"];
 const [out, ...rest] = process.argv.slice(2);
 const names = rest.length ? rest : ALL;
 const BASE = process.env.BASE_URL ?? "http://localhost:8765/3D-React-Fiber-Gallery/";
