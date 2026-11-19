@@ -14,7 +14,6 @@ export { LoadScreen } from "./loadScreen";
 export { LotsOfMashesSameFn } from "./lotsOfMashesSameFn";
 export { Game } from "./game";
 export { HookUseSpringProps } from "./hookUseSpringProps";
-export { Images } from "./images";
 export { MassInRapier } from "./massInRapier";
 export { MethodsOfTheRigidBody } from "./methodsOfTheRigidBody";
 export { Office } from "./office";
