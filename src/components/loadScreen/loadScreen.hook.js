@@ -1,7 +1,7 @@
 import * as R from "react";
 import { useProgress } from "@react-three/drei";
 import { useAppContext } from "../../context";
-import { wait } from "@testing-library/user-event/dist/utils";
+import { wait } from "../../utils";
 
 const useLoadScreen = () => {
   const { startedExperience } = useAppContext();

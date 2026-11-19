@@ -3,7 +3,10 @@ name: Deploy React app to GitHub Pages
 on:
   push:
     branches:
-      - main # Sostituisci con il branch principale del tuo repository
+      - main
+
+permissions:
+  contents: write # serve a gh-pages per pubblicare sul branch gh-pages
 
 jobs:
   deploy:
@@ -11,20 +14,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: "16" # Imposta la versione di Node.js che vuoi usare
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build the app
-        run: npm run build
-
-      - name: Deploy to GitHub Pages
+      # "npm run deploy" esegue già "predeploy" (la build): non serve un passo separato.
+      - name: Build and deploy to GitHub Pages
         run: npm run deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Usa il token GitHub per fare il deploy
