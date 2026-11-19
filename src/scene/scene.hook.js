@@ -33,6 +33,7 @@ const useScene = () => {
     ([name, { title, description, accent, icon }]) => ({
       name,
       icon,
+      thumb: `./thumbs/${name}.jpg`,
       title,
       description,
       accent,

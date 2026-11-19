@@ -2,6 +2,7 @@ import { useGallery } from "./gallery.hook";
 import "./styles.scss";
 
 const pad = n => String(n + 1).padStart(2, "0");
+const hideBroken = e => (e.currentTarget.style.display = "none");
 
 const Gallery = props => {
   const { items, current } = props;
@@ -11,21 +12,30 @@ const Gallery = props => {
       <div className="gallery-bar">
         <button
           className={`gallery-toggle ${h.hint ? "hint" : ""}`}
+          style={{ "--accent": h.currentItem?.accent }}
           onClick={h.toggle}
         >
-          <span className="gallery-title">{h.currentTitle}</span>
-          {h.hint ? (
-            <small>Tap to explore {items.length} scenes</small>
-          ) : (
-            <span className="gallery-dots" aria-label="All scenes">
-              {items.map(item => (
-                <i
-                  key={item.name}
-                  className={item.name === current ? "active" : ""}
-                />
-              ))}
-            </span>
-          )}
+          <img
+            className="gallery-thumb"
+            src={h.currentItem?.thumb}
+            alt=""
+            onError={hideBroken}
+          />
+          <span className="gallery-text">
+            <span className="gallery-title">{h.currentTitle}</span>
+            {h.hint ? (
+              <small>Tap to explore {items.length} scenes</small>
+            ) : (
+              <span className="gallery-dots" aria-label="All scenes">
+                {items.map(item => (
+                  <i
+                    key={item.name}
+                    className={item.name === current ? "active" : ""}
+                  />
+                ))}
+              </span>
+            )}
+          </span>
         </button>
         <button
           className="gallery-step"
@@ -43,7 +53,11 @@ const Gallery = props => {
         </button>
       </div>
       {h.open && (
-        <div className="gallery-overlay" onClick={h.close}>
+        <div
+          className="gallery-overlay"
+          style={{ "--tint": h.tint }}
+          onClick={h.close}
+        >
           <div className="gallery-panel" onClick={e => e.stopPropagation()}>
             <header>
               <div>
@@ -61,12 +75,29 @@ const Gallery = props => {
                     className={item.name === current ? "active" : ""}
                     style={{ "--accent": item.accent }}
                     onClick={() => h.select(item.name)}
+                    onMouseEnter={() => h.setHovered(item.name)}
+                    onMouseLeave={() => h.setHovered(null)}
+                    onFocus={() => h.setHovered(item.name)}
+                    onBlur={() => h.setHovered(null)}
                   >
-                    <em>{pad(i)}</em>
+                    <img
+                      src={item.thumb}
+                      alt=""
+                      loading="lazy"
+                      onError={hideBroken}
+                    />
+                    <span className="tags">
+                      <em>{pad(i)}</em>
+                      {item.name === current && <u>Now viewing</u>}
+                    </span>
                     <b aria-hidden>{item.icon}</b>
-                    <strong>{item.title}</strong>
-                    <span>{item.description}</span>
-                    {item.name === current && <u>Now viewing</u>}
+                    <span className="info">
+                      <strong>{item.title}</strong>
+                      <span>{item.description}</span>
+                    </span>
+                    <span className="go" aria-hidden>
+                      Open →
+                    </span>
                   </button>
                 </li>
               ))}

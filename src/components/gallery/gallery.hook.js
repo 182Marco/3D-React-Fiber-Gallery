@@ -21,12 +21,17 @@ const writeSeen = () => {
 
 const useGallery = ({ items, current, onSelect }) => {
   const [open, setOpen] = R.useState(false);
+  // Card sotto il cursore: tinge lo sfondo della galleria col suo colore.
+  const [hovered, setHovered] = R.useState(null);
   // Suggerimento "ci sono N scene" sul pulsante: solo finché non lo si è
   // visto, per HINT_MS o fino alla prima apertura della galleria.
   const [hint, setHint] = R.useState(() => !readSeen());
 
   const index = items.findIndex(i => i.name === current);
-  const currentTitle = items[index]?.title ?? current;
+  const currentItem = items[index];
+  const currentTitle = currentItem?.title ?? current;
+  const tint =
+    items.find(i => i.name === hovered)?.accent ?? currentItem?.accent;
 
   const dismissHint = R.useCallback(() => {
     setHint(false);
@@ -43,7 +48,10 @@ const useGallery = ({ items, current, onSelect }) => {
     dismissHint();
     setOpen(o => !o);
   };
-  const close = () => setOpen(false);
+  const close = () => {
+    setOpen(false);
+    setHovered(null);
+  };
   const select = name => {
     onSelect(name);
     close();
@@ -61,7 +69,19 @@ const useGallery = ({ items, current, onSelect }) => {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
-  return { close, currentTitle, hint, index, open, select, step, toggle };
+  return {
+    close,
+    currentItem,
+    currentTitle,
+    hint,
+    index,
+    open,
+    select,
+    setHovered,
+    step,
+    tint,
+    toggle,
+  };
 };
 
 export { useGallery };
