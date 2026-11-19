@@ -1,9 +1,9 @@
 import { useAtom } from "jotai";
 import { slideAtom } from "../overlaySlideShow/overlaySlideShow.hook";
-import * as L from "leva";
 import * as R from "react";
 import * as F from "@react-three/fiber";
 import { dollyOffset } from "../../fixedVars";
+import { useParam } from "../../../paramsPanel";
 
 const useCameraHandler = slideDistance => {
   const viewport = F.useThree(state => state.viewport);
@@ -11,7 +11,7 @@ const useCameraHandler = slideDistance => {
   const [slide] = useAtom(slideAtom);
   const lastSlide = R.useRef(0);
 
-  const { dollyDistance } = L.useControls(dollyOffset);
+  const dollyDistance = useParam("dolly distance", dollyOffset);
 
   const moveToSlide = async () => {
     await cameraControls.current.setLookAt(

@@ -1,7 +1,7 @@
 import { Gallery } from "../components/gallery";
+import { ParamsPanel } from "../components/paramsPanel";
 import { LoadScreen } from "../components/loadScreen";
 import { OverlaySlideShow } from "../components/slideShow/components/overlaySlideShow";
-import * as L from "leva";
 import * as F from "@react-three/fiber";
 import * as D from "@react-three/drei";
 import { useScene } from "./scene.hook";
@@ -13,8 +13,8 @@ const Scene = () => {
     <>
       {h.startedExperience && (
         <div className={h.getBgClass(h.currentProject)}>
-          {/* Leva resta solo per i parametri dei singoli progetti */}
-          <L.Leva />
+          {/* parametri registrati dalle scene con useParam */}
+          <ParamsPanel />
           <Gallery
             items={h.galleryItems}
             current={h.currentProject}

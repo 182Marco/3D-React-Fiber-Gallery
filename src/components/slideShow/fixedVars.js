@@ -26,20 +26,8 @@ const scenes = [
   },
 ];
 
-const slideDistance = {
-  slideDistance: {
-    value: 1,
-    min: 0,
-    max: 10,
-  },
-};
+const slideDistance = { value: 1, min: 0, max: 10, step: 0.1 };
 
-const dollyOffset = {
-  dollyDistance: {
-    value: 10,
-    min: 0,
-    max: 50,
-  },
-};
+const dollyOffset = { value: 10, min: 0, max: 50, step: 0.5 };
 
 export { dollyOffset, scenes, slideDistance };

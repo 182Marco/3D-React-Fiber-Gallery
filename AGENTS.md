@@ -5,7 +5,7 @@ Galleria di esperimenti 3D con React Three Fiber (CRA + `react-app-rewired`, Jav
 ## Stack
 - React 18, `@react-three/fiber` 8, `@react-three/drei` 9, `three` 0.159
 - Animazioni: `@react-spring/three`, `gsap`; fisica: `@react-three/rapier`
-- UI/debug: `leva`; stato globale: React context (`src/context`), `jotai` disponibile
+- UI: pannello parametri proprio (`src/components/paramsPanel`, basato su `jotai`); stato globale: React context (`src/context`)
 - Stili: SCSS (`src/styles`)
 - Build e dev server passano da `react-app-rewired` (CRA); Vite è stato rimosso.
 
@@ -17,13 +17,13 @@ Galleria di esperimenti 3D con React Three Fiber (CRA + `react-app-rewired`, Jav
 
 ## Architettura
 - `src/index.js` → `src/root.jsx` (`AppProvider` + `Scene`).
-- `src/scene/scene.jsx` mostra `LoadScreen` finché `startedExperience` è false, poi un `<Canvas shadows>` con il progetto scelto dal controllo Leva `project`.
+- `src/scene/scene.jsx` mostra `LoadScreen` finché `startedExperience` è false, poi un `<Canvas shadows>` con il progetto scelto dalla galleria (stato in `scene.hook.js`).
 - `src/scene/utils/registry.js` è l'unico punto in cui si definisce un progetto selezionabile (Bike, CartFollowingMidget, Dog, Explode, Home3d, PortalPass, slideShow, Woman): import dinamico, wrapper, sfondo, camera, testo/colore della card. `projects.js` ne deriva i nomi.
 - `src/scene/getComponents/getComponents.jsx` crea un componente `React.lazy` per voce del registry e lo avvolge col wrapper indicato (`suspense` → `WithSuspense`, `fallback` → `WithFallBackSuspense`, `scroll` → `WithScrollControls`, in `getComponents/wrappers`). Camera e sfondo si leggono dal registry (`getCamera.js`, `getBgClass` in `scene.hook.js`).
 - `src/components/*` contiene tutti i componenti 3D; molti sono esperimenti non collegati al selettore (physics, spring, ecc.). Barrel in `src/components/index.js`.
 - Asset statici (modelli `.glb/.gltf`, HDR, font, texture, audio) in `public/`; vanno caricati con path relativo a `public`.
 
-- Navigazione: `src/components/gallery` (pulsante in alto a sinistra → griglia di card) + deep link con hash `#/nomeprogetto` gestito in `scene.hook.js`. Leva non seleziona più il progetto: contiene solo i parametri dei singoli progetti (animazioni Dog/Woman, oggetto di Explode, ecc.).
+- Navigazione: `src/components/gallery` (pulsante in alto a sinistra → griglia di card) + deep link con hash `#/nomeprogetto` gestito in `scene.hook.js`. I parametri delle singole scene (animazioni Dog/Woman, oggetto di Explode, distanze slideShow) si dichiarano con `useParam(chiave, definizione)` / `useParamActions` dagli hook: il pannello in alto a destra (`ParamsPanel`) li mostra da solo (select/pillole, slider, toggle, colore, pulsanti). Leva è stata rimossa.
 
 ## Convenzioni
 - Ogni componente vive in una cartella `camelCase/` con: `nome.jsx` (solo JSX), `nome.hook.js` (logica, hook `useNome`), `index.js` (re-export). Rispettare questa separazione.

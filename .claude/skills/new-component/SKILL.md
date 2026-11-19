@@ -34,7 +34,7 @@ Un componente con hook ha sempre `.hook.js`, anche se piccolo. Se l'unica logica
 - Eventuale `useGLTF.preload("./model/x.glb")` a fine file, prima dell'export.
 
 **`.hook.js` — logica**
-- Un solo hook `use<Nome>` come arrow function. Contiene stato, ref, effetti, `useFrame`, `useControls` (Leva), caricamento modelli.
+- Un solo hook `use<Nome>` come arrow function. Contiene stato, ref, effetti, `useFrame`, `useParam` (pannello parametri, da `../paramsPanel`), caricamento modelli.
 - Restituisce **un oggetto** con tutto ciò che serve al `.jsx`, chiavi in ordine alfabetico quando possibile: `return { nodes, materials, groupRef };`.
 - Riceve parametri semplici dal componente (`useMovingItem(xSpread, speed)`), non props intere.
 - Effetti con cleanup se acquisiscono risorse (audio, camera, animazioni).
@@ -64,7 +64,7 @@ Namespace a una lettera per le librerie, import nominato per l'hook locale:
 import * as R from "react";             // R.useRef, R.useEffect
 import * as F from "@react-three/fiber"; // F.useFrame, F.useThree
 import * as D from "@react-three/drei";  // D.useGLTF, D.OrbitControls
-import * as L from "leva";               // L.useControls
+import { useParam } from "../paramsPanel"; // parametri nel pannello UI
 import * as C from "./components";       // C.Sotto
 import * as U from "./utils";            // U.fn
 import { useNome } from "./nome.hook";
@@ -118,7 +118,7 @@ D.useGLTF.preload("./model/nome.gltf");
 export { Nome };
 ```
 
-Scena selezionabile (con controlli Leva)
+Scena selezionabile (con parametri nel pannello: `const animation = useParam("animation", { value: names[0], options: names })`; slider con `{ value, min, max, step }`, toggle con `{ value: true }`, colore con `{ value: "#fff" }`, pulsanti con `useParamActions("nome", { etichetta: () => ... })`)
 ```jsx
 const Nome = () => {
   const h = useNome();

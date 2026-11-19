@@ -1,8 +1,8 @@
 import * as D from "@react-three/drei";
-import * as L from "leva";
 import * as R from "react";
 import { useGraph } from "@react-three/fiber";
 import { SkeletonUtils } from "three-stdlib";
+import { useParam } from "../paramsPanel";
 
 const useWoman = () => {
   const group = R.useRef();
@@ -11,9 +11,7 @@ const useWoman = () => {
   const { nodes, materials } = useGraph(clone);
   const { actions, names } = D.useAnimations(animations, group);
 
-  const { animation } = L.useControls({
-    animation: { value: names[3], options: names },
-  });
+  const animation = useParam("animation", { value: names[3], options: names });
 
   const stopActiveAnimation = () =>
     Object.values(actions).forEach(a => (a.isRunning() ? a.stop() : null));

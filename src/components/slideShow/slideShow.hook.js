@@ -1,9 +1,9 @@
 import * as R from "react";
 import * as F from "@react-three/fiber";
-import * as L from "leva";
 import { useAtom } from "jotai";
 import { slideAtom } from "./components/overlaySlideShow/overlaySlideShow.hook";
 import * as vars from "./fixedVars";
+import { useParam } from "../paramsPanel";
 
 // tempo durante cui la slide precedente resta animata (transizione camera)
 const TRANSITION_MS = 3000;
@@ -14,7 +14,7 @@ const useSlideShow = () => {
   const [activeSlides, setActiveSlides] = R.useState([slide]);
   const lastSlide = R.useRef(slide);
 
-  const { slideDistance } = L.useControls(vars.slideDistance);
+  const slideDistance = useParam("slide distance", vars.slideDistance);
 
   // Solo le slide visibili (attiva + precedente durante la transizione)
   // vengono renderizzate ogni frame; le altre restano sull'ultimo frame.

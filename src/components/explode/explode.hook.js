@@ -1,6 +1,6 @@
 import * as D from "@react-three/drei";
-import * as L from "leva";
 import * as R from "react";
+import { useParam } from "../paramsPanel";
 
 const useExplode = () => {
   const bird = "bird";
@@ -9,7 +9,7 @@ const useExplode = () => {
   const componets = { bird, banana, heart };
   const options = Object.keys(componets);
 
-  const { item } = L.useControls({ item: { value: heart, options } });
+  const item = useParam("item", { value: heart, options });
 
   const scroll = D.useScroll();
 
