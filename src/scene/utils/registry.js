@@ -4,6 +4,7 @@
 //   wrapper     "suspense" | "fallback" | "scroll" (vedi getComponents.jsx)
 //   bg          classi CSS dello sfondo (default: "bg light-bg")
 //   lab         true = esperimento mostrato con badge "Lab" in galleria
+//   tips        [[gesto, effetto], ...] mostrati sotto la card in galleria
 //   title/description/accent/icon  testo, colore ed emoji della card in galleria
 //   fitWidth    false se la scena gestisce da sé la larghezza (default: true →
 //               ResponsiveCamera riduce lo zoom su schermi stretti)
@@ -17,6 +18,11 @@ const registry = {
     title: "Bicycle",
     description: "A 3D bicycle with continuously turning wheels.",
     accent: "#97d9e1",
+    tips: [
+      ["Drag", "orbit the bike"],
+      ["Scroll", "zoom in & out"],
+      ["Right-drag", "pan"],
+    ],
     load: () => import("../../components/bike"),
     exportName: "Bike",
     wrapper: "fallback",
@@ -26,6 +32,10 @@ const registry = {
     title: "The Carriage of Destiny",
     description: "An endless landscape of objects looping past a cart.",
     accent: "#16a04b",
+    tips: [
+      ["Drag", "swing around the cart"],
+      ["Scroll", "zoom closer or farther"],
+    ],
     load: () => import("../../components/cartFollowingMidget"),
     exportName: "CartFollowingMidget",
     wrapper: "suspense",
@@ -36,6 +46,11 @@ const registry = {
     title: "Dog",
     description: "An animated dog: pick an animation from the panel.",
     accent: "#c9a27a",
+    tips: [
+      ["Panel", "pick an animation"],
+      ["Drag", "orbit"],
+      ["Scroll", "zoom"],
+    ],
     load: () => import("../../components/dog"),
     exportName: "Dog",
     wrapper: "fallback",
@@ -45,6 +60,11 @@ const registry = {
     title: "Explode",
     description: "Scroll to blow a model apart and put it back together.",
     accent: "#e8a33d",
+    tips: [
+      ["Scroll", "blow it apart & reassemble"],
+      ["Drag", "rotate the model"],
+      ["Panel", "swap the model"],
+    ],
     load: () => import("../../components/explode"),
     exportName: "Explode",
     wrapper: "scroll",
@@ -64,6 +84,11 @@ const registry = {
     title: "Portal Pass",
     description: "Three cards that open portals into other 3D worlds.",
     accent: "#34495e",
+    tips: [
+      ["Click", "a card to step inside"],
+      ["Drag", "look around"],
+      ["Click", "again to leave"],
+    ],
     load: () => import("../../components/portalPass"),
     exportName: "PortalPass",
     wrapper: "fallback",
@@ -75,6 +100,12 @@ const registry = {
     title: "Slideshow",
     description: "A 3D slider where each slide is a window into a new world.",
     accent: "#8f9aa8",
+    tips: [
+      ["← →", "change slide"],
+      ["Drag", "spin the model"],
+      ["Scroll", "zoom in & out"],
+      ["Panel", "tune distances"],
+    ],
     load: () => import("../../components/slideShow"),
     exportName: "SlideShow",
     wrapper: "fallback",
@@ -87,6 +118,11 @@ const registry = {
     title: "Woman",
     description: "An animated character: pick an animation from the panel.",
     accent: "#707070",
+    tips: [
+      ["Panel", "pick an animation"],
+      ["Drag", "orbit"],
+      ["Scroll", "zoom"],
+    ],
     load: () => import("../../components/woman"),
     exportName: "Woman",
     wrapper: "suspense",
@@ -98,6 +134,11 @@ const registry = {
     title: "Portal",
     description: "Double-click the card to step inside another world.",
     accent: "#e8a33d",
+    tips: [
+      ["Double-click", "the egg to enter"],
+      ["Drag", "orbit"],
+      ["Double-click", "again to leave"],
+    ],
     load: () => import("../../components/portal"),
     exportName: "Portal",
     wrapper: "suspense",
@@ -109,6 +150,11 @@ const registry = {
     description:
       "Stand inside a real 360° photo: drag to look around, click the objects to knock them like billiard balls.",
     accent: "#4a90c2",
+    tips: [
+      ["Drag", "look around"],
+      ["Click", "objects to knock them"],
+      ["Panel", "switch world"],
+    ],
     load: () => import("../../components/photoWorld"),
     exportName: "PhotoWorld",
     wrapper: "suspense",

@@ -27,7 +27,7 @@ const useScene = () => {
   }, []);
 
   const galleryItems = Object.entries(U.registry).map(
-    ([name, { title, description, accent, icon, lab }]) => ({
+    ([name, { title, description, accent, icon, lab, tips }]) => ({
       name,
       icon,
       thumb: `./thumbs/${name}.jpg`,
@@ -35,6 +35,7 @@ const useScene = () => {
       description,
       accent,
       lab: Boolean(lab),
+      tips: tips ?? [],
     }),
   );
 
@@ -56,6 +57,8 @@ const useScene = () => {
     fitWidth,
     camera: U.getCamera(currentProject).camera,
     galleryItems,
+    tips: U.registry[currentProject]?.tips,
+    accent: U.registry[currentProject]?.accent,
     selectProject: setCurrentProject,
     onPerformanceChange,
     getBgClass,

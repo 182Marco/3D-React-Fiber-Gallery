@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap");
+
+.scene-hint {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px 4px 4px;
+    border-radius: 999px;
+    background: rgba(14, 14, 20, 0.86);
+    border: 1px solid color-mix(in srgb, var(--accent, #fff) 45%, transparent);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 12.5px;
+    line-height: 1.2;
+    animation: hint-in 0.5s ease-out both;
+    animation-delay: calc(0.3s + var(--i) * 90ms);
+  }
+
+  kbd {
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--accent, #fff);
+    color: color-mix(in srgb, var(--accent, #fff) 12%, #000);
+    font:
+      700 10.5px/1.2 "Space Grotesk",
+      system-ui,
+      sans-serif;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+}
+
+@keyframes hint-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-hint li {
+    animation: none;
+  }
+}
+
+// Telefono: riga centrata in basso (sopra la UI della slideshow, se c'è)
+@media (max-width: 700px) {
+  .scene-hint {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+
+    &.lifted {
+      bottom: 96px;
+    }
+
+    li {
+      font-size: 11px;
+    }
+
+    kbd {
+      font-size: 9.5px;
+      padding: 2px 8px;
+    }
+  }
+}

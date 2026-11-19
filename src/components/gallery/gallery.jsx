@@ -100,6 +100,16 @@ const Gallery = props => {
                       Open →
                     </span>
                   </button>
+                  {item.tips.length > 0 && (
+                    <ul className="tips" style={{ "--accent": item.accent }}>
+                      {item.tips.map(([key, text]) => (
+                        <li key={key + text}>
+                          <kbd>{key}</kbd>
+                          <span>{text}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               ))}
             </ul>

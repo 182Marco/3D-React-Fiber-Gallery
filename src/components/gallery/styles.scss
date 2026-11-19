@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap");
+
 // Permette di animare il colore con cui lo sfondo della galleria si tinge.
 @property --tint {
   syntax: "<color>";
@@ -37,7 +39,9 @@
   padding: 6px 16px 6px 6px;
   border-radius: 14px;
   text-align: left;
-  font: 600 15px/1.2 system-ui, sans-serif;
+  font:
+    600 15px/1.2 system-ui,
+    sans-serif;
 
   // miniatura della scena corrente, con anello del suo colore
   .gallery-thumb {
@@ -127,11 +131,10 @@
   inset: 0;
   z-index: 40;
   display: flex;
-  padding: 20px 16px;
+  padding: 14px 16px;
   overflow-y: auto;
   // alone del colore della card sotto il cursore, su fondo scuro
-  background:
-    radial-gradient(
+  background: radial-gradient(
       70% 55% at 50% 0%,
       color-mix(in srgb, var(--tint) 55%, transparent),
       transparent 70%
@@ -150,17 +153,17 @@
 }
 
 .gallery-panel {
-  width: min(1040px, 100%);
+  width: min(1120px, 100%);
   margin: auto;
 
   header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 22px;
+    margin-bottom: 18px;
 
     h2 {
-      font-size: 32px;
+      font-size: 34px;
       font-weight: 800;
       letter-spacing: -0.02em;
       background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.55));
@@ -171,13 +174,13 @@
 
     p {
       margin-top: 4px;
-      font-size: 14px;
+      font-size: 15px;
       opacity: 0.7;
     }
 
     button {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       flex: none;
       border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 50%;
@@ -192,20 +195,20 @@
     }
   }
 
-  ul {
+  > ul {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
     padding: 0;
     list-style: none;
   }
 
-  li {
+  > ul > li {
     animation: gallery-rise 0.4s ease-out both;
     animation-delay: calc(var(--i) * 50ms);
   }
 
-  li button {
+  > ul > li > button {
     position: relative;
     display: block;
     width: 100%;
@@ -331,7 +334,7 @@
     }
 
     strong {
-      font-size: 19px;
+      font-size: 20px;
       letter-spacing: -0.01em;
       text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
     }
@@ -394,6 +397,50 @@
   }
 }
 
+// "Try this": cosa fare per provare gli effetti, sotto ogni card.
+.gallery-panel .tips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 2px 0;
+  padding: 0;
+  list-style: none;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    animation: none;
+    padding: 3px 11px 3px 3px;
+    border-radius: 999px;
+    background: color-mix(
+      in srgb,
+      var(--accent) 14%,
+      rgba(255, 255, 255, 0.04)
+    );
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    font-size: 13px;
+    line-height: 1.2;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  kbd {
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--accent);
+    // testo scuro o chiaro in base al colore della scena
+    color: color-mix(in srgb, var(--accent) 12%, #000);
+    font:
+      700 11px/1.2 "Space Grotesk",
+      system-ui,
+      sans-serif;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+}
+
 @keyframes gallery-live {
   50% {
     opacity: 0.3;
@@ -416,7 +463,7 @@
 @media (prefers-reduced-motion: reduce) {
   .gallery-toggle.hint,
   .gallery-overlay,
-  .gallery-panel li,
+  .gallery-panel > ul > li,
   .gallery-panel li button u::before {
     animation: none;
   }
@@ -424,6 +471,60 @@
   .gallery-panel li button,
   .gallery-panel li button img {
     transition: none;
+  }
+}
+
+// Desktop: la galleria occupa tutta la finestra, senza scroll. Le card si
+// dividono lo spazio in altezza (5 colonne × 2 righe per 10 scene).
+@media (min-width: 1000px) and (min-height: 560px) {
+  .gallery-overlay {
+    overflow: hidden;
+    padding: 28px 36px;
+  }
+
+  .gallery-panel {
+    display: flex;
+    flex-direction: column;
+    width: min(1560px, 100%);
+    height: 100%;
+    margin: 0 auto;
+
+    > ul {
+      flex: 1;
+      min-height: 0;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-auto-rows: minmax(0, 1fr);
+      gap: 18px 20px;
+    }
+
+    > ul > li {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    > ul > li > button {
+      flex: 1;
+      min-height: 0;
+      aspect-ratio: auto;
+
+      strong {
+        font-size: 22px;
+      }
+
+      .info > span {
+        -webkit-line-clamp: 3;
+        font-size: 14px;
+      }
+    }
+
+    .tips li {
+      font-size: 14px;
+    }
+
+    .tips kbd {
+      font-size: 11.5px;
+    }
   }
 }
 
@@ -442,12 +543,12 @@
       font-size: 24px;
     }
 
-    ul {
+    > ul {
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
     }
 
-    li button {
+    > ul > li > button {
       aspect-ratio: 4 / 5;
       border-radius: 14px;
 

@@ -1,5 +1,6 @@
 import { Gallery } from "../components/gallery";
 import { ResponsiveCamera } from "../components/responsiveCamera";
+import { SceneHint } from "../components/sceneHint";
 import { ParamsPanel } from "../components/paramsPanel";
 import { OverlaySlideShow } from "../components/slideShow/components/overlaySlideShow";
 import * as F from "@react-three/fiber";
@@ -17,6 +18,12 @@ const Scene = () => {
         items={h.galleryItems}
         current={h.currentProject}
         onSelect={h.selectProject}
+      />
+      <SceneHint
+        name={h.currentProject}
+        tips={h.tips}
+        accent={h.accent}
+        lifted={h.isSlideShow}
       />
       {h.isSlideShow && <OverlaySlideShow />}
       {/* key: a ogni cambio di scena il canvas viene ricreato, così la
