@@ -1,7 +1,6 @@
 import * as R from "react";
 import * as D from "@react-three/drei";
 import * as THREE from "three";
-import { DEG2RAD } from "three/src/math/MathUtils";
 import { useScene } from "./slide.hook";
 
 // AccumulativeShadows ri-bake-a 100 frame a ogni suo re-render (il suo
@@ -87,7 +86,7 @@ const Slide = ({ mainColor, path, active, name, ...props }) => {
           autoRotate={active}
           enabled={active}
           enablePan={false}
-          maxPolarAngle={DEG2RAD * 75}
+          maxPolarAngle={THREE.MathUtils.DEG2RAD * 75}
           minDistance={6}
           maxDistance={10}
           autoRotateSpeed={0.5}
