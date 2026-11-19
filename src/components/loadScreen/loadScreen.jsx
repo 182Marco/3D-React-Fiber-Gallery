@@ -9,7 +9,7 @@ const LoadScreen = ({ started, onStarted }) => {
         <div className={`loadingScreen ${started ? "start" : ""}`}>
           <h1>The Carriage of Destiny!</h1>
           <main>
-            <button disabled={h.progress < 100} onClick={onStarted}>
+            <button disabled={!h.ready} onClick={onStarted}>
               Start
             </button>
           </main>
