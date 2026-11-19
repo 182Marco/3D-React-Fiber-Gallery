@@ -7,11 +7,13 @@ const useScene = path => {
     scene.traverse(child => {
       if (child.isMesh) {
         child.castShadow = true;
-        child.receiveShadow = true;
       }
     });
   }, [scene]);
-  const ratioScale = Math.min(1.2, Math.max(0.5, window.innerWidth / 1920));
+  const ratioScale = R.useMemo(
+    () => Math.min(1.2, Math.max(0.5, window.innerWidth / 1920)),
+    [],
+  );
 
   return {
     nodes,
