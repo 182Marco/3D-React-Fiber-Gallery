@@ -15,7 +15,7 @@ const Scene = () => {
           {/* key: a ogni cambio di scena il canvas viene ricreato, così la
               telecamera riparte frontale (posizione di default) e non da dove
               l'aveva lasciata la scena precedente */}
-          <F.Canvas key={h.currentProject} shadows>
+          <F.Canvas key={h.currentProject} shadows dpr={[1, 1.5]}>
             {GetComponents(h.currentProject)}
           </F.Canvas>
         </div>
