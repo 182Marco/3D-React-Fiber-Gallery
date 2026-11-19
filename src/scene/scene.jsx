@@ -12,7 +12,12 @@ const Scene = () => {
         <div className={h.getBgClass(h.currentProject)}>
           {h.startedExperience && <L.Leva />}
           {h.isSlideShow && <C.OverlaySlideShow />}
-          <F.Canvas shadows>{GetComponents(h.currentProject)}</F.Canvas>
+          {/* key: a ogni cambio di scena il canvas viene ricreato, così la
+              telecamera riparte frontale (posizione di default) e non da dove
+              l'aveva lasciata la scena precedente */}
+          <F.Canvas key={h.currentProject} shadows>
+            {GetComponents(h.currentProject)}
+          </F.Canvas>
         </div>
       )}
       <C.LoadScreen
