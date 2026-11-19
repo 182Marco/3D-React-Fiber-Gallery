@@ -13,7 +13,7 @@ const SlideShow = () => {
       <C.CameraHandler slideDistance={h.slideDistance} />
       <group>
         <mesh position-y={h.viewport.height / 2 + 1.5}>
-          <sphereGeometry args={[1, 32, 32]} />
+          <sphereGeometry args={[1, 24, 24]} />
           <D.MeshDistortMaterial color={scenes[0].mainColor} speed={3} />
         </mesh>
         <mesh
@@ -50,8 +50,12 @@ const SlideShow = () => {
         >
           <planeGeometry args={[h.viewport.width, h.viewport.height]} />
           <meshBasicMaterial toneMapped={false}>
-            <D.RenderTexture attach="map">
-              <C.Slide {...s} />
+            <D.RenderTexture
+              attach="map"
+              samples={4}
+              frames={h.activeSlides.includes(index) ? Infinity : 3}
+            >
+              <C.Slide {...s} active={h.activeSlides.includes(index)} />
             </D.RenderTexture>
           </meshBasicMaterial>
         </mesh>
