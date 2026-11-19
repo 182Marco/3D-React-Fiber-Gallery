@@ -32,10 +32,12 @@ const Scene = () => {
           </F.Canvas>
         </div>
       )}
-      <LoadScreen
-        started={h.startedExperience}
-        onStarted={h.startExperience}
-      />
+      {!h.skipIntro && (
+        <LoadScreen
+          started={h.startedExperience}
+          onStarted={h.startExperience}
+        />
+      )}
     </>
   );
 };

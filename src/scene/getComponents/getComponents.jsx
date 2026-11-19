@@ -15,7 +15,8 @@ const lazyComponents = Object.fromEntries(
 );
 
 // Progetto di default: import anticipato, vedi commento in registry.js.
-U.registry[U.defaultProject].load();
+// Con un link diretto a un altro progetto l'intro non c'è, quindi non serve.
+if (!U.isDeepLinkToOtherProject()) U.registry[U.defaultProject].load();
 
 const GetComponents = projName => {
   const project = U.registry[projName];

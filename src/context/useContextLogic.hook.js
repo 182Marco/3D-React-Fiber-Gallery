@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { isDeepLinkToOtherProject } from "../scene/utils";
 
 const useContextLogic = () => {
-  const [startedExperience, setStart] = useState(false);
+  // Link diretto a un progetto non di default: niente intro, si parte subito.
+  const [skipIntro] = useState(isDeepLinkToOtherProject);
+  const [startedExperience, setStart] = useState(skipIntro);
 
   const startExperience = () => setStart(true);
 
-  return { startedExperience, startExperience };
+  return { skipIntro, startedExperience, startExperience };
 };
 
 export { useContextLogic };

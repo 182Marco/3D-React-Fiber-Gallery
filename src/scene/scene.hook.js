@@ -5,18 +5,11 @@ import { useAppContext } from "../context";
 const MIN_DPR = 1;
 const MAX_DPR = 1.5;
 
-// Deep link: l'hash dell'URL (#/bike, case-insensitive) sceglie il progetto.
-const options = Object.keys(U.projects);
-const getProjectFromHash = () => {
-  const name = window.location.hash.replace(/^#\/?/, "").toLowerCase();
-  return options.find(o => o.toLowerCase() === name);
-};
-
 const useScene = () => {
-  const { startedExperience, startExperience } = useAppContext();
+  const { skipIntro, startedExperience, startExperience } = useAppContext();
 
   const [currentProject, setCurrentProject] = R.useState(
-    () => getProjectFromHash() ?? U.defaultProject
+    () => U.getProjectFromHash() ?? U.defaultProject
   );
 
   // Progetto → hash. Si usa location.hash e non history.pushState perché
@@ -29,7 +22,7 @@ const useScene = () => {
   // Tasto indietro/avanti o hash modificato a mano → progetto.
   R.useEffect(() => {
     const onHashChange = () => {
-      const fromHash = getProjectFromHash();
+      const fromHash = U.getProjectFromHash();
       if (fromHash) setCurrentProject(fromHash);
     };
     window.addEventListener("hashchange", onHashChange);
@@ -63,6 +56,7 @@ const useScene = () => {
     fitWidth,
     galleryItems,
     selectProject: setCurrentProject,
+    skipIntro,
     onPerformanceChange,
     getBgClass,
     isSlideShow,
