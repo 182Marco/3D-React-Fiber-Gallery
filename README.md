@@ -54,7 +54,7 @@ The main goals of this project are:
 - [Three.js](https://threejs.org/) - A library for 3D graphics.
 - [React Drei](https://github.com/utsuboco/drei) - Advanced components and functions for React Three Fiber.
 - [React](https://reactjs.org/) - The main library for interface development.
-- [Leva](https://github.com/utsuboco/leva) - State control and real-time interaction.
+- [Jotai](https://jotai.org/) - Lightweight state shared between the 3D scenes and the UI.
 - [SCSS](https://sass-lang.com/) - A CSS preprocessor for advanced style management.
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - The primary language for logic and interactions.
 
