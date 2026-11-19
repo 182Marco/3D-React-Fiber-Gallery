@@ -6,15 +6,35 @@ import { atom, useAtomValue, useSetAtom } from "jotai";
 // React) sia nel pannello DOM.
 const paramsAtom = atom({});
 
+// Ogni registrazione ha un proprietario: alla pulizia (cambio scena) toglie
+// solo la propria voce. Senza, il canvas vecchio — smontato dopo che il nuovo
+// si è già registrato — cancellava i parametri della scena appena aperta.
+// Il valore scelto si conserva solo se è ancora valido per la nuova
+// definizione (es. un'animazione che non esiste nella scena successiva).
+const isValid = (def, value) =>
+  value !== undefined && (!def.options || def.options.includes(value));
+
 const useRegister = (key, def) => {
   const setParams = useSetAtom(paramsAtom);
+  // cambiano le opzioni (altro oggetto/scena) → ci si registra di nuovo
+  const signature = JSON.stringify([def.options, def.min, def.max, def.step]);
   R.useEffect(() => {
+    const owner = Symbol(key);
     setParams(p => ({
       ...p,
-      [key]: { ...def, value: p[key]?.value ?? def.value },
+      [key]: {
+        ...def,
+        owner,
+        value: isValid(def, p[key]?.value) ? p[key].value : def.value,
+      },
     }));
-    return () => setParams(({ [key]: _removed, ...rest }) => rest);
-  }, [key]);
+    return () =>
+      setParams(p => {
+        if (p[key]?.owner !== owner) return p;
+        const { [key]: _removed, ...rest } = p;
+        return rest;
+      });
+  }, [key, signature]);
 };
 
 // Registra un parametro e ne restituisce il valore corrente.
@@ -27,7 +47,7 @@ const useParam = (key, def) => {
   useRegister(key, def);
   const valueAtom = R.useMemo(
     () => atom(get => get(paramsAtom)[key]?.value),
-    [key]
+    [key],
   );
   return useAtomValue(valueAtom) ?? def.value;
 };
