@@ -9,7 +9,7 @@ const useExplode = () => {
   const componets = { bird, banana, heart };
   const options = Object.keys(componets);
 
-  const item = useParam("item", { value: heart, options });
+  const item = useParam("item", { value: bird, options });
 
   const scroll = D.useScroll();
 
