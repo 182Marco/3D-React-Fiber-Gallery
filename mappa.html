@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mappa del progetto</title>
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#1e1e1e; --panel:#252526; --bar:#333333; --tab:#2d2d2d; --line:#3c3c3c;
+  --text:#d4d4d4; --dim:#9da0a6; --hi:#ffffff; --accent:#4fc1ff; --status:#007acc;
+  --c-entry:#3b6ea5; --c-ctx:#7b5aa6; --c-scene:#2f8f83; --c-proj:#c27b2e; --c-asset:#5b5f66; --c-ui:#a6527a;
+  --ok:#6cc08b; --warn:#e5c07b;
+  --mono: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 var(--sans);display:flex;flex-direction:column}
+header.top{display:flex;align-items:center;gap:16px;padding:0 16px;background:var(--panel);border-bottom:1px solid var(--line);flex-wrap:wrap}
+header.top h1{font-size:15px;margin:0;padding:12px 0;color:var(--hi);font-weight:600;white-space:nowrap}
+[role=tablist]{display:flex;gap:2px;flex-wrap:wrap}
+[role=tab]{background:none;border:0;border-bottom:2px solid transparent;color:var(--dim);font:inherit;font-size:14px;padding:13px 14px;cursor:pointer}
+[role=tab]:hover{color:var(--hi)}
+[role=tab][aria-selected=true]{color:var(--hi);border-bottom-color:var(--accent)}
+[role=tab]:focus-visible,button:focus-visible,.row:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+main{flex:1;min-height:0;position:relative}
+section.tabpanel{display:none;height:100%;overflow:auto}
+section.tabpanel.on{display:block}
+#p-file.on{display:flex;flex-direction:column;overflow:hidden}
+
+/* ---------- GRAFO ---------- */
+.wrap{max-width:1100px;margin:0 auto;padding:20px 16px 48px}
+.wrap h2{color:var(--hi);font-size:22px;margin:4px 0 6px}
+.wrap p.lead{color:var(--dim);margin:0 0 16px;max-width:70ch}
+.graphbox{overflow:auto;border:1px solid var(--line);border-radius:10px;background:#1a1a1a}
+svg#graph{display:block;min-width:820px;width:100%;height:auto}
+.node{cursor:pointer}
+.node rect{stroke:rgba(255,255,255,.18);stroke-width:1;transition:stroke .15s,filter .15s}
+.node:hover rect,.node:focus rect{stroke:#fff;stroke-width:2}
+.node text{fill:#fff;pointer-events:none}
+.node .t{font:600 13px var(--sans)} .node .s{font:11px var(--sans);fill:rgba(255,255,255,.82)}
+.edge{fill:none;stroke:#7d8590;stroke-width:1.4}
+.edge.dash{stroke-dasharray:5 4;stroke:#6cc08b}
+.elabel{font:11px var(--sans);fill:#aeb4bd;paint-order:stroke;stroke:#1a1a1a;stroke-width:4px;stroke-linejoin:round}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0 0;font-size:13px;color:var(--dim)}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.hint{font-size:13px;color:var(--dim);margin-top:8px}
+.five{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:22px;counter-reset:s}
+.five div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 14px 14px 16px;counter-increment:s}
+.five div::before{content:counter(s);display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--status);color:#fff;font-weight:700;font-size:13px;margin-bottom:8px}
+.five b{display:block;color:var(--hi);margin-bottom:2px}
+
+/* ---------- EXPLORER (VS Code) ---------- */
+.vs{display:flex;flex:1;min-height:0}
+.activity{width:48px;background:var(--bar);display:flex;flex-direction:column;align-items:center;padding-top:8px;gap:4px;flex:none}
+.activity span{width:48px;height:44px;display:grid;place-items:center;color:#858585;font-size:20px}
+.activity span.sel{color:#fff;border-left:2px solid #fff}
+aside{width:310px;min-width:200px;background:var(--panel);display:flex;flex-direction:column;border-right:1px solid #1b1b1b;flex:none}
+aside h3{margin:0;padding:10px 20px;font:11px var(--sans);letter-spacing:.08em;color:#bbb;font-weight:400;display:flex;justify-content:space-between}
+aside h3 button{background:none;border:0;color:#bbb;cursor:pointer;font-size:11px;padding:0}
+aside h3 button:hover{color:#fff}
+#tree{overflow:auto;flex:1;padding-bottom:20px;font-size:13px}
+.row{display:flex;align-items:center;gap:6px;padding:2px 8px 2px 0;cursor:pointer;white-space:nowrap;user-select:none;color:#ccc;height:22px}
+.row:hover{background:#2a2d2e}
+.row.active{background:#37373d;color:#fff}
+.row .chev{width:14px;text-align:center;font-size:9px;color:#aaa;flex:none}
+.row .ic{font:700 9px var(--mono);width:20px;text-align:center;flex:none;border-radius:3px;padding:1px 0}
+.ic.js{color:#e5c07b}.ic.jsx{color:#61dafb}.ic.json{color:#cbcb41}.ic.scss{color:#f06292}.ic.md{color:#519aba}.ic.dir{color:#dcb67a;font-size:12px}
+.ic.asset{color:#9aa0a6}.ic.cfg{color:#8f9ba8}.ic.yml{color:#c5879b}
+.row .badge{margin-left:auto;font-size:10px;color:#6cc08b}
+.children{display:none}.open>.children{display:block}
+.editor{flex:1;min-width:0;display:flex;flex-direction:column;background:var(--bg)}
+.tabs{display:flex;background:var(--panel);overflow-x:auto;flex:none;min-height:35px}
+.etab{display:flex;align-items:center;gap:8px;padding:0 10px 0 12px;background:var(--tab);color:#999;font-size:13px;border-right:1px solid #1b1b1b;cursor:pointer;white-space:nowrap;height:35px}
+.etab.on{background:var(--bg);color:#fff;border-top:1px solid var(--status)}
+.etab .x{border:0;background:none;color:inherit;font-size:14px;cursor:pointer;opacity:.6;padding:0 2px}
+.etab .x:hover{opacity:1;background:#444;border-radius:3px}
+.crumbs{padding:4px 16px;font-size:12px;color:#8a8a8a;flex:none;border-bottom:1px solid #2a2a2a}
+.doc{flex:1;overflow:auto;padding:26px clamp(16px,4vw,48px) 60px}
+.doc>div{max-width:820px;margin:0 auto}
+.doc h1{font-size:28px;margin:0 0 6px;color:#fff;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.doc h1 small{font:600 11px var(--sans);padding:3px 9px;border-radius:99px;background:#2a3b2f;color:var(--ok);letter-spacing:.02em}
+.doc h1 small.exp{background:#3b3426;color:var(--warn)}
+.doc h1 small.sys{background:#26323f;color:var(--accent)}
+.path{font:12px var(--mono);color:#8a8a8a;margin-bottom:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+.card h2{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin:0 0 8px;font-weight:700}
+.card p{margin:0 0 8px}.card p:last-child{margin:0}
+.card.big{font-size:18px;line-height:1.5;color:#fff;background:linear-gradient(135deg,#1f2d3a,#252526);border-color:#2f4256}
+.card.ana{border-left:4px solid var(--warn)}
+.card.ex{border-left:4px solid var(--ok)}
+.flow{display:flex;flex-wrap:wrap;gap:6px 0;align-items:stretch}
+.step{background:#1b2a36;border:1px solid #2f4256;border-radius:10px;padding:10px 12px;font-size:14px;max-width:190px;color:#e6f1ff}
+.step em{display:block;font:700 11px var(--sans);color:var(--accent);font-style:normal;margin-bottom:2px}
+.arrow{align-self:center;padding:0 8px;color:#6b7785;font-size:20px}
+.rel{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+.rel .col{display:flex;flex-direction:column;gap:6px}
+.rel .col h4{margin:0;font-size:11px;color:var(--dim);letter-spacing:.06em;text-transform:uppercase}
+.chip{background:#2b2b2e;border:1px solid #44444a;border-radius:8px;padding:7px 10px;font-size:13px}
+.chip.me{background:#0e3a5a;border-color:#1b6fa8;color:#fff;font-weight:600;text-align:center}
+.chip.go{cursor:pointer;background:#2b2b2e}.chip.go:hover{border-color:var(--accent);color:#fff}
+.rel .mid{display:flex;flex-direction:column;align-items:center;gap:4px;color:#6b7785}
+.triad{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.triad button{text-align:left;font:inherit;background:#2b2b2e;border:1px solid #44444a;border-radius:10px;padding:12px;color:var(--text);cursor:pointer}
+.triad button:hover{border-color:var(--accent)}
+.triad button.cur{border-color:var(--accent);background:#0e3a5a}
+.triad b{display:block;color:#fff;margin-bottom:2px}
+.triad span{font-size:13px;color:var(--dim)}
+.triad code{font:11px var(--mono);color:var(--warn)}
+.kids{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+.kids button{text-align:left;font:inherit;background:#2b2b2e;border:1px solid #44444a;border-radius:10px;padding:10px 12px;color:var(--text);cursor:pointer}
+.kids button:hover{border-color:var(--accent)}
+.kids b{display:block;color:#fff;font-size:13px}.kids span{font-size:12px;color:var(--dim)}
+.status{background:var(--status);color:#fff;font-size:12px;padding:3px 12px;display:flex;gap:16px;flex:none;flex-wrap:wrap}
+
+/* ---------- COMANDI ---------- */
+.cmd{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+.cmd h3{margin:0 0 4px;color:#fff;font-size:16px}
+.cmd p{margin:0 0 10px;color:var(--dim);font-size:14px}
+.code{display:flex;align-items:center;gap:8px;background:#111;border:1px solid #333;border-radius:8px;padding:10px 12px;font:14px var(--mono);color:#e6e6e6;overflow-x:auto}
+.code::before{content:"$";color:var(--ok);flex:none}
+.code code{flex:1;white-space:pre}
+.code button{flex:none;background:#2d2d2d;border:1px solid #444;color:#ccc;border-radius:6px;padding:4px 10px;font:12px var(--sans);cursor:pointer}
+.code button:hover{color:#fff;border-color:var(--accent)}
+.num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--status);color:#fff;font-weight:700;font-size:13px;margin-right:8px}
+.result{background:#14261c;border:1px solid #2c5a3f;border-radius:12px;padding:14px 18px;margin:14px 0;color:#cdeedb}
+
+@media (max-width:760px){
+  .vs{flex-direction:column}
+  .activity{display:none}
+  aside{width:100%;max-height:38vh;border-right:0;border-bottom:1px solid #1b1b1b}
+  .rel{grid-template-columns:1fr}.rel .mid{transform:rotate(90deg)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>🗺️ Mappa del progetto</h1>
+  <div role="tablist" aria-label="Sezioni">
+    <button role="tab" id="t-graph" aria-controls="p-graph" aria-selected="true">1 · Come funziona</button>
+    <button role="tab" id="t-file" aria-controls="p-file" aria-selected="false">2 · Esplora i file</button>
+    <button role="tab" id="t-run" aria-controls="p-run" aria-selected="false">3 · Avvialo</button>
+  </div>
+</header>
+
+<main>
+<!-- ================= TAB 1 ================= -->
+<section class="tabpanel on" id="p-graph" role="tabpanel" aria-labelledby="t-graph">
+  <div class="wrap">
+    <h2>Come funziona il progetto, a colpo d'occhio</h2>
+    <p class="lead">È una galleria di scene 3D che girano nel browser. Una schermata iniziale carica tutto, premi <b>Start</b>, e da un menu a tendina scegli quale "mondo" guardare. Le frecce mostrano chi chiama chi. <b>Clicca un riquadro</b> per leggerne la spiegazione.</p>
+    <div class="graphbox"><svg id="graph" viewBox="0 0 1000 640" role="img" aria-label="Diagramma a grafo dell'architettura"></svg></div>
+    <div class="legend">
+      <span><i style="background:var(--c-entry)"></i>Avvio</span>
+      <span><i style="background:var(--c-ctx)"></i>Memoria condivisa</span>
+      <span><i style="background:var(--c-scene)"></i>Regia della scena</span>
+      <span><i style="background:var(--c-ui)"></i>Schermata iniziale</span>
+      <span><i style="background:var(--c-proj)"></i>I mondi 3D</span>
+      <span><i style="background:var(--c-asset)"></i>Materiali (modelli, foto, suoni)</span>
+      <span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="#6cc08b" stroke-width="1.6" stroke-dasharray="5 4"/></svg> informazione di supporto</span>
+    </div>
+    <div class="five">
+      <div><b>Si accende</b>Il browser apre la pagina, <code>index.js</code> accende React e monta <code>root</code>.</div>
+      <div><b>Aspetta il tuo Start</b>La schermata iniziale mostra la percentuale di caricamento. Il pulsante si sblocca al 100%.</div>
+      <div><b>Scegli il mondo</b>Un menu a tendina (Leva) in alto a destra elenca gli 8 mondi.</div>
+      <div><b>Il regista decide</b><code>GetComponents</code> traduce il nome scelto nel mondo giusto e lo avvolge in un "salvagente" per l'attesa.</div>
+      <div><b>Prende i materiali</b>Il mondo scelto pesca modelli, foto e suoni dalla cartella <code>public</code> e li mostra.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TAB 2 ================= -->
+<section class="tabpanel" id="p-file" role="tabpanel" aria-labelledby="t-file">
+  <div class="vs">
+    <nav class="activity" aria-hidden="true"><span class="sel">🗂</span><span>🔍</span><span>⑂</span><span>▷</span></nav>
+    <aside aria-label="Esplora risorse">
+      <h3><span>ESPLORA RISORSE</span><button id="collapse" title="Chiudi tutte le cartelle">⊟ chiudi tutto</button></h3>
+      <div id="tree" role="tree"></div>
+    </aside>
+    <div class="editor">
+      <div class="tabs" id="etabs"></div>
+      <div class="crumbs" id="crumbs">3D-React-Fiber-Gallery</div>
+      <div class="doc" id="doc"></div>
+      <div class="status"><span>⎇ main</span><span id="st-kind">Spiegazione semplice</span><span id="st-count"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TAB 3 ================= -->
+<section class="tabpanel" id="p-run" role="tabpanel" aria-labelledby="t-run">
+  <div class="wrap" style="max-width:760px">
+    <h2>Avvialo in locale</h2>
+    <p class="lead">Serve <b>Node.js</b> (consigliata la versione 18 o più recente) già installato. Poi basta aprire il terminale e lanciare questi comandi, in ordine.</p>
+
+    <div class="cmd"><h3><span class="num">1</span>Scarica il progetto</h3><p>Salta questo passo se hai già la cartella sul computer.</p>
+      <div class="code"><code>git clone https://github.com/182marco/3D-React-Fiber-Gallery.git</code><button data-copy>Copia</button></div></div>
+
+    <div class="cmd"><h3><span class="num">2</span>Entra nella cartella</h3>
+      <div class="code"><code>cd 3D-React-Fiber-Gallery</code><button data-copy>Copia</button></div></div>
+
+    <div class="cmd"><h3><span class="num">3</span>Installa le dipendenze</h3><p>Solo la prima volta (scarica le librerie in <code>node_modules</code>).</p>
+      <div class="code"><code>npm install</code><button data-copy>Copia</button></div></div>
+
+    <div class="cmd"><h3><span class="num">4</span>Avvia</h3>
+      <div class="code"><code>npm start</code><button data-copy>Copia</button></div></div>
+
+    <div class="result">✅ Si apre da solo il browser su <b>http://localhost:3000</b>. Aspetta che la barra arrivi al 100% e premi <b>Start</b>.</div>
+  </div>
+</section>
+</main>
+
+<script>
+/* =====================================================================
+   DATI
+   ===================================================================== */
+const PATHS = [".claude/skills/new-component/SKILL.md", ".codesandbox/tasks.json", ".github/workflows/deploy.yml", ".gitignore", ".prettierrc", "AGENTS.md", "README.md", "config-overrides.js", "package-lock.json", "package.json", "public/audios/Song Of Unity.mp3", "public/envMap/1.hdr", "public/envMap/envMap.hdr", "public/envMap/nx.png", "public/envMap/ny.png", "public/envMap/nz.png", "public/envMap/px.png", "public/envMap/py.png", "public/envMap/pz.png", "public/fonts/2.json", "public/fonts/Caprasimo-Regular.ttf", "public/fonts/OFL.txt", "public/fonts/Quicksand Medium_Regular.json", "public/fonts/Quicksand-Bold.ttf", "public/fonts/Quicksand-Light.ttf", "public/fonts/Quicksand-Medium.ttf", "public/fonts/Quicksand-Regular.ttf", "public/fonts/Quicksand-SemiBold.ttf", "public/fonts/Roboto-Bold.ttf", "public/images/1.jpg", "public/images/2.jpg", "public/images/3.jpg", "public/images/4.jpg", "public/images/5.jpg", "public/images/6.jpg", "public/images/favicon.ico", "public/images/vintagePaperBg.avif", "public/img/1.png", "public/index.html", "public/model/1.glb", "public/model/Heart.glb", "public/model/WawaOffice.blend", "public/model/WawaOffice.glb", "public/model/Westernbluebird.glb", "public/model/ankouChart.gltf", "public/model/banana.glb", "public/model/bike.gltf", "public/model/cactoro.gltf", "public/model/cybertruck_scene.glb", "public/model/dog.glb", "public/model/dragon.gltf", "public/model/fish.gltf", "public/model/lampPost.gltf", "public/model/model.gltf", "public/model/model3_scene.glb", "public/model/rock.gltf", "public/model/semi_scene.glb", "public/model/tree.gltf", "public/model/woman.gltf", "public/model/youngKorrigan.gltf", "public/sound/sound.mp3", "public/textures/1.png", "public/textures/LavaWorld.jpg", "public/textures/cactusForest.jpg", "public/textures/waterEnviron.jpg", "src/components/animateMultiplesMesh/animateMultiplesMesh.hook.js", "src/components/animateMultiplesMesh/animateMultiplesMesh.jsx", "src/components/animateMultiplesMesh/index.js", "src/components/bike/bike.hook.js", "src/components/bike/bike.jsx", "src/components/bike/index.js", "src/components/cameraControls/cameraControls.hook.js", "src/components/cameraControls/cameraControls.jsx", "src/components/cameraControls/index.js", "src/components/cartFollowingMidget/cartFollowingMidget.jsx", "src/components/cartFollowingMidget/cartFollowingMidget.updateCamera.js", "src/components/cartFollowingMidget/components/CartSceneOrbitControls/CartSceneOrbitControls.jsx", "src/components/cartFollowingMidget/components/CartSceneOrbitControls/index.js", "src/components/cartFollowingMidget/components/ankou/ankou.hook.js", "src/components/cartFollowingMidget/components/ankou/ankou.jsx", "src/components/cartFollowingMidget/components/ankou/index.js", "src/components/cartFollowingMidget/components/index.js", "src/components/cartFollowingMidget/components/lampPost/index.js", "src/components/cartFollowingMidget/components/lampPost/lampPost.hook.js", "src/components/cartFollowingMidget/components/lampPost/lampPost.jsx", "src/components/cartFollowingMidget/components/movingItem/index.js", "src/components/cartFollowingMidget/components/movingItem/movingItem.hook.js", "src/components/cartFollowingMidget/components/movingItem/movingItem.jsx", "src/components/cartFollowingMidget/components/renderMovingItems/fixedVars.js", "src/components/cartFollowingMidget/components/renderMovingItems/index.js", "src/components/cartFollowingMidget/components/renderMovingItems/renderMovingItems.jsx", "src/components/cartFollowingMidget/components/renderMovingItems/utils.js", "src/components/cartFollowingMidget/components/rock/index.js", "src/components/cartFollowingMidget/components/rock/rock.hook.js", "src/components/cartFollowingMidget/components/rock/rock.jsx", "src/components/cartFollowingMidget/components/tree/index.js", "src/components/cartFollowingMidget/components/tree/tree.hook.js", "src/components/cartFollowingMidget/components/tree/tree.jsx", "src/components/cartFollowingMidget/components/youngKorrigon/index.js", "src/components/cartFollowingMidget/components/youngKorrigon/youngKorrigan.hook.js", "src/components/cartFollowingMidget/components/youngKorrigon/youngKorrigan.js", "src/components/cartFollowingMidget/index.js", "src/components/cascadingMeshesOnClick/cascadingMeshesOnClick.hook.js", "src/components/cascadingMeshesOnClick/cascadingMeshesOnClick.jsx", "src/components/cascadingMeshesOnClick/index.js", "src/components/cascadingMeshes_/cascadingMeshes.hook.js", "src/components/cascadingMeshes_/cascadingMeshes.jsx", "src/components/cascadingMeshes_/index.js", "src/components/configInSpring/configInSpring.hook.js", "src/components/configInSpring/configInSpring.jsx", "src/components/configInSpring/index.js", "src/components/customModel/customModel.hook.js", "src/components/customModel/customModel.jsx", "src/components/customModel/index.js", "src/components/dog/dog.hook.js", "src/components/dog/dog.jsx", "src/components/dog/index.js", "src/components/explode/animation.hook.js", "src/components/explode/components/banana/banana.hook.js", "src/components/explode/components/banana/banana.jsx", "src/components/explode/components/banana/index.js", "src/components/explode/components/bird/bird.hook.js", "src/components/explode/components/bird/bird.jsx", "src/components/explode/components/bird/index.js", "src/components/explode/components/heart/Heart.jsx", "src/components/explode/components/heart/heart.hook.js", "src/components/explode/components/heart/index.js", "src/components/explode/components/index.js", "src/components/explode/explode.hook.js", "src/components/explode/explode.jsx", "src/components/explode/index.js", "src/components/fallingMesh/fallingMesh.hook.js", "src/components/fallingMesh/fallingMesh.jsx", "src/components/fallingMesh/index.js", "src/components/game/game.hook.js", "src/components/game/game.jsx", "src/components/game/index.js", "src/components/home3d/home3d.hook.js", "src/components/home3d/home3d.jsx", "src/components/home3d/index.js", "src/components/home3d/textsToPass.json", "src/components/hookUseSpringProps/hookUseSpringProps.hook.js", "src/components/hookUseSpringProps/hookUseSpringProps.jsx", "src/components/hookUseSpringProps/index.js", "src/components/images/images.hook.js", "src/components/images/images.jsx", "src/components/images/index.js", "src/components/index.js", "src/components/loadScreen/index.js", "src/components/loadScreen/loadScreen.hook.js", "src/components/loadScreen/loadScreen.jsx", "src/components/loadScreen/styles.scss", "src/components/lotsOfMashesSameFn/index.js", "src/components/lotsOfMashesSameFn/lotsOfMashesSameFn.hook.js", "src/components/lotsOfMashesSameFn/lotsOfMashesSameFn.jsx", "src/components/massInRapier/index.js", "src/components/massInRapier/massInRapier.hook.js", "src/components/massInRapier/massInRapier.jsx", "src/components/methodsOfTheRigidBody/index.js", "src/components/methodsOfTheRigidBody/methodsOfTheRigidBody.hook.js", "src/components/methodsOfTheRigidBody/methodsOfTheRigidBody.jsx", "src/components/office/index.js", "src/components/office/office.hook.js", "src/components/office/office.jsx", "src/components/office/utils.js", "src/components/orbitControl/index.js", "src/components/orbitControl/orbitControl.jsx", "src/components/overlayText/OverlayText.hook.js", "src/components/overlayText/index.js", "src/components/overlayText/overlayText.jsx", "src/components/overlayText/styles.scss", "src/components/physicsScene/index.js", "src/components/physicsScene/physicsScene.hook.js", "src/components/physicsScene/physicsScene.jsx", "src/components/pivotControl/index.js", "src/components/pivotControl/pivotControl.jsx", "src/components/playWithFritionToRoll/index.js", "src/components/playWithFritionToRoll/playWithFritionToRoll.hook.js", "src/components/playWithFritionToRoll/playWithFritionToRoll.jsx", "src/components/portal/index.js", "src/components/portal/portal.hook.js", "src/components/portal/portal.jsx", "src/components/portalPass/components/cactoro/cactoro.hook.js", "src/components/portalPass/components/cactoro/cactoro.jsx", "src/components/portalPass/components/cactoro/index.js", "src/components/portalPass/components/dragon/dragon.hook.js", "src/components/portalPass/components/dragon/dragon.jsx", "src/components/portalPass/components/dragon/index.js", "src/components/portalPass/components/fish/Fish.jsx", "src/components/portalPass/components/fish/fish.hook.js", "src/components/portalPass/components/fish/index.js", "src/components/portalPass/components/index.js", "src/components/portalPass/components/monsterStage/index.js", "src/components/portalPass/components/monsterStage/monsterStage.hook.js", "src/components/portalPass/components/monsterStage/monsterStage.jsx", "src/components/portalPass/environmentVars.js", "src/components/portalPass/index.js", "src/components/portalPass/portalPass.hook.js", "src/components/portalPass/portalPass.jsx", "src/components/presentationControl/index.js", "src/components/presentationControl/presentationControl.hook.js", "src/components/presentationControl/presentationControl.jsx", "src/components/scrollControl/index.js", "src/components/scrollControl/scrollControl.hook.js", "src/components/scrollControl/scrollControl.jsx", "src/components/select/index.js", "src/components/select/select.hook.js", "src/components/select/select.jsx", "src/components/sensorHittingACollider/index.js", "src/components/sensorHittingACollider/sensorHittingACollider.hook.js", "src/components/sensorHittingACollider/sensorHittingACollider.jsx", "src/components/slideShow/components/cameraHandler/cameraHandler.hook.js", "src/components/slideShow/components/cameraHandler/cameraHandler.js", "src/components/slideShow/components/cameraHandler/index.js", "src/components/slideShow/components/index.js", "src/components/slideShow/components/overlaySlideShow/index.js", "src/components/slideShow/components/overlaySlideShow/overlaySlideShow.hook.js", "src/components/slideShow/components/overlaySlideShow/overlaySlideShow.js", "src/components/slideShow/components/overlaySlideShow/styles.scss", "src/components/slideShow/components/slide/index.js", "src/components/slideShow/components/slide/slide.hook.js", "src/components/slideShow/components/slide/slide.js", "src/components/slideShow/fixedVars.js", "src/components/slideShow/index.js", "src/components/slideShow/slideShow.hook.js", "src/components/slideShow/slideShow.jsx", "src/components/spinner/index.js", "src/components/spinner/spinner.controls.js", "src/components/spinner/spinner.hook.js", "src/components/spinner/spinner.jsx", "src/components/springBasicAnimation/index.js", "src/components/springBasicAnimation/springBasicAnimation.hook.js", "src/components/springBasicAnimation/springBasicAnimation.jsx", "src/components/springImperativeAnimation/index.js", "src/components/springImperativeAnimation/springImperativeAnimation.hook.js", "src/components/springImperativeAnimation/springImperativeAnimation.jsx", "src/components/springRefHook/index.js", "src/components/springRefHook/springRefHook.hook.js", "src/components/springRefHook/springRefHook.jsx", "src/components/transformControl/index.js", "src/components/transformControl/transformControl.jsx", "src/components/woman/index.js", "src/components/woman/woman.hook.js", "src/components/woman/woman.jsx", "src/context/index.js", "src/context/useAppContext.jsx", "src/context/useContextLogic.hook.js", "src/index.js", "src/root.jsx", "src/scene/getComponents/getComponents.hook.js", "src/scene/getComponents/getComponents.jsx", "src/scene/getComponents/index.js", "src/scene/getComponents/wrappers/index.js", "src/scene/getComponents/wrappers/withFallBackSuspense.jsx", "src/scene/getComponents/wrappers/withScrollControls.jsx", "src/scene/getComponents/wrappers/withSuspense.jsx", "src/scene/index.js", "src/scene/scene.hook.js", "src/scene/scene.jsx", "src/scene/utils/getCamera.js", "src/scene/utils/index.js", "src/scene/utils/projects.js", "src/styles/_colors.scss", "src/styles/globalStyles.scss", "src/utils/WorkOnArrays.js", "src/utils/index.js", "src/utils/purify/index.js", "src/utils/purify/purify.js", "src/utils/purify/utils.js", "src/utils/randomNumbers/index.js", "src/utils/randomNumbers/randomNumbers.js", "src/utils/randomNumbers/validatePassedArguments.js", "src/utils/wait.js", "vite.config.js"];
+
+/* ---- spiegazioni per componente (cartella) ---- */
+const C = {
+animateMultiplesMesh:{g:0,what:"Tre cubi che arrivano da lati diversi (sinistra, sotto, davanti) e si fermano in fila ordinata.",look:"Disegna tre cubi bianchi e una telecamera che puoi girare col mouse.",brain:"Dice dove parte e dove arriva ogni cubo; la libreria 'react-spring' calcola da sola il movimento morbido nel mezzo.",ex:"Come tre camerieri che entrano da porte diverse e si mettono ognuno al proprio tavolo.",steps:["Tre cubi nascono fuori posizione","Parte l'animazione","Ognuno scivola verso il suo posto","Si fermano allineati"],uses:["react-spring (le animazioni morbide)","drei · OrbitControls (girare la vista)"]},
+bike:{g:1,what:"Una bicicletta 3D con le ruote che girano all'infinito, mentre tu puoi ruotare la vista intorno.",look:"Prende i pezzi del modello (telaio, ruote, raggi) e li incolla uno nel punto giusto dell'altro.",brain:"Carica il modello bike.gltf e, a ogni fotogramma, fa ruotare le ruote un pochino. Il 'pochino' dipende dal tempo passato, così gira uguale su ogni computer.",ex:"Come una bici appesa a un cavalletto con la ruota che gira da sola.",steps:["Carica bike.gltf","Monta i pezzi del modello","Ogni istante: ruota un po' le ruote","Tu orbiti con il mouse"],uses:["public/model/bike.gltf","drei · useGLTF, OrbitControls"]},
+cameraControls:{g:0,what:"Un pannello di bottoni (Leva) per muovere la telecamera: ruota, sposta, zoom. Sul pavimento c'è una griglia colorata come riferimento.",look:"Mostra solo i controlli della telecamera e una griglia rossa/turchese.",brain:"Collega ogni bottone a un movimento: '45°' ruota di 45 gradi, '1,0' sposta a destra, e così via.",ex:"Come un telecomando con i tasti 'gira a destra', 'avvicinati', 'allontanati'.",steps:["Appare il pannello","Premi un bottone","La telecamera esegue il movimento","Vedi la griglia da un'altra angolazione"],uses:["Leva (i pannelli di controllo)","drei · CameraControls, Grid"]},
+cartFollowingMidget:{g:1,what:"La scena d'apertura: due personaggi fermi su una carrozza mentre alberi, rocce e lampioni scorrono dietro di loro. Sembra che il carro viaggi, ma in realtà si muove lo sfondo. Parte anche la musica.",look:"Mette in fila: i due personaggi, tre gruppi di oggetti scorrevoli (rocce, lampioni, alberi), luce al tramonto e ombre a terra.",brain:"Un file a parte (updateCamera) mette la telecamera nella posizione giusta e fa partire la canzone quando premi Start; quando esci rimette tutto a posto.",ex:"Come il finestrino del treno: tu sei fermo, il paesaggio passa.",steps:["Premi Start","Parte la musica","La telecamera si piazza","Alberi, rocce e lampioni scorrono in loop","Ricomparendo dall'altra parte"],uses:["public/audios/Song Of Unity.mp3","modelli: ankou, youngKorrigan, tree, rock, lampPost","Context (sa se hai premuto Start)"]},
+cascadingMeshes_:{g:0,what:"Tre cubi che compaiono a cascata: uno dopo l'altro, ognuno un attimo dopo il precedente.",look:"Tre cubi in fila, grandi inizialmente zero.",brain:"Usa 'useTrail': una scia di animazioni dove ognuna parte con un piccolo ritardo dalla precedente.",ex:"Come la ola allo stadio: ognuno si alza poco dopo il vicino.",steps:["Cubi grandi zero","Il primo cresce","Il secondo lo segue","Il terzo chiude la scia"],uses:["react-spring · useTrail"]},
+cascadingMeshesOnClick:{g:0,what:"Gli stessi tre cubi, ma si ingrandiscono e rimpiccioliscono a cascata quando clicchi nel vuoto.",look:"Tre cubi; sono pronti ad ascoltare il click 'fuori dal cubo'.",brain:"Tiene un interruttore acceso/spento: a ogni click nel vuoto lancia l'animazione verso grande o verso piccolo.",ex:"Come un interruttore della luce: un click accende, il successivo spegne.",steps:["Clicchi nel vuoto","L'interruttore cambia","I cubi crescono o si riducono a cascata"],uses:["react-spring · useTrail"]},
+configInSpring:{g:0,what:"Un cubo che si muove con una 'molla' pesante: parte con ritardo, rimbalza un po'. Un click lo mette in pausa.",look:"Un cubo che cambia colore dal rosa al giallo mentre si sposta.",brain:"Contiene le impostazioni della molla (massa, tensione, attrito) e un interruttore di pausa.",ex:"Come una palla di piombo attaccata a un elastico: parte lenta e dondola.",steps:["Aspetta 2 secondi","Si muove e cambia colore","Click: pausa","Click di nuovo: riparte"],uses:["react-spring · useSpring"]},
+customModel:{g:0,what:"Un triangolo disegnato a mano, punto per punto, con una foto incollata sopra. Serve a capire come nasce una forma 3D da zero.",look:"Una forma con tre vertici e una texture (immagine) come pelle.",brain:"Prepara l'elenco dei tre punti e le coordinate per 'stendere' la foto sul triangolo. File sperimentale, non in galleria.",ex:"Come ritagliare un triangolo di carta e incollarci sopra una figurina.",steps:["Elenco dei 3 punti","Carica la foto","Stende la foto sul triangolo"],uses:["three.js · BufferGeometry","immagine in /images"]},
+dog:{g:1,what:"Un cane 3D che si muove. Da un menu scegli quale animazione fargli fare (camminare, sedersi, …).",look:"Mostra il cane al centro, una luce e la vista orbitabile.",brain:"Legge dal modello l'elenco delle animazioni, le mette nel menu e riproduce solo quella scelta, fermando la precedente.",ex:"Come un burattino con un telecomando a tendina: scegli il trucco e lui lo esegue.",steps:["Carica dog.glb","Elenca le animazioni nel menu","Scegli una voce","Il cane la esegue"],uses:["public/model/dog.glb","Leva (il menu)","drei · useAnimations"]},
+explode:{g:1,what:"Un oggetto (cuore, banana o uccello) che scorrendo la pagina si scompone in pezzi che volano via, e li ricompone tornando indietro.",look:"Una scena con cielo al tramonto; mostra solo l'oggetto scelto, che fluttua dolcemente.",brain:"Per ogni pezzo calcola in che direzione allontanarlo dal centro e, in base a quanto hai scrollato, lo sposta di più o di meno.",ex:"Come la vista 'esplosa' dei manuali Ikea: i pezzi si staccano ma restano allineati.",steps:["Scorri verso il basso","Ogni pezzo si allontana dal centro","Scorri su: i pezzi tornano","L'oggetto si ricompone"],uses:["public/model: Heart, banana, Westernbluebird","Wrapper ScrollControls (lo scroll)","Leva (scelta dell'oggetto)"]},
+fallingMesh:{g:0,what:"Esperimento di fisica: un cubo e un nodo di forma strana cadono per gravità e rimbalzano su un pavimento.",look:"Due oggetti con ombra e un pavimento solido.",brain:"Quasi vuoto: la fisica la fa tutta la libreria Rapier.",ex:"Come far cadere una scatola e un anello dal tavolo e guardare come atterrano.",steps:["Gli oggetti partono in aria","La gravità li tira giù","Toccano il pavimento","Rimbalzano e si fermano"],uses:["Rapier (la fisica)"]},
+game:{g:0,what:"Un mini-gioco: un cubo che salta quando lo clicchi e una barra che lo può colpire.",look:"Cubo blu (rosa quando ci passi sopra), una barra e un pavimento.",brain:"Dà una spinta verso l'alto al cubo al click e ricorda se il mouse ci sta sopra.",ex:"Come una pallina da flipper: la clicchi e salta.",steps:["Passi sul cubo: si colora","Clicchi: riceve una spinta","Salta e ricade","Se tocca la barra viene colpito"],uses:["Rapier (la fisica)","drei · Box"]},
+home3d:{g:1,what:"Un appartamento in sezione con tre piani. Scorrendo la pagina il palazzo scende, i piani si rivelano e compaiono i testi che li descrivono.",look:"Luce, il modello dell'ufficio e i testi HTML sovrapposti.",brain:"Al momento di entrare sposta la telecamera in alto davanti all'edificio; quando esci la rimette com'era.",ex:"Come un ascensore panoramico: ogni piano che passi si descrive da solo.",steps:["Entri nel mondo","La telecamera si sposta davanti all'edificio","Scorri","Il palazzo scende e appare il piano successivo","Compare il testo di quel piano"],uses:["componenti Office e OverlayText","testi in textsToPass.json","Wrapper ScrollControls"]},
+hookUseSpringProps:{g:0,what:"Un cubo che fa un giro a 4 tappe (destra, su, sinistra, giù) cambiando colore ad ogni tappa, ripetuto un paio di volte.",look:"Un cubo il cui colore e posizione sono 'vivi'.",brain:"Elenca le tappe in sequenza e dice quante volte ripeterle. Il click mette in pausa.",ex:"Come un trenino sul plastico che fa il giro del tavolo e cambia vagone colorato ad ogni stazione.",steps:["Parte dopo 2 secondi","Tappa 1: giallo, destra","Tappa 2: verde, su","Tappa 3: rosso, sinistra","Tappa 4: viola, giù"],uses:["react-spring · useSpring"]},
+images:{g:0,what:"Sei fotografie sospese nello spazio. Scorrendo la pagina ingrandiscono, si fanno colorate o si allargano a tutto schermo.",look:"Sei foto con posizioni e dimensioni diverse.",brain:"Legge quanto hai scrollato e, a seconda del punto (primo terzo, secondo, ultimo), cambia zoom e colore delle foto.",ex:"Come un album di foto che si anima mentre giri le pagine.",steps:["Scorri","Prima foto: zoom","Foto centrali: zoom più forte","Ultime: da bianco/nero a colori"],uses:["public/images/1…6.jpg","drei · Image, useScroll"]},
+loadScreen:{g:1,what:"La schermata di benvenuto: titolo 'The Carriage of Destiny!', una barra con la percentuale di caricamento e il bottone Start (grigio finché non arriva al 100%).",look:"Titolo, bottone, barra e percentuale in HTML normale (non 3D).",brain:"Ascolta quanto è stato scaricato e quando premi Start aspetta 3,5 secondi (il tempo della dissolvenza) e poi toglie la schermata dalla pagina.",ex:"Come il sipario di un teatro: resta chiuso finché tutto è pronto, poi si apre.",steps:["Pagina aperta: inizia il download","La barra sale 0% → 100%","Il bottone si sblocca","Premi Start","Dissolvenza e la schermata sparisce"],uses:["Context (segna 'partito')","drei · useProgress","styles.scss"]},
+lotsOfMashesSameFn:{g:0,what:"Duecento cubi verdi piovono dall'alto su un pavimento. Prova che si possono gestire tantissimi oggetti con la fisica senza rallentare.",look:"Un unico 'stampo' di cubo moltiplicato 200 volte, più il pavimento.",brain:"Inventa 200 posizioni casuali sopra la scena (una volta sola) e le passa alla fisica.",ex:"Come versare un sacchetto di dadi sul tavolo.",steps:["Estrae 200 posizioni casuali","Crea 200 cubi uguali","Cadono","Si ammucchiano sul pavimento"],uses:["Rapier · InstancedRigidBodies","utils · createSeqArray"]},
+massInRapier:{g:0,what:"Due cubi di peso diverso: cliccandoli li spingi e vedi che quello pesante si muove meno.",look:"Un cubo rosso piccolo, uno blu grande e un pavimento.",brain:"Ogni click dà una spinta orizzontale al cubo giusto.",ex:"Come spingere un carrello vuoto e uno pieno: lo stesso sforzo, risultati diversi.",steps:["Clicchi un cubo","Riceve la spinta","Quello leggero schizza via","Quello pesante si sposta poco"],uses:["Rapier (la fisica)"]},
+methodsOfTheRigidBody:{g:0,what:"Un catalogo di modi per spingere un oggetto: una spinta, una rotazione, una spinta in un punto preciso. Contiene anche prove di rimbalzo e gravità ridotta.",look:"Cubi e sfere colorate sul pavimento.",brain:"Ogni click applica un tipo diverso di spinta (i vari metodi sono lasciati nei commenti per confrontarli).",ex:"Come provare con un pallone: spinta dal centro, calcio di lato, trottola.",steps:["Clicchi un oggetto","Applica il tipo di spinta scelto","Guardi cosa succede","Nella console compare 'collision enter' quando urta"],uses:["Rapier (la fisica)"]},
+office:{g:0,what:"Il modello dell'ufficio a tre piani (scrivania, salotto, soffitta) con l'animazione legata allo scroll. È usato da Home3d.",look:"Tutti i pezzi del modello (mobili, pareti, scale) e i gruppi che si spostano.",brain:"Costruisce una 'timeline' (una striscia di animazione con gsap) e a ogni istante la posiziona in base a quanto hai scrollato.",ex:"Come un film in cui lo scroll è la barra di avanzamento: tiri a destra e vai avanti.",steps:["Carica WawaOffice.glb","Prepara la timeline","Scorri","Il tempo del film segue lo scroll","Palazzo scende, biblioteca entra, soffitta appare"],uses:["public/model/WawaOffice.glb","gsap (animazioni)","utils.js (altezza piani)"]},
+orbitControl:{g:0,what:"Una telecamera che gira da sola attorno al centro della scena.",look:"Solo i controlli, nessun oggetto.",brain:"Non ha cervello separato: due impostazioni (autoRotate, velocità).",ex:"Come il piatto girevole di un microonde, ma per la telecamera.",steps:["Parte la scena","La telecamera inizia a girare","Resta in orbita"],uses:["drei · OrbitControls"]},
+overlayText:{g:0,what:"I testi che compaiono sopra la scena 3D (titolo, descrizione, elenco puntato) e sfumano a mano a mano che scorri.",look:"Tre blocchi di testo HTML, uno per piano.",brain:"Calcola l'opacità di ognuno guardando a che punto sei nello scroll: il primo sfuma nel primo terzo, ecc.",ex:"Come i sottotitoli di un film che si cambiano da soli al momento giusto.",steps:["Scorri","Il testo 1 svanisce","Compare il testo 2","Poi il testo 3"],uses:["home3d/textsToPass.json","styles.scss","drei · useScroll"]},
+physicsScene:{g:0,what:"Una cartella segnaposto: contiene un componente vuoto, pronto per un futuro esperimento di fisica.",look:"Non mostra niente.",brain:"Nessuna logica per ora.",ex:"Come un tavolo apparecchiato ancora senza piatti.",steps:["(Ancora da scrivere)"],uses:["niente"]},
+pivotControl:{g:0,what:"Una scatola con frecce colorate per trascinarla e girarla con il mouse, come negli editor 3D.",look:"Cubo con tre assi e un ancoraggio fuori centro.",brain:"È solo un componente drei già pronto: nessun cervello proprio.",ex:"Come le maniglie di una foto in PowerPoint.",steps:["Appare il cubo con le frecce","Trascini una freccia","Il cubo si sposta o ruota"],uses:["drei · PivotControls"]},
+playWithFritionToRoll:{g:0,what:"Esperimento di attrito: un cubo su una superficie che reagisce diversamente a seconda di quanto è 'ruvida', con la fisica mostrata a vista.",look:"Cubo che cambia colore al passaggio, barra e pavimento; i contorni della fisica sono visibili.",brain:"Ricorda se il mouse è sopra e dà la spinta al click.",ex:"Come far scivolare un libro su un tavolo liscio o su un tappeto.",steps:["Cubo sulla superficie","Click: spinta","Scivola o rotola secondo l'attrito","Si ferma"],uses:["Rapier (la fisica)"]},
+portal:{g:0,what:"Una cornice come una porta magica con la scritta 'Eggs'. Doppio click per 'entrarci' con la telecamera.",look:"Una cornice a rettangolo arrotondato con un testo sopra.",brain:"Tiene l'interruttore 'aperto/chiuso' e sposta la telecamera davanti o dentro la cornice.",ex:"Come una finestra nel muro che mostra un'altra stanza.",steps:["Vedi la cornice","Doppio click","La telecamera entra","Doppio click: esce"],uses:["drei · RoundedBox, Text, CameraControls"]},
+portalPass:{g:1,what:"Tre portali magici affiancati (drago, pesce, cactus). Clicchi uno e la telecamera vola dentro, nel suo mondo.",look:"Tre cornici, ognuna con il suo nome, il suo mostro e uno sfondo diverso (lava, acqua, deserto).",brain:"Ricorda quale portale è aperto e quale è sotto il mouse. Quando ne apri uno fa volare la telecamera verso il punto giusto.",ex:"Come tre quadri-finestra nel corridoio di un museo: ci entri dentro.",steps:["Passi sopra un portale: il cursore cambia","Click","La telecamera vola avanti","Il portale si apre (sfuma)","Sei dentro il mondo del mostro"],uses:["public/model: dragon, fish, cactoro","public/textures (4 sfondi)","public/fonts/Caprasimo"]},
+presentationControl:{g:0,what:"Un grande cubo colorato che puoi ruotare un po' trascinandolo e che poi torna da solo alla posizione iniziale.",look:"Un cubo con sei facce di colori diversi.",brain:"Fornisce la lista dei sei colori.",ex:"Come un cubo-giocattolo su un elastico: lo giri ma si raddrizza.",steps:["Trascini","Il cubo ruota (entro un limite)","Rilasci","Torna a posto con un rimbalzo"],uses:["drei · PresentationControls"]},
+scrollControl:{g:0,what:"Una pagina da scorrere con le foto e un modello 3D che si muovono, e un testo HTML sovrapposto.",look:"Le sei foto, il modello a destra e i testi a scorrimento.",brain:"Carica il modello 3D.",ex:"Come una pagina web di presentazione di un prodotto.",steps:["Scorri la pagina","Le foto si animano","Il modello resta nel suo angolo","Compaiono i testi"],uses:["componente Images","drei · ScrollControls"]},
+select:{g:0,what:"Un menu a tendina HTML (fuori dal 3D) che elenca le animazioni di un modello. Aggiunge un 'Select Animation'.",look:"Un <select> con voci e nomi leggibili.",brain:"Trasforma i nomi tecnici delle animazioni in frasi leggibili e ricorda quale hai scelto.",ex:"Come il menu dei piatti: scegli e arriva.",steps:["Il modello ha una lista di animazioni","Il menu le mostra","Scegli","Parte quella"],uses:["Stili in styles.scss"]},
+sensorHittingACollider:{g:0,what:"Una sfera che, quando cade dentro una zona invisibile, fa scattare un evento (un 'sensore'). La zona non è solida: ci passi attraverso ma lei se ne accorge.",look:"Una sfera rossa e una zona sensore.",brain:"Reagisce all'ingresso e all'uscita dalla zona.",ex:"Come il sensore della porta di un supermercato: non ti blocca, ma si accorge che passi.",steps:["Clicchi la sfera","Cade verso la zona","Entra nel sensore","Scatta l'evento","Esce: scatta di nuovo"],uses:["Rapier · sensor collider"]},
+slideShow:{g:1,what:"Una presentazione 3D di auto elettriche (Cybertruck, Model 3, Semi). Ogni 'diapositiva' è una finestra su un mondo con il modello che gira, e le frecce ti portano alla successiva.",look:"Sfere distorte colorate (una per diapositiva), le slide con i modelli e la telecamera che si sposta.",brain:"Il numero di slide ricordato (con jotai) fa sapere alla telecamera dove andare; sposta la vista in due tempi: si allontana, poi scivola.",ex:"Come sfogliare un catalogo: ogni pagina si apre su un mondo.",steps:["Appare la prima slide","Premi la freccia","La telecamera si allontana","Scivola alla slide successiva","Il nuovo modello inizia a ruotare"],uses:["public/model: cybertruck, model3, semi","jotai (memoria condivisa)","Leva (distanza tra le slide)"]},
+spinner:{g:0,what:"Una ciambella metallica che gira, mostrata mentre un mondo sta ancora caricando.",look:"Un anello (torus) lucido.",brain:"La fa ruotare alla velocità richiesta. Le impostazioni (colori, posizione) sono in un file separato.",ex:"Come la rotellina dell'ora d'attesa.",steps:["Il mondo sta caricando","Appare la ciambella","Gira finché non è pronto","Sparisce"],uses:["WithFallBackSuspense (il salvagente)"]},
+springBasicAnimation:{g:0,what:"L'esempio più semplice di animazione a molla: un cubo che scivola da A a B.",look:"Un cubo.",brain:"Dice solo 'parti da qui, vai lì'.",ex:"Come spostare un oggetto con una molla morbida.",steps:["Dichiari da dove a dove","L'animazione parte","Il cubo arriva"],uses:["react-spring"]},
+springImperativeAnimation:{g:0,what:"Animazione a molla comandata a mano: la fai partire quando clicchi, andando e tornando.",look:"Un cubo cliccabile.",brain:"Ha un 'telecomando' (api) che a ogni click manda il cubo avanti o indietro.",ex:"Come premere il tasto di un ascensore.",steps:["Clicchi","Il telecomando comanda il cubo","Va a destra","Clicchi di nuovo: torna"],uses:["react-spring"]},
+springRefHook:{g:0,what:"Terza variante: l'animazione è collegata a un riferimento (ref) e parte al click con una durata fissa di 5 secondi.",look:"Un cubo cliccabile.",brain:"Conserva il riferimento all'animazione e quando clicchi la avvia.",ex:"Come avere il numero di telefono di un amico e chiamarlo quando serve.",steps:["Prepara l'animazione ma non parte","Clicchi","Parte (5 secondi)","Arriva in fondo"],uses:["react-spring · useSpringRef"]},
+transformControl:{g:0,what:"Un cubo con maniglie per spostarlo, ruotarlo o ingrandirlo (qui in modalità 'scala').",look:"Cubo con le maniglie di trasformazione.",brain:"Nessuna logica propria.",ex:"Come ridimensionare un'immagine tirando gli angoli.",steps:["Appare il cubo","Tiri una maniglia","Cambia dimensione"],uses:["drei · TransformControls"]},
+woman:{g:1,what:"Una donna 3D con animazioni scelte da un menu (come per il cane).",look:"Il modello con luce e telecamera orbitabile.",brain:"Clona il modello (per riusarlo senza conflitti), elenca le sue animazioni nel menu e riproduce solo quella scelta.",ex:"Come un manichino da sarta che puoi far muovere con un telecomando.",steps:["Carica woman.gltf","Elenca le animazioni","Scegli","Esegue"],uses:["public/model/woman.gltf","Leva (il menu)","drei · useAnimations"]},
+/* sotto-componenti */
+ankou:{g:-1,what:"Il personaggio 'Ankou' (figura con la carrozza) usato nella scena d'apertura.",look:"I pezzi del modello Ankou.",brain:"Carica il modello ankouChart.gltf.",ex:"Un attore: la scena lo posiziona dove serve.",steps:["Carica il modello","Mostra i pezzi"],uses:["public/model/ankouChart.gltf"]},
+lampPost:{g:-1,what:"Un singolo lampione. Ne vengono creati più copie che scorrono dietro ai personaggi.",look:"Il modello del lampione.",brain:"Carica lampPost.gltf.",ex:"Un attore comparsa, replicato più volte.",steps:["Carica il modello","Viene copiato dal ‘fornitore’ di oggetti mobili"],uses:["public/model/lampPost.gltf"]},
+movingItem:{g:-1,what:"Un 'tapis roulant' per un oggetto qualunque: lo fa scorrere da sinistra a destra e, quando arriva alla fine, lo riporta all'inizio. È ciò che crea l'illusione del viaggio infinito.",look:"Un contenitore (gruppo) vuoto che porta dentro ciò che gli dai.",brain:"A ogni istante sposta il gruppo verso destra; se supera il limite lo rimette a sinistra.",ex:"Come il nastro dei bagagli in aeroporto: i bagagli girano in cerchio.",steps:["Riceve velocità e limiti","Ogni istante avanza","Arriva al limite destro","Torna al limite sinistro","E ricomincia"],uses:["drei/fiber · useFrame"]},
+renderMovingItems:{g:-1,what:"La fabbrica degli oggetti che scorrono: crea tante rocce, lampioni o alberi, ognuno in una posizione e dimensione casuale.",look:"Per ogni elemento richiesto crea un 'tapis roulant' e dentro mette l'oggetto giusto.",brain:"Il numero, la velocità e le zone sono in un file di numeri (fixedVars); quello di utility calcola dove piazzare ciascun pezzo, evitando di mettere rocce davanti ai personaggi.",ex:"Come un decoratore che pianta alberi a caso lungo una strada, ma lasciando libero il centro.",steps:["Legge quanti ne servono","Per ognuno calcola posizione e dimensione","Lo mette su un tapis roulant","Ripete per rocce, lampioni e alberi"],uses:["fixedVars.js (i numeri)","utils.js (i calcoli)","utils · numeri casuali"]},
+rock:{g:-1,what:"Una roccia 3D. Ne vengono create tante in dimensioni diverse.",look:"Il modello della roccia.",brain:"Carica rock.gltf.",ex:"Una comparsa.",steps:["Carica il modello","Mostra"],uses:["public/model/rock.gltf"]},
+tree:{g:-1,what:"Un albero 3D, replicato decine di volte per formare il bosco che scorre.",look:"Il modello dell'albero.",brain:"Carica tree.gltf.",ex:"Una comparsa moltiplicata.",steps:["Carica il modello","Mostra"],uses:["public/model/tree.gltf"]},
+youngKorrigon:{g:-1,what:"L'altro personaggio della scena d'apertura ('Young Korrigan').",look:"I pezzi del modello.",brain:"Carica youngKorrigan.gltf.",ex:"Un attore principale.",steps:["Carica il modello","Mostra"],uses:["public/model/youngKorrigan.gltf"]},
+CartSceneOrbitControls:{g:-1,what:"I controlli di telecamera per la scena d'apertura: limitano quanto puoi girare/avvicinarti per non rompere l'illusione.",look:"Solo i controlli.",brain:"Nessuna logica propria.",ex:"Come un guardrail per la telecamera.",steps:["Appare","Limita i movimenti"],uses:["drei · OrbitControls"]},
+banana:{g:-1,what:"Il modello della banana usato in Explode, con i suoi pezzi pronti a staccarsi.",look:"Tanti pezzi separati con nome.",brain:"Mette in azione l'animazione di 'esplosione' dei pezzi.",ex:"Una banana smontabile.",steps:["Carica banana.glb","Usa l'esplosione condivisa"],uses:["public/model/banana.glb","explode/animation.hook.js"]},
+bird:{g:-1,what:"Il modello dell'uccello (Westernbluebird) usato in Explode.",look:"Pezzi separati.",brain:"Usa l'esplosione condivisa.",ex:"Un uccello smontabile.",steps:["Carica il modello","Usa l'esplosione condivisa"],uses:["public/model/Westernbluebird.glb"]},
+heart:{g:-1,what:"Il modello del cuore usato in Explode, di default il primo a comparire.",look:"Pezzi separati.",brain:"Usa l'esplosione condivisa.",ex:"Un cuore smontabile.",steps:["Carica Heart.glb","Usa l'esplosione condivisa"],uses:["public/model/Heart.glb"]},
+cactoro:{g:-1,what:"Il mostro-cactus che abita nel portale del deserto.",look:"Il modello.",brain:"Carica cactoro.gltf.",ex:"Un inquilino del portale.",steps:["Carica","Mostra"],uses:["public/model/cactoro.gltf"]},
+dragon:{g:-1,what:"Il drago del portale di lava.",look:"Il modello.",brain:"Carica dragon.gltf.",ex:"Un inquilino del portale.",steps:["Carica","Mostra"],uses:["public/model/dragon.gltf"]},
+fish:{g:-1,what:"Il pesce-mostro del portale d'acqua.",look:"Il modello.",brain:"Carica fish.gltf.",ex:"Un inquilino del portale.",steps:["Carica","Mostra"],uses:["public/model/fish.gltf"]},
+monsterStage:{g:-1,what:"La 'cornice portale' di un singolo mostro: nome in alto, cornice arrotondata e sfondo che si apre quando la scegli.",look:"Titolo, cornice e il mondo (texture) all'interno.",brain:"Carica lo sfondo e, quando il portale è attivo, lo fa 'aprire' gradualmente (non di colpo).",ex:"Una finestra con tendina che si scosta piano.",steps:["Carica lo sfondo","Aspetta che il portale sia attivo","Sfuma da chiuso a aperto"],uses:["maath (movimenti morbidi)","public/textures"]},
+cameraHandler:{g:-1,what:"Il pilota della telecamera dello slider: porta la vista da una slide all'altra con un movimento in due tempi.",look:"Nessun oggetto visibile, solo i controlli.",brain:"Legge il numero della slide (jotai) e muove la camera: prima si allontana, poi scivola vicino alla nuova slide.",ex:"Come un cameraman che zooma indietro, si sposta e zooma avanti.",steps:["Cambia la slide","Allontana la camera","Si sposta lateralmente","Si avvicina alla nuova slide"],uses:["jotai","Leva (distanza)"]},
+overlaySlideShow:{g:-1,what:"I bottoni, il logo e i testi (nome, prezzo, autonomia) sopra lo slider.",look:"Frecce, logo e dati dell'auto.",brain:"Tiene il numero della slide attuale (condiviso con la telecamera) e nasconde l'overlay durante la transizione.",ex:"Come l'etichetta e i tasti sotto una vetrina.",steps:["Premi una freccia","Cambia il numero di slide","Il testo si aggiorna"],uses:["jotai","styles.scss"]},
+slide:{g:-1,what:"Una singola diapositiva: il modello dell'auto con luci, ombre morbide rosate e rotazione lenta.",look:"Sfondo bianco, il modello, ombre e luci.",brain:"Carica il modello e calcola la scala giusta perché stia nella finestra.",ex:"Una pagina del catalogo.",steps:["Carica il modello","Lo scala","Lo fa ruotare","Mette luci e ombre"],uses:["public/model (auto)","drei · AccumulativeShadows"]}
+};
+
+/* ---- cartelle e file "di sistema" ---- */
+const DIRS = {
+"":["La cartella principale","Il contenitore di tutto. Qui ci sono le istruzioni per costruire il sito (package.json), il codice vero (src) e i materiali (public)."],
+".claude":["Impostazioni dell'assistente","Contiene le competenze dell'assistente AI di programmazione, per esempio come creare un nuovo componente nello stile del progetto."],
+".claude/skills":["Competenze dell'assistente","Istruzioni scritte per l'assistente AI."],
+".claude/skills/new-component":["Come creare un nuovo componente","Una piccola guida che spiega all'assistente AI come costruire un nuovo pezzo di galleria seguendo le regole del progetto."],
+".codesandbox":["Configurazione per CodeSandbox","CodeSandbox è un sito che fa girare il progetto online. Questa cartella gli dice cosa lanciare."],
+".github":["Cartella di GitHub","Contiene le automazioni che GitHub esegue da solo."],
+".github/workflows":["Automazioni","Ricette automatiche: 'quando succede X, fai Y'."],
+"public":["I materiali","Tutto ciò che il sito usa ma che non è codice: modelli 3D, foto, suoni, caratteri. Il browser li scarica quando servono."],
+"public/model":["I modelli 3D","Gli oggetti tridimensionali (cane, bici, alberi, auto, ufficio…) in formato .glb o .gltf. Sono come le statuette dei personaggi."],
+"public/images":["Le foto","Le sei immagini usate dalle pagine scorrevoli, più l'icona della scheda del browser (favicon) e lo sfondo carta."],
+"public/img":["Una immagine","Una sola immagine di prova."],
+"public/textures":["Le 'pelli' degli sfondi","Immagini usate per rivestire i mondi nei portali (lava, acqua, cactus)."],
+"public/envMap":["Gli ambienti di luce","File speciali .hdr che dicono come si illumina una scena (il cielo, i riflessi)."],
+"public/fonts":["I caratteri di scrittura","Le forme delle lettere usate nei testi 3D e nella pagina."],
+"public/audios":["La musica","La colonna sonora della scena d'apertura."],
+"public/sound":["Un suono","Un file audio di prova."],
+"src":["Il codice del progetto","Qui vive tutta la logica del sito: ciò che React trasforma in pagina e scena 3D."],
+"src/components":["Il magazzino dei mondi","Ogni sottocartella è un 'pezzo' della galleria: un mondo 3D, un esperimento o un elemento di supporto. Solo 8 sono collegati al menu."],
+"src/scene":["La regia","Decide cosa mostrare, in che modo e con quale telecamera."],
+"src/scene/getComponents":["Il traduttore nome → mondo","Prende il nome scelto nel menu e restituisce il mondo corrispondente."],
+"src/scene/getComponents/wrappers":["I salvagenti","Piccole funzioni che avvolgono un mondo per gestire l'attesa del caricamento o lo scroll."],
+"src/scene/utils":["Piccoli aiuti della regia","L'elenco dei mondi e la posizione della telecamera di ognuno."],
+"src/context":["La memoria condivisa","Un posto unico dove tutte le parti dell'app possono leggere 'l'utente ha premuto Start?'."],
+"src/styles":["Colori e stili","L'aspetto della pagina: colori, sfondi, regole di layout."],
+"src/utils":["Cassetta degli attrezzi","Funzioni piccole e generiche (numeri casuali, attese, pulizia del testo) riutilizzabili ovunque."]
+};
+const FILES = {
+"package.json":["Il documento d'identità del progetto","Elenca il nome, le librerie usate (React, three.js, ecc.) e i comandi: start, build, deploy.","Come la lista della spesa e il libretto d'istruzioni insieme: dice cosa serve e come si accende.",["Leggi la lista di librerie","npm install le scarica","npm start accende il sito"],["Chi installa il progetto"],["tutte le librerie"]],
+"package-lock.json":["La lista esatta delle versioni","Fotografa la versione precisa di ogni libreria installata, così tutti hanno lo stesso identico risultato. Non si modifica a mano.","Come lo scontrino dettagliato della spesa.",["npm install lo legge","Scarica proprio quelle versioni"],["npm install"],[]],
+"README.md":["La vetrina del progetto","Il testo che si legge su GitHub: presenta le funzionalità della galleria e gli obiettivi.","Come il retro di copertina di un libro.",["Chi arriva su GitHub","Legge cosa fa il progetto"],["Chi visita il repository"],[]],
+"AGENTS.md":["Il manuale per l'assistente AI","Spiega ad assistenti AI come è fatto il progetto, come avviarlo e quali regole di stile seguire.","Come il manuale di benvenuto per un nuovo collega.",["L'assistente apre il progetto","Legge AGENTS.md","Lavora seguendo le regole"],["Assistenti AI"],[]],
+"config-overrides.js":["Un piccolo ritocco alla macchina di costruzione","Dice allo strumento di build di usare il file public/index.html come pagina di base.","Come regolare la posizione di un sedile prima di partire.",["Parte npm start / build","Questo file ritocca la configurazione","Si usa la pagina giusta"],["react-app-rewired"],["public/index.html"]],
+"vite.config.js":["Una configurazione non usata","Per un altro strumento (Vite) che non è quello attivo: il progetto parte con react-app-rewired. Si può ignorare.","Come il manuale di un elettrodomestico che non usi.",["Esiste","Nessun comando lo chiama"],[],[]],
+".gitignore":["La lista di cose da non salvare","Elenca file e cartelle che Git non deve conservare (come node_modules).","Come l'elenco di cose da non mettere in valigia.",["Git guarda la lista","Salta quei file"],["Git"],[]],
+".prettierrc":["La regola di scrittura ordinata","Dice all'impaginatore automatico di codice (Prettier) come formattare: qui, niente parentesi inutili attorno ai parametri.","Come le regole di impaginazione di un giornale.",["Salvi il file","Prettier lo riformatta secondo la regola"],["Prettier"],[]],
+".codesandbox/tasks.json":["I comandi per CodeSandbox","Dice al sito CodeSandbox quali comandi lanciare (installa, avvia, build, deploy).","Come i tasti pre-impostati di una lavatrice.",["CodeSandbox apre il progetto","Lancia npm install","Poi npm start"],["CodeSandbox"],["package.json"]],
+".github/workflows/deploy.yml":["L'automazione di pubblicazione","Ogni volta che si salva su 'main', GitHub costruisce il sito e lo pubblica su GitHub Pages da solo.","Come un fattorino che ritira il pacco appena è pronto e lo consegna.",["Fai push su main","GitHub installa e costruisce","Pubblica sul sito web"],["GitHub"],["package.json (npm run deploy)"]],
+".claude/skills/new-component/SKILL.md":["La guida per creare nuovi componenti","Dice all'assistente AI esattamente come impostare un nuovo componente: tre file (vetrina, cervello, ingresso), stile funzionale, come collegarlo al menu.","Come una ricetta con ingredienti e passaggi.",["Chiedi un nuovo componente","L'assistente legge la ricetta","Crea i tre file e li collega"],["Assistente AI"],[]],
+"public/index.html":["La pagina di base","L'unica vera pagina web: è quasi vuota e contiene solo uno spazio (#root) dove React disegna tutto il resto.","Come una cornice vuota in cui poi appare il quadro.",["Il browser la scarica","Trova lo spazio vuoto","React ci disegna dentro"],["Browser"],["src/index.js"]],
+"src/index.js":["Il pulsante d'accensione","Il primo file che parte. Trova lo spazio vuoto nella pagina e ci monta dentro l'app, caricando anche lo stile globale.","Come girare la chiave dell'auto.",["Il browser apre la pagina","Questo file trova #root","Monta il componente Root"],["public/index.html"],["root.jsx","globalStyles.scss"]],
+"src/root.jsx":["Il livello più alto","Mette insieme le due parti principali: la memoria condivisa (AppProvider) e la regia (Scene).","Come il pianterreno di un palazzo: sostiene tutti i piani.",["Root si accende","Apre la memoria condivisa","Dentro mette la regia"],["src/index.js"],["context","scene"]],
+"src/context/index.js":["La porta d'ingresso della memoria","Una riga che rende disponibili AppProvider e useAppContext al resto dell'app.","Come la targhetta sul campanello.",["Chi vuole la memoria","Entra da qui"],["Tutta l'app"],["useAppContext.jsx"]],
+"src/context/useAppContext.jsx":["La bacheca condivisa","Crea la 'bacheca' (context) e due strumenti: AppProvider che la espone, useAppContext per leggerla da qualsiasi punto.","Come la lavagna in un ufficio: tutti la vedono e leggono.",["AppProvider appende la lavagna","Un componente la legge","Tutti vedono lo stesso valore"],["root.jsx","qualsiasi componente"],["useContextLogic.hook.js"]],
+"src/context/useContextLogic.hook.js":["Il cervello della memoria","Contiene l'unico dato condiviso: 'startedExperience' (hai premuto Start?), inizialmente no, e la funzione per cambiarlo.","Come un interruttore con due posizioni: aspetta / partito.",["Valore iniziale: no","Premi Start","Diventa sì","Tutti lo sanno"],["useAppContext.jsx"],["React · useState"]],
+"src/scene/index.js":["La porta d'ingresso della regia","Esporta Scene per chi la importa.","La targhetta sul campanello.",["Importi Scene","Arrivi qui"],["root.jsx"],["scene.jsx"]],
+"src/scene/scene.jsx":["Il palcoscenico","Disegna tutto: mostra la schermata iniziale, il menu Leva e lo spazio 3D (Canvas) con dentro il mondo scelto. Sceglie anche lo sfondo.","Come il direttore di sala: apre il sipario e fa entrare l'attore giusto.",["Prima: schermata di benvenuto","Premi Start","Appare lo spazio 3D e il menu","Dentro si mette il mondo scelto"],["root.jsx"],["scene.hook.js","LoadScreen","GetComponents","Leva"]],
+"src/scene/scene.hook.js":["Il cervello del palcoscenico","Legge quale mondo hai scelto dal menu, nasconde o mostra il menu e decide il colore di sfondo per ogni mondo.","Come un cartellone: dice quale spettacolo è in scena e di che colore sono le luci.",["Hai scelto dal menu","Salva il nome","Sceglie lo sfondo adatto","Dice se mostrare l'overlay dello slider"],["scene.jsx"],["Leva","Context (Start?)","projects.js"]],
+"src/scene/getComponents/index.js":["La porta d'ingresso del traduttore","Esporta GetComponents.","La targhetta sul campanello.",["Importi","Arrivi qui"],["scene.jsx"],["getComponents.jsx"]],
+"src/scene/getComponents/getComponents.jsx":["Il traduttore nome → mondo","Prende il nome (es. 'Dog') e restituisce il componente giusto, già avvolto nel salvagente più adatto.","Come un centralinista: dici il nome dell'ufficio e ti passa la linea.",["Riceve 'Dog'","Cerca il caso giusto","Restituisce il cane con salvagente","Se non lo trova avvisa in console"],["scene.jsx"],["tutti i mondi","wrappers"]],
+"src/scene/getComponents/getComponents.hook.js":["L'aggiusta-telecamera","Un hook che, dato un mondo, mette la telecamera nella posizione, angolo e distanza giusti (da getCamera).","Come regolare il sedile guida prima di partire.",["Riceve il mondo","Cerca la sua telecamera","Imposta posizione e campo visivo"],["(da collegare)"],["getCamera.js"]],
+"src/scene/getComponents/wrappers/index.js":["La porta d'ingresso dei salvagenti","Elenca i tre wrapper disponibili.","La targhetta.",["Importi","Arrivi qui"],["getComponents.jsx"],["tre wrapper"]],
+"src/scene/getComponents/wrappers/withSuspense.jsx":["Il salvagente semplice","Mentre un mondo sta ancora caricando i suoi file mostra… niente, e poi lo fa apparire appena pronto.","Come aspettare che la pagina del libro sia stampata.",["Il mondo parte","I file non sono pronti","Attesa","Appare"],["getComponents.jsx"],["React · Suspense"]],
+"src/scene/getComponents/wrappers/withFallBackSuspense.jsx":["Il salvagente con ciambella","Come il semplice, ma durante l'attesa mostra la ciambella che gira (Spinner).","Come la clessidra sul computer.",["Il mondo carica","Compare lo Spinner","Quando è pronto sparisce"],["getComponents.jsx"],["Spinner"]],
+"src/scene/getComponents/wrappers/withScrollControls.jsx":["Il salvagente per lo scroll","Avvolge il mondo in una pagina scorrevole di 4 'schermate': usato da Explode.","Come mettere un quadro su un rullo che scorre.",["Avvolge il mondo","Lo scroll diventa disponibile","Il mondo lo legge"],["getComponents.jsx"],["drei · ScrollControls"]],
+"src/scene/utils/index.js":["La porta d'ingresso","Esporta projects e getCamera.","La targhetta.",["Importi","Arrivi qui"],["scene"],["projects.js","getCamera.js"]],
+"src/scene/utils/projects.js":["L'elenco degli 8 mondi","Una lista di nomi: Bike, CartFollowingMidget, Dog, Explode, Home3d, PortalPass, slideShow, Woman. Il menu mostra proprio questi.","Come l'indice di un libro.",["Il menu legge la lista","Mostra i nomi","Tu scegli"],["scene.hook.js","getComponents.jsx"],[]],
+"src/scene/utils/getCamera.js":["La posizione di telecamera di ogni mondo","Per Explode, Home3d e Dog dice dove piazzare la telecamera e con che apertura. Per gli altri non dice nulla e se ne occupano loro.","Come i segni sul pavimento per i cameraman.",["Chiedi il mondo","Risponde posizione e zoom"],["getComponents.hook.js"],["projects.js"]],
+"src/styles/globalStyles.scss":["Lo stile di tutta la pagina","Azzera i margini, nasconde le barre di scorrimento, dà alla pagina intera lo sfondo e definisce i gradienti dei vari mondi (chiaro, scuro, verde, grigio).","Come la tinteggiatura delle pareti di tutte le stanze.",["La pagina si carica","Applica sfondo e regole","I mondi scelgono la propria tinta"],["src/index.js"],["_colors.scss"]],
+"src/styles/_colors.scss":["La tavolozza","I colori del progetto con un nome (primario, secondario, sfondo chiaro…).","Come i campioni di vernice con il nome sopra.",["Gli stili chiedono un colore","La tavolozza risponde"],["globalStyles.scss"],[]],
+"src/utils/index.js":["La porta d'ingresso della cassetta degli attrezzi","Elenca gli attrezzi disponibili.","La targhetta.",["Importi","Arrivi qui"],["molti componenti"],["gli attrezzi"]],
+"src/utils/WorkOnArrays.js":["Genera sequenze di numeri","Dato un numero, crea la lista 1, 2, 3, … fino a lì.","Come contare ad alta voce.",["Dici 5","Ottieni 1 2 3 4 5"],["lotsOfMashesSameFn"],[]],
+"src/utils/wait.js":["Mettersi in pausa","Una funzione che aspetta un certo tempo (in millisecondi) prima di proseguire.","Come un timer da cucina.",["Imposti il tempo","Aspetta","Poi continua"],["scene.hook.js"],[]],
+"src/utils/randomNumbers/index.js":["La porta d'ingresso","Esporta le funzioni sui numeri casuali.","La targhetta.",["Importi","Arrivi qui"],["renderMovingItems"],["randomNumbers.js"]],
+"src/utils/randomNumbers/randomNumbers.js":["Numeri a caso (ma controllati)","Due funzioni: un numero a caso in un intervallo, e un numero intero a caso evitando certe zone (per non piazzare rocce davanti ai personaggi).","Come tirare un dado a cui hai tolto alcune facce.",["Dai intervallo e zone vietate","Estrae a caso","Se cade in una zona vietata, riprova"],["renderMovingItems/utils.js"],["validatePassedArguments.js"]],
+"src/utils/randomNumbers/validatePassedArguments.js":["Il controllore dei dati","Verifica che gli argomenti passati alle funzioni casuali siano sensati, prima di usarli.","Come il controllo biglietti all'ingresso.",["Arrivano i dati","Controlla","Se sbagliati segnala l'errore"],["randomNumbers.js"],[]],
+"src/utils/purify/index.js":["La porta d'ingresso","Esporta purify.","La targhetta.",["Importi","Arrivi qui"],["–"],["purify.js"]],
+"src/utils/purify/purify.js":["Il filtro di sicurezza per il testo","Prende un testo HTML e toglie gli script e le azioni nascoste, lasciando solo il contenuto innocuo.","Come il filtro del caffè: passa il buono, resta fuori il resto.",["Riceve il testo","Toglie gli script","Toglie gli eventi nascosti","Restituisce testo pulito"],["–"],["utils.js"]],
+"src/utils/purify/utils.js":["Gli attrezzi del filtro","Le due funzioni che fanno il lavoro: removeScripts e removeInlineEvents.","Come i due setacci del filtro.",["Cerca gli script","Li elimina","Cerca gli eventi","Li elimina"],["purify.js"],[]],
+"src/components/index.js":["L'elenco di tutti i mondi","Una riga per componente: chi vuole usarne uno lo prende da qui.","Come l'indice di un catalogo.",["Importi * da components","Prendi quello che ti serve"],["Scene, getComponents.jsx"],["tutte le cartelle"]]
+};
+const MODELS = {"1.glb":"Un modello di prova","Heart.glb":"Il cuore di Explode","WawaOffice.blend":"Il file originale (di Blender) dell'ufficio, da cui è stato ricavato WawaOffice.glb","WawaOffice.glb":"L'ufficio a tre piani","Westernbluebird.glb":"L'uccello di Explode","ankouChart.gltf":"Il personaggio Ankou","banana.glb":"La banana di Explode","bike.gltf":"La bicicletta","cactoro.gltf":"Il mostro cactus","cybertruck_scene.glb":"Slide: Cybertruck","dog.glb":"Il cane","dragon.gltf":"Il drago","fish.gltf":"Il pesce","lampPost.gltf":"Il lampione","model.gltf":"Un modello generico","model3_scene.glb":"Slide: Model 3","rock.gltf":"La roccia","semi_scene.glb":"Slide: Semi","tree.gltf":"L'albero","woman.gltf":"La donna","youngKorrigan.gltf":"Il personaggio Young Korrigan"};
+
+/* =====================================================================
+   UTILITY
+   ===================================================================== */
+const $ = (s,r=document)=>r.querySelector(s);
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const dirname = p=>p.includes("/")?p.slice(0,p.lastIndexOf("/")):"";
+const base = p=>p.slice(p.lastIndexOf("/")+1);
+const ext = p=>{const b=base(p);return b.includes(".")?b.slice(b.lastIndexOf(".")+1).toLowerCase():""};
+const isDirPath = p=>p==="" || ALLDIRS.has(p);
+
+const ALLDIRS = new Set();
+PATHS.forEach(p=>{let d=dirname(p);while(d){ALLDIRS.add(d);d=dirname(d)}});
+
+/* ruolo di un file dentro src/components */
+function roleOf(p){
+  const b=base(p), e=ext(p);
+  if(b==="index.js") return "index";
+  if(e==="scss") return "style";
+  if(e==="json") return "texts";
+  if(/fixedVars|environmentVars/.test(b)) return "vars";
+  if(b==="utils.js"||/validate/.test(b)) return "utils";
+  if(/\.hook\.js$/.test(b)||/\.(updateCamera|controls)\.js$/.test(b)) return "hook";
+  if(/animation\.hook/.test(b)) return "hook";
+  return "view";
+}
+function compKey(p){
+  const m=p.match(/^src\/components\/(.+)$/); if(!m) return null;
+  const segs=dirname(p).replace(/^src\/components\/?/,"").split("/").filter(Boolean);
+  if(isDirPath(p)) segs.push(base(p));
+  for(let i=segs.length-1;i>=0;i--){ if(C[segs[i]]) return segs[i]; }
+  return null;
+}
+function iconOf(p,isDir){
+  if(isDir) return ["dir","📁"];
+  const e=ext(p),b=base(p);
+  if(e==="jsx") return ["jsx","⚛"]; if(e==="js") return ["js","JS"]; if(e==="json") return ["json","{}"];
+  if(e==="scss") return ["scss","S"]; if(e==="md") return ["md","MD"]; if(e==="yml") return ["yml","YML"];
+  if(["glb","gltf","blend"].includes(e)) return ["asset","3D"]; if(["jpg","png","avif","ico"].includes(e)) return ["asset","🖼"];
+  if(["mp3"].includes(e)) return ["asset","♪"]; if(["ttf"].includes(e)) return ["asset","Aa"]; if(e==="hdr") return ["asset","HDR"];
+  return ["cfg","⚙"];
+}
+
+/* =====================================================================
+   COSTRUTTORI DI DIAGRAMMI
+   ===================================================================== */
+function flow(steps){
+  return `<div class="flow">${steps.map((s,i)=>`${i?'<span class="arrow" aria-hidden="true">→</span>':''}<div class="step"><em>${i+1}</em>${esc(s)}</div>`).join("")}</div>`;
+}
+function rel(usedBy,me,uses,links){
+  const go=x=>{const t=(links||{})[x];return `<div class="chip${t?' go':''}" ${t?`data-open="${esc(t)}" tabindex="0" role="button"`:''}>${esc(x)}</div>`};
+  return `<div class="rel">
+    <div class="col"><h4>Chi lo chiama</h4>${usedBy.map(go).join("")}</div>
+    <div class="mid"><span>→</span></div>
+    <div class="col"><div class="chip me">${esc(me)}</div></div>
+  </div><div class="rel" style="margin-top:10px"><div class="col"></div><div class="mid"><span>↓</span></div><div class="col"><h4>Cosa usa</h4>${uses.map(go).join("")}</div></div>`;
+}
+function triad(folder,cur,siblings){
+  const info={view:["La vetrina","Come appare: solo disegno, nessun ragionamento."],hook:["Il cervello","Cosa succede: movimento, scelte, caricamenti."],index:["La porta d'ingresso","Una riga che permette agli altri di usarlo."],vars:["La cassetta dei numeri","Valori fissi in un posto solo."],utils:["Gli attrezzi","Piccoli calcoli riutilizzabili."],style:["Il trucco","Colori e stili."],texts:["I testi","Le frasi mostrate."]};
+  return `<div class="triad">${siblings.map(s=>{const r=roleOf(s);const i=info[r]||["File",""];return `<button data-open="${esc(s)}" class="${s===cur?'cur':''}"><b>${i[0]}</b><code>${esc(base(s))}</code><br><span>${i[1]}</span></button>`}).join("")}</div>`;
+}
+
+/* =====================================================================
+   COSTRUZIONE DELLA PAGINA DI SPIEGAZIONE
+   ===================================================================== */
+const ROLE = {
+  view:["La vetrina","Questo file decide solo <b>come appare</b> la cosa. Non ragiona: chiede tutto al suo 'cervello' (il file .hook) e disegna ciò che riceve.","Come un manichino in vetrina: sta fermo e mostra. A decidere come cambia è il commesso dietro."],
+  hook:["Il cervello","Questo file è il <b>cervello</b>: decide cosa succede, ricorda le cose, carica i file. Non disegna nulla: consegna i risultati al file gemello (la vetrina).","Come il regista dietro le quinte: non lo vedi mai in scena, ma muove tutto."],
+  index:["La porta d'ingresso","Questo file è <b>una riga sola</b>: dice a tutto il resto del progetto 'per usare questo pezzo, entra da qui'. Non fa niente d'altro.","Come la targhetta sul campanello: non è la casa, ti indica dove bussare."],
+  vars:["La cassetta dei numeri","Qui stanno i <b>numeri e le impostazioni fisse</b> (quanti alberi, quanto veloci, che colori). Tenerli in un posto solo significa che per cambiare il comportamento basta ritoccare un numero.","Come il quadro comandi di una radio: cambi una manopola, cambia il suono."],
+  utils:["La cassetta degli attrezzi","Qui stanno <b>piccole funzioni</b> che fanno un calcolo e restituiscono un risultato, senza effetti collaterali.","Come una calcolatrice: metti numeri, esce la risposta."],
+  style:["L'abito","Questo file decide <b>l'aspetto</b>: colori, dimensioni, posizioni della parte non-3D.","Come il guardaroba: non cambia cosa fa la persona, cambia come si presenta."],
+  texts:["I testi","Qui sono scritte <b>le frasi</b> mostrate sullo schermo, separate dal codice così si possono cambiare senza toccarlo.","Come il copione di uno spettacolo."]
+};
+
+function pageForFile(p){
+  const b=base(p), k=compKey(p), r=roleOf(p);
+  const sys=FILES[p];
+  let kind="sys", title=b, lead="", analogy="", ex="", steps=[], used=[], uses=[], role=null, folderSibs=null, tag="Parte di supporto";
+  if(sys){
+    [title,lead,analogy,steps,used,uses]=[sys[0],sys[1],sys[2],sys[3],sys[4],sys[5]];
+    ex=sys[2];
+    role=null;
+  }else if(p.startsWith("public/")){
+    const d=dirname(p), dn=base(d), e=ext(p);
+    tag="Materiale";
+    kind="asset";
+    if(d==="public/model") {title=MODELS[b]||b;lead=`Un modello 3D (${e}). ${MODELS[b]||""}. Il codice lo scarica solo quando quel mondo viene aperto.`;}
+    else if(d==="public/images") {title=b;lead="Un'immagine usata dalla galleria (foto delle pagine scorrevoli o icona della scheda).";}
+    else if(d==="public/textures") {title=b;lead="Una 'pelle' (texture) usata come sfondo dei portali.";}
+    else if(d==="public/envMap") {title=b;lead="Un file di luce ambientale: dà alla scena riflessi e luce realistici.";}
+    else if(d==="public/fonts") {title=b;lead="Un carattere (forma delle lettere) usato nei testi.";}
+    else if(d==="public/audios"||d==="public/sound") {title=b;lead="Un file audio.";}
+    else {title=b;lead="Un file di materiale.";}
+    analogy="Come un attore o una scenografia che resta nel magazzino finché non serve in scena.";
+    ex="Il codice scrive solo il nome del file, il browser lo scarica e lo usa.";
+    steps=["Un mondo ne ha bisogno","Il codice scrive il percorso","Il browser lo scarica","Appare nella scena"];
+    used=["Il componente che lo cita"]; uses=["Niente: è un materiale"];
+  }else if(k){
+    const c=C[k]; kind="comp";
+    tag=c.g===1?"In galleria":c.g===-1?"Parte di un mondo":"Esperimento";
+    title=b;
+    if(r==="view"){lead=c.look+" "+c.what;}
+    else if(r==="hook"){lead=c.brain;}
+    else if(r==="index"){lead="Una riga che rende disponibile "+(c.t||k)+" a tutto il resto del progetto.";}
+    else if(r==="vars"){lead="Qui sono raccolti i numeri e le impostazioni fisse di «"+k+"», separati dal codice.";}
+    else if(r==="utils"){lead="Piccole funzioni di calcolo di «"+k+"».";}
+    else if(r==="style"){lead="Colori e aspetto della parte con testo e bottoni di «"+k+"».";}
+    else if(r==="texts"){lead="I testi mostrati da «"+k+"».";}
+    role=ROLE[r]; analogy=role?role[2]:""; ex=c.ex;
+    steps=c.steps;
+    used=c.g===1?["Scene → GetComponents (il menu a tendina)"]:c.g===-1?["Il componente che lo contiene"]:["Nessuno: non è collegato al menu"];
+    uses=c.uses;
+    folderSibs=PATHS.filter(x=>dirname(x)===dirname(p)&&!/\.(blend)$/.test(x));
+  }else{
+    title=b; lead="Un file del progetto."; role=null;
+  }
+  return {title,tag,kind,lead,role,analogy,ex,steps,used,uses,folderSibs,name:b,whole:(k&&C[k].what)||""};
+}
+
+function pageForDir(p){
+  const name=p===""?"3D-React-Fiber-Gallery":base(p);
+  const k=compKey(p), kids=[...PATHS.filter(x=>dirname(x)===p), ...[...ALLDIRS].filter(x=>dirname(x)===p)].sort((a,b)=>(isDirPath(b)-isDirPath(a))||a.localeCompare(b));
+  if(k&&C[k]&&p.startsWith("src/components/")&&dirname(p)!=="src"&&p!=="src/components"){
+    const c=C[k];
+    return {title:name,tag:c.g===1?"In galleria":c.g===-1?"Parte di un mondo":"Esperimento",kind:"comp",lead:c.what,role:null,analogy:"Una cartella = un pezzo di galleria. Dentro ci sono sempre le stesse tre parti: la vetrina (.jsx), il cervello (.hook.js) e la porta d'ingresso (index.js).",ex:c.ex,steps:c.steps,used:c.g===1?["Scene → GetComponents (il menu a tendina)"]:c.g===-1?["Il componente che lo contiene"]:["Nessuno: è un esperimento"],uses:c.uses,kids,isDir:true};
+  }
+  const d=DIRS[p]||[name,"Una cartella del progetto."];
+  return {title:d[0],tag:"Cartella",kind:"sys",lead:d[1],role:null,analogy:"",ex:"",steps:[],used:[],uses:[],kids,isDir:true,name};
+}
+
+function render(p){
+  const dir=isDirPath(p);
+  const d=dir?pageForDir(p):pageForFile(p);
+  const tagCls=d.tag==="In galleria"?"":d.tag==="Esperimento"?"exp":"sys";
+  const links={};
+  const rootFiles={"root.jsx":"src/root.jsx","scene":"src/scene/scene.jsx","context":"src/context/useContextLogic.hook.js","getComponents.jsx":"src/scene/getComponents/getComponents.jsx","index.js":"src/index.js","globalStyles.scss":"src/styles/globalStyles.scss","LoadScreen":"src/components/loadScreen/loadScreen.jsx","Spinner":"src/components/spinner/spinner.jsx","wrappers":"src/scene/getComponents/wrappers","projects.js":"src/scene/utils/projects.js","getCamera.js":"src/scene/utils/getCamera.js","scene.hook.js":"src/scene/scene.hook.js","scene.jsx":"src/scene/scene.jsx","useAppContext.jsx":"src/context/useAppContext.jsx","useContextLogic.hook.js":"src/context/useContextLogic.hook.js","getComponents.hook.js":"src/scene/getComponents/getComponents.hook.js","package.json":"package.json","public/index.html":"public/index.html","src/index.js":"src/index.js","utils.js":dirname(p)+"/utils.js","purify.js":"src/utils/purify/purify.js","randomNumbers.js":"src/utils/randomNumbers/randomNumbers.js","validatePassedArguments.js":"src/utils/randomNumbers/validatePassedArguments.js","Scene → GetComponents (il menu a tendina)":"src/scene/getComponents/getComponents.jsx"};
+  Object.assign(links,rootFiles);
+  let h=`<h1>${esc(d.title)} <small class="${tagCls}">${esc(d.tag)}</small></h1><div class="path">${esc(p||"/")}${dir?"/":""}</div>`;
+  h+=`<div class="card big"><h2>In due parole</h2>${d.lead}</div>`;
+  if(d.role) h+=`<div class="card"><h2>Il ruolo di questo file: ${d.role[0]}</h2><p>${d.role[1]}</p></div>`;
+  if(d.analogy) h+=`<div class="card ana"><h2>Un'analogia</h2><p>${esc(d.analogy)}</p></div>`;
+  if(d.ex&&d.ex!==d.analogy) h+=`<div class="card ex"><h2>Un esempio</h2><p>${esc(d.ex)}</p></div>`;
+  if(d.steps&&d.steps.length) h+=`<div class="card"><h2>Come funziona, passo passo</h2>${flow(d.steps)}</div>`;
+  if(d.used&&d.used.length&&d.uses) h+=`<div class="card"><h2>Chi parla con chi</h2>${rel(d.used,d.name||d.title,d.uses.length?d.uses:["niente di particolare"],links)}</div>`;
+  if(d.folderSibs&&d.folderSibs.length>1) h+=`<div class="card"><h2>Le parti di questa cartella</h2>${triad(null,p,d.folderSibs)}</div>`;
+  if(d.isDir&&d.kids.length) h+=`<div class="card"><h2>Cosa c'è dentro</h2><div class="kids">${d.kids.map(x=>{const isD=isDirPath(x);const sub=isD?(DIRS[x]?DIRS[x][0]:(C[base(x)]?"pezzo di galleria":"cartella")):(FILES[x]?FILES[x][0]:(roleOf(x)==="hook"?"Il cervello":roleOf(x)==="view"?"La vetrina":roleOf(x)==="index"?"La porta d'ingresso":(x.startsWith("public/")?"Materiale":"File")));return `<button data-open="${esc(x)}"><b>${isD?"📁 ":""}${esc(base(x))}</b><span>${esc(sub)}</span></button>`}).join("")}</div></div>`;
+  return h;
+}
+
+/* =====================================================================
+   EXPLORER
+   ===================================================================== */
+const openTabs=[]; let current=null; const openDirs=new Set(["","src","src/components","src/scene"]);
+
+function buildTree(){
+  const tree=$("#tree"); tree.innerHTML="";
+  const mk=(dirPath,parent)=>{
+    const dirs=[...ALLDIRS].filter(x=>dirname(x)===dirPath).sort((a,b)=>a.localeCompare(b));
+    const files=PATHS.filter(x=>dirname(x)===dirPath).sort((a,b)=>a.localeCompare(b));
+    dirs.forEach(d=>{
+      const wrap=document.createElement("div"); wrap.dataset.dir=d; if(openDirs.has(d)) wrap.classList.add("open");
+      const row=document.createElement("div"); row.className="row"; row.tabIndex=0; row.setAttribute("role","treeitem"); row.dataset.path=d; row.style.paddingLeft=(dirPath===""?8:8+14*depth(d)-14)+"px";
+      const kc=compKey(d); const g=kc&&C[kc]&&C[kc].g===1&&dirname(d)==="src/components";
+      row.innerHTML=`<span class="chev">${openDirs.has(d)?"▼":"▶"}</span><span class="ic dir">📁</span><span>${esc(base(d))}</span>${g?'<span class="badge" title="Collegato al menu della galleria">● galleria</span>':''}`;
+      const kids=document.createElement("div"); kids.className="children";
+      wrap.append(row,kids); parent.append(wrap); mk(d,kids);
+    });
+    files.forEach(f=>{
+      const row=document.createElement("div"); row.className="row"; row.tabIndex=0; row.setAttribute("role","treeitem"); row.dataset.path=f; row.style.paddingLeft=(8+14*depth(f)-14+14)+"px";
+      const [c,l]=iconOf(f,false);
+      row.innerHTML=`<span class="chev"></span><span class="ic ${c}">${l}</span><span>${esc(base(f))}</span>`;
+      parent.append(row);
+    });
+  };
+  mk("",tree);
+}
+const depth=p=>p.split("/").length;
+
+function setActiveRow(p){
+  document.querySelectorAll("#tree .row.active").forEach(r=>r.classList.remove("active"));
+  const r=document.querySelector(`#tree .row[data-path="${CSS.escape(p)}"]`); if(r){r.classList.add("active");r.scrollIntoView({block:"nearest"})}
+}
+function revealPath(p){
+  let d=dirname(p),chain=[]; while(d){chain.push(d);d=dirname(d)}
+  chain.forEach(x=>{openDirs.add(x);const w=document.querySelector(`#tree [data-dir="${CSS.escape(x)}"]`);if(w){w.classList.add("open");const c=w.querySelector(".chev");if(c)c.textContent="▼"}});
+}
+function toggleDir(d){
+  const w=document.querySelector(`#tree [data-dir="${CSS.escape(d)}"]`); if(!w) return;
+  const o=w.classList.toggle("open"); o?openDirs.add(d):openDirs.delete(d);
+  w.querySelector(".chev").textContent=o?"▼":"▶";
+}
+function openItem(p,fromTree){
+  if(!p && p!=="") return;
+  if(isDirPath(p)&&p!==""){ if(!fromTree) revealPath(p+"/x"); }
+  else revealPath(p);
+  if(isDirPath(p)&&!openDirs.has(p)) toggleDir(p);
+  if(!openTabs.includes(p)) openTabs.push(p);
+  current=p; renderTabs(); $("#doc").innerHTML="<div>"+render(p)+"</div>"; $("#doc").scrollTop=0;
+  $("#crumbs").textContent=("3D-React-Fiber-Gallery/"+p).replace(/\/$/,"").split("/").join("  ›  ");
+  setActiveRow(p);
+}
+function closeTab(p){
+  const i=openTabs.indexOf(p); if(i<0) return; openTabs.splice(i,1);
+  if(current===p){ const n=openTabs[i]||openTabs[i-1]; if(n!==undefined) openItem(n); else {current=null;renderTabs();showWelcome()} } else renderTabs();
+}
+function renderTabs(){
+  $("#etabs").innerHTML=openTabs.map(p=>{const [c,l]=iconOf(p,isDirPath(p));return `<div class="etab ${p===current?'on':''}" data-tab="${esc(p)}"><span class="ic ${c}" style="font:700 9px var(--mono)">${l}</span>${esc(base(p)||"progetto")}<button class="x" data-close="${esc(p)}" aria-label="Chiudi">×</button></div>`}).join("");
+  $("#st-count").textContent=openTabs.length?openTabs.length+" aperti":"";
+}
+function showWelcome(){
+  $("#doc").innerHTML=`<div>
+  <h1>Benvenuto 👋</h1><div class="path">Scegli un file o una cartella a sinistra</div>
+  <div class="card big"><h2>Come si legge questa pagina</h2>Qui ogni file è spiegato <b>a parole semplici</b>, senza codice. Clicca un elemento nell'elenco a sinistra e questo spazio si riempie con cosa fa, un'analogia, un esempio e un diagramma.</div>
+  <div class="card"><h2>La regola d'oro del progetto</h2><p>Ogni pezzo di galleria è fatto da <b>tre file</b> che si dividono il lavoro:</p>
+    <div class="triad"><div class="chip"><b>🎭 La vetrina</b><br><code>nome.jsx</code><br><span style="color:var(--dim);font-size:13px">Come appare.</span></div><div class="chip"><b>🧠 Il cervello</b><br><code>nome.hook.js</code><br><span style="color:var(--dim);font-size:13px">Cosa succede.</span></div><div class="chip"><b>🚪 La porta</b><br><code>index.js</code><br><span style="color:var(--dim);font-size:13px">Come ci si arriva.</span></div></div></div>
+  <div class="card"><h2>Da dove partire</h2><div class="kids">
+    <button data-open="src/index.js"><b>src/index.js</b><span>Il pulsante d'accensione</span></button>
+    <button data-open="src/scene/scene.jsx"><b>scene.jsx</b><span>Il palcoscenico</span></button>
+    <button data-open="src/components/dog/dog.hook.js"><b>dog.hook.js</b><span>Un cervello d'esempio</span></button>
+    <button data-open="src/components/cartFollowingMidget"><b>cartFollowingMidget</b><span>La scena d'apertura</span></button>
+  </div></div>
+  <div class="card"><h2>Cosa significano i badge</h2><p><span style="color:var(--ok)">● galleria</span> = collegato al menu e visibile a chi usa il sito. Gli altri sono esperimenti di studio.</p></div></div>`;
+}
+
+/* =====================================================================
+   GRAFO
+   ===================================================================== */
+const N=[
+ ["entry",500,40,240,46,"entry","index.js","il punto di partenza","src/index.js"],
+ ["root",500,118,240,46,"entry","root.jsx","monta le due parti","src/root.jsx"],
+ ["ctx",160,210,240,52,"ctx","Memoria condivisa","«hai premuto Start?»","src/context/useContextLogic.hook.js"],
+ ["scene",500,210,240,52,"scene","Scene","il regista del palcoscenico","src/scene/scene.jsx"],
+ ["load",160,320,240,52,"ui","LoadScreen","percentuale + bottone Start","src/components/loadScreen/loadScreen.jsx"],
+ ["menu",500,320,240,52,"scene","Menu a tendina (Leva)","sceglie il «project»","src/scene/scene.hook.js"],
+ ["get",830,320,230,52,"scene","GetComponents","nome → mondo giusto","src/scene/getComponents/getComponents.jsx"],
+ ["wrap",830,410,230,46,"scene","Salvagenti","attesa / scroll","src/scene/getComponents/wrappers"],
+ ["cam",590,410,170,46,"scene","getCamera","posizione di vista","src/scene/utils/getCamera.js"]
+];
+const P=[["Cart","Carro in viaggio","cartFollowingMidget"],["Bike","Bici","bike"],["Dog","Cane","dog"],["Explode","Esplosione","explode"],["Home3d","Appartamento","home3d"],["PortalPass","Portali","portalPass"],["SlideShow","Slider auto","slideShow"],["Woman","Donna","woman"]];
+const E=[
+ ["entry","root","avvia"],["root","ctx","avvolge"],["root","scene",""],["ctx","load","Start premuto?",1],["ctx","scene","stato",1],
+ ["scene","load","mostra"],["scene","menu","chiede"],["scene","get","passa il nome"],["get","wrap",""],["get","cam","",1]
+];
+function renderGraph(){
+  const svg=$("#graph"); let s=`<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7d8590"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6cc08b"/></marker></defs>`;
+  const col={entry:"#3b6ea5",ctx:"#7b5aa6",scene:"#2f8f83",ui:"#a6527a",proj:"#c27b2e",asset:"#5b5f66"};
+  const nodes={}; N.forEach(n=>nodes[n[0]]={x:n[1],y:n[2],w:n[3],h:n[4]});
+  const px=62, projNodes=P.map((p,i)=>({id:"p"+i,x:px+125*i,y:515,w:116,h:50,t:p[0],s:p[1],f:"src/components/"+p[2]+"/"+(p[2]==="cartFollowingMidget"?"cartFollowingMidget.jsx":p[2]+".jsx")}));
+  projNodes.forEach(n=>nodes[n.id]=n);
+  nodes.assets={x:500,y:608,w:960,h:34};
+  const edge=(a,b,label,dash)=>{const A=nodes[a],B=nodes[b];let x1=A.x,y1=A.y+A.h/2,x2=B.x,y2=B.y-B.h/2;
+    if(Math.abs(A.y-B.y)<6){y1=A.y;y2=B.y;x1=A.x+(B.x>A.x?A.w/2:-A.w/2);x2=B.x+(B.x>A.x?-B.w/2:B.w/2)}
+    const my=(y1+y2)/2; const d=Math.abs(A.y-B.y)<6?`M${x1},${y1} L${x2},${y2}`:`M${x1},${y1} C${x1},${my} ${x2},${my} ${x2},${y2}`;
+    s+=`<path class="edge${dash?' dash':''}" d="${d}" marker-end="url(#${dash?'ahg':'ah'})"/>`;
+    if(label) s+=`<text class="elabel" x="${(x1+x2)/2}" y="${my-3}" text-anchor="middle">${esc(label)}</text>`; };
+  E.forEach(e=>edge(e[0],e[1],e[2],e[3]));
+  projNodes.forEach(p=>edge("wrap",p.id,""));
+  projNodes.forEach(p=>{s+=`<path class="edge dash" d="M${p.x},${p.y+p.h/2} L${p.x},${nodes.assets.y-nodes.assets.h/2}" marker-end="url(#ahg)"/>`});
+  const draw=(id,x,y,w,h,c,t,sub,f)=>{s+=`<g class="node" data-open="${esc(f)}" tabindex="0" role="button" aria-label="${esc(t)}"><rect x="${x-w/2}" y="${y-h/2}" width="${w}" height="${h}" rx="10" fill="${col[c]}"/><text class="t" x="${x}" y="${y-(sub?2:-4)}" text-anchor="middle">${esc(t)}</text>${sub?`<text class="s" x="${x}" y="${y+14}" text-anchor="middle">${esc(sub)}</text>`:''}</g>`};
+  N.forEach(n=>draw(n[0],n[1],n[2],n[3],n[4],n[5],n[6],n[7],n[8]));
+  projNodes.forEach(n=>draw(n.id,n.x,n.y,n.w,n.h,"proj",n.t,n.s,n.f));
+  s+=`<g class="node" data-open="public"><rect x="20" y="591" width="960" height="34" rx="10" fill="${col.asset}"/><text class="t" x="500" y="613" text-anchor="middle">📦 public/ — modelli 3D · foto · texture · suoni · caratteri</text></g>`;
+  s+=`<text class="elabel" x="700" y="470" text-anchor="middle">sceglie uno degli 8 mondi</text>`;
+  svg.innerHTML=s;
+}
+
+/* =====================================================================
+   TAB + EVENTI
+   ===================================================================== */
+function selectTab(id){
+  document.querySelectorAll("[role=tab]").forEach(t=>t.setAttribute("aria-selected",t.id===id));
+  document.querySelectorAll(".tabpanel").forEach(p=>p.classList.toggle("on",p.getAttribute("aria-labelledby")===id));
+  try{history.replaceState(null,"","#"+id.slice(2))}catch(e){}
+}
+document.querySelectorAll("[role=tab]").forEach(t=>t.addEventListener("click",()=>selectTab(t.id)));
+document.querySelector("[role=tablist]").addEventListener("keydown",e=>{
+  const tabs=[...document.querySelectorAll("[role=tab]")],i=tabs.indexOf(document.activeElement);
+  if(i<0) return; if(e.key==="ArrowRight"){tabs[(i+1)%3].focus();tabs[(i+1)%3].click()} if(e.key==="ArrowLeft"){tabs[(i+2)%3].focus();tabs[(i+2)%3].click()}
+});
+document.addEventListener("click",e=>{
+  const o=e.target.closest("[data-open]");
+  if(o){ selectTab("t-file"); openItem(o.dataset.open); return; }
+  const cl=e.target.closest("[data-close]"); if(cl){e.stopPropagation();closeTab(cl.dataset.close);return}
+  const tb=e.target.closest("[data-tab]"); if(tb){openItem(tb.dataset.tab);return}
+  const cp=e.target.closest("[data-copy]"); if(cp){const t=cp.previousElementSibling.textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{cp.textContent="Copiato ✓"}).catch(()=>{const r=document.createRange();r.selectNodeContents(cp.previousElementSibling);const s=getSelection();s.removeAllRanges();s.addRange(r);cp.textContent="Selezionato"});setTimeout(()=>cp.textContent="Copia",1600);return}
+});
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Enter"&&e.key!==" ") return;
+  const o=e.target.closest("[data-open][tabindex],.row"); if(!o) return;
+  e.preventDefault(); o.click();
+});
+$("#tree").addEventListener("click",e=>{
+  const row=e.target.closest(".row"); if(!row) return; const p=row.dataset.path;
+  if(isDirPath(p)){ const was=openDirs.has(p); openItem(p,true); if(was) toggleDir(p); } else openItem(p,true);
+});
+$("#collapse").addEventListener("click",()=>{openDirs.clear();openDirs.add("");buildTree();if(current)setActiveRow(current)});
+
+/* avvio */
+buildTree(); renderGraph(); showWelcome();
+const h=(location.hash||"").slice(1); if(["file","run","graph"].includes(h)) selectTab("t-"+h);
+</script>
+</body>
+</html>
