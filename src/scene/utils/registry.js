@@ -6,7 +6,9 @@
 //   title/description/accent/icon  testo, colore ed emoji della card in galleria
 //   fitWidth    false se la scena gestisce da sé la larghezza (default: true →
 //               ResponsiveCamera riduce lo zoom su schermi stretti)
-//   camera      opzioni camera (default: {})
+//   camera      { position, fov, near, far } passati al Canvas (default di R3F:
+//               position [0,0,5], fov 75). Le scene esistenti sono tarate
+//               sul default
 //   background  colore di sfondo del Canvas (opzionale)
 const registry = {
   Bike: {
@@ -36,7 +38,6 @@ const registry = {
     load: () => import("../../components/dog"),
     exportName: "Dog",
     wrapper: "fallback",
-    camera: { fov: 33, near: 0.1, far: 500, position: [-7, 0, 10] },
   },
   Explode: {
     icon: "💥",
@@ -46,7 +47,6 @@ const registry = {
     load: () => import("../../components/explode"),
     exportName: "Explode",
     wrapper: "scroll",
-    camera: { position: [0, 0, 5], fov: 30 },
   },
   Home3d: {
     icon: "🏠",
@@ -56,7 +56,6 @@ const registry = {
     load: () => import("../../components/home3d"),
     exportName: "Home3d",
     wrapper: "suspense",
-    camera: { position: [2.3, 1.5, 2.3], fov: 64 },
   },
   PortalPass: {
     icon: "🌀",

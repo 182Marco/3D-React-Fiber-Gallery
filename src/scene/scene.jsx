@@ -25,7 +25,12 @@ const Scene = () => {
           {/* key: a ogni cambio di scena il canvas viene ricreato, così la
               telecamera riparte frontale (posizione di default) e non da dove
               l'aveva lasciata la scena precedente */}
-          <F.Canvas key={h.currentProject} shadows dpr={h.dpr}>
+          <F.Canvas
+            key={h.currentProject}
+            shadows
+            dpr={h.dpr}
+            camera={h.camera}
+          >
             <D.PerformanceMonitor onChange={h.onPerformanceChange} />
             <ResponsiveCamera enabled={h.fitWidth} />
             {GetComponents(h.currentProject)}

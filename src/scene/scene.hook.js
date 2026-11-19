@@ -56,6 +56,7 @@ const useScene = () => {
     currentProject,
     dpr,
     fitWidth,
+    camera: U.getCamera(currentProject).camera,
     galleryItems,
     selectProject: setCurrentProject,
     skipIntro,
