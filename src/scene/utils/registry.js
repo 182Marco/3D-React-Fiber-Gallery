@@ -1,0 +1,63 @@
+// Unico punto in cui si definisce un progetto selezionabile.
+//   load        import dinamico del modulo (code splitting)
+//   exportName  nome dell'export nominato da usare come componente
+//   wrapper     "suspense" | "fallback" | "scroll" (vedi getComponents.jsx)
+//   bg          classi CSS dello sfondo (default: "bg light-bg")
+//   camera      opzioni camera (default: {})
+//   background  colore di sfondo del Canvas (opzionale)
+const registry = {
+  Bike: {
+    load: () => import("../../components/bike"),
+    exportName: "Bike",
+    wrapper: "fallback",
+  },
+  CartFollowingMidget: {
+    load: () => import("../../components/cartFollowingMidget"),
+    exportName: "CartFollowingMidget",
+    wrapper: "suspense",
+    bg: "bg green-bg",
+  },
+  Dog: {
+    load: () => import("../../components/dog"),
+    exportName: "Dog",
+    wrapper: "fallback",
+    camera: { fov: 33, near: 0.1, far: 500, position: [-7, 0, 10] },
+  },
+  Explode: {
+    load: () => import("../../components/explode"),
+    exportName: "Explode",
+    wrapper: "scroll",
+    camera: { position: [0, 0, 5], fov: 30 },
+  },
+  Home3d: {
+    load: () => import("../../components/home3d"),
+    exportName: "Home3d",
+    wrapper: "suspense",
+    camera: { position: [2.3, 1.5, 2.3], fov: 64 },
+  },
+  PortalPass: {
+    load: () => import("../../components/portalPass"),
+    exportName: "PortalPass",
+    wrapper: "fallback",
+    bg: "bg dark-bg",
+  },
+  slideShow: {
+    load: () => import("../../components/slideShow"),
+    exportName: "SlideShow",
+    wrapper: "fallback",
+    bg: "bg",
+    background: "#ececec",
+  },
+  Woman: {
+    load: () => import("../../components/woman"),
+    exportName: "Woman",
+    wrapper: "suspense",
+    bg: "bg grey-bg",
+  },
+};
+
+// Progetto mostrato all'avvio. Il suo modulo viene importato subito: i
+// useGLTF.preload a livello di modulo alimentano useProgress (LoadScreen).
+const defaultProject = "CartFollowingMidget";
+
+export { registry, defaultProject };

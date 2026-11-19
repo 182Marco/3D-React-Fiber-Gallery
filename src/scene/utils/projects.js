@@ -1,12 +1,6 @@
-const projects = {
-  Bike: "Bike",
-  CartFollowingMidget: "CartFollowingMidget",
-  Dog: "Dog",
-  Explode: "Explode",
-  Home3d: "Home3d",
-  PortalPass: "PortalPass",
-  slideShow: "slideShow",
-  Woman: "Woman",
-};
+import { registry } from "./registry";
+
+// { Bike: "Bike", ... } derivato dal registry: non va modificato a mano.
+const projects = Object.fromEntries(Object.keys(registry).map(k => [k, k]));
 
 export { projects };

@@ -24,7 +24,7 @@ const useScene = () => {
   }, [startExperience]);
 
   const { project } = L.useControls({
-    project: { value: U.projects.CartFollowingMidget, options },
+    project: { value: U.defaultProject, options },
   });
 
   const [currentProject, setCurrentProject] = R.useState(project);
@@ -33,20 +33,7 @@ const useScene = () => {
     setCurrentProject(project);
   }, [project]);
 
-  const getBgClass = project => {
-    switch (project) {
-      case U.projects.CartFollowingMidget:
-        return "bg green-bg";
-      case U.projects.PortalPass:
-        return "bg dark-bg";
-      case U.projects.Woman:
-        return "bg grey-bg";
-      case U.projects.slideShow:
-        return "bg";
-      default:
-        return "bg light-bg";
-    }
-  };
+  const getBgClass = project => U.registry[project]?.bg ?? "bg light-bg";
 
   // Risoluzione adattiva: PerformanceMonitor restituisce un fattore 0..1 in
   // base agli FPS; dpr scala tra MIN_DPR (device lento) e MAX_DPR.
