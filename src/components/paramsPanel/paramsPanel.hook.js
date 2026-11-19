@@ -6,7 +6,7 @@ const usePanel = () => {
   const [params, setParams] = useAtom(paramsAtom);
   // Su telefono parte chiuso, per non coprire la scena.
   const [collapsed, setCollapsed] = R.useState(
-    () => window.matchMedia("(max-width: 700px)").matches
+    () => window.matchMedia("(max-width: 700px)").matches,
   );
 
   const entries = Object.entries(params).map(([key, def]) => ({
