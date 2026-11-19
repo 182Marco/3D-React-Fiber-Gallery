@@ -50,3 +50,19 @@ $background-color: #ffffff99;
     }
   }
 }
+
+// Telefono: le card di testo occupano la larghezza e stanno in basso,
+// così la scena 3D resta visibile sopra.
+@media (max-width: 700px) {
+  .w100-scroll section {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 16px 32px;
+    justify-content: flex-end;
+
+    &.right {
+      margin-left: 0;
+      padding: 0 16px 32px;
+    }
+  }
+}
