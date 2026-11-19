@@ -7,6 +7,27 @@ It starts with a loader that transports you into a 3D scene, where you will expl
 
 ---
 
+**🔗 Live demo: https://182marco.github.io/3D-React-Fiber-Gallery/**
+
+Every scene has a shareable deep link (e.g. `#/dog`). Use the gallery button (top left) to switch between scenes.
+
+<table>
+<tr>
+<td align="center"><a href="https://182marco.github.io/3D-React-Fiber-Gallery/#/bike"><img src="public/thumbs/Bike.jpg" width="200" alt="Bicycle"><br>Bicycle</a></td>
+<td align="center"><a href="https://182marco.github.io/3D-React-Fiber-Gallery/#/cartfollowingmidget"><img src="public/thumbs/CartFollowingMidget.jpg" width="200" alt="The Carriage of Destiny"><br>The Carriage of Destiny</a></td>
+<td align="center"><a href="https://182marco.github.io/3D-React-Fiber-Gallery/#/dog"><img src="public/thumbs/Dog.jpg" width="200" alt="Dog"><br>Dog</a></td>
+<td align="center"><a href="https://182marco.github.io/3D-React-Fiber-Gallery/#/explode"><img src="public/thumbs/Explode.jpg" width="200" alt="Explode"><br>Explode</a></td>
+</tr>
+<tr>
+<td align="center"><a href="https://182marco.github.io/3D-React-Fiber-Gallery/#/home3d"><img src="public/thumbs/Home3d.jpg" width="200" alt="Home 3D"><br>Home 3D</a></td>
+<td align="center"><a href="https://182marco.github.io/3D-React-Fiber-Gallery/#/portalpass"><img src="public/thumbs/PortalPass.jpg" width="200" alt="Portal Pass"><br>Portal Pass</a></td>
+<td align="center"><a href="https://182marco.github.io/3D-React-Fiber-Gallery/#/slideshow"><img src="public/thumbs/slideShow.jpg" width="200" alt="Slideshow"><br>Slideshow</a></td>
+<td align="center"><a href="https://182marco.github.io/3D-React-Fiber-Gallery/#/woman"><img src="public/thumbs/Woman.jpg" width="200" alt="Woman"><br>Woman</a></td>
+</tr>
+</table>
+
+---
+
 ## 📚 Project Features
 
 Explore a dynamic and interactive world with a series of 3D experiments designed to amaze you! Here's what you'll find:
@@ -78,3 +99,14 @@ To run the project locally, follow these steps:
    type:
    ```bash
    npm run start
+
+
+4. **Build / test**  
+   ```bash
+   npm run build
+   npm test -- --watchAll=false
+   ```
+
+## ➕ Adding a scene
+
+Create `src/components/<name>/` and add **one** entry to `src/scene/utils/registry.js`. See `AGENTS.md` for details. Thumbnails are regenerated with `scripts/make-thumbs.mjs`.
