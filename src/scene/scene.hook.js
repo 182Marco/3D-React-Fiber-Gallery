@@ -23,15 +23,34 @@ const useScene = () => {
     getLeva();
   }, [startExperience]);
 
-  const { project } = L.useControls({
-    project: { value: U.defaultProject, options },
-  });
+  // Deep link: l'hash dell'URL (#/bike, case-insensitive) sceglie il progetto.
+  // Si usa location.hash e non history.pushState perché <base> è fisso.
+  const getProjectFromHash = () => {
+    const name = window.location.hash.replace(/^#\/?/, "").toLowerCase();
+    return options.find(o => o.toLowerCase() === name);
+  };
+
+  const [{ project }, setControls] = L.useControls(() => ({
+    project: { value: getProjectFromHash() ?? U.defaultProject, options },
+  }));
 
   const [currentProject, setCurrentProject] = R.useState(project);
 
   R.useEffect(() => {
     setCurrentProject(project);
+    const hash = `#/${project.toLowerCase()}`;
+    if (window.location.hash !== hash) window.location.hash = hash;
   }, [project]);
+
+  // Tasto indietro/avanti o hash modificato a mano → aggiorna il selettore.
+  R.useEffect(() => {
+    const onHashChange = () => {
+      const fromHash = getProjectFromHash();
+      if (fromHash) setControls({ project: fromHash });
+    };
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
 
   const getBgClass = project => U.registry[project]?.bg ?? "bg light-bg";
 
