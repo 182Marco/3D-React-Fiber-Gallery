@@ -30,13 +30,19 @@ const MonsterStage = ({
         args={[2, 3, 0.1]}
         onPointerEnter={() => setIsHover(name)}
         onPointerLeave={() => setIsHover(null)}
+        onClick={() => active !== name && setActive(name)}
         name={name}
       >
         <D.MeshPortalMaterial side={THREE.DoubleSide} ref={h.portalMaterialRef}>
           <D.Environment preset="sunset" />
           <ambientLight intensity={4} />
           {children}
-          <mesh onDoubleClick={() => setActive(active === name ? null : name)}>
+          <mesh
+            onClick={e => {
+              e.stopPropagation();
+              setActive(active === name ? null : name);
+            }}
+          >
             <sphereGeometry args={[10, 64, 64]} />
             <meshStandardMaterial map={h.loadedTexture} side={THREE.BackSide} />
           </mesh>
