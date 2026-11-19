@@ -4,6 +4,9 @@ import * as U from "./utils";
 import * as UtilityFn from "../utils";
 import { useAppContext } from "../context";
 
+const MIN_DPR = 1;
+const MAX_DPR = 1.5;
+
 const useScene = () => {
   const options = Object.keys(U.projects);
   const { startedExperience, startExperience } = useAppContext();
@@ -45,10 +48,18 @@ const useScene = () => {
     }
   };
 
+  // Risoluzione adattiva: PerformanceMonitor restituisce un fattore 0..1 in
+  // base agli FPS; dpr scala tra MIN_DPR (device lento) e MAX_DPR.
+  const [dpr, setDpr] = R.useState(MAX_DPR);
+  const onPerformanceChange = ({ factor }) =>
+    setDpr(Math.round((MIN_DPR + (MAX_DPR - MIN_DPR) * factor) * 10) / 10);
+
   const isSlideShow = currentProject === U.projects.slideShow;
 
   return {
     currentProject,
+    dpr,
+    onPerformanceChange,
     getBgClass,
     isSlideShow,
     startedExperience,
