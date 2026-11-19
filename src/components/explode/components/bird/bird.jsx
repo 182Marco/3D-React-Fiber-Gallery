@@ -344,6 +344,6 @@ const Bird = props => {
   );
 };
 
-useGLTF.preload("/model/Westernbluebird.glb");
+useGLTF.preload("./model/Westernbluebird.glb");
 
 export { Bird };

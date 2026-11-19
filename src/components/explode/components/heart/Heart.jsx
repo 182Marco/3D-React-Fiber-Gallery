@@ -372,6 +372,6 @@ const Heart = props => {
   );
 };
 
-D.useGLTF.preload("/model/heart.glb");
+D.useGLTF.preload("./model/Heart.glb");
 
 export { Heart };

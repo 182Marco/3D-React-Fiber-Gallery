@@ -474,4 +474,4 @@ const Banana = props => {
 
 export { Banana };
 
-useGLTF.preload("/model/banana.glb");
+useGLTF.preload("./model/banana.glb");

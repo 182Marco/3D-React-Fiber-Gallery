@@ -3,7 +3,7 @@ import * as R from "react";
 import { useExplodeAnimation } from "../../animation.hook";
 
 const useBird = () => {
-  const { nodes, materials } = D.useGLTF("/model/Westernbluebird.glb");
+  const { nodes, materials } = D.useGLTF("./model/Westernbluebird.glb");
 
   const group = R.useRef();
 

@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 
 const useBike = () => {
-  const { nodes, materials } = useGLTF("/model/bike.gltf");
+  const { nodes, materials } = useGLTF("./model/bike.gltf");
 
   const backTireRef = useRef();
   const backRadiusRef = useRef();

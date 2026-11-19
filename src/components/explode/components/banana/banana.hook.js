@@ -3,7 +3,7 @@ import * as D from "@react-three/drei";
 import { useExplodeAnimation } from "../../animation.hook";
 
 const useBanana = () => {
-  const { nodes, materials } = D.useGLTF("/model/banana.glb");
+  const { nodes, materials } = D.useGLTF("./model/banana.glb");
   const group = R.useRef();
 
   useExplodeAnimation(group, { distance: 5 });

@@ -208,6 +208,6 @@ const Bike = props => {
   );
 };
 
-useGLTF.preload("/model/bike.gltf");
+useGLTF.preload("./model/bike.gltf");
 
 export { Bike };

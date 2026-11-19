@@ -87,8 +87,8 @@ const Slide = ({ mainColor, path, ...props }) => {
   );
 };
 
-D.useGLTF.preload("/model/cybertruck_scene.glb");
-D.useGLTF.preload("/model/model3_scene.glb");
-D.useGLTF.preload("/model/semi_scene.glb");
+D.useGLTF.preload("./model/cybertruck_scene.glb");
+D.useGLTF.preload("./model/model3_scene.glb");
+D.useGLTF.preload("./model/semi_scene.glb");
 
 export { Slide };
