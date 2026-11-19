@@ -2,6 +2,9 @@ import * as THREE from "three";
 import * as D from "@react-three/drei";
 import { useMonsterStage } from "./monsterStage.hook";
 
+// Pixel di spostamento oltre i quali un click è considerato un drag.
+const DRAG_THRESHOLD = 5;
+
 const MonsterStage = ({
   children,
   active,
@@ -30,7 +33,7 @@ const MonsterStage = ({
         args={[2, 3, 0.1]}
         onPointerEnter={() => setIsHover(name)}
         onPointerLeave={() => setIsHover(null)}
-        onClick={() => active !== name && setActive(name)}
+        onClick={e => e.delta <= DRAG_THRESHOLD && active !== name && setActive(name)}
         name={name}
       >
         <D.MeshPortalMaterial side={THREE.DoubleSide} ref={h.portalMaterialRef}>
@@ -40,6 +43,8 @@ const MonsterStage = ({
           <mesh
             onClick={e => {
               e.stopPropagation();
+              // Un trascinamento (rotazione camera) non deve chiudere il mondo.
+              if (e.delta > DRAG_THRESHOLD) return;
               setActive(active === name ? null : name);
             }}
           >
