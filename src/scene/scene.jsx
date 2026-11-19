@@ -1,4 +1,5 @@
 import { Gallery } from "../components/gallery";
+import { ResponsiveCamera } from "../components/responsiveCamera";
 import { ParamsPanel } from "../components/paramsPanel";
 import { LoadScreen } from "../components/loadScreen";
 import { OverlaySlideShow } from "../components/slideShow/components/overlaySlideShow";
@@ -26,6 +27,7 @@ const Scene = () => {
               l'aveva lasciata la scena precedente */}
           <F.Canvas key={h.currentProject} shadows dpr={h.dpr}>
             <D.PerformanceMonitor onChange={h.onPerformanceChange} />
+            <ResponsiveCamera enabled={h.fitWidth} />
             {GetComponents(h.currentProject)}
           </F.Canvas>
         </div>

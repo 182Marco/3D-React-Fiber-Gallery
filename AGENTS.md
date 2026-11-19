@@ -34,7 +34,7 @@ Galleria di esperimenti 3D con React Three Fiber (CRA + `react-app-rewired`, Jav
 ## Aggiungere un nuovo progetto
 1. Creare `src/components/<nome>/` con `.jsx`, `.hook.js`, `index.js`.
 2. Esportarlo da `src/components/index.js` (e fare `export` nominato anche in `<nome>/index.js`: il registry importa la cartella).
-3. Aggiungere UNA voce in `registry` (`src/scene/utils/registry.js`): `load`, `exportName`, `wrapper`, `title`, `description`, `accent` (card della galleria), e se servono `bg`, `camera`, `background`.
+3. Aggiungere UNA voce in `registry` (`src/scene/utils/registry.js`): `load`, `exportName`, `wrapper`, `title`, `description`, `accent` (card della galleria), e se servono `bg`, `camera`, `background`, `fitWidth: false` (solo se la scena gestisce da sé la larghezza: di default `ResponsiveCamera` riduce lo zoom su schermi più stretti di 1.2:1 perché nulla esca dai lati).
 
 ## Attenzioni
 - Prestazioni: gli effetti glow/postprocessing sono stati rimossi di recente perché rallentavano tutto (vedi git log); evitare di reintrodurli senza misurare.

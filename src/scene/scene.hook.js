@@ -53,11 +53,14 @@ const useScene = () => {
   const onPerformanceChange = ({ factor }) =>
     setDpr(Math.round((MIN_DPR + (MAX_DPR - MIN_DPR) * factor) * 10) / 10);
 
+  const fitWidth = U.registry[currentProject]?.fitWidth !== false;
+
   const isSlideShow = currentProject === U.projects.slideShow;
 
   return {
     currentProject,
     dpr,
+    fitWidth,
     galleryItems,
     selectProject: setCurrentProject,
     onPerformanceChange,

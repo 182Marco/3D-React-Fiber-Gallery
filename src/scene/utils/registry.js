@@ -4,6 +4,8 @@
 //   wrapper     "suspense" | "fallback" | "scroll" (vedi getComponents.jsx)
 //   bg          classi CSS dello sfondo (default: "bg light-bg")
 //   title/description/accent  testo e colore della card in galleria
+//   fitWidth    false se la scena gestisce da sé la larghezza (default: true →
+//               ResponsiveCamera riduce lo zoom su schermi stretti)
 //   camera      opzioni camera (default: {})
 //   background  colore di sfondo del Canvas (opzionale)
 const registry = {
@@ -58,6 +60,7 @@ const registry = {
     load: () => import("../../components/portalPass"),
     exportName: "PortalPass",
     wrapper: "fallback",
+    fitWidth: false, // layout e distanza camera propri (portalPass.hook.js)
     bg: "bg dark-bg",
   },
   slideShow: {
@@ -67,6 +70,7 @@ const registry = {
     load: () => import("../../components/slideShow"),
     exportName: "SlideShow",
     wrapper: "fallback",
+    fitWidth: false, // le slide usano già viewport.width
     bg: "bg",
     background: "#ececec",
   },
