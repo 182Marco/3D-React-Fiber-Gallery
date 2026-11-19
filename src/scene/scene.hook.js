@@ -1,56 +1,49 @@
-import * as L from "leva";
 import * as R from "react";
 import * as U from "./utils";
-import * as UtilityFn from "../utils";
 import { useAppContext } from "../context";
 
 const MIN_DPR = 1;
 const MAX_DPR = 1.5;
 
+// Deep link: l'hash dell'URL (#/bike, case-insensitive) sceglie il progetto.
+const options = Object.keys(U.projects);
+const getProjectFromHash = () => {
+  const name = window.location.hash.replace(/^#\/?/, "").toLowerCase();
+  return options.find(o => o.toLowerCase() === name);
+};
+
 const useScene = () => {
-  const options = Object.keys(U.projects);
   const { startedExperience, startExperience } = useAppContext();
 
-  const getLeva = async () => {
-    await UtilityFn.wait(1);
-    const levaHandler = document.getElementById("leva__root");
-    if (levaHandler) {
-      levaHandler.style.display = startExperience ? "none" : "block";
-    }
-  };
+  const [currentProject, setCurrentProject] = R.useState(
+    () => getProjectFromHash() ?? U.defaultProject
+  );
 
-  R.useLayoutEffect(() => {
-    getLeva();
-  }, [startExperience]);
-
-  // Deep link: l'hash dell'URL (#/bike, case-insensitive) sceglie il progetto.
-  // Si usa location.hash e non history.pushState perché <base> è fisso.
-  const getProjectFromHash = () => {
-    const name = window.location.hash.replace(/^#\/?/, "").toLowerCase();
-    return options.find(o => o.toLowerCase() === name);
-  };
-
-  const [{ project }, setControls] = L.useControls(() => ({
-    project: { value: getProjectFromHash() ?? U.defaultProject, options },
-  }));
-
-  const [currentProject, setCurrentProject] = R.useState(project);
-
+  // Progetto → hash. Si usa location.hash e non history.pushState perché
+  // <base> è fisso.
   R.useEffect(() => {
-    setCurrentProject(project);
-    const hash = `#/${project.toLowerCase()}`;
+    const hash = `#/${currentProject.toLowerCase()}`;
     if (window.location.hash !== hash) window.location.hash = hash;
-  }, [project]);
+  }, [currentProject]);
 
-  // Tasto indietro/avanti o hash modificato a mano → aggiorna il selettore.
+  // Tasto indietro/avanti o hash modificato a mano → progetto.
   R.useEffect(() => {
     const onHashChange = () => {
       const fromHash = getProjectFromHash();
-      if (fromHash) setControls({ project: fromHash });
+      if (fromHash) setCurrentProject(fromHash);
     };
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
+
+  const galleryItems = Object.entries(U.registry).map(
+    ([name, { title, description, accent }]) => ({
+      name,
+      title,
+      description,
+      accent,
+    })
+  );
 
   const getBgClass = project => U.registry[project]?.bg ?? "bg light-bg";
 
@@ -65,6 +58,8 @@ const useScene = () => {
   return {
     currentProject,
     dpr,
+    galleryItems,
+    selectProject: setCurrentProject,
     onPerformanceChange,
     getBgClass,
     isSlideShow,

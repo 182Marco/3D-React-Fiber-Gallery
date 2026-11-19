@@ -3,45 +3,67 @@
 //   exportName  nome dell'export nominato da usare come componente
 //   wrapper     "suspense" | "fallback" | "scroll" (vedi getComponents.jsx)
 //   bg          classi CSS dello sfondo (default: "bg light-bg")
+//   title/description/accent  testo e colore della card in galleria
 //   camera      opzioni camera (default: {})
 //   background  colore di sfondo del Canvas (opzionale)
 const registry = {
   Bike: {
+    title: "Bicycle",
+    description: "A 3D bicycle with continuously turning wheels.",
+    accent: "#97d9e1",
     load: () => import("../../components/bike"),
     exportName: "Bike",
     wrapper: "fallback",
   },
   CartFollowingMidget: {
+    title: "The Carriage of Destiny",
+    description: "An endless landscape of objects looping past a cart.",
+    accent: "#16a04b",
     load: () => import("../../components/cartFollowingMidget"),
     exportName: "CartFollowingMidget",
     wrapper: "suspense",
     bg: "bg green-bg",
   },
   Dog: {
+    title: "Dog",
+    description: "An animated dog: pick an animation from the panel.",
+    accent: "#c9a27a",
     load: () => import("../../components/dog"),
     exportName: "Dog",
     wrapper: "fallback",
     camera: { fov: 33, near: 0.1, far: 500, position: [-7, 0, 10] },
   },
   Explode: {
+    title: "Explode",
+    description: "Scroll to blow a model apart and put it back together.",
+    accent: "#e8a33d",
     load: () => import("../../components/explode"),
     exportName: "Explode",
     wrapper: "scroll",
     camera: { position: [0, 0, 5], fov: 30 },
   },
   Home3d: {
+    title: "Home 3D",
+    description: "A three-storey apartment revealed as you scroll.",
+    accent: "#d9afd9",
     load: () => import("../../components/home3d"),
     exportName: "Home3d",
     wrapper: "suspense",
     camera: { position: [2.3, 1.5, 2.3], fov: 64 },
   },
   PortalPass: {
+    title: "Portal Pass",
+    description: "Three cards that open portals into other 3D worlds.",
+    accent: "#34495e",
     load: () => import("../../components/portalPass"),
     exportName: "PortalPass",
     wrapper: "fallback",
     bg: "bg dark-bg",
   },
   slideShow: {
+    title: "Slideshow",
+    description: "A 3D slider where each slide is a window into a new world.",
+    accent: "#8f9aa8",
     load: () => import("../../components/slideShow"),
     exportName: "SlideShow",
     wrapper: "fallback",
@@ -49,6 +71,9 @@ const registry = {
     background: "#ececec",
   },
   Woman: {
+    title: "Woman",
+    description: "An animated character: pick an animation from the panel.",
+    accent: "#707070",
     load: () => import("../../components/woman"),
     exportName: "Woman",
     wrapper: "suspense",

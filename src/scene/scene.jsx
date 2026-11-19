@@ -1,3 +1,4 @@
+import { Gallery } from "../components/gallery";
 import { LoadScreen } from "../components/loadScreen";
 import { OverlaySlideShow } from "../components/slideShow/components/overlaySlideShow";
 import * as L from "leva";
@@ -12,7 +13,13 @@ const Scene = () => {
     <>
       {h.startedExperience && (
         <div className={h.getBgClass(h.currentProject)}>
-          {h.startedExperience && <L.Leva />}
+          {/* Leva resta solo per i parametri dei singoli progetti */}
+          <L.Leva />
+          <Gallery
+            items={h.galleryItems}
+            current={h.currentProject}
+            onSelect={h.selectProject}
+          />
           {h.isSlideShow && <OverlaySlideShow />}
           {/* key: a ogni cambio di scena il canvas viene ricreato, così la
               telecamera riparte frontale (posizione di default) e non da dove
