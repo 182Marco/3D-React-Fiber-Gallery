@@ -1,4 +1,5 @@
-import * as C from "../components";
+import { LoadScreen } from "../components/loadScreen";
+import { OverlaySlideShow } from "../components/slideShow/components/overlaySlideShow";
 import * as L from "leva";
 import * as F from "@react-three/fiber";
 import { useScene } from "./scene.hook";
@@ -11,7 +12,7 @@ const Scene = () => {
       {h.startedExperience && (
         <div className={h.getBgClass(h.currentProject)}>
           {h.startedExperience && <L.Leva />}
-          {h.isSlideShow && <C.OverlaySlideShow />}
+          {h.isSlideShow && <OverlaySlideShow />}
           {/* key: a ogni cambio di scena il canvas viene ricreato, così la
               telecamera riparte frontale (posizione di default) e non da dove
               l'aveva lasciata la scena precedente */}
@@ -20,7 +21,7 @@ const Scene = () => {
           </F.Canvas>
         </div>
       )}
-      <C.LoadScreen
+      <LoadScreen
         started={h.startedExperience}
         onStarted={h.startExperience}
       />

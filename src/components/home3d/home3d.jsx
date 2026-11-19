@@ -1,5 +1,6 @@
 import * as D from "@react-three/drei";
-import * as C from "..";
+import { OverlayText } from "../overlayText";
+import { Office } from "../office";
 import J from "./textsToPass.json";
 import { useHome3d } from "./home3d.hook";
 
@@ -10,8 +11,8 @@ const Home3d = () => {
       <ambientLight intensity={3} />
       <D.CameraControls enabled={false} />
       <D.ScrollControls pages={3} damping={0.25}>
-        <C.OverlayText txt={J.txt} />
-        <C.Office scale={1.3} name={h.name} />
+        <OverlayText txt={J.txt} />
+        <Office scale={1.3} name={h.name} />
       </D.ScrollControls>
     </>
   );
