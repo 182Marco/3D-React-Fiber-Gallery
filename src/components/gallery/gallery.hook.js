@@ -5,8 +5,10 @@ import { getProjectFromHash } from "../../scene/utils";
 // Stato aperto/chiuso della galleria. È un atom (store globale) e non uno
 // useState perché le scene, che vivono in un altro root React (il Canvas),
 // devono saperlo: es. il carro mette in pausa la musica a galleria aperta.
-// All'avvio è aperta, salvo link diretto a una scena.
-const galleryOpenAtom = atom(() => !getProjectFromHash());
+// All'avvio è aperta, salvo link diretto a una scena. Il valore iniziale va
+// passato direttamente: atom(funzione) sarebbe un atom derivato di sola
+// lettura e scrivervi darebbe "not writable atom".
+const galleryOpenAtom = atom(!getProjectFromHash());
 
 const HINT_KEY = "gallery-hint-seen";
 const HINT_MS = 7000;
