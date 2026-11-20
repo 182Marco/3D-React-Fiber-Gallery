@@ -1,1 +1,0 @@
-export { HookUseSpringProps } from "./hookUseSpringProps";

@@ -1,1 +1,0 @@
-export { ScrollControl } from "./scrollControl";
