@@ -1,5 +1,12 @@
 import * as R from "react";
+import { atom, useAtom } from "jotai";
 import { getProjectFromHash } from "../../scene/utils";
+
+// Stato aperto/chiuso della galleria. È un atom (store globale) e non uno
+// useState perché le scene, che vivono in un altro root React (il Canvas),
+// devono saperlo: es. il carro mette in pausa la musica a galleria aperta.
+// All'avvio è aperta, salvo link diretto a una scena.
+const galleryOpenAtom = atom(() => !getProjectFromHash());
 
 const HINT_KEY = "gallery-hint-seen";
 const HINT_MS = 7000;
@@ -21,8 +28,7 @@ const writeSeen = () => {
 };
 
 const useGallery = ({ items, current, onSelect }) => {
-  // All'avvio la galleria è già aperta, salvo link diretto a una scena.
-  const [open, setOpen] = R.useState(() => !getProjectFromHash());
+  const [open, setOpen] = useAtom(galleryOpenAtom);
   // Card sotto il cursore: tinge lo sfondo della galleria col suo colore.
   const [hovered, setHovered] = R.useState(null);
   // Suggerimento "ci sono N scene" sul pulsante: solo finché non lo si è
@@ -86,4 +92,4 @@ const useGallery = ({ items, current, onSelect }) => {
   };
 };
 
-export { useGallery };
+export { galleryOpenAtom, useGallery };
