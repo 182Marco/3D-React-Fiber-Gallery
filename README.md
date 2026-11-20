@@ -3,13 +3,13 @@
 Welcome to my **3D React Three Fiber Playground** project! 🚀  
 This repository is an interactive workspace where you can explore 3D graphics experiments on the web using **React Three Fiber**. It's my first step in creating dynamic 3D experiences, enriched with numerous interactive elements.
 
-It starts with a loader that transports you into a 3D scene, where you will explore models and looping animations, all designed to dynamically respond to user input and create a unique and engaging experience.
+The app opens on a gallery of scenes: pick one and explore models, looping animations and interactions that respond to your input. Some scenes have a small parameters panel (top right) to tweak animations, objects or distances.
 
 ---
 
 **🔗 Live demo: https://182marco.github.io/3D-React-Fiber-Gallery/**
 
-Every scene has a shareable deep link (e.g. `#/dog`). Use the gallery button (top left) to switch between scenes.
+Every scene has a shareable deep link (e.g. `#/dog`). Use the gallery button (top left) to switch between scenes. The *Lab* section holds the more experimental ones (Portal, Photo Worlds).
 
 <table>
 <tr>
@@ -24,6 +24,10 @@ Every scene has a shareable deep link (e.g. `#/dog`). Use the gallery button (to
 <td align="center"><a href="https://182marco.github.io/3D-React-Fiber-Gallery/#/slideshow"><img src="public/thumbs/slideShow.jpg" width="200" alt="Slideshow"><br>Slideshow</a></td>
 <td align="center"><a href="https://182marco.github.io/3D-React-Fiber-Gallery/#/woman"><img src="public/thumbs/Woman.jpg" width="200" alt="Woman"><br>Woman</a></td>
 </tr>
+<tr>
+<td align="center"><a href="https://182marco.github.io/3D-React-Fiber-Gallery/#/portal"><img src="public/thumbs/Portal.jpg" width="200" alt="Portal (Lab)"><br>Portal (Lab)</a></td>
+<td align="center"><a href="https://182marco.github.io/3D-React-Fiber-Gallery/#/photoworld"><img src="public/thumbs/PhotoWorld.jpg" width="200" alt="Photo Worlds (Lab)"><br>Photo Worlds (Lab)</a></td>
+</tr>
 </table>
 
 ---
@@ -32,8 +36,8 @@ Every scene has a shareable deep link (e.g. `#/dog`). Use the gallery button (to
 
 Explore a dynamic and interactive world with a series of 3D experiments designed to amaze you! Here's what you'll find:
 
-- **✨ Epic Initial Loader**  
-  A loading animation that immerses you into a 3D universe, anticipating the surprises ahead.
+- **🗂️ Gallery with Deep Links**  
+  A card grid (with thumbnails and a "how to try it" hint per scene) opens on start; every scene has its own `#/name` link.
 
 - **🌍 Infinite Repetitive Scene**  
   An endless landscape where objects move and reposition in a continuous loop, creating an uninterrupted flow.
@@ -56,6 +60,9 @@ Explore a dynamic and interactive world with a series of 3D experiments designed
 - **🚴‍♂️ 3D Bicycle with Animated Wheels**  
   A 3D bicycle model that dynamically responds to your input, with continuously moving wheels.
 
+- **🥚 Portal and 🌐 Photo Worlds (Lab)**  
+  A magic frame you can enter with a double click, and 360° photographic environments where you push objects around with physics.
+
 ---
 
 ## 🚀 Project Goals
@@ -75,6 +82,8 @@ The main goals of this project are:
 - [Three.js](https://threejs.org/) - A library for 3D graphics.
 - [React Drei](https://github.com/utsuboco/drei) - Advanced components and functions for React Three Fiber.
 - [React](https://reactjs.org/) - The main library for interface development.
+- [Rapier](https://github.com/pmndrs/react-three-rapier) - Physics (Photo Worlds).
+- [GSAP](https://gsap.com/) - Scroll-driven timelines (Home 3D).
 - [Jotai](https://jotai.org/) - Lightweight state shared between the 3D scenes and the UI.
 - [SCSS](https://sass-lang.com/) - A CSS preprocessor for advanced style management.
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - The primary language for logic and interactions.
